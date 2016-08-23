@@ -6,7 +6,7 @@
  *  Website:    http://shianra.com
  ================================================== */
 
-var attrNames = ['Str', 'Dex', 'Con', 'Int', 'Wis', 'Cha'];
+var attrNames = ['Strength', 'Dexterity', 'Constitution', 'Intelligence', 'Wisdom', 'Charisma'];
 var points = [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 5, 7, 9];
 var modifiers = [-5, -5, -4, -4, -3, -3, -2, -2, -1, -1, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
 
@@ -34,7 +34,7 @@ var racialChaTD = 'td#racialCha';
  * @desc The header for the racial traits section.
  */
 var racialTraitsHeader = '<h3>Racial Traits</h3>';
-var dlHorizontal = '<dl class="dl-horizontal">';
+var dlHorizontal = '<dl class="dl-horizontal clearfix">';
 var dtColSm3 = '<dt class="col-sm-3">';
 var dtEnd = '</dt>';
 var ddColSm9 = '<dd class="col-sm-9">';
@@ -44,12 +44,12 @@ var dlEnd = '</dl>';
 /**
  * @desc The table cells where the racial variant information will be displayed.
  */
-var variantLabel = 'td#variantLabel';
-var variantList = 'td#variantList';
-var optionLabel1 = 'td#optionLabel1';
-var optionChoice1 = 'td#optionChoice1';
-var optionLabel2 = 'td#optionLabel2';
-var optionChoice2 = 'td#optionChoice2';
+var variantLabel = 'div#variantLabel';
+var variantList = 'div#variantList';
+var optionLabel1 = 'div#optionLabel1';
+var optionChoice1 = 'div#optionChoice1';
+var optionLabel2 = 'div#optionLabel2';
+var optionChoice2 = 'div#optionChoice2';
 var raceDescription = 'div#raceDescription';
 
 var racialInfo = [];
@@ -131,9 +131,13 @@ racialInfo[2] = {
         ' (The Common word for such meditation is &quot;trance.&quot;) While meditating, you can dream after a' +
         ' fashion; such dreams are actually mental exercises that have become reflexive through years of practice.' +
         ' After resting in this way, you gain the same benefit that a human does from 8 hours of sleep.'],
-    variants: ['Dark Elf (Drow)',
-        'High Elf',
-        'Wood Elf']
+    variants: [{
+        name: 'Dark Elf (Drow)'
+    }, {
+        name: 'High Elf'
+    }, {
+        name: 'Wood Elf'
+    }]
 };
 racialInfo[3] = {
     name: 'Gnome',
@@ -153,8 +157,11 @@ racialInfo[3] = {
         ' can&#039;t discern color in darkness, only shades of grey.',
         'Gnome Cunning',
         'You have advantage on all Int, Wis, and Cha saving throws against magic.'],
-    variants: ['Forest Gnome',
-        'Rock Gnome']
+    variants: [{
+        name: 'Forest Gnome'
+    }, {
+        name: 'Rock Gnome'
+    }]
 };
 racialInfo[4] = {
     name: 'Half-Elf',
@@ -223,8 +230,11 @@ racialInfo[6] = {
         'You have advantage on saving throws against being frightened.',
         'Halfling Nimbleness',
         'You can move through the space of any creature that is of a size larger than yours.'],
-    variants: ['Lightfoot Halfling',
-        'Stout Halfling']
+    variants: [{
+        name: 'Lightfoot Halfling'
+    }, {
+        name: 'Stout Halfling'
+    }]
 };
 racialInfo[7] = {
     name: 'Human',
@@ -239,8 +249,11 @@ racialInfo[7] = {
     ' speech with words borrowed from other tongues: Orc curses, Elvish musical expressions, Dwarvish military' +
     ' phrases, and so on.',
     other: [],
-    variants: ['Disabled',
-        'Enabled']
+    variants: [{
+        name: 'Disabled'
+    }, {
+        name: 'Enabled'
+    }]
 };
 racialInfo[8] = {
     name: 'Tiefling',
@@ -291,33 +304,58 @@ var getIntValue = function (source) {
 };
 
 /**
+ * @func getVariantLabel
+ * @param race
+ * @returns {string}
+ */
+var getVariantLabel = function (race) {
+    return '<label for="race' + race.name + '" class="col-sm-3 col-form-label">' + race.name + ' Subrace:</label>'
+};
+
+/**
+ * @func getGariantOptions
+ * @param race
+ * @returns {string}
+ */
+var getVariantOptions = function (race) {
+    var select = '<div class="col-sm-3"><select class="form-control" id="race' + race.name +
+        '" onchange="racial' + race.name + '(this.form)" style="width: 100%;">' +
+        '<option disabled selected="">---</option>';
+    race.variants.forEach(function (item) {
+        select += '<option value="' + item.name + '">' + item.name + '</option>';
+    });
+    select += '</select></div>';
+    return select;
+};
+
+/**
  * @func increaseAttr
  * @param attr
  * @param amount
  */
 var increaseAttr = function (attr, amount) {
     switch (attr) {
-        case 'Str':
+        case 'Strength':
             racialStr = amount;
             $(racialStrTD).html(racialStr);
             break;
-        case 'Dex':
+        case 'Dexterity':
             racialDex = amount;
             $(racialDexTD).html(racialDex);
             break;
-        case 'Con':
+        case 'Constitution':
             racialCon = amount;
             $(racialConTD).html(racialCon);
             break;
-        case 'Int':
+        case 'Intelligence':
             racialInt = amount;
             $(racialIntTD).html(racialInt);
             break;
-        case 'Wis':
+        case 'Wisdom':
             racialWis = amount;
             $(racialWisTD).html(racialWis);
             break;
-        case 'Cha':
+        case 'Charisma':
             racialCha = amount;
             $(racialChaTD).html(racialCha);
             break;
@@ -420,21 +458,6 @@ var setIntValue = function (target, amount) {
     $('input[id=' + target + ']').val(amount)
 };
 
-/**
- * @func variantOptions
- * @param race
- * @returns {string}
- */
-var variantOptions = function (race) {
-    var select = '<select class="form-control" id="race' + race.name + '" onchange="racial' + race.name +
-        '(this.form)" style="width: 100%;"><option disabled selected="">---</option>';
-    race.variants.forEach(function (item) {
-        select += '<option value="' + item.name + '">' + item.name + '</option>';
-    });
-    select += '</select>';
-    return select;
-};
-
 /* -----------------------------------------------------
  The big, meaty functions
  ----------------------------------------------------- */
@@ -464,8 +487,8 @@ function getRace() {
             racialCon = 2;
             $(racialConTD).html(racialCon);
 
-            $(variantLabel).html('Dwarf Subrace:');
-            $(variantList).html(variantOptions(racialInfo[1]));
+            $(variantLabel).html(getVariantLabel(racialInfo[1]));
+            $(variantList).html(getVariantOptions(racialInfo[1]));
             $(raceDescription).html(racialTemplate(racialInfo[1]));
             break;
 
@@ -474,8 +497,8 @@ function getRace() {
             racialDex = 2;
             $(racialDexTD).html(racialDex);
 
-            $(variantLabel).html('Elf Subrace:');
-            $(variantList).html(variantOptions(racialInfo[2]));
+            $(variantLabel).html(getVariantLabel(racialInfo[2]));
+            $(variantList).html(getVariantOptions(racialInfo[2]));
             $(raceDescription).html(racialTemplate(racialInfo[2]));
             break;
 
@@ -484,8 +507,8 @@ function getRace() {
             racialInt = 2;
             $(racialIntTD).html(racialInt);
 
-            $(variantLabel).html('Gnome Subrace:');
-            $(variantList).html(variantOptions(racialInfo[3]));
+            $(variantLabel).html(getVariantLabel(racialInfo[3]));
+            $(variantList).html(getVariantOptions(racialInfo[3]));
             $(raceDescription).html(racialTemplate(racialInfo[3]));
             break;
 
@@ -494,10 +517,10 @@ function getRace() {
             racialCha = 2;
             $(racialChaTD).html(racialCha);
 
-            $(optionLabel1).html('Ability Score #1:');
-            $(optionChoice1).html('<select class="form-control" id="optionHalfElf1" onchange="optionHalfElf(this.form)" style="width: 100%;">' + attrOptions + '</select>');
-            $(optionLabel2).html('Ability Score #2:');
-            $(optionChoice2).html('<select class="form-control" id="optionHalfElf2" onchange="optionHalfElf(this.form)" style="width: 100%;">' + attrOptions + '</select>');
+            $(optionLabel1).html('<label for="race" class="col-sm-3 col-form-label">Ability Score #1:</label>');
+            $(optionChoice1).html('<div class="col-sm-3"><select class="form-control" id="optionHalfElf1" onchange="optionHalfElf(this.form)" style="width: 100%;">' + attrOptions() + '</select></div>');
+            $(optionLabel2).html('<label for="race" class="col-sm-3 col-form-label">Ability Score #2:</label>');
+            $(optionChoice2).html('<div class="col-sm-3"><select class="form-control" id="optionHalfElf2" onchange="optionHalfElf(this.form)" style="width: 100%;">' + attrOptions() + '</select></div>');
 
             $(raceDescription).html(racialTemplate(racialInfo[4]));
             break;
@@ -517,8 +540,8 @@ function getRace() {
             racialDex = 2;
             $(racialDexTD).html(racialDex);
 
-            $(variantLabel).html('Halfling Subrace:');
-            $(variantList).html(variantOptions(racialInfo[6]));
+            $(variantLabel).html(getVariantLabel(racialInfo[6]));
+            $(variantList).html(getVariantOptions(racialInfo[6]));
             $(raceDescription).html(racialTemplate(racialInfo[6]));
             break;
 
@@ -537,8 +560,8 @@ function getRace() {
             racialCha = 1;
             $(racialChaTD).html(racialCha);
 
-            $(variantLabel).html('Variant Human:');
-            $(variantList).html(variantOptions(racialInfo[7]));
+            $(variantLabel).html(getVariantLabel(racialInfo[7]));
+            $(variantList).html(getVariantOptions(racialInfo[7]));
             $(raceDescription).html(racialTemplate(racialInfo[7]));
             break;
 
@@ -561,6 +584,7 @@ function getRace() {
  */
 function racialDwarf() {
     var racialVariant = $('select[id=raceDwarf]').val();
+    var racialVariantInfo = 'div#raceDescription';
 
     switch (racialVariant) {
         case 'Hill Dwarf':
@@ -568,7 +592,7 @@ function racialDwarf() {
             $(racialStrTD).html(racialStr);
             racialWis = 1;
             $(racialWisTD).html(racialWis);
-            $('div#raceDescription').append(racialVariantTemplate(racialInfo[1].variants[0]));
+            $(racialVariantInfo).append(racialVariantTemplate(racialInfo[1].variants[0]));
             break;
 
         case 'Mountain Dwarf':
@@ -576,7 +600,7 @@ function racialDwarf() {
             $(racialStrTD).html(racialStr);
             racialWis = 0;
             $(racialWisTD).html(racialWis);
-            $('div#raceDescription').append(racialVariantTemplate(racialInfo[1].variants[1]));
+            $(racialVariantInfo).append(racialVariantTemplate(racialInfo[1].variants[1]));
             break;
     }
 
@@ -721,7 +745,7 @@ function racialHuman() {
             $(optionLabel2).html('Ability Score #2:');
             $(optionChoice2).html('<select class="form-control" id="optionHuman2" onchange="optionHuman(this.form)" style="width: 100%;">' + attrOptions() + '</select>');
             $(raceDescription).html(racialTraitsHeader + '\n\
-			<dl class="dl-horizontal">\n\
+			<dl class="dl-horizontal clearfix">\n\
 				' + dtColSm3 + '<s>Ability Score Increase</s>' + dtEnd + '\n\
 				' + ddColSm9 + '<s>Your ability scores each increase by 1.</s>' + ddEnd + '\n\
 				' + dtColSm3 + 'Age' + dtEnd + '\n\
@@ -734,7 +758,7 @@ function racialHuman() {
 				' + ddColSm9 + 'Your base walking speed is 30 feet.' + ddEnd + '\n\
 				' + dtColSm3 + 'Languages' + dtEnd + '\n\
 				' + ddColSm9 + 'You can speak, read, and write Common and one extra language of your choice. Humans typically learn the languages of other peoples they deal with, including obscure dialects. They are fond of sprinkling their speech with words borrowed from other tongues: Orc curses, Elvish musical expressions, Dwarvish military phrases, and so on.' + ddEnd + '' + dlEnd + '<h5>Subrace Traits</h5>\n\
-			<dl id="humanSubrace" class="dl-horizontal">' + dlEnd);
+			<dl id="humanSubrace" class="dl-horizontal clearfix">' + dlEnd);
             $('dl#humanSubrace').html('' + dtColSm3 + 'Ability Score Increase' + dtEnd + '\n\
 			' + ddColSm9 + 'Two different ability scores of your choice increase by 1.' + ddEnd + '\n\
 			' + dtColSm3 + 'Skills' + dtEnd + '\n\
@@ -760,7 +784,7 @@ function racialHuman() {
             resetRacialOptions();
 
             $(raceDescription).html(racialTraitsHeader + '\n\
-			<dl class="dl-horizontal">\n\
+			<dl class="dl-horizontal clearfix">\n\
 				' + dtColSm3 + 'Ability Score Increase' + dtEnd + '\n\
 				' + ddColSm9 + 'Your ability scores each increase by 1.' + ddEnd + '\n\
 				' + dtColSm3 + 'Age' + dtEnd + '\n\
@@ -773,7 +797,7 @@ function racialHuman() {
 				' + ddColSm9 + 'Your base walking speed is 30 feet.' + ddEnd + '\n\
 				' + dtColSm3 + 'Languages' + dtEnd + '\n\
 				' + ddColSm9 + 'You can speak, read, and write Common and one extra language of your choice. Humans typically learn the languages of other peoples they deal with, including obscure dialects. They are fond of sprinkling their speech with words borrowed from other tongues: Orc curses, Elvish musical expressions, Dwarvish military phrases, and so on.' + ddEnd + '' + dlEnd + '<h5>Subrace Traits</h5>\n\
-			<dl id="humanSubrace" class="dl-horizontal">' + dlEnd);
+			<dl id="humanSubrace" class="dl-horizontal clearfix">' + dlEnd);
             $('dl#humanSubrace').html('');
             break;
     }
@@ -811,7 +835,7 @@ function optionHalfElf() {
     increaseAttr(bonusAttr2, 1);
 
     getTotals();
-}
+};
 
 /**
  * @func getTotals

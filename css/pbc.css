@@ -27,6 +27,15 @@ h1, h2, h3, h4, h5, h6 {
     font-family: 'MrsEaves', serif;
 }
 
+a {
+    color: #c9ae6b;
+}
+
+a:focus,
+a:hover {
+    color: #c9ae6b;
+}
+
 .bg-inverse {
     background-color: #373a3c;
 }
@@ -43,6 +52,12 @@ h1, h2, h3, h4, h5, h6 {
 
 .table thead th {
     border-bottom: 3px solid #c9ae6b;
+}
+
+.form-control {
+    color: #373a3c;
+    background-color: #fff;
+    border: 1px solid #c9ae6b;
 }
 
 .bg-info {

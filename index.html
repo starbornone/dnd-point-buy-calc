@@ -13,7 +13,7 @@
 <nav class="navbar navbar-fixed-top navbar-dark bg-inverse">
     <ul class="nav navbar-nav">
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="http://shianra.com">
                 Return to Shianra.com
                 <i class="fa fa-reply fa-flip-vertical" aria-hidden="true"></i>
             </a>
@@ -35,9 +35,9 @@
                     score modifier</strong>, a <strong>total point cost</strong>, and a summary of all <strong>racial
                     traits</strong> at the end. There's also a reset button following the racial traits section.</p>
 
-            <h2>Standard Rules</h2>
+            <h2 class="m-t-2">Standard Rules</h2>
 
-            <dl class="dl-horizontal">
+            <dl class="dl-horizontal clearfix">
                 <dt class="col-sm-3">Available Points</dt>
                 <dd class="col-sm-9">27</dd>
                 <dt class="col-sm-3">Variants</dt>
@@ -49,35 +49,33 @@
 
             <form id="dnd5e-pbc" action="" method="get">
 
-                <div class="table-responsive">
-                    <table class="table">
-                        <tr>
-                            <td style="width: 25%;">Select Race:</td>
-                            <td style="width: 25%;" id="selectRace">
-                                <select class="form-control" id="race" name="race" onchange="getRace()"
-                                        style="width: 100%;">
-                                    <option value="---" disabled selected="">---</option>
-                                    <option value="Dragonborn">Dragonborn</option>
-                                    <option value="Dwarf">Dwarf</option>
-                                    <option value="Elf">Elf</option>
-                                    <option value="Gnome">Gnome</option>
-                                    <option value="Half-Elf">Half-Elf</option>
-                                    <option value="Half-Orc">Half-Orc</option>
-                                    <option value="Halfling">Halfling</option>
-                                    <option value="Human">Human</option>
-                                    <option value="Tiefling">Tiefling</option>
-                                </select>
-                            </td>
-                            <td style="width: 25%;" id="variantLabel"></td>
-                            <td style="width: 25%;" id="variantList"></td>
-                        </tr>
-                        <tr>
-                            <td id="optionLabel1"></td>
-                            <td id="optionChoice1"></td>
-                            <td id="optionLabel2"></td>
-                            <td id="optionChoice2"></td>
-                        </tr>
-                    </table>
+                <div class="form-group row m-t-2">
+                    <label for="race" class="col-sm-3 col-form-label">Select Race:</label>
+                    <div class="col-sm-3">
+                        <select class="form-control" id="race" name="race" onchange="getRace()"
+                                style="width: 100%;">
+                            <option value="---" disabled selected="">---</option>
+                            <option value="Dragonborn">Dragonborn</option>
+                            <option value="Dwarf">Dwarf</option>
+                            <option value="Elf">Elf</option>
+                            <option value="Gnome">Gnome</option>
+                            <option value="Half-Elf">Half-Elf</option>
+                            <option value="Half-Orc">Half-Orc</option>
+                            <option value="Halfling">Halfling</option>
+                            <option value="Human">Human</option>
+                            <option value="Tiefling">Tiefling</option>
+                        </select>
+                    </div>
+
+                    <div id="variantLabel"></div>
+                    <div id="variantList"></div>
+                </div>
+
+                <div class="form-group row">
+                    <div id="optionLabel1"></div>
+                    <div id="optionChoice1"></div>
+                    <div id="optionLabel2"></div>
+                    <div id="optionChoice2"></div>
                 </div>
 
                 <div class="table-responsive">
@@ -159,7 +157,7 @@
                     </table>
                 </div>
 
-                <div id="raceDescription" class="bg-info m-b-1 clearfix">
+                <div id="raceDescription" class="bg-info m-b-1">
                     <h3>Racial Traits</h3>
                 </div>
 
@@ -178,6 +176,21 @@
         crossorigin="anonymous"></script>
 <script src="js/pbc.js"></script>
 <script src="https://use.fontawesome.com/e091877903.js"></script>
+<script>
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'UA-24430613-4', 'auto');
+    ga('send', 'pageview');
+</script>
 
 </body>
 </html>
