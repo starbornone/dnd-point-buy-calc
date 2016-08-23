@@ -1,7 +1,80 @@
+@font-face {
+    font-family: Bookmania;
+    src: url('../fonts/Bookmania.otf');
+}
+
+@font-face {
+    font-family: MrsEaves;
+    src: url('../fonts/MrsEaves.ttf');
+}
+
+@font-face {
+    font-family: ScalaSans;
+    src: url('../fonts/ScalaSans.otf');
+}
+
 body {
+    padding: 8rem 5rem 5rem 5rem;
+    background: #fff url('../images/background.jpg') no-repeat;
+    background-size: cover;
+
+    font-family: 'Bookmania', serif;
+    font-size: 1.2rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #58170d;
+    font-family: 'MrsEaves', serif;
+}
+
+.bg-inverse {
+    background-color: #373a3c;
+}
+
+.container {
     padding: 5rem;
+    background-color: #fcfcf5;
+}
+
+.table td,
+.table th {
+    border-top: 1px solid #c9ae6b;
+}
+
+.table thead th {
+    border-bottom: 3px solid #c9ae6b;
 }
 
 .bg-info {
     padding: 2rem;
+    border-top: 2px solid #373a3c;
+    border-bottom: 2px solid #373a3c;
+    background-color: #c2ccce !important;
+    font-size: 1rem;
+}
+
+.bg-info,
+.bg-info h2,
+.bg-info h3,
+.bg-info h4 {
+    color: #373a3c !important;
+    font-family: 'ScalaSans', sans-serif;
+}
+
+.bg-info h2,
+.bg-info h3,
+.bg-info h4 {
+    text-transform: uppercase;
+}
+
+.btn-primary {
+    color: #373a3c;
+    background-color: #c9ae6b;
+    border: none;
+    font-size: 1.2rem;
+}
+
+.btn-primary:focus,
+.btn-primary:hover {
+    background-color: #c9ae6b;
 }

@@ -1,1 +1,1 @@
-# DnD Point Buy Calc
+# D&D Point Buy Calc
