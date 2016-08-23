@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.3/css/bootstrap.min.css"
+          integrity="sha384-MIwDKRSSImVFAZCVLtU0LMDdON6KVCrZHyVQQj6e8wIEJkW4tvwqXrbMIya1vriY" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC|Raleway:400,500,600" rel="stylesheet">
+    <link rel="stylesheet" href="./css/pbc.css">
+    <title>D&D 5e Point-Buy Calculator</title>
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+
+            <h1>D&#38;D 5e Point-Buy Calculator</h1>
+
+            <p>This point-buy calculator covers the <a
+                    href="http://dnd.wizards.com/products/tabletop-games/rpg-products/rpg_playershandbook"
+                    target="_blank">D&#38;D 5e Player's Handbook</a> and includes the <strong>ability score point
+                cost</strong> for each increment between 8 and 15, <strong>racial bonuses and penalties</strong> based
+                on race and subrace selection, a <strong>total ability score</strong>, the resulting <strong>ability
+                    score modifier</strong>, a <strong>total point cost</strong>, and a summary of all <strong>racial
+                    traits</strong> at the end. There's also a reset button following the racial traits section.</p>
+
+            <h2>Standard Rules</h2>
+
+            <dl class="dl-horizontal">
+                <dt class="col-sm-2">Available Points</dt>
+                <dd class="col-sm-10">27</dd>
+                <dt class="col-sm-2">Variants</dt>
+                <dd class="col-sm-10">If there is an option to select a variant (Subrace), you must pick one (with the
+                    exception of Humans). The Races which do not have this option, do not require one to be selected:
+                    Dragonborn, Half-Elves, Half-Orcs, Humans, and Tieflings.
+                </dd>
+            </dl>
+
+            <form id="dnd5e-pbc" action="" method="get">
+                <div class="table-responsive">
+                    <table class="table">
+                        <tr>
+                            <td style="width: 25%;">Select Race:</td>
+                            <td style="width: 25%;" id="selectRace">
+                                <select class="form-control" id="race" name="race" onchange="getRace()"
+                                        style="width: 100%;">
+                                    <option value="---" disabled selected="">---</option>
+                                    <option value="Dragonborn">Dragonborn</option>
+                                    <option value="Dwarf">Dwarf</option>
+                                    <option value="Elf">Elf</option>
+                                    <option value="Gnome">Gnome</option>
+                                    <option value="Half-Elf">Half-Elf</option>
+                                    <option value="Half-Orc">Half-Orc</option>
+                                    <option value="Halfling">Halfling</option>
+                                    <option value="Human">Human</option>
+                                    <option value="Tiefling">Tiefling</option>
+                                </select>
+                            </td>
+                            <td style="width: 25%;" id="variantLabel"></td>
+                            <td style="width: 25%;" id="variantList"></td>
+                        </tr>
+                        <tr>
+                            <td id="optionLabel1"></td>
+                            <td id="optionChoice1"></td>
+                            <td id="optionLabel2"></td>
+                            <td id="optionChoice2"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th style="width: 20%;">Attribute</th>
+                            <th style="width: 15%;">Score</th>
+                            <th style="width: 15%;">Cost</th>
+                            <th style="width: 15%;">Racial</th>
+                            <th style="width: 20%;" class="active">Total</th>
+                            <th style="width: 15%;" class="info">Modifier</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td><label for="attrStr">Strength</label></td>
+                            <td><input type="number" class="form-control" id="attrStr" name="attrStr" value="8" min="8"
+                                       max="15" step="1" onchange="getTotal()"/></td>
+                            <td id="costStr">0</td>
+                            <td id="racialStr"></td>
+                            <td id="totalStr" class="active">8</td>
+                            <td id="modStr" class="info">-1</td>
+                        </tr>
+                        <tr>
+                            <td><label for="attrDex">Dexterity</label></td>
+                            <td><input type="number" class="form-control" id="attrDex" name="attrDex" value="8" min="8"
+                                       max="15" step="1" onchange="getTotal()"/></td>
+                            <td id="costDex">0</td>
+                            <td id="racialDex"></td>
+                            <td id="totalDex" class="active">8</td>
+                            <td id="modDex" class="info">-1</td>
+                        </tr>
+                        <tr>
+                            <td><label for="attrCon">Constitution</label></td>
+                            <td><input type="number" class="form-control" id="attrCon" name="attrCon" value="8" min="8"
+                                       max="15" step="1" onchange="getTotal()"/></td>
+                            <td id="costCon">0</td>
+                            <td id="racialCon"></td>
+                            <td id="totalCon" class="active">8</td>
+                            <td id="modCon" class="info">-1</td>
+                        </tr>
+                        <tr>
+                            <td><label for="attrInt">Intelligence</label></td>
+                            <td><input type="number" class="form-control" id="attrInt" name="attrInt" value="8" min="8"
+                                       max="15" step="1" onchange="getTotal()"/></td>
+                            <td id="costInt">0</td>
+                            <td id="racialInt"></td>
+                            <td id="totalInt" class="active">8</td>
+                            <td id="modInt" class="info">-1</td>
+                        </tr>
+                        <tr>
+                            <td><label for="attrWis">Wisdom</label></td>
+                            <td><input type="number" class="form-control" id="attrWis" name="attrWis" value="8" min="8"
+                                       max="15" step="1" onchange="getTotal()"/></td>
+                            <td id="costWis">0</td>
+                            <td id="racialWis"></td>
+                            <td id="totalWis" class="active">8</td>
+                            <td id="modWis" class="info">-1</td>
+                        </tr>
+                        <tr>
+                            <td><label for="attrCha">Charisma</label></td>
+                            <td><input type="number" class="form-control" id="attrCha" name="attrCha" value="8" min="8"
+                                       max="15" step="1" onchange="getTotal()"/></td>
+                            <td id="costCha">0</td>
+                            <td id="racialCha"></td>
+                            <td id="totalCha" class="active">8</td>
+                            <td id="modCha" class="info">-1</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Total Cost</strong>:</td>
+                            <td></td>
+                            <td id="costTotal">0</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="raceDescription" class="bg-info m-b-1">
+                    <h4>Racial Traits</h4>
+                </div>
+                <input type="button" class="btn btn-default" value="Reset" onclick="resetAll()"/>
+            </form>
+
+        </div>
+    </div><!-- /.row -->
+</div><!-- /.container -->
+
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"
+        integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.3/js/bootstrap.min.js"
+        integrity="sha384-ux8v3A6CPtOTqOzMKiuo3d/DomGaaClxFYdCu2HPMBEkf6x2xiDyJ7gkXU0MWwaD"
+        crossorigin="anonymous"></script>
+<script src="js/pbc.js"></script>
+
+</body>
+</html>
