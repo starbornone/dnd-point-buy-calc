@@ -51,6 +51,7 @@ var optionChoice1 = 'div#optionChoice1';
 var optionLabel2 = 'div#optionLabel2';
 var optionChoice2 = 'div#optionChoice2';
 var raceDescription = 'div#raceDescription';
+var racialVariantInfo = 'div#racialVariant';
 
 var racialInfo = [];
 racialInfo[0] = {
@@ -132,11 +133,38 @@ racialInfo[2] = {
         ' fashion; such dreams are actually mental exercises that have become reflexive through years of practice.' +
         ' After resting in this way, you gain the same benefit that a human does from 8 hours of sleep.'],
     variants: [{
-        name: 'Dark Elf (Drow)'
+        name: 'Dark Elf (Drow)',
+        ability: 'Your Cha score increases by 1.',
+        other: ['Superior Darkvision',
+            'Your darkvision has a radius of 120 feet.',
+            'Sunlight Sensitivity',
+            'You have disadvantage on attack rolls and on Wis (Perception) checks that rely on sight when you,' +
+            ' the target of your attack, or whatever you are trying to perceive is in direct sunlight.',
+            'Drow Magic',
+            'You know the <em>dancing lights</em> cantrip. When you reach 3rd level, you can cast the <em>faerie' +
+            ' fire</em> spell once per day. When you reach 5th level, you can also cast the <em>darkness</em> spell' +
+            ' once per day. Cha is your spellcasting abilily for these spells.',
+            'Drow Weapon Training',
+            'You have proficiency with rapiers, shortswords, and hand crossbows.']
     }, {
-        name: 'High Elf'
+        name: 'High Elf',
+        ability: 'Your Int score increases by 1.',
+        other: ['Elf Weapon Training',
+            'You have proficiency with the longsword, shortsword, shortbow, and longbow.',
+            'Cantrip',
+            'You know one Cantrip of your choice from the wizard spell list. Int is your spellcasting ability for it.',
+            'Extra Language',
+            'You can speak, read, and write one extra language of your choice.']
     }, {
-        name: 'Wood Elf'
+        name: 'Wood Elf',
+        ability: 'Your Wis score increases by 1.',
+        other: ['Elf Weapon Training',
+            'You have proficiency with the longsword, shortsword, shortbow, and longbow.',
+            'Fleet of Foot',
+            'Your base walking speed increases to 35 feet.',
+            'Mask of the Wild',
+            'You can attempt to hide even when you are only lightly obscured by foliage, heavy rain, falling snow,' +
+            ' mist, and other natural phenomena.']
     }]
 };
 racialInfo[3] = {
@@ -158,9 +186,34 @@ racialInfo[3] = {
         'Gnome Cunning',
         'You have advantage on all Int, Wis, and Cha saving throws against magic.'],
     variants: [{
-        name: 'Forest Gnome'
+        name: 'Forest Gnome',
+        ability: 'Your Dex score increases by 1.',
+        other: ['Natural Illusionist',
+            'You know the <em>minor illusion</em> cantrip. Int is your spellcasting ability for it.',
+            'Speak with Small Beasts',
+            'Through sounds and gestures, you can communicate simple ideas with Small or smaller beasts. Forest' +
+            ' gnomes love animals and often keep squirrels, badgers, rabbits, moles, woodpeckers, and other' +
+            ' creatures as beloved pets.']
     }, {
-        name: 'Rock Gnome'
+        name: 'Rock Gnome',
+        ability: 'Your Con score increases by 1.',
+        other: ['Artificer&#039;s Lore',
+            'Whenever you make an Int (History) check related to magic items, alchemical objects, or technological' +
+            ' devices, you can add twice your proficiency bonus, instead of any proficiency bonus you normally apply.',
+            'Tinker',
+            'You have proficiency with artisan&#039;s tools (tinker&#039;s tools). Using those tools, you can spend' +
+            ' 1 hour and 10 gp worth of materials to construct a Tiny clockwork device (AC 5, 1 hp). The device' +
+            ' ceases to function after 24 hours (unless you spend 1 hour repairing it to keep the device' +
+            ' functioning), or when you use your action to dismantle it; at that time, you can reclaim the' +
+            ' materials used to create it. You can have up to three such devices active at a time. When you create' +
+            ' a device, choose one of the following options:<ul><li><strong>Clockwork Toy</strong>: This toy is a' +
+            ' clockwork animal, monster, or person, such as a frog, mouse, bird, dragon, or soldier. When placed on' +
+            ' the ground, the toy moves 5 feet across the ground on each of your turns in a random direction. It' +
+            ' makes noises as appropriate to the creature it represents.</li><li><strong>Fire Starter</strong>: The' +
+            ' device produces a miniature flame, which you can use to light a candle, torch, or campfire. Using' +
+            ' the device requires your action.</li><li><strong>Music Box</strong>: When opened, this music box' +
+            ' plays a single song at a moderate volume. The box stops playing when it reaches the song&#039;s end' +
+            ' or when it is closed.</li></ul>']
     }]
 };
 racialInfo[4] = {
@@ -181,16 +234,16 @@ racialInfo[4] = {
         'Fey Ancestry',
         'You have advantage on saving throws against being charmed, and magic can&#039;t put you to sleep.',
         'Skill Versatility',
-        'You gain proficiency in two skilIs of your choice.'],
+        'You gain proficiency in two skills of your choice.'],
     variants: []
 };
 racialInfo[5] = {
     name: 'Half-Orc',
-    ability: 'Your Str score inereases by 2, and your Con score inereases by 1.',
+    ability: 'Your Str score increases by 2, and your Con score increases by 1.',
     age: 'Half-orcs mature a tittle faster than humans, reaching adulthood around age 14. They age noticeably faster' +
     ' and rarely live longer than 75 years.',
     alignment: 'Half-orcs inherit a tendency toward chaos from their orc parents and are not strongly inclined toward' +
-    ' good. Half-orcs raised among orcs and willillg to live out their lives among them are usually evil.',
+    ' good. Half-orcs raised among orcs and willing to live out their lives among them are usually evil.',
     size: 'Half-orcs are somewhat larger and bulkier than humans, and they range from 5 to well over 6 feet tall.' +
     ' Your size is Medium.',
     speed: 'Your base walking speed is 30 feet.',
@@ -231,9 +284,16 @@ racialInfo[6] = {
         'Halfling Nimbleness',
         'You can move through the space of any creature that is of a size larger than yours.'],
     variants: [{
-        name: 'Lightfoot Halfling'
+        name: 'Lightfoot Halfling',
+        ability: 'Your Cha score increases by 1.',
+        other: ['Naturally Stealthy',
+            'You can attempt to hide even when you are obscured only by a creature that is at least one size larger' +
+            ' than you.']
     }, {
-        name: 'Stout Halfling'
+        name: 'Stout Halfling',
+        ability: 'Your Con score increases by 1.',
+        other: ['Stout Resilience',
+            'You have advantage on saving throws against poison, and you have resistance against poison damage.']
     }]
 };
 racialInfo[7] = {
@@ -271,10 +331,9 @@ racialInfo[8] = {
         'Hellish Resistance',
         'You have resistance to fire damage.',
         'Infernal Legacy',
-        'You know the &lt;em&gt;thaumaturgy&lt;/em&gt; cantrip. Once you reach 3rd level, you can cast the' +
-        ' &lt;em&gt;hellish rebuke&lt;/em&gt; spell once per day as a 2nd-level spell. Once you reach 5th level,' +
-        ' you can also cast the &lt;em&gt;darkness&lt;/em&gt; spell once per day. Cha is your spellcasting' +
-        ' ability for these spells.'],
+        'You know the <em>thaumaturgy</em> cantrip. Once you reach 3rd level, you can cast the <em>hellish' +
+        ' rebuke</em> spell once per day as a 2nd-level spell. Once you reach 5th level, you can also cast the' +
+        ' <em>darkness</em> spell once per day. Cha is your spellcasting ability for these spells.'],
     variants: []
 };
 
@@ -449,6 +508,7 @@ var resetRacialOptions = function () {
     $(optionLabel2).html('');
     $(optionChoice2).html('');
     $(raceDescription).html(racialTraitsHeader + '');
+    $(racialVariantInfo).html('');
 };
 
 /**
@@ -465,7 +525,7 @@ var setIntValue = function (target, amount) {
 /**
  * @func getRace
  */
-function getRace() {
+var getRace = function() {
     var theRace = $('select[id=race]').val();
 
     resetRacialAbilityScores();
@@ -517,9 +577,9 @@ function getRace() {
             racialCha = 2;
             $(racialChaTD).html(racialCha);
 
-            $(optionLabel1).html('<label for="race" class="col-sm-3 col-form-label">Ability Score #1:</label>');
+            $(optionLabel1).html('<label for="optionHalfElf1" class="col-sm-3 col-form-label">Ability Score #1:</label>');
             $(optionChoice1).html('<div class="col-sm-3"><select class="form-control" id="optionHalfElf1" onchange="optionHalfElf(this.form)" style="width: 100%;">' + attrOptions() + '</select></div>');
-            $(optionLabel2).html('<label for="race" class="col-sm-3 col-form-label">Ability Score #2:</label>');
+            $(optionLabel2).html('<label for="optionHalfElf2" class="col-sm-3 col-form-label">Ability Score #2:</label>');
             $(optionChoice2).html('<div class="col-sm-3"><select class="form-control" id="optionHalfElf2" onchange="optionHalfElf(this.form)" style="width: 100%;">' + attrOptions() + '</select></div>');
 
             $(raceDescription).html(racialTemplate(racialInfo[4]));
@@ -582,9 +642,8 @@ function getRace() {
 /**
  * @func racialDwarf
  */
-function racialDwarf() {
+var racialDwarf = function() {
     var racialVariant = $('select[id=raceDwarf]').val();
-    var racialVariantInfo = 'div#raceDescription';
 
     switch (racialVariant) {
         case 'Hill Dwarf':
@@ -592,7 +651,7 @@ function racialDwarf() {
             $(racialStrTD).html(racialStr);
             racialWis = 1;
             $(racialWisTD).html(racialWis);
-            $(racialVariantInfo).append(racialVariantTemplate(racialInfo[1].variants[0]));
+            $(racialVariantInfo).html(racialVariantTemplate(racialInfo[1].variants[0]));
             break;
 
         case 'Mountain Dwarf':
@@ -600,140 +659,108 @@ function racialDwarf() {
             $(racialStrTD).html(racialStr);
             racialWis = 0;
             $(racialWisTD).html(racialWis);
-            $(racialVariantInfo).append(racialVariantTemplate(racialInfo[1].variants[1]));
+            $(racialVariantInfo).html(racialVariantTemplate(racialInfo[1].variants[1]));
             break;
     }
 
     getTotals();
-}
+};
 
 /**
  * @func racialElf
  */
-function racialElf() {
-    var elfRacial = $('select[id=raceElf]').val();
-    if (elfRacial === "Dark") {
-        racialInt = 0;
-        $(racialIntTD).html(racialInt);
-        racialWis = 0;
-        $(racialWisTD).html(racialWis);
-        racialCha = 1;
-        $(racialChaTD).html(racialCha);
-        $('dl#elfSubrace').html('' + dtColSm3 + 'Ability Score Increase' + dtEnd + '\n\
-			' + ddColSm9 + 'Your Cha score increases by 1.' + ddEnd + '\n\
-			' + dtColSm3 + 'Superior Darkvision' + dtEnd + '\n\
-			' + ddColSm9 + 'Your darkvision has a radius of 120 feet.' + ddEnd + '\n\
-			' + dtColSm3 + 'Sunlight Sensitivity' + dtEnd + '\n\
-			' + ddColSm9 + 'You have disadvantage on attack rolls and on Wis (Perception) checks that rely on sight when you, the target of your attack, or whatever you are trying to perceive is in direct sunlight.' + ddEnd + '\n\
-			' + dtColSm3 + 'Drow Magic' + dtEnd + '\n\
-			' + ddColSm9 + 'You know the <em>dancing lights</em> cantrip. When you reach 3rd level, you can cast the <em>faerie fire</em> spell once per day. When you reach 5th level, you can also cast the <em>darkness</em> spell once per day. Cha is your spellcasting abilily for these spells.' + ddEnd + '\n\
-			' + dtColSm3 + 'Drow Weapon Training' + dtEnd + '\n\
-			' + ddColSm9 + 'You have proficiency with rapiers, shortswords, and hand crossbows.' + ddEnd + '');
+var racialElf = function() {
+    var racialVariant = $('select[id=raceElf]').val();
+
+    switch (racialVariant) {
+        case 'Dark Elf (Drow)':
+            racialInt = 0;
+            $(racialIntTD).html(racialInt);
+            racialWis = 0;
+            $(racialWisTD).html(racialWis);
+            racialCha = 1;
+            $(racialChaTD).html(racialCha);
+            $(racialVariantInfo).html(racialVariantTemplate(racialInfo[2].variants[0]));
+            break;
+        case 'High Elf':
+            racialInt = 1;
+            $(racialIntTD).html(racialInt);
+            racialWis = 0;
+            $(racialWisTD).html(racialWis);
+            racialCha = 0;
+            $(racialChaTD).html(racialCha);
+            $(racialVariantInfo).html(racialVariantTemplate(racialInfo[2].variants[1]));
+            break;
+        case 'Wood Elf':
+            racialInt = 0;
+            $(racialIntTD).html(racialInt);
+            racialWis = 1;
+            $(racialWisTD).html(racialWis);
+            racialCha = 0;
+            $(racialChaTD).html(racialCha);
+            $(racialVariantInfo).html(racialVariantTemplate(racialInfo[2].variants[2]));
+            break;
     }
-    else if (elfRacial === "High") {
-        racialInt = 1;
-        $(racialIntTD).html(racialInt);
-        racialWis = 0;
-        $(racialWisTD).html(racialWis);
-        racialCha = 0;
-        $(racialChaTD).html(racialCha);
-        $('dl#elfSubrace').html('' + dtColSm3 + 'Ability Score Increase' + dtEnd + '\n\
-			' + ddColSm9 + 'Your Int score increases by 1.' + ddEnd + '\n\
-			' + dtColSm3 + 'Elf Weapon Training' + dtEnd + '\n\
-			' + ddColSm9 + 'You have proficiency with the longsword, shortsword, shortbow, and longbow.' + ddEnd + '\n\
-			' + dtColSm3 + 'Cantrip' + dtEnd + '\n\
-			' + ddColSm9 + 'You know one Cantrip of your choice from the wizard spell list. Int is your spellcasting ability for it.' + ddEnd + '\n\
-			' + dtColSm3 + 'Extra Language' + dtEnd + '\n\
-			' + ddColSm9 + 'You can speak, read, and write one extra language of your choice.' + ddEnd + '');
-    }
-    else {
-        racialInt = 0;
-        $(racialIntTD).html(racialInt);
-        racialWis = 1;
-        $(racialWisTD).html(racialWis);
-        racialCha = 0;
-        $(racialChaTD).html(racialCha);
-        $('dl#elfSubrace').html('' + dtColSm3 + 'Ability Score Increase' + dtEnd + '\n\
-			' + ddColSm9 + 'Your Wis score increases by 1.' + ddEnd + '\n\
-			' + dtColSm3 + 'Elf Weapon Training' + dtEnd + '\n\
-			' + ddColSm9 + 'You have proficiency with the longsword, shortsword, shortbow, and longbow.' + ddEnd + '\n\
-			' + dtColSm3 + 'Fleet of Foot' + dtEnd + '\n\
-			' + ddColSm9 + 'Your base walking speed increases to 35 feet.' + ddEnd + '\n\
-			' + dtColSm3 + 'Mask of the Wild' + dtEnd + '\n\
-			' + ddColSm9 + 'You can attempt to hide even when you are only lightly obscured by foliage, heavy rain, falling snow, mist, and other natural phenomena.' + ddEnd + '');
-    }
+
     getTotals();
-}
+};
 
 /**
  * @func racialGnome
  */
-function racialGnome() {
-    var gnomeRacial = $('select[id=raceGnome]').val();
-    if (gnomeRacial === "Forest") {
-        racialDex = 1;
-        $(racialDexTD).html(racialDex);
-        racialCon = 0;
-        $(racialConTD).html(racialCon);
-        $('dl#gnomeSubrace').html('' + dtColSm3 + 'Ability Score Increase' + dtEnd + '\n\
-			' + ddColSm9 + 'Your Dex score increases by 1.' + ddEnd + '\n\
-			' + dtColSm3 + 'Natural Illusionist' + dtEnd + '\n\
-			' + ddColSm9 + 'You know the <em>minor illusion</em> cantrip. Int is your spellcasting ability for it.' + ddEnd + '\n\
-			' + dtColSm3 + 'Speak with Small Beasts' + dtEnd + '\n\
-			' + ddColSm9 + 'Through sounds and gestures, you can communicate simple ideas with Small or smaller beasts. Forest gnomes love animals and often keep squirrels, badgers, rabbits, moles, woodpeckers, and other creatures as beloved pets.' + ddEnd + '');
+var racialGnome = function() {
+    var racialVariant = $('select[id=raceGnome]').val();
+
+    switch (racialVariant) {
+        case 'Forest Gnome':
+            racialDex = 1;
+            $(racialDexTD).html(racialDex);
+            racialCon = 0;
+            $(racialConTD).html(racialCon);
+            $(racialVariantInfo).html(racialVariantTemplate(racialInfo[3].variants[0]));
+            break;
+        case 'Rock Gnome':
+            racialDex = 0;
+            $(racialDexTD).html(racialDex);
+            racialCon = 1;
+            $(racialConTD).html(racialCon);
+            $(racialVariantInfo).html(racialVariantTemplate(racialInfo[3].variants[1]));
+            break;
     }
-    else {
-        racialDex = 0;
-        $(racialDexTD).html(racialDex);
-        racialCon = 1;
-        $(racialConTD).html(racialCon);
-        $('dl#gnomeSubrace').html('' + dtColSm3 + 'Ability Score Increase' + dtEnd + '\n\
-			' + ddColSm9 + 'Your Con score increases by 1.' + ddEnd + '\n\
-			' + dtColSm3 + 'Artificer&#039;s Lore' + dtEnd + '\n\
-			' + ddColSm9 + 'Whenever you make an Int (History) check related to magic items, alchemical objects, or technological devices, you can add twice your proficiency bonus, instead of any proficiency bonus you normally apply.' + ddEnd + '\n\
-			' + dtColSm3 + 'Tinker' + dtEnd + '\n\
-			' + ddColSm9 + 'You have proficiency with artisan&#039;s tools (tinker&#039;s tools). Using those tools, you can spend 1 hour and 10 gp worth of materials to construct a Tiny clockwork device (AC 5, 1 hp). The device ceases to function after 24 hours (unless you spend 1 hour repairing it to keep the device functioning), or when you use your action to dismantle it; at that time, you can reclaim the materials used to create it. You can have up to three such devices active at a time. When you create a device, choose one of the following options:\n\
-				<ul>\n\
-					<li><strong>Clockwork Toy</strong>: This toy is a clockwork animal, monster, or person, such as a frog, mouse, bird, dragon, or soldier. When placed on the ground, the toy moves 5 feet across the ground on each of your turns in a random direction. It makes noises as appropriate to the creature it represents.</li>\n\
-					<li><strong>Fire Starter</strong>: The device produces a miniature flame, which you can use to light a candle, torch, or campfire. Using the device requires your action.</li>\n\
-					<li><strong>Music Box</strong>: When opened, this music box plays a single song at a moderate volume. The box stops playing when it reaches the song&#039;s end or when it is closed.</li>\n\
-				</ul>' + ddEnd + '');
-    }
+
     getTotals();
-}
+};
 
 /**
  * @func racialHalfling
  */
-function racialHalfling() {
-    var halflingRacial = $('select[id=raceHalfling]').val();
-    if (halflingRacial === "Lightfoot") {
-        racialCon = 0;
-        $(racialConTD).html(racialCon);
-        racialCha = 1;
-        $(racialChaTD).html(racialCha);
-        $('dl#halflingSubrace').html('' + dtColSm3 + 'Ability Score Increase' + dtEnd + '\n\
-			' + ddColSm9 + 'Your Cha score increases by 1.' + ddEnd + '\n\
-			' + dtColSm3 + 'Naturally Stealthy' + dtEnd + '\n\
-			' + ddColSm9 + 'You can attempt to hide even when you are obscured only by a creature that is at least one size larger than you.' + ddEnd + '');
+var racialHalfling = function() {
+    var racialVariant = $('select[id=raceHalfling]').val();
+
+    switch (racialVariant) {
+        case 'Lightfoot Halfling':
+            racialCon = 0;
+            $(racialConTD).html(racialCon);
+            racialCha = 1;
+            $(racialChaTD).html(racialCha);
+            $(racialVariantInfo).html(racialVariantTemplate(racialInfo[6].variants[0]));
+            break;
+        case 'Stout Halfling':
+            racialCon = 1;
+            $(racialConTD).html(racialCon);
+            racialCha = 0;
+            $(racialChaTD).html(racialCha);
+            $(racialVariantInfo).html(racialVariantTemplate(racialInfo[6].variants[1]));
+            break;
     }
-    else {
-        racialCon = 1;
-        $(racialConTD).html(racialCon);
-        racialCha = 0;
-        $(racialChaTD).html(racialCha);
-        $('dl#halflingSubrace').html('' + dtColSm3 + 'Ability Score Increase' + dtEnd + '\n\
-			' + ddColSm9 + 'Your Con score increases by 1.' + ddEnd + '\n\
-			' + dtColSm3 + 'Stout Resilience' + dtEnd + '\n\
-			' + ddColSm9 + 'You have advantage on saving throws against poison, and you have resistance against poison damage.' + ddEnd + '');
-    }
+
     getTotals();
-}
+};
 
 /**
  * @func racialHuman
  */
-function racialHuman() {
+var racialHuman = function() {
     var variantState = $('select[id=raceHuman]').val();
 
     switch (variantState) {
@@ -803,7 +830,7 @@ function racialHuman() {
     }
 
     getTotals();
-}
+};
 
 /**
  * @func optionHuman
@@ -840,7 +867,7 @@ function optionHalfElf() {
 /**
  * @func getTotals
  */
-function getTotals() {
+var getTotals = function() {
     /**
      * @func getAttrTotal
      */
@@ -919,7 +946,7 @@ function getTotals() {
     getMod();
 }
 
-function resetAll() {
+var resetAll = function() {
     $('td#selectRace').html('<select class="form-control" id="race" name="race" onchange="getRace()" style="width: 100%;"><option value="---" disabled selected="">---</option><option value="Dragonborn">Dragonborn</option><option value="Dwarf">Dwarf</option><option value="Elf">Elf</option><option value="Gnome">Gnome</option><option value="Half-Elf">Half-Elf</option><option value="Half-Orc">Half-Orc</option><option value="Halfling">Halfling</option><option value="Human">Human</option><option value="Tiefling">Tiefling</option></select>');
 
     setIntValue('attrStr', '8');
@@ -978,4 +1005,20 @@ function resetAll() {
     $('td#costTotal').html(zeroValue);
 
     resetRacialOptions();
-}
+};
+
+$(function () {
+    var inputStr = document.getElementById('attrStr');
+    var inputDex = document.getElementById('attrDex');
+    var inputCon = document.getElementById('attrCon');
+    var inputInt = document.getElementById('attrInt');
+    var inputWis = document.getElementById('attrWis');
+    var inputCha = document.getElementById('attrCha');
+
+    inputStr.addEventListener('click', getTotals, false);
+    inputDex.addEventListener('click', getTotals, false);
+    inputCon.addEventListener('click', getTotals, false);
+    inputInt.addEventListener('click', getTotals, false);
+    inputWis.addEventListener('click', getTotals, false);
+    inputCha.addEventListener('click', getTotals, false);
+});

@@ -94,7 +94,7 @@
                         <tr>
                             <td><label for="attrStr">Strength</label></td>
                             <td><input type="number" class="form-control" id="attrStr" name="attrStr" value="8" min="8"
-                                       max="15" step="1" onchange="getTotal()"/></td>
+                                       max="15" step="1"/></td>
                             <td id="costStr">0</td>
                             <td id="racialStr"></td>
                             <td id="totalStr" class="active">8</td>
@@ -103,7 +103,7 @@
                         <tr>
                             <td><label for="attrDex">Dexterity</label></td>
                             <td><input type="number" class="form-control" id="attrDex" name="attrDex" value="8" min="8"
-                                       max="15" step="1" onchange="getTotal()"/></td>
+                                       max="15" step="1"/></td>
                             <td id="costDex">0</td>
                             <td id="racialDex"></td>
                             <td id="totalDex" class="active">8</td>
@@ -112,7 +112,7 @@
                         <tr>
                             <td><label for="attrCon">Constitution</label></td>
                             <td><input type="number" class="form-control" id="attrCon" name="attrCon" value="8" min="8"
-                                       max="15" step="1" onchange="getTotal()"/></td>
+                                       max="15" step="1"/></td>
                             <td id="costCon">0</td>
                             <td id="racialCon"></td>
                             <td id="totalCon" class="active">8</td>
@@ -121,7 +121,7 @@
                         <tr>
                             <td><label for="attrInt">Intelligence</label></td>
                             <td><input type="number" class="form-control" id="attrInt" name="attrInt" value="8" min="8"
-                                       max="15" step="1" onchange="getTotal()"/></td>
+                                       max="15" step="1"/></td>
                             <td id="costInt">0</td>
                             <td id="racialInt"></td>
                             <td id="totalInt" class="active">8</td>
@@ -130,7 +130,7 @@
                         <tr>
                             <td><label for="attrWis">Wisdom</label></td>
                             <td><input type="number" class="form-control" id="attrWis" name="attrWis" value="8" min="8"
-                                       max="15" step="1" onchange="getTotal()"/></td>
+                                       max="15" step="1"/></td>
                             <td id="costWis">0</td>
                             <td id="racialWis"></td>
                             <td id="totalWis" class="active">8</td>
@@ -139,7 +139,7 @@
                         <tr>
                             <td><label for="attrCha">Charisma</label></td>
                             <td><input type="number" class="form-control" id="attrCha" name="attrCha" value="8" min="8"
-                                       max="15" step="1" onchange="getTotal()"/></td>
+                                       max="15" step="1"/></td>
                             <td id="costCha">0</td>
                             <td id="racialCha"></td>
                             <td id="totalCha" class="active">8</td>
@@ -157,8 +157,11 @@
                     </table>
                 </div>
 
-                <div id="raceDescription" class="bg-info m-b-1">
-                    <h3>Racial Traits</h3>
+                <div class="bg-info m-b-1">
+                    <div id="raceDescription">
+                        <h3>Racial Traits</h3>
+                    </div>
+                    <div id="racialVariant"></div>
                 </div>
 
                 <input type="button" class="btn btn-primary pull-xs-right" value="Reset" onclick="resetAll()"/>
