@@ -4,6 +4,7 @@
  *  Version     1.2
  *  Author:     Sha Kong-Brooks
  *  Website:    http://shianra.com
+ *  TODO Individual racial functions should each have a foreach, then see if they can all be merged into one function.
  ================================================== */
 
 var attrNames = ['Strength', 'Dexterity', 'Constitution', 'Intelligence', 'Wisdom', 'Charisma'];
@@ -990,7 +991,7 @@ var resetAll = function() {
 
 $(function () {
     var inputRace = document.getElementById('race');
-    inputRace.addEventListener('click', getRace, false);
+    inputRace.addEventListener('change', getRace, false);
 
     var inputStr = document.getElementById('attrStr');
     var inputDex = document.getElementById('attrDex');
@@ -999,12 +1000,12 @@ $(function () {
     var inputWis = document.getElementById('attrWis');
     var inputCha = document.getElementById('attrCha');
 
-    inputStr.addEventListener('click', getTotals, false);
-    inputDex.addEventListener('click', getTotals, false);
-    inputCon.addEventListener('click', getTotals, false);
-    inputInt.addEventListener('click', getTotals, false);
-    inputWis.addEventListener('click', getTotals, false);
-    inputCha.addEventListener('click', getTotals, false);
+    inputStr.addEventListener('change', getTotals, false);
+    inputDex.addEventListener('change', getTotals, false);
+    inputCon.addEventListener('change', getTotals, false);
+    inputInt.addEventListener('change', getTotals, false);
+    inputWis.addEventListener('change', getTotals, false);
+    inputCha.addEventListener('change', getTotals, false);
 
     var inputReset = document.getElementById('reset');
     inputReset.addEventListener('click', resetAll, false);
