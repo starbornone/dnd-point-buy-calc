@@ -947,7 +947,7 @@ var getTotals = function() {
 }
 
 var resetAll = function() {
-    $('td#selectRace').html('<select class="form-control" id="race" name="race" onchange="getRace()" style="width: 100%;"><option value="---" disabled selected="">---</option><option value="Dragonborn">Dragonborn</option><option value="Dwarf">Dwarf</option><option value="Elf">Elf</option><option value="Gnome">Gnome</option><option value="Half-Elf">Half-Elf</option><option value="Half-Orc">Half-Orc</option><option value="Halfling">Halfling</option><option value="Human">Human</option><option value="Tiefling">Tiefling</option></select>');
+    $('td#selectRace').html('<select class="form-control" id="race" name="race" style="width: 100%;"><option value="---" disabled selected="">---</option><option value="Dragonborn">Dragonborn</option><option value="Dwarf">Dwarf</option><option value="Elf">Elf</option><option value="Gnome">Gnome</option><option value="Half-Elf">Half-Elf</option><option value="Half-Orc">Half-Orc</option><option value="Halfling">Halfling</option><option value="Human">Human</option><option value="Tiefling">Tiefling</option></select>');
 
     setIntValue('attrStr', '8');
     setIntValue('attrDex', '8');
@@ -955,13 +955,6 @@ var resetAll = function() {
     setIntValue('attrInt', '8');
     setIntValue('attrWis', '8');
     setIntValue('attrCha', '8');
-
-    var attrStr = getIntValue('attrStr');
-    var attrDex = getIntValue('attrDex');
-    var attrCon = getIntValue('attrCon');
-    var attrInt = getIntValue('attrInt');
-    var attrWis = getIntValue('attrWis');
-    var attrCha = getIntValue('attrCha');
 
     var zeroValue = 0;
 
@@ -974,40 +967,31 @@ var resetAll = function() {
 
     resetRacialAbilityScores();
 
-    var totalStr = attrStr + racialStr;
-    var totalDex = attrDex + racialDex;
-    var totalCon = attrCon + racialCon;
-    var totalInt = attrInt + racialInt;
-    var totalWis = attrWis + racialWis;
-    var totalCha = attrCha + racialCha;
+    $('td#totalStr').html('8');
+    $('td#totalDex').html('8');
+    $('td#totalCon').html('8');
+    $('td#totalInt').html('8');
+    $('td#totalWis').html('8');
+    $('td#totalCha').html('8');
 
-    $('td#totalStr').html(totalStr);
-    $('td#totalDex').html(totalDex);
-    $('td#totalCon').html(totalCon);
-    $('td#totalInt').html(totalInt);
-    $('td#totalWis').html(totalWis);
-    $('td#totalCha').html(totalCha);
-
-    var modStr = modifiers[totalStr];
-    var modDex = modifiers[totalDex];
-    var modCon = modifiers[totalCon];
-    var modInt = modifiers[totalInt];
-    var modWis = modifiers[totalWis];
-    var modCha = modifiers[totalCha];
-
-    $('td#modStr').html(modStr);
-    $('td#modDex').html(modDex);
-    $('td#modCon').html(modCon);
-    $('td#modInt').html(modInt);
-    $('td#modWis').html(modWis);
-    $('td#modCha').html(modCha);
+    $('td#modStr').html(modifiers[8]);
+    $('td#modDex').html(modifiers[8]);
+    $('td#modCon').html(modifiers[8]);
+    $('td#modInt').html(modifiers[8]);
+    $('td#modWis').html(modifiers[8]);
+    $('td#modCha').html(modifiers[8]);
 
     $('td#costTotal').html(zeroValue);
 
     resetRacialOptions();
+
+    getTotals();
 };
 
 $(function () {
+    var inputRace = document.getElementById('race');
+    inputRace.addEventListener('click', getRace, false);
+
     var inputStr = document.getElementById('attrStr');
     var inputDex = document.getElementById('attrDex');
     var inputCon = document.getElementById('attrCon');
@@ -1021,4 +1005,7 @@ $(function () {
     inputInt.addEventListener('click', getTotals, false);
     inputWis.addEventListener('click', getTotals, false);
     inputCha.addEventListener('click', getTotals, false);
+
+    var inputReset = document.getElementById('reset');
+    inputReset.addEventListener('click', resetAll, false);
 });

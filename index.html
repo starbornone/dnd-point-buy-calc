@@ -38,8 +38,8 @@
             <h2 class="m-t-2">Standard Rules</h2>
 
             <dl class="dl-horizontal clearfix">
-                <dt class="col-sm-3">Available Points</dt>
-                <dd class="col-sm-9">27</dd>
+                <dt class="col-sm-3">Recommendations</dt>
+                <dd class="col-sm-9">Use 27 points, as recommended by the Player's Handbook.</dd>
                 <dt class="col-sm-3">Variants</dt>
                 <dd class="col-sm-9">If there is an option to select a variant (Subrace), you must pick one (with the
                     exception of Humans). The Races which do not have this option, do not require one to be selected:
@@ -52,8 +52,7 @@
                 <div class="form-group row m-t-2">
                     <label for="race" class="col-sm-3 col-form-label">Select Race:</label>
                     <div class="col-sm-3">
-                        <select class="form-control" id="race" name="race" onchange="getRace()"
-                                style="width: 100%;">
+                        <select class="form-control" id="race" name="race" style="width: 100%;">
                             <option value="---" disabled selected="">---</option>
                             <option value="Dragonborn">Dragonborn</option>
                             <option value="Dwarf">Dwarf</option>
@@ -164,7 +163,7 @@
                     <div id="racialVariant"></div>
                 </div>
 
-                <input type="button" class="btn btn-primary pull-xs-right" value="Reset" onclick="resetAll()"/>
+                <input id="reset" type="button" class="btn btn-primary pull-xs-right" value="Reset"/>
 
             </form>
 
