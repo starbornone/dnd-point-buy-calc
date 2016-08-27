@@ -35,9 +35,9 @@ var racialChaTD = 'td#racialCha';
  */
 var racialTraitsHeader = '<h3>Racial Traits</h3>';
 var dlHorizontal = '<dl class="dl-horizontal clearfix">';
-var dtColSm3 = '<dt class="col-sm-3">';
+var dtColSm3 = '<dt class="col-xl-3">';
 var dtEnd = '</dt>';
-var ddColSm9 = '<dd class="col-sm-9">';
+var ddColSm9 = '<dd class="col-xl-9">';
 var ddEnd = '</dd>';
 var dlEnd = '</dl>';
 
