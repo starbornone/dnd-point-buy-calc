@@ -58,14 +58,31 @@ var racialVariantInfo = 'div#racialVariant';
 var racialInfo = [];
 racialInfo[0] = {
     name: 'Dragonborn',
-    ability: '...',
-    age: '...',
-    alignment: '...',
-    size: '...',
-    speed: '...',
-    language: '...',
-    other: ['...',
-        '...']
+    ability: 'Your Strength score increases by 2, and your Charisma score increases by 1.',
+    age: 'Young dragonborn grow quickly. They walk hours after hatching, attain the size and development of a' +
+    ' 10-year-old human child by the age of 3, and reach adulthood by 15. They live to be around 80.',
+    alignment: 'Dragonborn tend to extremes, making a conscious choice for one side or the other in the cosmic war' +
+    ' between good and evil (represented by Bahamut and Tiamat, respectively). Most dragonborn are good, but those' +
+    ' who side with Tiamat can be terrible villains.',
+    size: 'Dragonborn are taller and heavier than humans, standing well over 6 feet tall and averaging almost 250' +
+    ' pounds. Your size is Medium.',
+    speed: 'Your base walking speed is 30 feet.',
+    language: 'You can speak, read, and write Common and Draconic. Draconic is thought to be one of the oldest' +
+    ' languages and is often used in the study of magic. The language sounds harsh to most other creatures and' +
+    ' includes numerous hard consonants and sibilants.',
+    other: ['Draconic Ancestry',
+        'You have draconic ancestry. Choose one type of dragon from the Draconic Ancestry table. Your breath weapon' +
+        ' and damage resistance are determined by the dragon type, as shown in the table.',
+        'Breath Weapon',
+        'You can use your action to exhale destructive energy. Your draconic ancestry determines the size, shape, ' +
+        ' and damage type of the exhalation. When you use your breath weapon, each creature in the area of the' +
+        ' exhalation must make a saving throw, the type of which is determined by your draconic ancestry. The DC' +
+        ' for this saving throw equals 8 + your Constitution modifier + your proficiency bonus. A creature takes' +
+        ' 2d6 damage on a failed save. and half as much damage on a successful one. The damage increases to 3d6 at' +
+        ' 6th level. 4d6 at 11th level, and 5d6 at 16th level. After you use your breath weapon, you can\'t use it' +
+        ' again until you complete a short or long rest.',
+        'Damage Resistance',
+        'You have resistance to the damage type associated with your draconic ancestry.']
 };
 racialInfo[1] = {
     name: 'Dwarf',
@@ -110,7 +127,7 @@ racialInfo[2] = {
     name: 'Elf',
     ability: 'Your Dex score increases by 2.',
     age: 'Although elves reach physical maturity at about the same age as humans, the elven understanding of' +
-    ' adulthood goes beyond physical growth to eocompass worldly experience. An elf typically claims adulthood and' +
+    ' adulthood goes beyond physical growth to encompass worldly experience. An elf typically claims adulthood and' +
     ' an adult name around the age of 100 and can live to be 750 years old.',
     alignment: 'Elves love freedom, variety, and self-expression, so they lean strongly toward the gentler aspects' +
     ' of chaos. They value and protect others&#039; freedom as well as their own, and they are more often good than' +
@@ -145,7 +162,7 @@ racialInfo[2] = {
             'Drow Magic',
             'You know the <em>dancing lights</em> cantrip. When you reach 3rd level, you can cast the <em>faerie' +
             ' fire</em> spell once per day. When you reach 5th level, you can also cast the <em>darkness</em> spell' +
-            ' once per day. Cha is your spellcasting abilily for these spells.',
+            ' once per day. Cha is your spellcasting ability for these spells.',
             'Drow Weapon Training',
             'You have proficiency with rapiers, shortswords, and hand crossbows.']
     }, {
@@ -230,7 +247,7 @@ racialInfo[4] = {
     speed: 'Your base walking speed is 30 feet.',
     language: 'You can speak, read, and write Common, Elvish, and one extra language of your choice.',
     other: ['Darkvision',
-        'Thanks to your elfblood, you have superior vision in dark and dim conditions. You can see in dim light' +
+        'Thanks to your elf-blood, you have superior vision in dark and dim conditions. You can see in dim light' +
         ' within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can&#039;t' +
         ' discern color in darkness, only shades of grey.',
         'Fey Ancestry',
@@ -279,7 +296,7 @@ racialInfo[6] = {
     ' literature. Their oral tradition, however, is very strong. Almost all halflings speak Common to converse with' +
     ' the people in whose lands they dwell or through which they are traveling.',
     other: ['Lucky',
-        'When you roll a 1 on an attack roll, ability check, or saving throw, you can reroll the die and must use' +
+        'When you roll a 1 on an attack roll, ability check, or saving throw, you can re-roll the die and must use' +
         ' the new roll.',
         'Brave',
         'You have advantage on saving throws against being frightened.',
