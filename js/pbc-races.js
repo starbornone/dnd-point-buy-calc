@@ -305,7 +305,7 @@ racialInfo[8] = {
 };
 racialInfo[9] = {
     name: 'Aasimar',
-    ability: '',
+    ability: 'Your Wisdom score increases by 1, and your Charisma score increases by 2.',
     age: '',
     alignment: '',
     size: '',

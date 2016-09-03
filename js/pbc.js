@@ -21,7 +21,7 @@ var racialWis = 0;
 var racialCha = 0;
 
 /**
- * @desc The table cells where the racial stats will be displayed.
+ * @desc The table cells where the racial attribute bonuses will be displayed.
  */
 var racialStrTD = 'td#racialStr';
 var racialDexTD = 'td#racialDex';
@@ -56,7 +56,7 @@ var raceDescription = 'div#raceDescription';
 var racialVariantInfo = 'div#racialVariant';
 
 /**
- * 
+ * @desc The table cells where the total attributes will be displayed.
  */
 var totalStrTD = 'td#totalStr';
 var totalDexTD = 'td#totalDex';
