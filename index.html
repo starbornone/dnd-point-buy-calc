@@ -25,30 +25,203 @@
     <div class="row">
         <div class="col-lg-12">
 
+            <button class="btn btn-secondary pull-sm-right" data-toggle="modal" data-target=".basic-usage">
+                Basic Usage
+            </button>
+            <button class="btn btn-secondary pull-sm-right" data-toggle="modal" data-target=".about-calc">
+                About
+            </button>
+
             <h1>D&#38;D 5e Point-Buy Calculator</h1>
 
-            <p>This point-buy calculator covers the <a
-                    href="http://dnd.wizards.com/products/tabletop-games/rpg-products/rpg_playershandbook"
-                    target="_blank">D&#38;D 5e Player's Handbook</a> and includes the <strong>ability score point
-                cost</strong> for each increment between 8 and 15, <strong>racial bonuses and penalties</strong> based
-                on race and subrace selection, a <strong>total ability score</strong>, the resulting <strong>ability
-                    score modifier</strong>, a <strong>total point cost</strong>, and a summary of all <strong>racial
-                    traits</strong> at the end. There's also a reset button following the racial traits section.</p>
+            <div class="modal fade about-calc" tabindex="-1" role="dialog" aria-labelledby="aboutCalcLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
 
-            <h2 class="m-t-2">Standard Rules</h2>
+                        <div class="modal-header">
 
-            <dl class="dl-horizontal clearfix">
-                <dt class="col-lg-3">Recommendations</dt>
-                <dd class="col-lg-9">Use 27 points, as recommended by the Player's Handbook.</dd>
-                <dt class="col-lg-3">Variants</dt>
-                <dd class="col-lg-9">If there is an option to select a variant (Subrace), you must pick one (with the
-                    exception of Humans). The Races which do not have this option, do not require one to be selected.
-                </dd>
-            </dl>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h4 class="modal-title">About</h4>
+
+                        </div>
+                        <div class="modal-body">
+
+                            <p>This point-buy calculator covers the following D&#38;D 5e books:</p>
+
+                            <ul>
+                                <li>
+                                    <a href="http://dnd.wizards.com/products/tabletop-games/rpg-products/rpg_playershandbook"
+                                       target="_blank">
+                                        Player's Handbook
+                                        <i class="fa fa-external-link" aria-hidden="true"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="http://dnd.wizards.com/products/tabletop-games/rpg-products/dungeon-masters-guide"
+                                       target="_blank">
+                                        Dungeon Master's Guide
+                                        <i class="fa fa-external-link" aria-hidden="true"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="http://dnd.wizards.com/articles/features/unearthed-arcana-eberron"
+                                       target="_blank">
+                                    Unearthed Arcana: Eberron
+                                    <i class="fa fa-external-link" aria-hidden="true"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="http://dnd.wizards.com/articles/features/gothic-heroes" target="_blank">
+                                    Unearthed Arcana: Gothic Heroes
+                                    <i class="fa fa-external-link" aria-hidden="true"></i>
+                                </a>
+                                </li>
+                                <li>
+                                    <a href="http://dnd.wizards.com/articles/features/unearthed-arcana-waterborne-adventures"
+                                       target="_blank">
+                                        Unearthed Arcana: Waterborne Adventures
+                                        <i class="fa fa-external-link" aria-hidden="true"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://dnd.wizards.com/products/tabletop-games/rpg-products/player%E2%80%99s-companion"
+                                       target="_blank">
+                                        Elemental Evil Player's Guide
+                                        <i class="fa fa-external-link" aria-hidden="true"></i>
+                                    </a>
+                                </li>
+                            </ul>
+
+                            <p>It includes the <strong>ability score point cost</strong> for each increment between 8
+                                and 15, <strong>racial
+                                    bonuses and penalties</strong> based on race and subrace selection, a <strong>total
+                                    ability
+                                    score</strong>, the resulting <strong>ability score modifier</strong>, a <strong>total
+                                    point
+                                    cost</strong>, and a summary of all <strong>racial traits</strong> at the end.
+                                There's also a reset
+                                button following the racial traits section.</p>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade basic-usage" tabindex="-1" role="dialog" aria-labelledby="basicUsageLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+
+                        <div class="modal-header">
+
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h4 class="modal-title">Basic Usage</h4>
+
+                        </div>
+                        <div class="modal-body">
+
+                            <dl class="dl-horizontal clearfix">
+                                <dt class="col-lg-3">Recommendations</dt>
+                                <dd class="col-lg-9">Use 27 points, as recommended by the Player's Handbook.</dd>
+                                <dt class="col-lg-3">Variants</dt>
+                                <dd class="col-lg-9">If there is an option to select a variant (Subrace), you must pick
+                                    one
+                                    (with the
+                                    exception of Humans). The Races which do not have this option, do not require one to
+                                    be
+                                    selected.
+                                </dd>
+                            </dl>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
 
             <form id="dnd5e-pbc" action="" method="get">
 
-                <div class="form-group row m-t-2">
+                <div id="accordion" class="m-t-2 m-b-2" role="tablist" aria-multiselectable="true">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="advancedOptionsHeading">
+
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#advancedOptions"
+                                   aria-expanded="true" aria-controls="advancedOptions">
+                                    Advanced Options
+                                    <i class="fa" aria-hidden="true"></i>
+                                </a>
+                            </h4>
+
+                        </div>
+                        <div id="advancedOptions" class="panel-collapse collapse in" role="tabpanel"
+                             aria-labelledby="advancedOptionsHeading">
+
+                            <legend>Books to use</legend>
+
+                            <div class="form-group row">
+                                <div class="col-lg-4">
+                                    <label class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" checked>
+                                        <span class="custom-control-indicator"></span>
+                                        <span class="custom-control-description">Player's Handbook</span>
+                                    </label>
+                                </div>
+                                <div class="col-lg-4">
+                                    <label class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" checked>
+                                        <span class="custom-control-indicator"></span>
+                                        <span class="custom-control-description">Dungeon Master's Guide</span>
+                                    </label>
+                                </div>
+                                <div class="col-lg-4">
+                                    <label class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" checked>
+                                        <span class="custom-control-indicator"></span>
+                                        <span class="custom-control-description">Unearthed Arcana: Eberron</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-lg-4">
+                                    <label class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" checked>
+                                        <span class="custom-control-indicator"></span>
+                                        <span class="custom-control-description">Unearthed Arcana: Gothic Heroes</span>
+                                    </label>
+                                </div>
+                                <div class="col-lg-4">
+                                    <label class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" checked>
+                                        <span class="custom-control-indicator"></span>
+                                        <span class="custom-control-description">Unearthed Arcana: Waterborne Adventures</span>
+                                    </label>
+                                </div>
+                                <div class="col-lg-4">
+                                    <label class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" checked>
+                                        <span class="custom-control-indicator"></span>
+                                        <span class="custom-control-description">Elemental Evil Player's Guide</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <p id="passwordHelpBlock" class="form-text text-muted">
+                                Un-check any of the books that you would like to exclude the races from.
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
                     <div id="raceLabel" class="col-lg-3"></div>
                     <div id="raceList" class="col-lg-3"></div>
 

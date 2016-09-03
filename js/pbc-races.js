@@ -359,39 +359,6 @@ racialInfo[13] = {
     variants: []
 };
 racialInfo[14] = {
-    name: 'Aarakocra',
-    ability: '',
-    age: '',
-    alignment: '',
-    size: '',
-    speed: '',
-    language: '',
-    other : [],
-    variants: []
-};
-racialInfo[15] = {
-    name: 'Genasi',
-    ability: '',
-    age: '',
-    alignment: '',
-    size: '',
-    speed: '',
-    language: '',
-    other : [],
-    variants: []
-};
-racialInfo[16] = {
-    name: 'Goliath',
-    ability: '',
-    age: '',
-    alignment: '',
-    size: '',
-    speed: '',
-    language: '',
-    other : [],
-    variants: []
-};
-racialInfo[17] = {
     name: 'Minotaur',
     ability: '',
     age: '',
@@ -402,7 +369,7 @@ racialInfo[17] = {
     other : [],
     variants: []
 };
-racialInfo[18] = {
+racialInfo[15] = {
     name: 'Revenant',
     ability: '',
     age: '',
@@ -413,3 +380,36 @@ racialInfo[18] = {
     other : [],
     variants: []
 };
+ racialInfo[16] = {
+     name: 'Aarakocra',
+     ability: '',
+     age: '',
+     alignment: '',
+     size: '',
+     speed: '',
+     language: '',
+     other : [],
+     variants: []
+ };
+ racialInfo[17] = {
+     name: 'Genasi',
+     ability: '',
+     age: '',
+     alignment: '',
+     size: '',
+     speed: '',
+     language: '',
+     other : [],
+     variants: []
+ };
+ racialInfo[18] = {
+     name: 'Goliath',
+     ability: '',
+     age: '',
+     alignment: '',
+     size: '',
+     speed: '',
+     language: '',
+     other : [],
+     variants: []
+ };

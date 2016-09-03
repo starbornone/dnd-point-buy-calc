@@ -86,16 +86,16 @@ var attrOptions = function () {
  * @param race
  */
 var getVariantAttrOptions = function (race) {
-    $(optionLabel1).html('<label for="option' + race +'1" class="col-form-label">' +
+    $(optionLabel1).html('<label for="option' + race + '1" class="col-form-label">' +
         'Ability Score #1:' +
         '</label>');
-    $(optionChoice1).html('<select class="form-control" id="option' + race +'1"' + '">' +
+    $(optionChoice1).html('<select class="form-control" id="option' + race + '1"' + '">' +
         attrOptions() +
         '</select>');
-    $(optionLabel2).html('<label for="option' + race +'2" class="col-form-label">' +
+    $(optionLabel2).html('<label for="option' + race + '2" class="col-form-label">' +
         'Ability Score #2:' +
         '</label>');
-    $(optionChoice2).html('<select class="form-control" id="option' + race +'2"">' +
+    $(optionChoice2).html('<select class="form-control" id="option' + race + '2"">' +
         attrOptions() +
         '</select>');
 };
@@ -114,37 +114,39 @@ var getIntValue = function (source) {
  * @returns {string}
  */
 var getRaceSelect = function () {
-    var optionDis = '<option value="---" disabled>-- ';
+    var optionDis = '<option value="---" disabled>--- ';
     var optionClo = '</option>';
-    var raceSelect = '<select class="form-control" id="race" name="race" style="width: 100%;">' + optionDis + 'Player\'s Handbook' + optionClo;
+    var raceSelect = '<select class="form-control" id="race" name="race" style="width: 100%;">' +
+        '<option value="---" disabled selected="">Please select a race' +
+        optionDis + 'Player\'s Handbook' + optionClo;
     racialInfo.forEach(function (item) {
-        raceSelect += '<option value=' + item.name + '>' + item.name + optionClo;
-        switch(item.name) {
-            case 'Tiefling':
+        switch (item.name) {
+            case 'Aasimar':
                 raceSelect += optionDis + 'Dungeon Master\'s Guide' + optionClo;
                 break;
-            case 'Eladrin':
-                raceSelect += optionDis + 'Eberron Unearthed Arcana' + optionClo;
+            case 'Changeling':
+                raceSelect += optionDis + 'Unearthed Arcana: Eberron' + optionClo;
                 break;
-            case 'Warforged':
-                raceSelect += optionDis + 'Elemental Evil Player\'s Guide' + optionClo;
-                break;
-            case 'Goliath':
-                raceSelect += optionDis + 'Waterborne Adventures' + optionClo;
+            case 'Revenant':
+                raceSelect += optionDis + 'Unearthed Arcana: Gothic Heroes' + optionClo;
                 break;
             case 'Minotaur':
-                raceSelect += optionDis + 'Gothic Heroes' + optionClo;
+                raceSelect += optionDis + 'Unearthed Arcana: Waterborne Adventures' + optionClo;
+                break;
+            case 'Aarakocra':
+                raceSelect += optionDis + 'Elemental Evil Player\'s Guide' + optionClo;
                 break;
         }
+        raceSelect += '<option value=' + item.name + '>' + item.name + optionClo;
     });
     raceSelect += '</select>';
-  return raceSelect;
+    return raceSelect;
 };
 
 /**
  * @func getRacialAttr
  */
-var getRacialAttr = function(race) {
+var getRacialAttr = function (race) {
     var source1 = 'option' + race + '1';
     var bonusAttr1 = $('select[id=' + source1 + ']').val();
     increaseAttr(bonusAttr1, 1);
@@ -328,7 +330,7 @@ var setIntValue = function (target, amount) {
 /**
  * @func getRace
  */
-var getRace = function() {
+var getRace = function () {
     var theRace = $('select[id=race]').val();
 
     resetRacialAbilityScores();
@@ -387,8 +389,12 @@ var getRace = function() {
             var inputVariantHalfElf1 = document.getElementById('option' + currentRace + '1');
             var inputVariantHalfElf2 = document.getElementById('option' + currentRace + '2');
 
-            inputVariantHalfElf1.addEventListener('change', function() { getRacialAttr(currentRace) }, false);
-            inputVariantHalfElf2.addEventListener('change', function() { getRacialAttr(currentRace) }, false);
+            inputVariantHalfElf1.addEventListener('change', function () {
+                getRacialAttr(currentRace)
+            }, false);
+            inputVariantHalfElf2.addEventListener('change', function () {
+                getRacialAttr(currentRace)
+            }, false);
 
             $(raceDescription).html(racialTemplate(racialInfo[4]));
             break;
@@ -487,7 +493,7 @@ var getVariant = function () {
 /**
  * @func racialDwarf
  */
-var racialDwarf = function() {
+var racialDwarf = function () {
     var racialVariant = $('select[id=raceVariant]').val();
 
     switch (racialVariant) {
@@ -514,7 +520,7 @@ var racialDwarf = function() {
 /**
  * @func racialElf
  */
-var racialElf = function() {
+var racialElf = function () {
     var racialVariant = $('select[id=raceVariant]').val();
 
     switch (racialVariant) {
@@ -555,7 +561,7 @@ var racialElf = function() {
 /**
  * @func racialGnome
  */
-var racialGnome = function() {
+var racialGnome = function () {
     var racialVariant = $('select[id=raceVariant]').val();
 
     switch (racialVariant) {
@@ -582,7 +588,7 @@ var racialGnome = function() {
 /**
  * @func racialHalfElf
  */
-var racialHalfElf = function() {
+var racialHalfElf = function () {
     var source1 = 'optionHalfElf1';
     var bonusAttr1 = $('select[id=' + source1 + ']').val();
     increaseAttr(bonusAttr1, 1);
@@ -597,7 +603,7 @@ var racialHalfElf = function() {
 /**
  * @func racialHalfling
  */
-var racialHalfling = function() {
+var racialHalfling = function () {
     var racialVariant = $('select[id=raceVariant]').val();
 
     switch (racialVariant) {
@@ -624,7 +630,7 @@ var racialHalfling = function() {
 /**
  * @func racialHuman
  */
-var racialHuman = function() {
+var racialHuman = function () {
     var variantState = $('select[id=raceVariant]').val();
 
     switch (variantState) {
@@ -640,8 +646,12 @@ var racialHuman = function() {
             var inputVariantHuman1 = document.getElementById('option' + currentRace + '1');
             var inputVariantHuman2 = document.getElementById('option' + currentRace + '2');
 
-            inputVariantHuman1.addEventListener('change', function() { getRacialAttr(currentRace) }, false);
-            inputVariantHuman2.addEventListener('change', function() { getRacialAttr(currentRace) }, false);
+            inputVariantHuman1.addEventListener('change', function () {
+                getRacialAttr(currentRace)
+            }, false);
+            inputVariantHuman2.addEventListener('change', function () {
+                getRacialAttr(currentRace)
+            }, false);
             break;
 
         case 'Disabled':
@@ -672,7 +682,7 @@ var racialHuman = function() {
 /**
  * @func getTotals
  */
-var getTotals = function() {
+var getTotals = function () {
     /**
      * @func getAttrTotal
      */
@@ -754,7 +764,7 @@ var getTotals = function() {
 /**
  * @func resetAll
  */
-var resetAll = function() {
+var resetAll = function () {
     $(raceList).html(getRaceSelect());
 
     var inputRace = document.getElementById('race');
@@ -800,6 +810,8 @@ var resetAll = function() {
 };
 
 $(function () {
+    $('.collapse').collapse();
+
     $(raceLabel).html(getRaceLabel());
     $(raceList).html(getRaceSelect());
 

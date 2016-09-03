@@ -45,6 +45,56 @@ a:hover {
     background-color: #fcfcf5;
 }
 
+/* -----------------------------------
+    Advanced Options
+   ----------------------------------- */
+
+#accordion {
+    padding: 2rem;
+    border-right: 1px solid #58170d;
+    border-left: 1px solid #58170d;
+    background-color: #e9edeb;
+    font-family: 'ScalaSans', sans-serif;
+    font-size: 0.9em;
+}
+
+[data-toggle="collapse"] i:before {
+    content: "\f106";
+}
+
+[data-toggle="collapse"].collapsed i:before {
+    content: "\f107";
+}
+
+.panel-title a {
+    color: #58170d;
+    font-family: 'ScalaSans', sans-serif;
+}
+
+#advancedOptions legend {
+    border-bottom: 1px solid #c9ae6b;
+    color: #58170d;
+    font-family: 'MrsEaves', serif;
+}
+
+.custom-control-input:checked ~ .custom-control-indicator {
+    background-color: #c9ae6b;
+    color: #fcfcf5;
+}
+
+.custom-control-input:focus ~ .custom-control-indicator {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.custom-control-indicator {
+    background-color: #58170d;
+}
+
+/* -----------------------------------
+    The Calculator Table
+   ----------------------------------- */
+
 .table td,
 .table th {
     border-top: 1px solid #c9ae6b;
@@ -59,6 +109,10 @@ a:hover {
     background-color: #fff;
     border: 1px solid #c9ae6b;
 }
+
+/* -----------------------------------
+    Racial Information
+   ----------------------------------- */
 
 .bg-info {
     padding: 2rem;
@@ -76,11 +130,16 @@ a:hover {
     font-family: 'ScalaSans', sans-serif;
 }
 
+.panel-title,
 .bg-info h2,
 .bg-info h3,
 .bg-info h4 {
     text-transform: uppercase;
 }
+
+/* -----------------------------------
+    Other: Buttons
+   ----------------------------------- */
 
 .btn-primary {
     color: #373a3c;
@@ -91,5 +150,20 @@ a:hover {
 
 .btn-primary:focus,
 .btn-primary:hover {
+    color: #fcfcf5;
     background-color: #c9ae6b;
+}
+
+.btn-secondary {
+    margin-left: 1em;
+    color: #373a3c;
+    background-color: #c2ccce;
+    border: none;
+    font-size: 1.2rem;
+}
+
+.btn-secondary:focus,
+.btn-secondary:hover {
+    color: #fcfcf5;
+    background-color: #c2ccce;
 }
