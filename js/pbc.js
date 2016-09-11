@@ -448,6 +448,52 @@ var getRace = function () {
 
             $(raceDescription).html(racialTemplate(racialInfo[8]));
             break;
+
+        case 'Aasimar':
+            // +1 Wis, +2 Cha
+            racialWis = 1;
+            $(racialWisTD).html(racialWis);
+            racialCha = 2;
+            $(racialChaTD).html(racialCha);
+
+            $(raceDescription).html(racialTemplate(racialInfo[9]));
+            break;
+
+        case 'Eladrin':
+            $(raceDescription).html(racialTemplate(racialInfo[10]));
+            break;
+
+        case 'Changeling':
+            $(raceDescription).html(racialTemplate(racialInfo[11]));
+            break;
+
+        case 'Shifter':
+            $(raceDescription).html(racialTemplate(racialInfo[12]));
+            break;
+
+        case 'Warforged':
+            $(raceDescription).html(racialTemplate(racialInfo[13]));
+            break;
+
+        case 'Minotaur':
+            $(raceDescription).html(racialTemplate(racialInfo[14]));
+            break;
+
+        case 'Revenant':
+            $(raceDescription).html(racialTemplate(racialInfo[15]));
+            break;
+
+        case 'Aarakocra':
+            $(raceDescription).html(racialTemplate(racialInfo[16]));
+            break;
+
+        case 'Genasi':
+            $(raceDescription).html(racialTemplate(racialInfo[17]));
+            break;
+
+        case 'Goliath':
+            $(raceDescription).html(racialTemplate(racialInfo[18]));
+            break;
     }
 
     var inputVariant = document.getElementById('raceVariant');

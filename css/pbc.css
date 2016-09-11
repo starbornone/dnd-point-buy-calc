@@ -92,6 +92,23 @@ a:hover {
 }
 
 /* -----------------------------------
+    Modals
+   ----------------------------------- */
+
+.modal-content {
+    border-radius: 0;
+}
+
+.modal-header {
+    padding: 2.5rem 2.5rem 1rem 2.5rem;
+    background-color: #fcfcf5;
+}
+
+.modal-body {
+    padding: 1rem 2.5rem 2.5rem 2.5rem;
+}
+
+/* -----------------------------------
     The Calculator Table
    ----------------------------------- */
 
