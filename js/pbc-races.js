@@ -186,27 +186,6 @@ racialInfo[3] = {
             ' the device requires your action.</li><li><strong>Music Box</strong>: When opened, this music box' +
             ' plays a single song at a moderate volume. The box stops playing when it reaches the song\'s end' +
             ' or when it is closed.</li></ul>']
-    }, {
-        name: 'Deep Gnome',
-        ability: 'Your Intelligence score increases by 2, and your Dexterity score increases by 1.',
-        age: 'Deep gnomes are short-lived for gnomes. They mature at the same rate humans do and are considered' +
-        ' full-grown adults by 25. They live 200 to 250 years, although hard toil and the dangers of the Underdark often' +
-        ' claim them before their time.',
-        alignment: 'Svirfneblin believe that survival depends on avoiding entanglements with other creatures and not' +
-        ' making enemies, so they favour neutral alignments. They rarely wish others ill, and they are unlikely to' +
-        ' take risks on behalf of others.',
-        size: 'A typical svirfneblin stands about 3 to 3&frac12; feet tall and weighs 80 to 120 pounds. Your size is' +
-        ' Small.',
-        speed: ' Your base walking speed is 25 feet.',
-        language: 'Your can speak, read, and write Common, Gnomish, and Undercommon. The svirfneblin dialect is more' +
-        ' gutteral than surface Gnomish, and most svirfneblin know only a little bit of Common, but those who deal' +
-        ' with outsiders (and that includes you as an adventurer) pick up enough Common to get by in other lands.',
-        other: ['Superior Darkvision',
-            'Your darkvision has a radius of 120 feet.',
-            'Gnome Cunning',
-            'You have advantage on all Intelligence, Wisdom, and Charisma saving throws against magic.',
-            'Stone Camouflage',
-            'You have advantage on Dexterity (stealth) checks to hide in rocky terrain.']
     }]
 };
 racialInfo[4] = {
@@ -357,18 +336,7 @@ racialInfo[9] = {
         ' spells.'],
     variants: []
 };
-/*racialInfo[10] = {
- name: 'Eladrin',
- ability: '',
- age: '',
- alignment: '',
- size: '',
- speed: '',
- language: '',
- other : [],
- variants: []
- };*/
-racialInfo[11] = {
+racialInfo[10] = {
     name: 'Changeling',
     ability: 'Your Dexterity and Charisma scores increase by 1.',
     age: '...',
@@ -383,7 +351,7 @@ racialInfo[11] = {
         ' form. However, your equipment does not change with you. If you die, you revert to your natural appearance.'],
     variants: []
 };
-racialInfo[12] = {
+racialInfo[11] = {
     name: 'Shifter',
     ability: 'Your Dexterity score increases by 1.',
     age: '...',
@@ -435,7 +403,7 @@ racialInfo[12] = {
             'While shifting, you gain advantage on all Wisdom-based checks and saving throws.']
     }]
 };
-racialInfo[13] = {
+racialInfo[12] = {
     name: 'Warforged',
     ability: 'Your Strength and Constitution scores increase by 1.',
     age: '...',
@@ -452,7 +420,7 @@ racialInfo[13] = {
         ' notice approaching enemies and other events as normal.'],
     variants: []
 };
-racialInfo[14] = {
+racialInfo[13] = {
     name: 'Minotaur',
     ability: 'Your Strength score increases by 1.',
     age: 'Minotaurs enter adulthood at around the age of 17 and can live up to 150 years.',
@@ -480,7 +448,7 @@ racialInfo[14] = {
         'You gain proficiency with navigator’s tools and vehicles (water).'],
     variants: []
 };
-racialInfo[15] = {
+racialInfo[14] = {
     name: 'Revenant',
     ability: '',
     age: '',
@@ -491,7 +459,7 @@ racialInfo[15] = {
     other: [],
     variants: []
 };
-racialInfo[16] = {
+racialInfo[15] = {
     name: 'Aarakocra',
     ability: 'Your Dexterity score increases by 2, and your Wisdom score increases by 1.',
     age: 'Aarakocra reach maturity by age 3. Compared to humans, aarakocra don\'t usually live longer than 30' +
@@ -507,6 +475,28 @@ racialInfo[16] = {
         'Talons',
         'You are proficient with your unarmed strikes, with deal 1d4 slashing damage on a hit.'],
     variants: []
+};
+racialInfo[16] = {
+    name: 'Deep Gnome',
+    ability: 'Your Intelligence score increase by 2, and your Dexterity score increases by 1.',
+    age: 'Deep gnomes are short-lived for gnomes. They mature at the same rate humans do and are considered' +
+    ' full-grown adults by 25. They live 200 to 250 years, although hard toil and the dangers of the Underdark' +
+    ' often claim them before their time.',
+    alignment: 'Svirfneblin believe that survival depends on avoiding entanglements with other creatures and not' +
+    ' making enemies, so they favour neutral alignments. They rarely wish others ill, and they are unlikely to' +
+    ' take risks on behalf of others.',
+    size: 'A typical svirfneblin stands about 3 to 3&frac12; feet tall and weighs 80 to 120 pounds. Your size is' +
+    ' Small.',
+    speed: ' Your base walking speed is 25 feet.',
+    language: 'Your can speak, read, and write Common, Gnomish, and Undercommon. The svirfneblin dialect is more' +
+    ' gutteral than surface Gnomish, and most svirfneblin know only a little bit of Common, but those who deal' +
+    ' with outsiders (and that includes you as an adventurer) pick up enough Common to get by in other lands.',
+    other: ['Superior Darkvision',
+        'Your darkvision has a radius of 120 feet.',
+        'Gnome Cunning',
+        'You have advantage on all Intelligence, Wisdom, and Charisma saving throws against magic.',
+        'Stone Camouflage',
+        'You have advantage on Dexterity (stealth) checks to hide in rocky terrain.']
 };
 racialInfo[17] = {
     name: 'Genasi',

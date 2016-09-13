@@ -4,6 +4,8 @@
  *  Version     1.2
  *  Author:     Sha Kong-Brooks
  *  Website:    http://shianra.com
+ *
+ *  TODO: Elf: Revenant
  ================================================== */
 
 var attrNames = ['Strength', 'Dexterity', 'Constitution', 'Intelligence', 'Wisdom', 'Charisma'];
@@ -148,7 +150,7 @@ var getRaceSelect = function () {
                 raceSelect += optionDis + 'Elemental Evil Player\'s Guide' + optionClo;
                 break;
         }
-        raceSelect += '<option value=' + item.name + '>' + item.name + optionClo;
+        raceSelect += '<option value="' + item.name + '">' + item.name + optionClo;
     });
     raceSelect += '</select>';
     return raceSelect;
@@ -158,6 +160,8 @@ var getRaceSelect = function () {
  * @func getRacialAttr
  */
 var getRacialAttr = function (race) {
+    resetRacialAbilityScores();
+
     var source1 = 'option' + race + '1';
     var bonusAttr1 = $('select[id=' + source1 + ']').val();
     increaseAttr(bonusAttr1, 1);
@@ -165,6 +169,11 @@ var getRacialAttr = function (race) {
     var source2 = 'option' + race + '2';
     var bonusAttr2 = $('select[id=' + source2 + ']').val();
     increaseAttr(bonusAttr2, 1);
+
+    if (race == 'HalfElf') {
+        racialCha = 2;
+        $(racialChaTD).html(racialCha);
+    }
 
     getTotals();
 };
@@ -282,12 +291,10 @@ var racialTemplate = function (race) {
  */
 var racialVariantTemplate = function (variant) {
     var racialVariantsHeader = '<h4>Variant Traits</h4>';
-    var variantNote = '<p>Any trait shown below that conflicts with one above will override the above.</p>';
 
     var other = racialOther(variant.other);
 
     return racialVariantsHeader +
-        variantNote +
         dlHorizontal +
         dtColSm3 + 'Ability Score Modifiers' + dtEnd + ddColSm9 + variant.ability + ddEnd +
         other +
@@ -463,39 +470,81 @@ var getRace = function () {
             $(raceDescription).html(racialTemplate(racialInfo[9]));
             break;
 
-        case 'Eladrin':
+        case 'Changeling':
+            // +1 Dex, +1 Cha
+            racialDex = 1;
+            $(racialDexTD).html(racialDex);
+            racialCha = 1;
+            $(racialChaTD).html(racialCha);
+
             $(raceDescription).html(racialTemplate(racialInfo[10]));
             break;
 
-        case 'Changeling':
+        case 'Shifter':
+            // +1 Dex
+            racialDex = 1;
+            $(racialDexTD).html(racialDex);
+
+            $(variantLabel).html(getVariantLabel(racialInfo[11]));
+            $(variantList).html(getVariantSelect(racialInfo[11]));
             $(raceDescription).html(racialTemplate(racialInfo[11]));
             break;
 
-        case 'Shifter':
+        case 'Warforged':
+            // +1 Str, +1 Con
+            racialStr = 1;
+            $(racialStrTD).html(racialStr);
+            racialCon = 1;
+            $(racialConTD).html(racialCon);
+
             $(raceDescription).html(racialTemplate(racialInfo[12]));
             break;
 
-        case 'Warforged':
+        case 'Minotaur':
+            // +1 Str
+            racialStr = 1;
+            $(racialStrTD).html(racialStr);
+
             $(raceDescription).html(racialTemplate(racialInfo[13]));
             break;
 
-        case 'Minotaur':
+        case 'Aarakocra':
+            // +2 Dex, +1 Wis
+            racialDex = 2;
+            $(racialDexTD).html(racialDex);
+            racialWis = 1;
+            $(racialWisTD).html(racialWis);
+
             $(raceDescription).html(racialTemplate(racialInfo[14]));
             break;
 
-        case 'Revenant':
-            $(raceDescription).html(racialTemplate(racialInfo[15]));
-            break;
+        case 'Deep Gnome':
+            // +1 Dex, +2 Int
+            racialDex = 1;
+            $(racialDexTD).html(racialDex);
+            racialWis = 2;
+            $(racialWisTD).html(racialInt);
 
-        case 'Aarakocra':
             $(raceDescription).html(racialTemplate(racialInfo[16]));
             break;
 
         case 'Genasi':
+            // +2 Con
+            racialCon = 2;
+            $(racialConTD).html(racialCon);
+
+            $(variantLabel).html(getVariantLabel(racialInfo[17]));
+            $(variantList).html(getVariantSelect(racialInfo[17]));
             $(raceDescription).html(racialTemplate(racialInfo[17]));
             break;
 
         case 'Goliath':
+            // +2 Str, +1 Con
+            racialStr = 2;
+            $(racialStrTD).html(racialStr);
+            racialCon = 1;
+            $(racialConTD).html(racialCon);
+
             $(raceDescription).html(racialTemplate(racialInfo[18]));
             break;
     }
@@ -537,6 +586,14 @@ var getVariant = function () {
         case 'Human':
             racialHuman();
             break;
+
+        case 'Shifter':
+            racialShifter();
+            break;
+
+        case 'Genasi':
+            racialGenasi();
+            break;
     }
 };
 
@@ -552,6 +609,7 @@ var racialDwarf = function () {
             $(racialStrTD).html(racialStr);
             racialWis = 1;
             $(racialWisTD).html(racialWis);
+
             $(racialVariantInfo).html(racialVariantTemplate(racialInfo[1].variants[0]));
             break;
 
@@ -560,6 +618,7 @@ var racialDwarf = function () {
             $(racialStrTD).html(racialStr);
             racialWis = 0;
             $(racialWisTD).html(racialWis);
+
             $(racialVariantInfo).html(racialVariantTemplate(racialInfo[1].variants[1]));
             break;
     }
@@ -581,6 +640,7 @@ var racialElf = function () {
             $(racialWisTD).html(racialWis);
             racialCha = 1;
             $(racialChaTD).html(racialCha);
+
             $(racialVariantInfo).html(racialVariantTemplate(racialInfo[2].variants[0]));
             break;
 
@@ -591,6 +651,7 @@ var racialElf = function () {
             $(racialWisTD).html(racialWis);
             racialCha = 0;
             $(racialChaTD).html(racialCha);
+
             $(racialVariantInfo).html(racialVariantTemplate(racialInfo[2].variants[1]));
             break;
 
@@ -601,7 +662,19 @@ var racialElf = function () {
             $(racialWisTD).html(racialWis);
             racialCha = 0;
             $(racialChaTD).html(racialCha);
+
             $(racialVariantInfo).html(racialVariantTemplate(racialInfo[2].variants[2]));
+            break;
+
+        case 'Eladrin':
+            racialInt = 1;
+            $(racialIntTD).html(racialInt);
+            racialWis = 0;
+            $(racialWisTD).html(racialWis);
+            racialCha = 0;
+            $(racialChaTD).html(racialCha);
+
+            $(racialVariantInfo).html(racialVariantTemplate(racialInfo[2].variants[3]));
             break;
     }
 
@@ -620,6 +693,7 @@ var racialGnome = function () {
             $(racialDexTD).html(racialDex);
             racialCon = 0;
             $(racialConTD).html(racialCon);
+
             $(racialVariantInfo).html(racialVariantTemplate(racialInfo[3].variants[0]));
             break;
 
@@ -628,6 +702,7 @@ var racialGnome = function () {
             $(racialDexTD).html(racialDex);
             racialCon = 1;
             $(racialConTD).html(racialCon);
+
             $(racialVariantInfo).html(racialVariantTemplate(racialInfo[3].variants[1]));
             break;
     }
@@ -662,6 +737,7 @@ var racialHalfling = function () {
             $(racialConTD).html(racialCon);
             racialCha = 1;
             $(racialChaTD).html(racialCha);
+
             $(racialVariantInfo).html(racialVariantTemplate(racialInfo[6].variants[0]));
             break;
 
@@ -670,6 +746,7 @@ var racialHalfling = function () {
             $(racialConTD).html(racialCon);
             racialCha = 0;
             $(racialChaTD).html(racialCha);
+
             $(racialVariantInfo).html(racialVariantTemplate(racialInfo[6].variants[1]));
             break;
     }
@@ -723,6 +800,154 @@ var racialHuman = function () {
             $(variantLabel).html(getVariantLabel(racialInfo[7]));
             $(variantList).html(getVariantSelect(racialInfo[7]));
             $(raceDescription).html(racialTemplate(racialInfo[7]));
+            break;
+    }
+
+    getTotals();
+};
+
+/**
+ * @func racialShifter
+ */
+var racialShifter = function () {
+    var racialVariant = $('select[id=raceVariant]').val();
+
+    switch (racialVariant) {
+        case 'Beasthide':
+            racialStr = 0;
+            $(racialStrTD).html(racialStr);
+            racialDex = 1;
+            $(racialDexTD).html(racialDex);
+            racialCon = 1;
+            $(racialConTD).html(racialCon);
+
+            $(racialVariantInfo).html(racialVariantTemplate(racialInfo[11].variants[0]));
+            break;
+
+        case 'Cliffwalk':
+            racialStr = 0;
+            $(racialStrTD).html(racialStr);
+            racialDex = 2;
+            $(racialDexTD).html(racialDex);
+            racialCon = 0;
+            $(racialConTD).html(racialCon);
+
+            $(racialVariantInfo).html(racialVariantTemplate(racialInfo[11].variants[1]));
+            break;
+
+        case 'Longstride':
+            racialStr = 0;
+            $(racialStrTD).html(racialStr);
+            racialDex = 2;
+            $(racialDexTD).html(racialDex);
+            racialCon = 0;
+            $(racialConTD).html(racialCon);
+            racialWis = 0;
+            $(racialWisTD).html(racialWis);
+
+            $(racialVariantInfo).html(racialVariantTemplate(racialInfo[11].variants[2]));
+            break;
+
+        case 'Longtooth':
+            racialStr = 1;
+            $(racialStrTD).html(racialStr);
+            racialDex = 1;
+            $(racialDexTD).html(racialDex);
+            racialCon = 0;
+            $(racialConTD).html(racialCon);
+            racialWis = 0;
+            $(racialWisTD).html(racialWis);
+
+            $(racialVariantInfo).html(racialVariantTemplate(racialInfo[11].variants[3]));
+            break;
+
+        case 'Razorclaw':
+            racialStr = 0;
+            $(racialStrTD).html(racialStr);
+            racialDex = 2;
+            $(racialDexTD).html(racialDex);
+            racialCon = 0;
+            $(racialConTD).html(racialCon);
+            racialWis = 0;
+            $(racialWisTD).html(racialWis);
+
+            $(racialVariantInfo).html(racialVariantTemplate(racialInfo[11].variants[4]));
+            break;
+
+        case 'Wildhunt':
+            racialStr = 0;
+            $(racialStrTD).html(racialStr);
+            racialDex = 1;
+            $(racialDexTD).html(racialDex);
+            racialCon = 0;
+            $(racialConTD).html(racialCon);
+            racialWis = 1;
+            $(racialWisTD).html(racialWis);
+
+            $(racialVariantInfo).html(racialVariantTemplate(racialInfo[11].variants[5]));
+            break;
+    }
+
+    getTotals();
+};
+
+/**
+ * @func racialGenasi
+ */
+var racialGenasi = function () {
+    var racialVariant = $('select[id=raceVariant]').val();
+
+    switch (racialVariant) {
+        case 'Air Genasi':
+            racialStr = 0;
+            $(racialStrTD).html(racialStr);
+            racialDex = 1;
+            $(racialDexTD).html(racialDex);
+            racialInt = 0;
+            $(racialIntTD).html(racialInt);
+            racialWis = 0;
+            $(racialWisTD).html(racialWis);
+
+            $(racialVariantInfo).html(racialVariantTemplate(racialInfo[17].variants[0]));
+            break;
+
+        case 'Earth Genasi':
+            racialStr = 1;
+            $(racialStrTD).html(racialStr);
+            racialDex = 0;
+            $(racialDexTD).html(racialDex);
+            racialInt = 0;
+            $(racialIntTD).html(racialInt);
+            racialWis = 0;
+            $(racialWisTD).html(racialWis);
+
+            $(racialVariantInfo).html(racialVariantTemplate(racialInfo[17].variants[1]));
+            break;
+
+        case 'Fire Genasi':
+            racialStr = 0;
+            $(racialStrTD).html(racialStr);
+            racialDex = 0;
+            $(racialDexTD).html(racialDex);
+            racialInt = 1;
+            $(racialIntTD).html(racialInt);
+            racialWis = 0;
+            $(racialWisTD).html(racialWis);
+
+            $(racialVariantInfo).html(racialVariantTemplate(racialInfo[17].variants[2]));
+            break;
+
+        case 'Water Genasi':
+            racialStr = 0;
+            $(racialStrTD).html(racialStr);
+            racialDex = 0;
+            $(racialDexTD).html(racialDex);
+            racialInt = 0;
+            $(racialIntTD).html(racialInt);
+            racialWis = 1;
+            $(racialWisTD).html(racialWis);
+
+            $(racialVariantInfo).html(racialVariantTemplate(racialInfo[17].variants[3]));
             break;
     }
 
@@ -823,49 +1048,21 @@ var resetAll = function () {
     var baseNo = 8;
     var zeroValue = 0;
 
-    $('input[id=attrStr], input[id=attrDex], input[id=attrCon], input[id=attrInt], input[id=attrWis],' +
-        ' input[id=attrCha]').val(baseNo)
-    $('#costStr, #costDex, #costCon, #costInt, #costWis, #costCha').html(zeroValue);
+    $('input').val(baseNo);
+    $('[id*="cost" i]').html(zeroValue);
 
     resetRacialAbilityScores();
 
     $(totalStrTD, totalDexTD, totalConTD, totalIntTD, totalWisTD, totalChaTD).html(baseNo);
-    $('#modStr, #modDex, #modCon, #modInt, #modWis, #modCha').html(modifiers[baseNo]);
+    $('[id*="mod" i]').html(modifiers[baseNo]);
     $('#costTotal').html(zeroValue);
 
     resetRacialOptions();
     getTotals();
 };
 
-var bookSelect = function (e) {
-    if (e.target !== e.currentTarget) {
-
-        var bookName = e.target.id;
-
-        $('#playersHandbook').change(function(){
-
-            if($(this).is(':checked')){
-
-                // what to do if the book is checked
-
-            } else {
-
-                // what to do if the book is unchecked
-                removeBook(bookName);
-
-            }
-
-        });
-
-    }
-    e.stopPropagation();
-};
-
 $(function () {
     $('.collapse').collapse();
-
-    var bookOptions = document.querySelector('#bookOptions');
-    bookOptions.addEventListener('change', bookSelect, false);
 
     $(raceLabel).html(getRaceLabel());
     $(raceList).html(getRaceSelect());
