@@ -23,12 +23,12 @@ var racialCha = 0;
 /**
  * @desc The table cells where the racial attribute bonuses will be displayed.
  */
-var racialStrTD = 'td#racialStr';
-var racialDexTD = 'td#racialDex';
-var racialConTD = 'td#racialCon';
-var racialIntTD = 'td#racialInt';
-var racialWisTD = 'td#racialWis';
-var racialChaTD = 'td#racialCha';
+var racialStrTD = '#racialStr';
+var racialDexTD = '#racialDex';
+var racialConTD = '#racialCon';
+var racialIntTD = '#racialInt';
+var racialWisTD = '#racialWis';
+var racialChaTD = '#racialCha';
 
 /**
  * @desc The header for the racial traits section.
@@ -44,30 +44,41 @@ var dlEnd = '</dl>';
 /**
  * @desc The table cells where the racial variant information will be displayed.
  */
-var raceLabel = 'div#raceLabel';
-var raceList = 'div#raceList';
-var variantLabel = 'div#variantLabel';
-var variantList = 'div#variantList';
-var optionLabel1 = 'div#optionLabel1';
-var optionChoice1 = 'div#optionChoice1';
-var optionLabel2 = 'div#optionLabel2';
-var optionChoice2 = 'div#optionChoice2';
-var raceDescription = 'div#raceDescription';
-var racialVariantInfo = 'div#racialVariant';
+var raceLabel = '#raceLabel';
+var raceList = '#raceList';
+var variantLabel = '#variantLabel';
+var variantList = '#variantList';
+var optionLabel1 = '#optionLabel1';
+var optionChoice1 = '#optionChoice1';
+var optionLabel2 = '#optionLabel2';
+var optionChoice2 = '#optionChoice2';
+var raceDescription = '#raceDescription';
+var racialVariantInfo = '#racialVariant';
 
 /**
  * @desc The table cells where the total attributes will be displayed.
  */
-var totalStrTD = 'td#totalStr';
-var totalDexTD = 'td#totalDex';
-var totalConTD = 'td#totalCon';
-var totalIntTD = 'td#totalInt';
-var totalWisTD = 'td#totalWis';
-var totalChaTD = 'td#totalCha';
+var totalStrTD = '#totalStr';
+var totalDexTD = '#totalDex';
+var totalConTD = '#totalCon';
+var totalIntTD = '#totalInt';
+var totalWisTD = '#totalWis';
+var totalChaTD = '#totalCha';
 
 /* -----------------------------------------------------
  All the cool stuff
  ----------------------------------------------------- */
+
+/**
+ * @func attrChange
+ * @param e
+ */
+var attrChange = function (e) {
+    if (e.target !== e.currentTarget) {
+        getTotals();
+    }
+    e.stopPropagation();
+};
 
 /**
  * @func attrOptions
@@ -314,13 +325,6 @@ var resetRacialOptions = function () {
     $(optionChoice2).html('');
     $(raceDescription).html(racialTraitsHeader + '');
     $(racialVariantInfo).html('');
-};
-
-/**
- * @func setIntValue
- */
-var setIntValue = function (target, amount) {
-    $('input[id=' + target + ']').val(amount)
 };
 
 /* -----------------------------------------------------
@@ -745,12 +749,12 @@ var getTotals = function () {
      * @func getCostAttr
      */
     var getCostAttr = function () {
-        $('td#costStr').html(costStr);
-        $('td#costDex').html(costDex);
-        $('td#costCon').html(costCon);
-        $('td#costInt').html(costInt);
-        $('td#costWis').html(costWis);
-        $('td#costCha').html(costCha);
+        $('#costStr').html(costStr);
+        $('#costDex').html(costDex);
+        $('#costCon').html(costCon);
+        $('#costInt').html(costInt);
+        $('#costWis').html(costWis);
+        $('#costCha').html(costCha);
     };
 
     /**
@@ -758,7 +762,7 @@ var getTotals = function () {
      */
     var getCostTotal = function () {
         var costTotal = costStr + costDex + costCon + costInt + costWis + costCha;
-        $('td#costTotal').html(costTotal);
+        $('#costTotal').html(costTotal);
     };
 
     /**
@@ -772,12 +776,12 @@ var getTotals = function () {
         var modWis = modifiers[totalWis];
         var modCha = modifiers[totalCha];
 
-        $('td#modStr').html(modStr);
-        $('td#modDex').html(modDex);
-        $('td#modCon').html(modCon);
-        $('td#modInt').html(modInt);
-        $('td#modWis').html(modWis);
-        $('td#modCha').html(modCha);
+        $('#modStr').html(modStr);
+        $('#modDex').html(modDex);
+        $('#modCon').html(modCon);
+        $('#modInt').html(modInt);
+        $('#modWis').html(modWis);
+        $('#modCha').html(modCha);
     };
 
     var attrStr = getIntValue('attrStr');
@@ -819,44 +823,49 @@ var resetAll = function () {
     var baseNo = 8;
     var zeroValue = 0;
 
-    setIntValue('attrStr', baseNo);
-    setIntValue('attrDex', baseNo);
-    setIntValue('attrCon', baseNo);
-    setIntValue('attrInt', baseNo);
-    setIntValue('attrWis', baseNo);
-    setIntValue('attrCha', baseNo);
-
-    $('td#costStr').html(zeroValue);
-    $('td#costDex').html(zeroValue);
-    $('td#costCon').html(zeroValue);
-    $('td#costInt').html(zeroValue);
-    $('td#costWis').html(zeroValue);
-    $('td#costCha').html(zeroValue);
+    $('input[id=attrStr], input[id=attrDex], input[id=attrCon], input[id=attrInt], input[id=attrWis],' +
+        ' input[id=attrCha]').val(baseNo)
+    $('#costStr, #costDex, #costCon, #costInt, #costWis, #costCha').html(zeroValue);
 
     resetRacialAbilityScores();
 
-    $(totalStrTD).html(baseNo);
-    $(totalDexTD).html(baseNo);
-    $(totalConTD).html(baseNo);
-    $(totalIntTD).html(baseNo);
-    $(totalWisTD).html(baseNo);
-    $(totalChaTD).html(baseNo);
-
-    $('td#modStr').html(modifiers[baseNo]);
-    $('td#modDex').html(modifiers[baseNo]);
-    $('td#modCon').html(modifiers[baseNo]);
-    $('td#modInt').html(modifiers[baseNo]);
-    $('td#modWis').html(modifiers[baseNo]);
-    $('td#modCha').html(modifiers[baseNo]);
-
-    $('td#costTotal').html(zeroValue);
+    $(totalStrTD, totalDexTD, totalConTD, totalIntTD, totalWisTD, totalChaTD).html(baseNo);
+    $('#modStr, #modDex, #modCon, #modInt, #modWis, #modCha').html(modifiers[baseNo]);
+    $('#costTotal').html(zeroValue);
 
     resetRacialOptions();
     getTotals();
 };
 
+var bookSelect = function (e) {
+    if (e.target !== e.currentTarget) {
+
+        var bookName = e.target.id;
+
+        $('#playersHandbook').change(function(){
+
+            if($(this).is(':checked')){
+
+                // what to do if the book is checked
+
+            } else {
+
+                // what to do if the book is unchecked
+                removeBook(bookName);
+
+            }
+
+        });
+
+    }
+    e.stopPropagation();
+};
+
 $(function () {
     $('.collapse').collapse();
+
+    var bookOptions = document.querySelector('#bookOptions');
+    bookOptions.addEventListener('change', bookSelect, false);
 
     $(raceLabel).html(getRaceLabel());
     $(raceList).html(getRaceSelect());
@@ -864,19 +873,8 @@ $(function () {
     var inputRace = document.getElementById('race');
     inputRace.addEventListener('change', getRace, false);
 
-    var inputStr = document.getElementById('attrStr');
-    var inputDex = document.getElementById('attrDex');
-    var inputCon = document.getElementById('attrCon');
-    var inputInt = document.getElementById('attrInt');
-    var inputWis = document.getElementById('attrWis');
-    var inputCha = document.getElementById('attrCha');
-
-    inputStr.addEventListener('change', getTotals, false);
-    inputDex.addEventListener('change', getTotals, false);
-    inputCon.addEventListener('change', getTotals, false);
-    inputInt.addEventListener('change', getTotals, false);
-    inputWis.addEventListener('change', getTotals, false);
-    inputCha.addEventListener('change', getTotals, false);
+    var attrTable = document.querySelector('#attributeTable');
+    attrTable.addEventListener('change', attrChange, false);
 
     var inputReset = document.getElementById('reset');
     inputReset.addEventListener('click', resetAll, false);

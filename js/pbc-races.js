@@ -371,11 +371,11 @@ racialInfo[9] = {
 racialInfo[11] = {
     name: 'Changeling',
     ability: 'Your Dexterity and Charisma scores increase by 1.',
-    age: '',
-    alignment: '',
+    age: '...',
+    alignment: '...',
     size: 'Changelings are built much like humans, but a little leaner. Your size is Medium.',
     speed: 'Your base walking speed is 30 feet.',
-    language: '',
+    language: '...',
     other: ['Duplicity',
         'You gain proficiency in the Deception skill.',
         'Shapechanger',
@@ -386,11 +386,11 @@ racialInfo[11] = {
 racialInfo[12] = {
     name: 'Shifter',
     ability: 'Your Dexterity score increases by 1.',
-    age: '',
-    alignment: '',
+    age: '...',
+    alignment: '...',
     size: 'Shifters are about the same size as humans. Your size is Medium.',
     speed: 'Your base walking speed is 30 feet.',
-    language: '',
+    language: '...',
     other: ['Darkvision',
         'Your lycanthropic heritage grants you the ability to see in dark conditions. You can see in dim light within' +
         ' 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can’t discern color' +
@@ -438,8 +438,8 @@ racialInfo[12] = {
 racialInfo[13] = {
     name: 'Warforged',
     ability: 'Your Strength and Constitution scores increase by 1.',
-    age: '',
-    alignment: '',
+    age: '...',
+    alignment: '...',
     size: 'Warforged are generally broader and heavier than humans. Your size is Medium.',
     speed: 'Your base walking speed is 30 feet.',
     language: 'You can speak, read, and write Common and one other language of your choice.',
@@ -476,6 +476,7 @@ racialInfo[14] = {
         ' with your horns as a bonus action. You cannot use this shove attempt to knock a creature prone.',
         'Labyrinthine Recall',
         'You can perfectly recall any path you have traveled.',
+        'Sea Reaver',
         'You gain proficiency with navigator’s tools and vehicles (water).'],
     variants: []
 };
@@ -494,11 +495,11 @@ racialInfo[16] = {
     name: 'Aarakocra',
     ability: 'Your Dexterity score increases by 2, and your Wisdom score increases by 1.',
     age: 'Aarakocra reach maturity by age 3. Compared to humans, aarakocra don\'t usually live longer than 30' +
-        ' years.',
+    ' years.',
     alignment: 'Most aarakocra are good and rarely choose sides when it comes to law and chaos. Tribal leaders and' +
-        ' warriors might be lawful, while explorers and adventurers might tend toward chaotic.',
+    ' warriors might be lawful, while explorers and adventurers might tend toward chaotic.',
     size: 'Aarakocra are about 5 feet tall. They have thin, lightwieght bodies that weigh between 80 and 100 pounds.' +
-        ' Your size is Medium.',
+    ' Your size is Medium.',
     speed: 'Your base walking speed is 25 feet.',
     language: 'You can speak, read, and write Common, Aarakocra, and Auran.',
     other: ['Flight',
@@ -509,7 +510,7 @@ racialInfo[16] = {
 };
 racialInfo[17] = {
     name: 'Genasi',
-    ability: 'Your Constitution score increases by 2',
+    ability: 'Your Constitution score increases by 2.',
     age: 'Genasi mature at about the same rate as humans and reach adulthood in their late teens. They live somewhat' +
     ' longer than humans do, up to 120 years.',
     alignment: 'Independent and self-reliant, genasi tend toward a neutral alignment.',
