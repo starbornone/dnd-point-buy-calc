@@ -5,7 +5,8 @@
  *  Author:     Sha Kong-Brooks
  *  Website:    http://shianra.com
  *
- *  TODO: Elf: Revenant
+ *  TODO: Revenant
+ *  TODO: For everything below Human, racial attributes do not work
  ================================================== */
 
 var attrNames = ['Strength', 'Dexterity', 'Constitution', 'Intelligence', 'Wisdom', 'Charisma'];
