@@ -32,7 +32,7 @@
                 About
             </button>
 
-            <h1>D&#38;D 5e Point-Buy Calculator</h1>
+            <h1 class="m-b-2">D&#38;D 5e Point-Buy Calculator</h1>
 
             <div class="modal fade about-calc" tabindex="-1" role="dialog" aria-labelledby="aboutCalcLabel"
                  aria-hidden="true">
@@ -49,7 +49,7 @@
                         </div>
                         <div class="modal-body">
 
-                            <p>This point-buy calculator covers the following D&#38;D 5e books:</p>
+                            <p>This point-buy calculator is a work in progress and aims to cover the following D&#38;D 5e books:</p>
 
                             <ul>
                                 <li>
@@ -96,14 +96,11 @@
                             </ul>
 
                             <p>It includes the <strong>ability score point cost</strong> for each increment between 8
-                                and 15, <strong>racial
-                                    bonuses and penalties</strong> based on race and subrace selection, a <strong>total
-                                    ability
-                                    score</strong>, the resulting <strong>ability score modifier</strong>, a <strong>total
-                                    point
-                                    cost</strong>, and a summary of all <strong>racial traits</strong> at the end.
-                                There's also a reset
-                                button following the racial traits section.</p>
+                                and 15, <strong>racial bonuses and penalties</strong> based on race and subrace
+                                selection, a <strong>total ability score</strong>, the resulting <strong>ability score
+                                    modifier</strong>, a <strong>total point cost</strong>, and a summary of all
+                                <strong>racial traits</strong> at the end. There's also a reset button following the
+                                racial traits section.</p>
 
                         </div>
 
@@ -147,79 +144,79 @@
 
             <form id="dnd5e-pbc" action="" method="get">
 
-<!--                <div id="accordion" class="m-t-2 m-b-2" role="tablist" aria-multiselectable="true">
-                    <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="advancedOptionsHeading">
+                <!--                <div id="accordion" class="m-t-2 m-b-2" role="tablist" aria-multiselectable="true">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="advancedOptionsHeading">
 
-                            <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#advancedOptions"
-                                   aria-expanded="true" aria-controls="advancedOptions">
-                                    Advanced Options
-                                    <i class="fa" aria-hidden="true"></i>
-                                </a>
-                            </h4>
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#accordion" href="#advancedOptions"
+                                                   aria-expanded="true" aria-controls="advancedOptions">
+                                                    Advanced Options
+                                                    <i class="fa" aria-hidden="true"></i>
+                                                </a>
+                                            </h4>
 
-                        </div>
-                        <div id="advancedOptions" class="panel-collapse collapse in" role="tabpanel"
-                             aria-labelledby="advancedOptionsHeading">
+                                        </div>
+                                        <div id="advancedOptions" class="panel-collapse collapse in" role="tabpanel"
+                                             aria-labelledby="advancedOptionsHeading">
 
-                            <legend>Books to use</legend>
+                                            <legend>Books to use</legend>
 
-                            <div id="bookOptions" class="form-group row">
-                                <div class="col-lg-4">
-                                    <label class="custom-control custom-checkbox">
-                                        <input id="playersHandbook" type="checkbox" class="custom-control-input"
-                                               checked>
-                                        <span class="custom-control-indicator"></span>
-                                        <span class="custom-control-description">Player's Handbook</span>
-                                    </label>
-                                </div>
-                                <div class="col-lg-4">
-                                    <label class="custom-control custom-checkbox">
-                                        <input id="dungeonMastersGuide" type="checkbox" class="custom-control-input"
-                                               checked>
-                                        <span class="custom-control-indicator"></span>
-                                        <span class="custom-control-description">Dungeon Master's Guide</span>
-                                    </label>
-                                </div>
-                                <div class="col-lg-4">
-                                    <label class="custom-control custom-checkbox">
-                                        <input id="uaEberron" type="checkbox" class="custom-control-input" checked>
-                                        <span class="custom-control-indicator"></span>
-                                        <span class="custom-control-description">Unearthed Arcana: Eberron</span>
-                                    </label>
-                                </div>
-                            </div>
+                                            <div id="bookOptions" class="form-group row">
+                                                <div class="col-lg-4">
+                                                    <label class="custom-control custom-checkbox">
+                                                        <input id="playersHandbook" type="checkbox" class="custom-control-input"
+                                                               checked>
+                                                        <span class="custom-control-indicator"></span>
+                                                        <span class="custom-control-description">Player's Handbook</span>
+                                                    </label>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <label class="custom-control custom-checkbox">
+                                                        <input id="dungeonMastersGuide" type="checkbox" class="custom-control-input"
+                                                               checked>
+                                                        <span class="custom-control-indicator"></span>
+                                                        <span class="custom-control-description">Dungeon Master's Guide</span>
+                                                    </label>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <label class="custom-control custom-checkbox">
+                                                        <input id="uaEberron" type="checkbox" class="custom-control-input" checked>
+                                                        <span class="custom-control-indicator"></span>
+                                                        <span class="custom-control-description">Unearthed Arcana: Eberron</span>
+                                                    </label>
+                                                </div>
+                                            </div>
 
-                            <div class="form-group row">
-                                <div class="col-lg-4">
-                                    <label class="custom-control custom-checkbox">
-                                        <input id="uaGothicHeroes" type="checkbox" class="custom-control-input" checked>
-                                        <span class="custom-control-indicator"></span>
-                                        <span class="custom-control-description">Unearthed Arcana: Gothic Heroes</span>
-                                    </label>
-                                </div>
-                                <div class="col-lg-4">
-                                    <label class="custom-control custom-checkbox">
-                                        <input id="uaWaterborneAdventures" type="checkbox" class="custom-control-input"
-                                               checked>
-                                        <span class="custom-control-indicator"></span>
-                                        <span class="custom-control-description">Unearthed Arcana: Waterborne Adventures</span>
-                                    </label>
-                                </div>
-                                <div class="col-lg-4">
-                                    <label class="custom-control custom-checkbox">
-                                        <input id="elementalEvilPlayersGuide" type="checkbox"
-                                               class="custom-control-input" checked>
-                                        <span class="custom-control-indicator"></span>
-                                        <span class="custom-control-description">Elemental Evil Player's Guide</span>
-                                    </label>
-                                </div>
-                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-lg-4">
+                                                    <label class="custom-control custom-checkbox">
+                                                        <input id="uaGothicHeroes" type="checkbox" class="custom-control-input" checked>
+                                                        <span class="custom-control-indicator"></span>
+                                                        <span class="custom-control-description">Unearthed Arcana: Gothic Heroes</span>
+                                                    </label>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <label class="custom-control custom-checkbox">
+                                                        <input id="uaWaterborneAdventures" type="checkbox" class="custom-control-input"
+                                                               checked>
+                                                        <span class="custom-control-indicator"></span>
+                                                        <span class="custom-control-description">Unearthed Arcana: Waterborne Adventures</span>
+                                                    </label>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <label class="custom-control custom-checkbox">
+                                                        <input id="elementalEvilPlayersGuide" type="checkbox"
+                                                               class="custom-control-input" checked>
+                                                        <span class="custom-control-indicator"></span>
+                                                        <span class="custom-control-description">Elemental Evil Player's Guide</span>
+                                                    </label>
+                                                </div>
+                                            </div>
 
-                        </div>
-                    </div>
-                </div>-->
+                                        </div>
+                                    </div>
+                                </div>-->
 
                 <div class="form-group row">
                     <div id="raceLabel" class="col-lg-3"></div>
