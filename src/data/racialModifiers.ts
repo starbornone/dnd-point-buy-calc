@@ -329,4 +329,64 @@ export const racialModifiers: { [key: string]: RaceModifier } = {
     wisdom: 0,
     charisma: 0,
   },
+
+  tabaxi: {
+    name: "Tabaxi",
+    strength: 0,
+    dexterity: 2,
+    constitution: 0,
+    intelligence: 0,
+    wisdom: 0,
+    charisma: 1,
+  },
+
+  firbolg: {
+    name: "Firbolg",
+    strength: 0,
+    dexterity: 0,
+    constitution: 2,
+    intelligence: 0,
+    wisdom: 1,
+    charisma: 0,
+  },
+
+  kobold: {
+    name: "Kobold",
+    strength: 0,
+    dexterity: 2,
+    constitution: 0,
+    intelligence: 0,
+    wisdom: 0,
+    charisma: 1,
+  },
+
+  lizardfolk: {
+    name: "Lizardfolk",
+    strength: 2,
+    dexterity: 0,
+    constitution: 1,
+    intelligence: 0,
+    wisdom: 0,
+    charisma: 0,
+  },
+
+  githyanki: {
+    name: "Githyanki",
+    strength: 1,
+    dexterity: 0,
+    constitution: 0,
+    intelligence: 2,
+    wisdom: 0,
+    charisma: 0,
+  },
+
+  githzerai: {
+    name: "Githzerai",
+    strength: 0,
+    dexterity: 0,
+    constitution: 0,
+    intelligence: 2,
+    wisdom: 1,
+    charisma: 0,
+  },
 };

@@ -45,81 +45,53 @@ A point-buy calculator for **Dungeons & Dragons 5th Edition** (D&D 5e) that help
 
 The app features the following races and variants with their respective racial modifiers:
 
-### Dragonborn
+Here's the updated list with nested formatting for variants and bolded race and variant names:
 
-- **Strength +2**, **Charisma +1**
+### Racial Modifiers and Variants
 
-### Dwarf
+- **Dragonborn**: Strength +2, Charisma +1
+- **Dwarf**:
+  - **Hill Dwarf**: Constitution +2, Wisdom +1
+  - **Mountain Dwarf**: Strength +2, Constitution +2
+- **Elf**:
+  - **High Elf**: Dexterity +2, Intelligence +1
+  - **Wood Elf**: Dexterity +2, Wisdom +1
+  - **Drow**: Dexterity +2, Charisma +1
+- **Gnome**:
+  - **Forest Gnome**: Intelligence +2, Dexterity +1
+  - **Rock Gnome**: Intelligence +2, Constitution +1
+- **Half-Elf**: Charisma +2 and +1 to any two other attributes
+- **Halfling**:
+  - **Lightfoot Halfling**: Dexterity +2, Charisma +1
+  - **Stout Halfling**: Dexterity +2, Constitution +1
+- **Half-Orc**: Strength +2, Constitution +1
+- **Human**:
+  - **Human**: +1 to all ability scores
+  - **Variant Human**: +1 to any two attributes
+- **Tiefling**: Charisma +2, Intelligence +1
+- **Aasimar**: Charisma +2, Wisdom +1
+- **Changeling**: Charisma +2 and +1 to any other attribute
+- **Shifter**:
+  - **Beasthide**: Constitution +2
+  - **Longtooth**: Strength +1
+  - **Swiftstride**: Dexterity +1, Charisma +1
+  - **Wildhunt**: Wisdom +2
+- **Genasi**:
+  - **Air Genasi**: Constitution +2, Dexterity +1
+  - **Earth Genasi**: Constitution +2, Strength +1
+  - **Fire Genasi**: Constitution +2, Intelligence +1
+  - **Water Genasi**: Constitution +2, Wisdom +1
+- **Goliath**: Strength +2, Constitution +1
+- **Aarakocra**: Dexterity +2, Wisdom +1
+- **Warforged**: Constitution +1, Strength +1
+- **Tabaxi**: Dexterity +2, Charisma +1
+- **Firbolg**: Wisdom +2, Strength +1
+- **Kobold**: Dexterity +2, Strength -1
+- **Lizardfolk**: Constitution +2, Wisdom +1
+- **Githyanki**: Strength +1, Intelligence +2
+- **Githzerai**: Wisdom +2, Intelligence +1
 
-- **Hill Dwarf**: **Constitution +2**, **Wisdom +1**
-- **Mountain Dwarf**: **Strength +2**, **Constitution +2**
-
-### Elf
-
-- **High Elf**: **Dexterity +2**, **Intelligence +1**
-- **Wood Elf**: **Dexterity +2**, **Wisdom +1**
-- **Drow**: **Dexterity +2**, **Charisma +1**
-
-### Gnome
-
-- **Forest Gnome**: **Intelligence +2**, **Dexterity +1**
-- **Rock Gnome**: **Intelligence +2**, **Constitution +1**
-
-### Half-Elf
-
-- **Charisma +2** and **+1 to any two other attributes**
-
-### Halfling
-
-- **Lightfoot Halfling**: **Dexterity +2**, **Charisma +1**
-- **Stout Halfling**: **Dexterity +2**, **Constitution +1**
-
-### Half-Orc
-
-- **Strength +2**, **Constitution +1**
-
-### Human
-
-- **Human**: **+1 to all ability scores**
-- **Variant Human**: **+1 to any two attributes**
-
-### Tiefling
-
-- **Charisma +2**, **Intelligence +1**
-
-### Aasimar
-
-- **Charisma +2**, **Wisdom +1**
-
-### Changeling
-
-- **Charisma +2** and **+1 to any other attribute**
-
-### Shifter
-
-- **Beasthide**: **Constitution +2**
-- **Longtooth**: **Strength +1**
-- **Swiftstride**: **Dexterity +1**, **Charisma +1**
-- **Wildhunt**: **Wisdom +2**
-
-### Genasi
-
-- **Air Genasi**: **Constitution +2**, **Dexterity +1**
-- **Earth Genasi**: **Constitution +2**, **Strength +1**
-- **Fire Genasi**: **Constitution +2**, **Intelligence +1**
-- **Water Genasi**: **Constitution +2**, **Wisdom +1**
-
-### Goliath
-
-- **Strength +2**, **Constitution +1**
-
-### Aarakocra
-
-- **Dexterity +2**, **Wisdom +1**
-
-### Warforged
-
-- **Constitution +1**, **Strength +1**
+Let me know if you need any further adjustments!
 
 ## Known Bugs
 
@@ -128,7 +100,6 @@ The app features the following races and variants with their respective racial m
 ### Short-Term Goals
 
 - **Mobile Optimization**: Ensure the app is fully optimized for mobile use with an improved user interface.
-- **Add Missing Races**: Tabaxi, Firbolg, Kobold, Lizardfolk, and Githyanki/Githzerai.
 
 ### Long-Term Goals
 
