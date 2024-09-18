@@ -114,8 +114,8 @@ Ensure you have the following installed:
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/dd5e-point-buy-calculator.git
-   cd dd5e-point-buy-calculator
+   git clone git@github.com:starbornone/DnD-Point-Buy-Calc.git
+   cd DnD-Point-Buy-Calc
    ```
 
 2. Install dependencies:
