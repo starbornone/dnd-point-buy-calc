@@ -71,11 +71,11 @@ export const AttributeTable = () => {
         <thead>
           <tr>
             <th className="text-left">Attribute</th>
-            <th>Score</th>
-            <th>Cost</th>
-            <th>Racial</th>
-            <th>Total</th>
-            <th>Modifier</th>
+            <th className="text-center">Score</th>
+            <th className="text-center">Cost</th>
+            <th className="text-center">Racial</th>
+            <th className="text-center">Total</th>
+            <th className="text-center">Modifier</th>
           </tr>
         </thead>
         <tbody>
@@ -93,8 +93,6 @@ export const AttributeTable = () => {
                     className="border p-1 rounded text-center w-24"
                     value={attrValue}
                     onChange={(e) => handleChange(e, attrKey)}
-                    min={8}
-                    max={15}
                   />
                 </td>
                 <td className="text-center">{calculatePointCost(attrValue)}</td>
