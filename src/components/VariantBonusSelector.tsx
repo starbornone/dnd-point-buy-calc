@@ -2,8 +2,10 @@ import { AttributeState } from "@/types/race";
 import React from "react";
 
 interface VariantBonusSelectorProps {
-  selectedBonuses: [string, string];
-  setSelectedBonuses: React.Dispatch<React.SetStateAction<[string, string]>>;
+  selectedBonuses: [keyof AttributeState, keyof AttributeState];
+  setSelectedBonuses: React.Dispatch<
+    React.SetStateAction<[keyof AttributeState, keyof AttributeState]>
+  >;
   attributeKeys: (keyof AttributeState)[];
 }
 
@@ -16,11 +18,11 @@ export const VariantBonusSelector: React.FC<VariantBonusSelectorProps> = ({
     e: React.ChangeEvent<HTMLSelectElement>,
     index: number
   ) => {
-    const newBonus = e.target.value;
+    const newBonus = e.target.value as keyof AttributeState;
     setSelectedBonuses((prev) => {
       const newBonuses = [...prev];
       newBonuses[index] = newBonus;
-      return newBonuses as [string, string];
+      return newBonuses as [keyof AttributeState, keyof AttributeState];
     });
   };
 
@@ -48,7 +50,6 @@ export const VariantBonusSelector: React.FC<VariantBonusSelectorProps> = ({
               </option>
             ))}
           </select>
-
           <select
             value={selectedBonuses[1]}
             onChange={(e) => handleBonusChange(e, 1)}
