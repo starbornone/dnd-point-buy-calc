@@ -15,7 +15,7 @@ export default function HomePage() {
           <h1 className="text-3xl font-bold m-0 text-primary">
             D&D 5e Point-Buy Calculator
           </h1>
-          <div className="flex justify-end gap-x-2">
+          <div className="flex justify-end gap-x-4">
             <Modal title="Basic Usage">
               <p>
                 Use 27 points, as recommended by the Player&apos;s Handbook.

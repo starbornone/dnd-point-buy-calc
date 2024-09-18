@@ -19,7 +19,7 @@ export default function RootLayout({
       <body className="antialiased">
         <Providers>
           <Navbar />
-          <main className="prose max-w-none">{children}</main>
+          <main className="prose mx-auto max-w-5xl">{children}</main>
         </Providers>
       </body>
     </html>

@@ -24,48 +24,51 @@ export const RaceSelector = () => {
   };
 
   return (
-    <div className="mt-4">
-      <label htmlFor="race" className="block font-bold">
-        Select Race
-      </label>
-      <select
-        id="race"
-        className="mt-2 block w-full p-2 border border-lightGray rounded"
-        value={selectedRace}
-        onChange={handleRaceChange}
-      >
-        <option value="" disabled>
-          Select a race
-        </option>
-        {raceDropdown.map((race) => (
-          <option key={race.value} value={race.value}>
-            {race.name}
+    <div className="grid grid-cols-2 gap-8">
+      <div>
+        <label htmlFor="race" className="block font-bold">
+          Select Race
+        </label>
+        <select
+          id="race"
+          className="mt-2 block w-full p-2 border border-lightGray rounded"
+          value={selectedRace}
+          onChange={handleRaceChange}
+        >
+          <option value="" disabled>
+            Select a race
           </option>
-        ))}
-      </select>
-
-      {availableVariants.length > 0 && (
-        <>
-          <label htmlFor="variant" className="block font-bold mt-4">
-            Select Variant
-          </label>
-          <select
-            id="variant"
-            className="mt-2 block w-full p-2 border border-lightGray rounded"
-            value={selectedVariant}
-            onChange={handleVariantChange}
-          >
-            <option value="" disabled>
-              Select a variant
+          {raceDropdown.map((race) => (
+            <option key={race.value} value={race.value}>
+              {race.name}
             </option>
-            {availableVariants.map((variant) => (
-              <option key={variant} value={variant}>
-                {variant}
+          ))}
+        </select>
+      </div>
+      <div>
+        {availableVariants.length > 0 && (
+          <>
+            <label htmlFor="variant" className="block font-bold">
+              Select Variant
+            </label>
+            <select
+              id="variant"
+              className="mt-2 block w-full p-2 border border-lightGray rounded"
+              value={selectedVariant}
+              onChange={handleVariantChange}
+            >
+              <option value="" disabled>
+                Select a variant
               </option>
-            ))}
-          </select>
-        </>
-      )}
+              {availableVariants.map((variant) => (
+                <option key={variant} value={variant}>
+                  {variant}
+                </option>
+              ))}
+            </select>
+          </>
+        )}
+      </div>
     </div>
   );
 };

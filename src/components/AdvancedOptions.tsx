@@ -15,7 +15,7 @@ export const AdvancedOptions = () => {
   return (
     <div className="mt-4 bg-lightGray p-4 rounded">
       <h3 className="font-bold">Advanced Options</h3>
-      <div className="grid grid-cols-3 gap-4 mt-4">
+      <div className="grid grid-cols-3 gap-8 mt-4">
         <label className="flex items-center">
           <input
             type="checkbox"

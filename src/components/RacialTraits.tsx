@@ -59,7 +59,7 @@ export const RacialTraits = () => {
       <h2 className="font-bold">Racial Traits</h2>
       {selectedRace ? (
         <>
-          <div className="grid grid-cols-2 gap-x-4">
+          <div className="grid grid-cols-2 gap-x-8">
             <div>
               <dl>
                 <dt>Ability Score Increase:</dt>
