@@ -21,14 +21,10 @@ export const RacialTraits = () => {
 
   const baseRaceTraits = raceData[selectedRace] || defaultTraits;
 
-  console.log("baseRaceTraits", baseRaceTraits);
-
   const selectedRaceTraits = mergeRaceAndVariant(
     baseRaceTraits,
     selectedVariant
   );
-
-  console.log("selectedRaceTraits", selectedRaceTraits);
 
   return (
     <div className="bg-lightGray p-4 mt-4 rounded">
