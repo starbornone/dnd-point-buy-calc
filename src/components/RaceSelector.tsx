@@ -44,7 +44,6 @@ export const RaceSelector = () => {
         ))}
       </select>
 
-      {/* Only show variant dropdown if the selected race has variants */}
       {availableVariants.length > 0 && (
         <>
           <label htmlFor="variant" className="block font-bold mt-4">

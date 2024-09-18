@@ -2,21 +2,31 @@
 
 import { useRace } from "@/context/RaceContext";
 import { useStats } from "@/context/StatsContext";
+import { finalModifiers, pointCosts } from "@/data";
 import { racialModifiers } from "@/data/racialModifiers";
-import { attrNames, modifiers, points } from "@/utils/attributeUtils"; // Import necessary utilities
+import { AttributeState } from "@/types/race";
 import { findRaceKeyByName } from "@/utils/findRaceKeyByName";
 
 export const AttributeTable = () => {
   const { attributes, setAttributes } = useStats();
   const { selectedRace, selectedVariant } = useRace();
 
-  // Function to get modifiers (either base or variant)
+  const attributeKeys: (keyof AttributeState)[] = [
+    "strength",
+    "dexterity",
+    "constitution",
+    "intelligence",
+    "wisdom",
+    "charisma",
+  ];
+
   const getModifiers = (raceOrVariant: string, name: string) => {
     let key = name;
 
     if (raceOrVariant === "variant") {
       key = findRaceKeyByName(name) || name;
     }
+
     return (
       racialModifiers[key as keyof typeof racialModifiers] || {
         strength: 0,
@@ -29,38 +39,29 @@ export const AttributeTable = () => {
     );
   };
 
-  // Calculate racial bonuses by combining base and variant modifiers
-  const calculateRacialBonuses = (base, variant) => {
-    return {
-      strength: selectedVariant ? variant.strength : base.strength,
-      dexterity: selectedVariant ? variant.dexterity : base.dexterity,
-      constitution: selectedVariant ? variant.constitution : base.constitution,
-      intelligence: selectedVariant ? variant.intelligence : base.intelligence,
-      wisdom: selectedVariant ? variant.wisdom : base.wisdom,
-      charisma: selectedVariant ? variant.charisma : base.charisma,
-    };
+  const calculateRacialBonuses = (
+    base: AttributeState,
+    variant: AttributeState
+  ) => {
+    return selectedVariant ? { ...variant } : { ...base };
   };
 
-  // Get base and variant modifiers
   const baseModifiers = getModifiers("race", selectedRace);
   const variantModifiers = getModifiers("variant", selectedVariant);
 
-  // Combine base and variant modifiers into racial bonuses
   const racialBonuses = calculateRacialBonuses(baseModifiers, variantModifiers);
 
-  // Calculate point cost for an attribute value
-  const calculatePointCost = (value: number) => points[value] || 0;
-
-  // Calculate modifier for an attribute value
-  const calculateModifier = (value: number) => modifiers[value] || 0;
+  const calculatePointCost = (value: number) => pointCosts[value] || 0;
+  const calculateModifier = (value: number) => finalModifiers[value] || 0;
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement>,
-    attr: keyof typeof attributes
+    attr: keyof AttributeState
   ) => {
+    const value = parseInt(e.target.value, 10);
     setAttributes((prev) => ({
       ...prev,
-      [attr]: parseInt(e.target.value),
+      [attr]: value,
     }));
   };
 
@@ -78,15 +79,14 @@ export const AttributeTable = () => {
           </tr>
         </thead>
         <tbody>
-          {attrNames.map((attrName, index) => {
-            const attrKey = attrName.toLowerCase() as keyof typeof attributes;
+          {attributeKeys.map((attrKey) => {
             const attrValue = attributes[attrKey];
             const racialBonus = racialBonuses[attrKey];
             const total = attrValue + racialBonus;
 
             return (
-              <tr key={attrName}>
-                <td>{attrName}</td>
+              <tr key={attrKey}>
+                <td>{attrKey.charAt(0).toUpperCase() + attrKey.slice(1)}</td>
                 <td className="text-center">
                   <input
                     type="number"
@@ -97,14 +97,10 @@ export const AttributeTable = () => {
                     max={15}
                   />
                 </td>
-                <td className="text-center">
-                  {calculatePointCost(attrValue)} {/* Use points array */}
-                </td>
+                <td className="text-center">{calculatePointCost(attrValue)}</td>
                 <td className="text-center">{racialBonus}</td>
                 <td className="text-center">{total}</td>
-                <td className="text-center">
-                  {calculateModifier(total)} {/* Use modifiers array */}
-                </td>
+                <td className="text-center">{calculateModifier(total)}</td>
               </tr>
             );
           })}
@@ -114,14 +110,8 @@ export const AttributeTable = () => {
             </td>
             <td></td>
             <td className="text-center">
-              {attrNames.reduce(
-                (acc, _, index) =>
-                  acc +
-                  calculatePointCost(
-                    attributes[
-                      attrNames[index].toLowerCase() as keyof typeof attributes
-                    ]
-                  ),
+              {attributeKeys.reduce(
+                (acc, attrKey) => acc + calculatePointCost(attributes[attrKey]),
                 0
               )}
             </td>

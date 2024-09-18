@@ -1,4 +1,6 @@
-export const racialModifiers = {
+import { RaceModifier } from "@/types";
+
+export const racialModifiers: { [key: string]: RaceModifier } = {
   dragonborn: {
     name: "Dragonborn",
     strength: 2,

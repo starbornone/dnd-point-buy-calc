@@ -16,6 +16,17 @@ export interface Race {
   variants?: Variant[];
 }
 
+export interface RaceModifier {
+  name: string;
+  strength: number;
+  dexterity: number;
+  constitution: number;
+  intelligence: number;
+  wisdom: number;
+  charisma: number;
+  variants?: string[];
+}
+
 export interface AttributeState {
   strength: number;
   dexterity: number;

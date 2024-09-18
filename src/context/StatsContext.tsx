@@ -5,7 +5,9 @@ import { createContext, ReactNode, useContext, useState } from "react";
 
 interface StatsContextType {
   attributes: AttributeState;
-  setAttributes: (attributes: AttributeState) => void;
+  setAttributes: (
+    attributes: AttributeState | ((prev: AttributeState) => AttributeState)
+  ) => void;
 }
 
 const StatsContext = createContext<StatsContextType | undefined>(undefined);
