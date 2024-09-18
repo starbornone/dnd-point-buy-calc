@@ -16,27 +16,35 @@ export const AttributeTable = () => {
   const { attributes, setAttributes } = useStats();
   const { selectedRace, selectedVariant } = useRace();
   const [selectedBonuses, setSelectedBonuses] = useState<
-    [keyof AttributeState, keyof AttributeState]
-  >(["strength", "dexterity"]);
+    [keyof AttributeState, keyof AttributeState | undefined]
+  >(["strength", undefined]);
 
   const baseModifiers = getModifiers("race", selectedRace);
   const variantModifiers = getModifiers("variant", selectedVariant);
 
+  const bonusesForRacialCalculation: [
+    keyof AttributeState,
+    keyof AttributeState
+  ] = [selectedBonuses[0], selectedBonuses[1] || "strength"];
+
   const racialBonuses = calculateRacialBonuses({
     baseModifiers,
-    variantModifiers,
     isVariant: selectedVariant !== "",
+    selectedBonuses: bonusesForRacialCalculation,
+    selectedRace,
     selectedVariant,
-    selectedBonuses,
+    variantModifiers,
   });
 
   return (
     <div className="mt-4">
-      {selectedVariant === "Variant Human" && (
+      {(selectedVariant === "Variant Human" ||
+        selectedRace === "changeling") && (
         <VariantBonusSelector
           selectedBonuses={selectedBonuses}
           setSelectedBonuses={setSelectedBonuses}
           attributeKeys={attributeKeys}
+          selectedRace={selectedRace}
         />
       )}
 
