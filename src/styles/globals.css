@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: Bookmania;
+  src: url('../fonts/Bookmania.otf');
+}
+
+@font-face {
+  font-family: ScalaSans;
+  src: url('../fonts/ScalaSans.otf');
+}
+
+:root {
+  --color-primary: #58170d;
+  --color-secondary: #c9ae6b;
+  --color-bg-inverse: #373a3c;
+  --color-bg-info: #c2ccce;
+  --color-bg-light: #fcfcf5;
+  --color-text-primary: #373a3c;
+}
+
+body {
+  background: #fff url('/images/background.jpg') no-repeat center center;
+  background-size: cover;
+  font-family: 'Bookmania', serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-primary);
+  margin: 0 !important;
+}
+
+p, ul, ul li, ol, ol li, dd {
+  margin: 0 !important;
+  padding: 0 !important;
+}
