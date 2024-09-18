@@ -13,7 +13,7 @@ export const human: Race = {
   other: [],
   variants: [
     {
-      name: "Enabled",
+      name: "Variant Human",
       ability: "Two different ability scores of your choice increase by 1.",
       other: [
         "Skills",

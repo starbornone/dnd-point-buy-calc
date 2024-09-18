@@ -1,3 +1,5 @@
+import { AttributeState } from "@/types";
+
 export const attributeNames = [
   "Strength",
   "Dexterity",
@@ -5,4 +7,13 @@ export const attributeNames = [
   "Intelligence",
   "Wisdom",
   "Charisma",
+];
+
+export const attributeKeys: (keyof AttributeState)[] = [
+  "strength",
+  "dexterity",
+  "constitution",
+  "intelligence",
+  "wisdom",
+  "charisma",
 ];

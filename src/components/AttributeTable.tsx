@@ -1,15 +1,21 @@
 "use client";
 
+import { VariantBonusSelector } from "@/components";
 import { useRace } from "@/context/RaceContext";
 import { useStats } from "@/context/StatsContext";
-import { finalModifiers, pointCosts } from "@/data";
 import { racialModifiers } from "@/data/racialModifiers";
 import { AttributeState } from "@/types/race";
+import { calculateModifier, calculatePointCost } from "@/utils";
 import { findRaceKeyByName } from "@/utils/findRaceKeyByName";
+import { useState } from "react";
 
 export const AttributeTable = () => {
   const { attributes, setAttributes } = useStats();
   const { selectedRace, selectedVariant } = useRace();
+  const [selectedBonuses, setSelectedBonuses] = useState<[string, string]>([
+    "strength",
+    "dexterity",
+  ]);
 
   const attributeKeys: (keyof AttributeState)[] = [
     "strength",
@@ -43,16 +49,22 @@ export const AttributeTable = () => {
     base: AttributeState,
     variant: AttributeState
   ) => {
-    return selectedVariant ? { ...variant } : { ...base };
+    let bonuses = selectedVariant ? { ...variant } : { ...base };
+
+    // Check if selected variant is "Variant Human" and apply bonuses
+    if (selectedVariant === "Variant Human") {
+      // Apply +1 to the selected two attributes for Variant Human
+      bonuses[selectedBonuses[0]] += 1;
+      bonuses[selectedBonuses[1]] += 1;
+    }
+
+    return bonuses;
   };
 
   const baseModifiers = getModifiers("race", selectedRace);
   const variantModifiers = getModifiers("variant", selectedVariant);
 
   const racialBonuses = calculateRacialBonuses(baseModifiers, variantModifiers);
-
-  const calculatePointCost = (value: number) => pointCosts[value] || 0;
-  const calculateModifier = (value: number) => finalModifiers[value] || 0;
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -67,6 +79,14 @@ export const AttributeTable = () => {
 
   return (
     <div className="mt-4">
+      {selectedVariant === "Variant Human" && (
+        <VariantBonusSelector
+          selectedBonuses={selectedBonuses}
+          setSelectedBonuses={setSelectedBonuses}
+          attributeKeys={attributeKeys}
+        />
+      )}
+
       <table className="w-full table-auto">
         <thead>
           <tr>
