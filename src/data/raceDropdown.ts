@@ -34,4 +34,10 @@ export const raceDropdown = [
   { name: shifter.name, value: "shifter" },
   { name: tiefling.name, value: "tiefling" },
   { name: warforged.name, value: "warforged" },
+  { name: `Tabaxi — TODO —`, value: "tabaxi", disabled: true },
+  { name: `Firbolg — TODO —`, value: "firbolg", disabled: true },
+  { name: `Kobold — TODO —`, value: "kobold", disabled: true },
+  { name: `Lizardfolk — TODO —`, value: "lizardfolk", disabled: true },
+  { name: `Githyanki — TODO —`, value: "githyanki", disabled: true },
+  { name: `Githzerai — TODO —`, value: "githzerai", disabled: true },
 ];

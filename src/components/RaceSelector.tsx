@@ -39,7 +39,11 @@ export const RaceSelector = () => {
             Select a race
           </option>
           {raceDropdown.map((race) => (
-            <option key={race.value} value={race.value}>
+            <option
+              disabled={race.disabled}
+              key={race.value}
+              value={race.value}
+            >
               {race.name}
             </option>
           ))}

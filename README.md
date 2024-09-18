@@ -128,6 +128,7 @@ The app features the following races and variants with their respective racial m
 ### Short-Term Goals
 
 - **Mobile Optimization**: Ensure the app is fully optimized for mobile use with an improved user interface.
+- **Add Missing Races**: Tabaxi, Firbolg, Kobold, Lizardfolk, and Githyanki/Githzerai.
 
 ### Long-Term Goals
 
