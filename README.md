@@ -45,10 +45,6 @@ A point-buy calculator for **Dungeons & Dragons 5th Edition** (D&D 5e) that help
 
 The app features the following races and variants with their respective racial modifiers:
 
-Here's the updated list with nested formatting for variants and bolded race and variant names:
-
-### Racial Modifiers and Variants
-
 - **Dragonborn**: Strength +2, Charisma +1
 - **Dwarf**:
   - **Hill Dwarf**: Constitution +2, Wisdom +1
@@ -90,8 +86,6 @@ Here's the updated list with nested formatting for variants and bolded race and 
 - **Lizardfolk**: Constitution +2, Wisdom +1
 - **Githyanki**: Strength +1, Intelligence +2
 - **Githzerai**: Wisdom +2, Intelligence +1
-
-Let me know if you need any further adjustments!
 
 ## Known Bugs
 
