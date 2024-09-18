@@ -33,6 +33,27 @@ export const VariantBonusSelector: React.FC<VariantBonusSelectorProps> = ({
     });
   };
 
+  const renderSelect = (
+    value: keyof AttributeState | undefined,
+    index: number,
+    availableAttributes: (keyof AttributeState)[]
+  ) => (
+    <select
+      value={value || ""}
+      onChange={(e) => handleBonusChange(e, index)}
+      className="mt-2 block w-full p-2 border border-lightGray rounded"
+    >
+      <option value="" disabled>
+        Select an attribute
+      </option>
+      {availableAttributes.map((attr) => (
+        <option key={attr} value={attr}>
+          {attr.charAt(0).toUpperCase() + attr.slice(1)}
+        </option>
+      ))}
+    </select>
+  );
+
   if (selectedRace === "changeling") {
     const availableAttributesForBonus = attributeKeys.filter(
       (attr) => attr !== "charisma"
@@ -43,17 +64,7 @@ export const VariantBonusSelector: React.FC<VariantBonusSelectorProps> = ({
         <div>
           <label>Select one attribute for +1 bonus:</label>
           <div className="grid grid-cols-1 gap-4">
-            <select
-              value={selectedBonuses[0]}
-              onChange={(e) => handleBonusChange(e, 0)}
-              className="mt-2 block w-full p-2 border border-lightGray rounded"
-            >
-              {availableAttributesForBonus.map((attr) => (
-                <option key={attr} value={attr}>
-                  {attr.charAt(0).toUpperCase() + attr.slice(1)}
-                </option>
-              ))}
-            </select>
+            {renderSelect(selectedBonuses[0], 0, availableAttributesForBonus)}
           </div>
         </div>
       </div>
@@ -72,31 +83,16 @@ export const VariantBonusSelector: React.FC<VariantBonusSelectorProps> = ({
       <div>
         <label>Select two attributes for +1 bonus:</label>
         <div className="grid grid-cols-2 gap-4">
-          <select
-            value={selectedBonuses[0]}
-            onChange={(e) => handleBonusChange(e, 0)}
-            className="mt-2 block w-full p-2 border border-lightGray rounded"
-          >
-            {availableAttributesForFirstSelect.map((attr) => (
-              <option key={attr} value={attr}>
-                {attr.charAt(0).toUpperCase() + attr.slice(1)}
-              </option>
-            ))}
-          </select>
-          <select
-            value={selectedBonuses[1] || ""}
-            onChange={(e) => handleBonusChange(e, 1)}
-            className="mt-2 block w-full p-2 border border-lightGray rounded"
-          >
-            <option value="" disabled>
-              Select an attribute
-            </option>
-            {availableAttributesForSecondSelect.map((attr) => (
-              <option key={attr} value={attr}>
-                {attr.charAt(0).toUpperCase() + attr.slice(1)}
-              </option>
-            ))}
-          </select>
+          {renderSelect(
+            selectedBonuses[0],
+            0,
+            availableAttributesForFirstSelect
+          )}
+          {renderSelect(
+            selectedBonuses[1],
+            1,
+            availableAttributesForSecondSelect
+          )}
         </div>
       </div>
     </div>

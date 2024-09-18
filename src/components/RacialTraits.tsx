@@ -1,37 +1,9 @@
 "use client";
 
 import { useRace } from "@/context/RaceContext";
-import {
-  aasimar,
-  changeling,
-  dragonborn,
-  dwarf,
-  elf,
-  gnome,
-  halfElf,
-  halfling,
-  halfOrc,
-  human,
-  shifter,
-  tiefling,
-} from "@/data";
+import { raceData } from "@/data";
 import { Race } from "@/types/race";
 import { mergeRaceAndVariant } from "@/utils";
-
-const raceData: { [key: string]: Race } = {
-  aasimar,
-  changeling,
-  dragonborn,
-  dwarf,
-  elf,
-  gnome,
-  halfElf,
-  halfling,
-  halfOrc,
-  human,
-  shifter,
-  tiefling,
-};
 
 const defaultTraits: Race = {
   name: "",
@@ -49,10 +21,14 @@ export const RacialTraits = () => {
 
   const baseRaceTraits = raceData[selectedRace] || defaultTraits;
 
+  console.log("baseRaceTraits", baseRaceTraits);
+
   const selectedRaceTraits = mergeRaceAndVariant(
     baseRaceTraits,
     selectedVariant
   );
+
+  console.log("selectedRaceTraits", selectedRaceTraits);
 
   return (
     <div className="bg-lightGray p-4 mt-4 rounded">

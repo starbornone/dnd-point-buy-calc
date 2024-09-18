@@ -1,0 +1,38 @@
+import {
+  aarakocra,
+  aasimar,
+  changeling,
+  dragonborn,
+  dwarf,
+  elf,
+  genasi,
+  gnome,
+  goliath,
+  halfElf,
+  halfling,
+  halfOrc,
+  human,
+  shifter,
+  tiefling,
+  warforged,
+} from "@/data/races";
+import { Race } from "@/types";
+
+export const raceData: { [key: string]: Race } = {
+  aarakocra,
+  aasimar,
+  changeling,
+  dragonborn,
+  dwarf,
+  elf,
+  genasi,
+  gnome,
+  goliath,
+  halfElf,
+  halfling,
+  halfOrc,
+  human,
+  shifter,
+  tiefling,
+  warforged,
+};

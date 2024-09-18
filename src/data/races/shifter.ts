@@ -3,11 +3,13 @@ import { Race } from "@/types/race";
 export const shifter: Race = {
   name: "Shifter",
   ability: "Your Dexterity score increases by 1.",
-  age: "...",
-  alignment: "...",
+  age: "Shifters reach maturity slightly faster than humans, growing to adulthood around age 10. They live to be around 70 years old.",
+  alignment:
+    "Shifters have a strong connection to their primal instincts, making them tend toward chaotic alignments. Their inherent adaptability and independence drive them to value personal freedom.",
   size: "Shifters are about the same size as humans. Your size is Medium.",
   speed: "Your base walking speed is 30 feet.",
-  language: "...",
+  language:
+    "You can speak, read, and write Common and one other language of your choice.",
   other: [
     "Darkvision",
     "Your lycanthropic heritage grants you the ability to see in dark conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can’t discern color in darkness, only shades of gray.",
