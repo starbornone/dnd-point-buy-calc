@@ -19,7 +19,14 @@ export const calculateRacialBonuses = ({
 
   if (selectedRace === "changeling" && selectedBonuses) {
     bonuses[selectedBonuses[0]] += 1;
-  } else if (selectedVariant === "Variant Human" && selectedBonuses) {
+  }
+
+  if (selectedRace === "halfElf" && selectedBonuses) {
+    bonuses[selectedBonuses[0]] += 1;
+    bonuses[selectedBonuses[1]] += 1;
+  }
+
+  if (selectedVariant === "Variant Human" && selectedBonuses) {
     bonuses[selectedBonuses[0]] += 1;
     bonuses[selectedBonuses[1]] += 1;
   }

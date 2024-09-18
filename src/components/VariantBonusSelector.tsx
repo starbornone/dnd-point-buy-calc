@@ -78,6 +78,28 @@ export const VariantBonusSelector: React.FC<VariantBonusSelectorProps> = ({
     (attr) => attr !== selectedBonuses[0]
   );
 
+  if (selectedRace === "halfElf") {
+    return (
+      <div className="grid grid-cols-2 gap-8">
+        <div>
+          <label>Select two attributes for +1 bonus:</label>
+          <div className="grid grid-cols-2 gap-4">
+            {renderSelect(
+              selectedBonuses[0],
+              0,
+              availableAttributesForFirstSelect
+            )}
+            {renderSelect(
+              selectedBonuses[1],
+              1,
+              availableAttributesForSecondSelect
+            )}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="grid grid-cols-2 gap-8">
       <div>

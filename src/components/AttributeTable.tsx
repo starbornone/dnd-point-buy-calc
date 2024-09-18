@@ -39,7 +39,8 @@ export const AttributeTable = () => {
   return (
     <div className="mt-4">
       {(selectedVariant === "Variant Human" ||
-        selectedRace === "changeling") && (
+        selectedRace === "changeling" ||
+        selectedRace === "halfElf") && (
         <VariantBonusSelector
           selectedBonuses={selectedBonuses}
           setSelectedBonuses={setSelectedBonuses}
