@@ -29,10 +29,12 @@ export const AttributeTableBody: React.FC<AttributeTableBodyProps> = ({
             <td>{attrKey.charAt(0).toUpperCase() + attrKey.slice(1)}</td>
             <td className="text-center">
               <input
-                type="number"
                 className="border p-1 rounded text-center w-12"
-                value={attrValue}
+                max={99}
+                min={1}
                 onChange={(e) => handleChange(e, attrKey)}
+                type="number"
+                value={attrValue}
               />
             </td>
             <td className="text-center">{calculatePointCost(attrValue)}</td>
