@@ -4,9 +4,9 @@ import type { Metadata } from "next";
 import { Navbar } from "@/components";
 
 export const metadata: Metadata = {
-  title: "D&D 5e Point-Buy Calculator",
+  title: "D&D 5e Point Buy Calculator",
   description:
-    "A point buy calculator for D&D 5e including point cost, racial bonuses, total score, modifiers, total points, and a summary of all traits.",
+    "Easily calculate your Dungeons & Dragons 5e character stats with our point buy calculator. Includes point costs, racial bonuses, total scores, modifiers, and a summary of traits.",
 };
 
 export default function RootLayout({
