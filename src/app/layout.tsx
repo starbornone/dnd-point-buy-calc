@@ -1,7 +1,7 @@
-import { Navbar } from "@/components";
 import "@/styles/globals.css";
-import type { Metadata } from "next";
 import Providers from "./Providers";
+import type { Metadata } from "next";
+import { Navbar } from "@/components";
 
 export const metadata: Metadata = {
   title: "D&D 5e Point-Buy Calculator",
@@ -16,10 +16,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased">
+      <body className="antialiased p-4">
         <Providers>
-          <Navbar />
+          <div className="hidden md:block">
+            <Navbar />
+          </div>
           <main className="prose mx-auto max-w-5xl mb-12">{children}</main>
+          <div className="md:hidden block">
+            <Navbar />
+          </div>
         </Providers>
       </body>
     </html>

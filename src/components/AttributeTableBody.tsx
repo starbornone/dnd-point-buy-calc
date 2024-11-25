@@ -30,7 +30,7 @@ export const AttributeTableBody: React.FC<AttributeTableBodyProps> = ({
             <td className="text-center">
               <input
                 type="number"
-                className="border p-1 rounded text-center w-24"
+                className="border p-1 rounded text-center w-12"
                 value={attrValue}
                 onChange={(e) => handleChange(e, attrKey)}
               />

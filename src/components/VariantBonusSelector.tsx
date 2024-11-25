@@ -60,7 +60,7 @@ export const VariantBonusSelector: React.FC<VariantBonusSelectorProps> = ({
     );
 
     return (
-      <div className="grid grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <label>Select one attribute for +1 bonus:</label>
           <div className="grid grid-cols-1 gap-4">
@@ -80,7 +80,7 @@ export const VariantBonusSelector: React.FC<VariantBonusSelectorProps> = ({
 
   if (selectedRace === "halfElf") {
     return (
-      <div className="grid grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <label>Select two attributes for +1 bonus:</label>
           <div className="grid grid-cols-2 gap-4">
@@ -101,7 +101,7 @@ export const VariantBonusSelector: React.FC<VariantBonusSelectorProps> = ({
   }
 
   return (
-    <div className="grid grid-cols-2 gap-8">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div>
         <label>Select two attributes for +1 bonus:</label>
         <div className="grid grid-cols-2 gap-4">

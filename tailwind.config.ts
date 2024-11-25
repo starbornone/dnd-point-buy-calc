@@ -12,12 +12,13 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        bgInverse: "#373a3c",
-        lightGray: "#c2ccce",
-        primary: "#58170d",
-        secondary: "#c9ae6b",
-        textPrimary: "#373a3c",
-        white: "#fcfcf5",
+        bgInverse: "var(--color-bg-inverse)",
+        lightGray: "var(--color-bg-info)",
+        primary: "var(--color-primary)",
+        secondary: "var(--color-secondary)",
+        textPrimary: "var(--color-text-primary)",
+        white: "var(--color-bg-light)",
+        navButton: "var(--color-nav-button)",
       },
     },
   },
