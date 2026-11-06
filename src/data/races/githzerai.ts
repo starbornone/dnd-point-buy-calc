@@ -4,6 +4,7 @@ import { Race } from "@/types/race";
 export const githzerai: Race = {
   name: "Githzerai",
   bonuses: bonuses({ wisdom: 2, intelligence: 1 }),
+  grantedCantrips: ["Mage Hand"],
   ability:
     "Your Wisdom score increases by 2, and your Intelligence score increases by 1.",
   age: "Githzerai reach adulthood in their late teens and can live to be around 120 years old.",

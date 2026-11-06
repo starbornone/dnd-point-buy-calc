@@ -38,6 +38,7 @@ export const genasi: Race = {
     {
       name: "Fire Genasi",
       bonuses: bonuses({ intelligence: 1 }),
+      grantedCantrips: ["Produce Flame"],
       ability: "Your Intelligence score increases by 1.",
       other: [
         "Darkvision",
@@ -51,6 +52,7 @@ export const genasi: Race = {
     {
       name: "Water Genasi",
       bonuses: bonuses({ wisdom: 1 }),
+      grantedCantrips: ["Shape Water"],
       ability: "Your Wisdom score increases by 1.",
       other: [
         "Acid Resistance",

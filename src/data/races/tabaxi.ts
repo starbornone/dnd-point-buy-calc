@@ -4,6 +4,7 @@ import { Race } from "@/types/race";
 export const tabaxi: Race = {
   name: "Tabaxi",
   bonuses: bonuses({ dexterity: 2, charisma: 1 }),
+  grantedSkills: ["Acrobatics", "Stealth"],
   ability:
     "Your Dexterity score increases by 2, and your Charisma score increases by 1.",
   age: "Tabaxi reach adulthood around age 15 and can live to be over 100 years old.",
@@ -12,6 +13,7 @@ export const tabaxi: Race = {
   size: "Tabaxi are about the same size as humans, but leaner. Your size is Medium.",
   speed:
     "Your base walking speed is 30 feet. You have a climbing speed of 20 feet.",
+  languageChoice: { count: 1, exclude: ["Common"] },
   language:
     "You can speak, read, and write Common and one language of your choice.",
   other: [

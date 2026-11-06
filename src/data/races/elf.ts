@@ -4,6 +4,7 @@ import { Race } from "@/types/race";
 export const elf: Race = {
   name: "Elf",
   bonuses: bonuses({ dexterity: 2 }),
+  grantedSkills: ["Perception"],
   ability: "Your Dexterity score increases by 2.",
   age: "Although elves reach physical maturity at about the same age as humans, the elven understanding of adulthood goes beyond physical growth to encompass worldly experience. An elf typically claims adulthood and an adult name around the age of 100 and can live to be 750 years old.",
   alignment:
@@ -25,6 +26,7 @@ export const elf: Race = {
     {
       name: "Dark Elf (Drow)",
       bonuses: bonuses({ charisma: 1 }),
+      grantedCantrips: ["Dancing Lights"],
       ability: "Your Charisma score increases by 1.",
       other: [
         "Superior Darkvision",
@@ -41,6 +43,8 @@ export const elf: Race = {
       name: "High Elf",
       bonuses: bonuses({ intelligence: 1 }),
       ability: "Your Intelligence score increases by 1.",
+      languageChoice: { count: 1, exclude: ["Common", "Elvish"] },
+      cantripChoice: { list: "wizard" },
       other: [
         "Elf Weapon Training",
         "You have proficiency with the longsword, shortsword, shortbow, and longbow.",

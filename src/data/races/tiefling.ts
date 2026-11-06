@@ -4,6 +4,7 @@ import { Race } from "@/types/race";
 export const tiefling: Race = {
   name: "Tiefling",
   bonuses: bonuses({ intelligence: 1, charisma: 2 }),
+  grantedCantrips: ["Thaumaturgy"],
   ability:
     "Your Intelligence score increases by 1, and your Charisma score increases by 2.",
   age: "Tieflings mature at the same rate as humans but live a few years longer.",

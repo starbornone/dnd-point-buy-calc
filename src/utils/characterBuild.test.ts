@@ -19,6 +19,10 @@ describe("character build links", () => {
       attributes,
       bonuses: [undefined, undefined],
       skills: ["", ""],
+      languages: ["", ""],
+      tool: "",
+      cantrip: "",
+      dragon: "",
       feat: "",
       featAbility: "",
       budget: 32,
@@ -39,6 +43,10 @@ describe("character build links", () => {
       attributes: defaultAttributes(),
       bonuses: ["dexterity", "charisma"],
       skills: ["Perception", ""],
+      languages: ["", ""],
+      tool: "",
+      cantrip: "",
+      dragon: "",
       feat: "Lucky",
       featAbility: "",
       budget: 27,
@@ -58,6 +66,44 @@ describe("character build links", () => {
       "Deception",
       "Insight",
     ]);
+  });
+
+  it("keeps an extra language and drops one the race already speaks", () => {
+    expect(parseBuild("?race=halfElf&tongue=Elvish,Dwarvish")?.languages).toEqual([
+      "Dwarvish",
+      "",
+    ]);
+    expect(parseBuild("?race=changeling&tongue=Orc,Goblin")?.languages).toEqual([
+      "Orc",
+      "Goblin",
+    ]);
+    expect(parseBuild("?race=elf&variant=High+Elf&tongue=Sylvan")?.languages).toEqual([
+      "Sylvan",
+      "",
+    ]);
+    expect(parseBuild("?race=elf&variant=Wood+Elf&tongue=Sylvan")?.languages).toEqual([
+      "",
+      "",
+    ]);
+  });
+
+  it("keeps a legal tool or cantrip and drops one the race cannot take", () => {
+    const dwarf = new URLSearchParams({
+      race: "dwarf",
+      variant: "Hill Dwarf",
+      tool: "Smith's tools",
+    });
+    expect(parseBuild(dwarf.toString())?.tool).toBe("Smith's tools");
+    expect(parseBuild("?race=dwarf&variant=Hill+Dwarf&tool=Thieves'+tools")?.tool).toBe("");
+    expect(parseBuild("?race=warforged&tool=Thieves'+tools")?.tool).toBe("Thieves' tools");
+    expect(parseBuild("?race=elf&variant=High+Elf&cantrip=Fire+Bolt")?.cantrip).toBe("Fire Bolt");
+    expect(parseBuild("?race=elf&variant=Wood+Elf&cantrip=Fire+Bolt")?.cantrip).toBe("");
+  });
+
+  it("keeps a dragonborn ancestry and drops it for any other race", () => {
+    expect(parseBuild("?race=dragonborn&dragon=Red")?.dragon).toBe("Red");
+    expect(parseBuild("?race=dragonborn&dragon=Purple")?.dragon).toBe("");
+    expect(parseBuild("?race=dwarf&variant=Hill+Dwarf&dragon=Red")?.dragon).toBe("");
   });
 
   it("drops scores and choices that are not legal", () => {
@@ -89,6 +135,10 @@ describe("build files", () => {
       attributes,
       bonuses: ["dexterity", "wisdom"] as ["dexterity", "wisdom"],
       skills: ["", ""] as ["", ""],
+      languages: ["", ""] as ["", ""],
+      tool: "",
+      cantrip: "",
+      dragon: "",
       feat: "",
       featAbility: "" as const,
       budget: 27,
@@ -102,6 +152,8 @@ describe("build files", () => {
     });
     expect(file.abilities.find((ability) => ability.key === "dexterity")?.racial).toBe(1);
     expect(file.pointCost).toBe(9);
+    expect(file.grantedSkills).toEqual([]);
+    expect(file.grantedCantrips).toEqual([]);
     expect(file.pointsRemaining).toBe(18);
     expect(fromBuildFile(file)).toMatchObject({
       race: "halfElf",
@@ -118,6 +170,10 @@ describe("build files", () => {
       attributes: defaultAttributes(),
       bonuses: ["strength", "dexterity"] as ["strength", "dexterity"],
       skills: ["Perception", ""] as ["Perception", ""],
+      languages: ["", ""] as ["", ""],
+      tool: "",
+      cantrip: "",
+      dragon: "",
       feat: "Actor",
       featAbility: "" as const,
       budget: 27,

@@ -6,7 +6,7 @@ import { useStats } from "@/context/StatsContext";
 import { attributeKeys } from "@/data";
 import { featOptions, feats } from "@/data/feats";
 import { raceData } from "@/data/raceData";
-import { abilityLabel, skillLabel } from "@/i18n/names";
+import { abilityLabel, ancestryLabel, cantripLabel, languageLabel, skillLabel, toolGroupLabel, toolLabel } from "@/i18n/names";
 import { skills } from "@/data/skills";
 import {
   calculateFeatBonus,
@@ -16,7 +16,14 @@ import {
   getFixedBonuses,
   handleAttributeChange,
   resolveFloatingBonus,
+  cantripOptions,
+  dragonOptions,
+  languageOptions,
+  resolveCantripChoice,
+  resolveLanguageChoice,
   resolveSkillChoice,
+  resolveToolChoice,
+  toolGroupsFor,
 } from "@/utils";
 import { AttributeTableBody } from "./AttributeTableBody";
 import { VariantBonusSelector } from "./VariantBonusSelector";
@@ -32,6 +39,14 @@ export const AttributeTable = () => {
     setSelectedBonuses,
     selectedSkills,
     setSelectedSkill,
+    selectedLanguages,
+    setSelectedLanguage,
+    selectedTool,
+    setSelectedTool,
+    selectedCantrip,
+    setSelectedCantrip,
+    selectedDragon,
+    setSelectedDragon,
     selectedFeat,
     setSelectedFeat,
     selectedFeatAbility,
@@ -49,6 +64,9 @@ export const AttributeTable = () => {
   const variantHuman = selectedVariant === "Variant Human";
   const skillChoice = resolveSkillChoice(race, variant);
   const skillOptions = skillChoice?.options ?? skills;
+  const languageChoice = resolveLanguageChoice(race, variant);
+  const toolChoice = resolveToolChoice(race, variant);
+  const cantripChoice = resolveCantripChoice(race, variant);
   const featBonuses = calculateFeatBonus(selectedFeat, selectedFeatAbility);
   const showFeat = featGrantsIncrease(selectedFeat);
 
@@ -142,6 +160,109 @@ export const AttributeTable = () => {
             )}
           </div>
           )}
+        </div>
+      )}
+
+      {languageChoice && (
+        <div className="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+          {Array.from({ length: languageChoice.count }, (_, index) => {
+            const slot = index as 0 | 1;
+            const other = selectedLanguages[slot === 0 ? 1 : 0];
+            return (
+              <div key={slot}>
+                <label htmlFor={`language-choice-${slot}`} className="block">
+                  {languageChoice.count === 1
+                    ? copy.extraLanguage
+                    : copy.languageSlot(slot)}
+                </label>
+                <select
+                  id={`language-choice-${slot}`}
+                  className="mt-2 block w-full p-2 border border-lightGray rounded"
+                  value={selectedLanguages[slot]}
+                  onChange={(event) => setSelectedLanguage(slot, event.target.value)}
+                >
+                  <option value="">{copy.selectLanguage}</option>
+                  {languageOptions(languageChoice)
+                    .filter((language) => language !== other)
+                    .map((language) => (
+                      <option key={language} value={language}>
+                        {languageLabel(locale, language)}
+                      </option>
+                    ))}
+                </select>
+              </div>
+            );
+          })}
+        </div>
+      )}
+
+      {(toolChoice || cantripChoice) && (
+        <div className="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+          {toolChoice && (
+            <div>
+              <label htmlFor="tool-choice" className="block">
+                {copy.toolProficiency}
+              </label>
+              <select
+                id="tool-choice"
+                className="mt-2 block w-full p-2 border border-lightGray rounded"
+                value={selectedTool}
+                onChange={(event) => setSelectedTool(event.target.value)}
+              >
+                <option value="">{copy.selectTool}</option>
+                {toolGroupsFor(toolChoice).map((group) => (
+                  <optgroup key={group.name} label={toolGroupLabel(locale, group.name)}>
+                    {group.tools.map((tool) => (
+                      <option key={tool} value={tool}>
+                        {toolLabel(locale, tool)}
+                      </option>
+                    ))}
+                  </optgroup>
+                ))}
+              </select>
+            </div>
+          )}
+          {cantripChoice && (
+            <div>
+              <label htmlFor="cantrip-choice" className="block">
+                {copy.cantrip}
+              </label>
+              <select
+                id="cantrip-choice"
+                className="mt-2 block w-full p-2 border border-lightGray rounded"
+                value={selectedCantrip}
+                onChange={(event) => setSelectedCantrip(event.target.value)}
+              >
+                <option value="">{copy.selectCantrip}</option>
+                {cantripOptions(cantripChoice).map((cantrip) => (
+                  <option key={cantrip} value={cantrip}>
+                    {cantripLabel(locale, cantrip)}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
+        </div>
+      )}
+
+      {race?.draconicAncestry && (
+        <div className="mb-4">
+          <label htmlFor="dragon-ancestry" className="block">
+            {copy.draconicAncestry}
+          </label>
+          <select
+            id="dragon-ancestry"
+            className="mt-2 block w-full p-2 border border-lightGray rounded"
+            value={selectedDragon}
+            onChange={(event) => setSelectedDragon(event.target.value)}
+          >
+            <option value="">{copy.selectDragon}</option>
+            {dragonOptions().map((dragon) => (
+              <option key={dragon} value={dragon}>
+                {ancestryLabel(locale, dragon)}
+              </option>
+            ))}
+          </select>
         </div>
       )}
 

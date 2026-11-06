@@ -9,6 +9,7 @@ export const changeling: Race = {
     count: 2,
     options: ["Deception", "Insight", "Intimidation", "Persuasion"],
   },
+  languageChoice: { count: 2, exclude: ["Common"] },
   ability:
     "Your Charisma score increases by 2, and one other ability score of your choice increases by 1.",
   age: "Changelings mature slightly faster than humans but share a similar lifespan, reaching adulthood in their late teens and living up to 100 years.",

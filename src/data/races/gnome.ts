@@ -21,6 +21,7 @@ export const gnome: Race = {
     {
       name: "Forest Gnome",
       bonuses: bonuses({ dexterity: 1 }),
+      grantedCantrips: ["Minor Illusion"],
       ability: "Your Dexterity score increases by 1.",
       other: [
         "Natural Illusionist",
@@ -32,6 +33,7 @@ export const gnome: Race = {
     {
       name: "Rock Gnome",
       bonuses: bonuses({ constitution: 1 }),
+      grantedTools: ["Tinker's tools"],
       ability: "Your Constitution score increases by 1.",
       other: [
         "Artificer's Lore",

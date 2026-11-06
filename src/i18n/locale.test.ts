@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { raceDropdown } from "@/data/raceDropdown";
 import { defaultAttributes, parseBuild, serializeBuild } from "@/utils/characterBuild";
-import { readLocale, withLocale } from "./locale";
+import { LOCALES, readLocale, withLocale } from "./locale";
 import { raceNames, skillLabel } from "./names";
 
 describe("locale query", () => {
@@ -12,6 +12,10 @@ describe("locale query", () => {
       attributes: { ...defaultAttributes(), strength: 15 },
       bonuses: [undefined, undefined],
       skills: ["", ""],
+      languages: ["", ""],
+      tool: "",
+      cantrip: "",
+      dragon: "",
       feat: "",
       featAbility: "",
       budget: 27,
@@ -24,6 +28,8 @@ describe("locale query", () => {
       variant: "Hill Dwarf",
       attributes: expect.objectContaining({ strength: 15 }),
     });
+    expect(withLocale(query, "zh")).toContain("lang=zh");
+    expect(readLocale(withLocale(query, "zh"))).toBe("zh");
     expect(withLocale(query, "en")).toBe(query);
   });
 
@@ -34,14 +40,17 @@ describe("locale query", () => {
 });
 
 describe("display names", () => {
-  it("names every race in both languages", () => {
+  it("names every race in each language", () => {
     for (const race of raceDropdown) {
-      expect(raceNames.en[race.value]).toBeTruthy();
-      expect(raceNames.es[race.value]).toBeTruthy();
+      for (const locale of LOCALES) {
+        expect(raceNames[locale][race.value]).toBeTruthy();
+      }
     }
   });
 
-  it("uses the Spanish Player's Handbook skill names", () => {
+  it("uses the handbook skill names", () => {
+    expect(skillLabel("zh", "Perception")).toBe("察觉");
+    expect(skillLabel("zh", "Animal Handling")).toBe("驯兽");
     expect(skillLabel("es", "Perception")).toBe("Percepción");
     expect(skillLabel("es", "Animal Handling")).toBe("Trato con animales");
     expect(skillLabel("en", "Perception")).toBe("Perception");

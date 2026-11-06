@@ -5,7 +5,16 @@ import { useRace } from "@/context/RaceContext";
 import { useStats } from "@/context/StatsContext";
 import { attributeKeys } from "@/data";
 import { DEFAULT_LOCALE } from "@/i18n/locale";
-import { abilityLabel, raceLabel, skillLabel, variantLabel } from "@/i18n/names";
+import {
+  abilityLabel,
+  ancestryLabel,
+  cantripLabel,
+  languageLabel,
+  raceLabel,
+  skillLabel,
+  toolLabel,
+  variantLabel,
+} from "@/i18n/names";
 import { raceData } from "@/data/raceData";
 import {
   calculateFeatBonus,
@@ -17,6 +26,9 @@ import {
   getFixedBonuses,
   mergeRaceAndVariant,
   resolveFloatingBonus,
+  resolveGrantedCantrips,
+  resolveGrantedSkills,
+  resolveGrantedTools,
 } from "@/utils";
 
 export const PrintSheet = () => {
@@ -28,6 +40,10 @@ export const PrintSheet = () => {
     selectedVariant,
     selectedBonuses,
     selectedSkills,
+    selectedLanguages,
+    selectedTool,
+    selectedCantrip,
+    selectedDragon,
     selectedFeat,
     selectedFeatAbility,
   } = useRace();
@@ -42,6 +58,9 @@ export const PrintSheet = () => {
   const featBonuses = calculateFeatBonus(selectedFeat, selectedFeatAbility);
   const showFeat = featGrantsIncrease(selectedFeat);
   const traits = race ? mergeRaceAndVariant(race, selectedVariant) : null;
+  const grantedSkills = resolveGrantedSkills(race, variant);
+  const grantedTools = resolveGrantedTools(race, variant);
+  const grantedCantrips = resolveGrantedCantrips(race, variant);
   const costs = attributeKeys.map((key) => calculatePointCost(attributes[key]));
   const pointCost = costs.every((cost) => !Number.isNaN(cost))
     ? costs.reduce((sum, cost) => sum + cost, 0)
@@ -90,6 +109,23 @@ export const PrintSheet = () => {
           })}
         </tbody>
       </table>
+      {grantedSkills.length > 0 ? (
+        <p>
+          {grantedSkills.length > 1 ? copy.grantedSkills : copy.grantedSkill}{" "}
+          {grantedSkills.map((skill) => skillLabel(locale, skill)).join(", ")}
+        </p>
+      ) : null}
+      {grantedCantrips.length > 0 ? (
+        <p>
+          {grantedCantrips.length > 1 ? copy.grantedCantrips : copy.grantedCantrip}{" "}
+          {grantedCantrips.map((cantrip) => cantripLabel(locale, cantrip)).join(", ")}
+        </p>
+      ) : null}
+      {grantedTools.map((tool) => (
+        <p key={tool}>
+          {copy.grantedTool} {toolLabel(locale, tool)}
+        </p>
+      ))}
       {selectedSkills.some(Boolean) ? (
         <p>
           {selectedSkills.filter(Boolean).length > 1 ? copy.chosenSkills : copy.skillLine}{" "}
@@ -97,6 +133,32 @@ export const PrintSheet = () => {
             .filter(Boolean)
             .map((skill) => skillLabel(locale, skill))
             .join(", ")}
+        </p>
+      ) : null}
+      {selectedLanguages.some(Boolean) ? (
+        <p>
+          {selectedLanguages.filter(Boolean).length > 1
+            ? copy.chosenLanguages
+            : copy.chosenLanguage}{" "}
+          {selectedLanguages
+            .filter(Boolean)
+            .map((language) => languageLabel(locale, language))
+            .join(", ")}
+        </p>
+      ) : null}
+      {selectedTool ? (
+        <p>
+          {copy.chosenTool} {toolLabel(locale, selectedTool)}
+        </p>
+      ) : null}
+      {selectedDragon ? (
+        <p>
+          {copy.chosenAncestry} {ancestryLabel(locale, selectedDragon)}
+        </p>
+      ) : null}
+      {selectedCantrip ? (
+        <p>
+          {copy.chosenCantrip} {cantripLabel(locale, selectedCantrip)}
         </p>
       ) : null}
       {selectedFeat ? (

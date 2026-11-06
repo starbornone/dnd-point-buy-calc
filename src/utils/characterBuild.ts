@@ -14,7 +14,21 @@ import {
 import { grantedFeatAbility, calculateFeatBonus, featNeedsChoice } from "./calculateFeatBonus";
 import { calculateRacialBonuses, resolveFloatingBonus } from "./calculateRacialBonuses";
 import { getFixedBonuses } from "./getModifiers";
+import {
+  emptyLanguagePicks,
+  LanguagePicks,
+  resolveLanguageChoice,
+  selectLanguages,
+} from "./languageChoice";
+import { resolveCantripChoice, selectCantrip } from "./cantripChoice";
+import { selectDragon } from "./draconicAncestry";
+import {
+  resolveGrantedCantrips,
+  resolveGrantedSkills,
+  resolveGrantedTools,
+} from "./grantedProficiencies";
 import { emptySkillPicks, resolveSkillChoice, selectSkills, SkillPicks } from "./skillChoice";
+import { resolveToolChoice, selectTool } from "./toolChoice";
 
 const SCORE_PARAMS: Record<keyof AttributeState, string> = {
   strength: "str",
@@ -42,6 +56,10 @@ export interface CharacterBuild {
   attributes: AttributeState;
   bonuses: BonusPicks;
   skills: SkillPicks;
+  languages: LanguagePicks;
+  tool: string;
+  cantrip: string;
+  dragon: string;
   feat: string;
   featAbility: keyof AttributeState | "";
   budget: number;
@@ -53,6 +71,10 @@ export const defaultBuild = (): CharacterBuild => ({
   attributes: defaultAttributes(),
   bonuses: emptyBonusPicks(),
   skills: emptySkillPicks(),
+  languages: emptyLanguagePicks(),
+  tool: "",
+  cantrip: "",
+  dragon: "",
   feat: "",
   featAbility: "",
   budget: POINT_BUY_BUDGET,
@@ -79,6 +101,11 @@ export const serializeBuild = (build: CharacterBuild): string => {
   if (picks.length > 0) params.set("bonus", picks.join(","));
   const chosenSkills = build.skills.filter(Boolean);
   if (chosenSkills.length > 0) params.set("skill", chosenSkills.join(","));
+  const chosenLanguages = build.languages.filter(Boolean);
+  if (chosenLanguages.length > 0) params.set("tongue", chosenLanguages.join(","));
+  if (build.tool) params.set("tool", build.tool);
+  if (build.cantrip) params.set("cantrip", build.cantrip);
+  if (build.dragon) params.set("dragon", build.dragon);
   if (build.feat) params.set("feat", build.feat);
   if (build.featAbility && featNeedsChoice(build.feat)) {
     params.set("asi", build.featAbility);
@@ -97,6 +124,10 @@ export const parseBuild = (search: string): CharacterBuild | null => {
     "variant",
     "bonus",
     "skill",
+    "tongue",
+    "tool",
+    "cantrip",
+    "dragon",
     "feat",
     "asi",
     "budget",
@@ -142,6 +173,16 @@ export const parseBuild = (search: string): CharacterBuild | null => {
     resolveSkillChoice(raceRecord, variantRecord),
     (params.get("skill") ?? "").split(",").filter(Boolean)
   );
+  const chosenLanguages = selectLanguages(
+    resolveLanguageChoice(raceRecord, variantRecord),
+    (params.get("tongue") ?? "").split(",").filter(Boolean)
+  );
+  const tool = selectTool(resolveToolChoice(raceRecord, variantRecord), params.get("tool") ?? "");
+  const cantrip = selectCantrip(
+    resolveCantripChoice(raceRecord, variantRecord),
+    params.get("cantrip") ?? ""
+  );
+  const dragon = selectDragon(raceRecord, params.get("dragon") ?? "");
   const requestedFeat = params.get("feat") ?? "";
   const variantHuman = variant === "Variant Human";
   const feat =
@@ -168,6 +209,10 @@ export const parseBuild = (search: string): CharacterBuild | null => {
     attributes,
     bonuses,
     skills: chosenSkills,
+    languages: chosenLanguages,
+    tool,
+    cantrip,
+    dragon,
     feat,
     featAbility,
     budget,
@@ -192,9 +237,16 @@ export interface BuildFile {
   attributes: AttributeState;
   bonuses: (keyof AttributeState)[];
   skill: string;
+  languages: string;
+  tool: string;
+  cantrip: string;
+  dragon: string;
   feat: string;
   featAbility: keyof AttributeState | "";
   budget: number;
+  grantedSkills: string[];
+  grantedTools: string[];
+  grantedCantrips: string[];
   abilities: AbilityExport[];
   pointCost: number;
   pointsRemaining: number | null;
@@ -237,7 +289,14 @@ export const toBuildFile = (build: CharacterBuild): BuildFile => {
     attributes: build.attributes,
     bonuses: build.bonuses.filter((pick): pick is keyof AttributeState => Boolean(pick)),
     skill: build.skills.filter(Boolean).join(","),
+    languages: build.languages.filter(Boolean).join(","),
+    tool: build.tool,
+    cantrip: build.cantrip,
+    dragon: build.dragon,
     feat: build.feat,
+    grantedSkills: resolveGrantedSkills(race, variant),
+    grantedTools: resolveGrantedTools(race, variant),
+    grantedCantrips: resolveGrantedCantrips(race, variant),
     featAbility: grantedFeatAbility(build.feat, build.featAbility),
     budget: build.budget,
     abilities,
@@ -281,6 +340,12 @@ export const fromBuildFile = (value: unknown): CharacterBuild | null => {
     if (picks.length > 0) params.set("bonus", picks.join(","));
   }
   if (typeof value.skill === "string" && value.skill) params.set("skill", value.skill);
+  if (typeof value.languages === "string" && value.languages) {
+    params.set("tongue", value.languages);
+  }
+  if (typeof value.tool === "string" && value.tool) params.set("tool", value.tool);
+  if (typeof value.cantrip === "string" && value.cantrip) params.set("cantrip", value.cantrip);
+  if (typeof value.dragon === "string" && value.dragon) params.set("dragon", value.dragon);
   if (typeof value.feat === "string" && value.feat) params.set("feat", value.feat);
   if (typeof value.featAbility === "string" && value.featAbility) {
     params.set("asi", value.featAbility);

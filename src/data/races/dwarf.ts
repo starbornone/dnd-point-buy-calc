@@ -1,4 +1,5 @@
 import { bonuses } from "@/data/bonuses";
+import { dwarfTools } from "@/data/tools";
 import { Race } from "@/types/race";
 
 export const dwarf: Race = {
@@ -11,6 +12,7 @@ export const dwarf: Race = {
   size: "Dwarves stand between 4 and 5 feet tall and average about 150 pounds. Your size is Medium.",
   speed:
     "Your base walking speed is 25 feet. Your speed is not reduced by wearing heavy armor.",
+  toolChoice: { options: dwarfTools },
   language:
     "You can speak, read, and write Common and Dwarvish. Dwarvish is full of hard consonants and guttural sounds, and those characteristics spill over into whatever other language a dwarf might speak.",
   other: [

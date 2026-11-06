@@ -1,13 +1,14 @@
 "use client";
 
+import { Fragment } from "react";
 import { useLocale, useMessages } from "@/context/LocaleContext";
 import { useRace } from "@/context/RaceContext";
 import { emptyBonuses } from "@/data/bonuses";
 import { raceData } from "@/data";
 import { Race } from "@/types/race";
 import { DEFAULT_LOCALE } from "@/i18n/locale";
-import { abilityLabel, skillLabel } from "@/i18n/names";
-import { grantedFeatAbility, mergeRaceAndVariant } from "@/utils";
+import { abilityLabel, ancestryLabel, cantripLabel, languageLabel, skillLabel, toolLabel } from "@/i18n/names";
+import { grantedFeatAbility, mergeRaceAndVariant, resolveGrantedCantrips, resolveGrantedSkills, resolveGrantedTools } from "@/utils";
 
 const defaultTraits: Race = {
   name: "",
@@ -24,9 +25,31 @@ const defaultTraits: Race = {
 export const RacialTraits = () => {
   const { locale } = useLocale();
   const copy = useMessages();
-  const { selectedRace, selectedVariant, selectedSkills, selectedFeat, selectedFeatAbility } =
-    useRace();
+  const {
+    selectedRace,
+    selectedVariant,
+    selectedSkills,
+    selectedLanguages,
+    selectedTool,
+    selectedCantrip,
+    selectedDragon,
+    selectedFeat,
+    selectedFeatAbility,
+  } = useRace();
   const chosenSkills = selectedSkills.filter(Boolean);
+  const grantedSkills = resolveGrantedSkills(
+    raceData[selectedRace],
+    raceData[selectedRace]?.variants?.find((entry) => entry.name === selectedVariant)
+  );
+  const grantedTools = resolveGrantedTools(
+    raceData[selectedRace],
+    raceData[selectedRace]?.variants?.find((entry) => entry.name === selectedVariant)
+  );
+  const grantedCantrips = resolveGrantedCantrips(
+    raceData[selectedRace],
+    raceData[selectedRace]?.variants?.find((entry) => entry.name === selectedVariant)
+  );
+  const chosenLanguages = selectedLanguages.filter(Boolean);
   const featAbility = grantedFeatAbility(selectedFeat, selectedFeatAbility);
 
   const baseRaceTraits = raceData[selectedRace] || defaultTraits;
@@ -61,18 +84,70 @@ export const RacialTraits = () => {
               <dl>
                 <dt>{copy.languages}</dt>
                 <dd>{selectedRaceTraits.language}</dd>
+                {chosenLanguages.length > 0 && (
+                  <>
+                    <dt>
+                      {chosenLanguages.length > 1 ? copy.chosenLanguages : copy.chosenLanguage}
+                    </dt>
+                    {chosenLanguages.map((language) => (
+                      <dd key={language}>{languageLabel(locale, language)}</dd>
+                    ))}
+                  </>
+                )}
                 {selectedRaceTraits.other.map((trait, index) => {
                   if (index % 2 === 0) {
                     return <dt key={index}>{trait}:</dt>;
                   }
                   return <dd key={index}>{trait}</dd>;
                 })}
+                {grantedSkills.length > 0 && (
+                  <>
+                    <dt>{grantedSkills.length > 1 ? copy.grantedSkills : copy.grantedSkill}</dt>
+                    {grantedSkills.map((skill) => (
+                      <dd key={skill}>{skillLabel(locale, skill)}</dd>
+                    ))}
+                  </>
+                )}
+                {grantedCantrips.length > 0 && (
+                  <>
+                    <dt>
+                      {grantedCantrips.length > 1 ? copy.grantedCantrips : copy.grantedCantrip}
+                    </dt>
+                    {grantedCantrips.map((cantrip) => (
+                      <dd key={cantrip}>{cantripLabel(locale, cantrip)}</dd>
+                    ))}
+                  </>
+                )}
+                {grantedTools.map((tool) => (
+                  <Fragment key={tool}>
+                    <dt>{copy.grantedTool}</dt>
+                    <dd>{toolLabel(locale, tool)}</dd>
+                  </Fragment>
+                ))}
                 {chosenSkills.length > 0 && (
                   <>
                     <dt>{chosenSkills.length > 1 ? copy.chosenSkills : copy.chosenSkill}</dt>
                     {chosenSkills.map((skill) => (
                       <dd key={skill}>{skillLabel(locale, skill)}</dd>
                     ))}
+                  </>
+                )}
+                {selectedTool && (
+                  <>
+                    <dt>{copy.chosenTool}</dt>
+                    <dd>{toolLabel(locale, selectedTool)}</dd>
+                  </>
+                )}
+                {selectedDragon && (
+                  <>
+                    <dt>{copy.chosenAncestry}</dt>
+                    <dd>{ancestryLabel(locale, selectedDragon)}</dd>
+                  </>
+                )}
+                {selectedCantrip && (
+                  <>
+                    <dt>{copy.chosenCantrip}</dt>
+                    <dd>{cantripLabel(locale, selectedCantrip)}</dd>
                   </>
                 )}
                 {selectedFeat && (

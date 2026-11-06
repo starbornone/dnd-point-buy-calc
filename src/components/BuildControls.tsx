@@ -8,6 +8,7 @@ import {
   MIN_POINT_BUDGET,
   POINT_BUY_BUDGET,
 } from "@/utils/calculatePointCost";
+import { emptyLanguagePicks } from "@/utils/languageChoice";
 import { emptySkillPicks } from "@/utils/skillChoice";
 import { standardArrayAttributes } from "@/utils/standardArray";
 import {
@@ -28,6 +29,10 @@ export const BuildControls = () => {
     selectedVariant,
     selectedBonuses,
     selectedSkills,
+    selectedLanguages,
+    selectedTool,
+    selectedCantrip,
+    selectedDragon,
     selectedFeat,
     selectedFeatAbility,
   } = useRace();
@@ -41,6 +46,10 @@ export const BuildControls = () => {
     attributes,
     bonuses: selectedBonuses,
     skills: selectedSkills,
+    languages: selectedLanguages,
+    tool: selectedTool,
+    cantrip: selectedCantrip,
+    dragon: selectedDragon,
     feat: selectedFeat,
     featAbility: selectedFeatAbility,
     budget: pointBudget,
@@ -52,7 +61,7 @@ export const BuildControls = () => {
   };
 
   const reset = () => {
-    loadRace("", "", emptyBonusPicks(), emptySkillPicks(), "", "");
+    loadRace("", "", emptyBonusPicks(), emptySkillPicks(), emptyLanguagePicks(), "", "", "", "", "");
     loadStats(defaultAttributes(), POINT_BUY_BUDGET);
     setCopied(false);
   };
@@ -97,6 +106,10 @@ export const BuildControls = () => {
         parsed.variant,
         parsed.bonuses,
         parsed.skills,
+        parsed.languages,
+        parsed.tool,
+        parsed.cantrip,
+        parsed.dragon,
         parsed.feat,
         parsed.featAbility
       );

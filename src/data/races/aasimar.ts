@@ -4,6 +4,7 @@ import { Race } from "@/types/race";
 export const aasimar: Race = {
   name: "Aasimar",
   bonuses: bonuses({ charisma: 2 }),
+  grantedCantrips: ["Light"],
   ability: "Your Charisma score increases by 2.",
   age: "Aasimar mature at the same rate as humans, but they can live up to 160 years.",
   alignment:

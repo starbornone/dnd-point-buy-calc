@@ -46,51 +46,51 @@ A point-buy calculator for **Dungeons & Dragons 5th Edition** (D&D 5e) that help
 
 The app features the following races and variants with their respective racial modifiers:
 
-- **Dragonborn**: Strength +2, Charisma +1
-- **Dwarf**:
+- **Dragonborn**: Strength +2, Charisma +1, and one of the ten draconic ancestries
+- **Dwarf**: smith's tools, brewer's supplies, or mason's tools, plus a subrace:
   - **Hill Dwarf**: Constitution +2, Wisdom +1
   - **Mountain Dwarf**: Strength +2, Constitution +2
-- **Elf**:
-  - **High Elf**: Dexterity +2, Intelligence +1
+- **Elf**: Perception, plus a subrace:
+  - **High Elf**: Dexterity +2, Intelligence +1, one extra language, and one wizard cantrip
   - **Wood Elf**: Dexterity +2, Wisdom +1
-  - **Drow**: Dexterity +2, Charisma +1
+  - **Drow**: Dexterity +2, Charisma +1, and dancing lights
   - **Eladrin**: Dexterity +2, Intelligence +1
 - **Gnome**:
-  - **Forest Gnome**: Intelligence +2, Dexterity +1
-  - **Rock Gnome**: Intelligence +2, Constitution +1
-- **Half-Elf**: Charisma +2, +1 to any two other attributes, and two skill proficiencies
+  - **Forest Gnome**: Intelligence +2, Dexterity +1, and minor illusion
+  - **Rock Gnome**: Intelligence +2, Constitution +1, and tinker's tools
+- **Half-Elf**: Charisma +2, +1 to any two other attributes, two skills, and one extra language
 - **Halfling**:
   - **Lightfoot Halfling**: Dexterity +2, Charisma +1
   - **Stout Halfling**: Dexterity +2, Constitution +1
-- **Half-Orc**: Strength +2, Constitution +1
+- **Half-Orc**: Strength +2, Constitution +1, and Intimidation
 - **Human**:
-  - **Human**: +1 to all ability scores
-  - **Variant Human**: +1 to any two attributes, plus the ability increase from the chosen feat
-- **Tiefling**: Charisma +2, Intelligence +1
-- **Aasimar** (*Volo's Guide to Monsters*):
+  - **Human**: +1 to all ability scores, and one extra language
+  - **Variant Human**: +1 to any two attributes, one extra language, one skill, and the ability increase from the chosen feat
+- **Tiefling**: Charisma +2, Intelligence +1, and thaumaturgy
+- **Aasimar** (*Volo's Guide to Monsters*): the light cantrip, plus a subrace:
   - **Protector**: Charisma +2, Wisdom +1
   - **Scourge**: Charisma +2, Constitution +1
   - **Fallen**: Charisma +2, Strength +1
-- **Changeling**: Charisma +2, +1 to any other attribute, and two of Deception, Insight, Intimidation, and Persuasion
-- **Shifter** (*Eberron: Rising from the Last War*):
-  - **Beasthide**: Constitution +2, Strength +1
-  - **Longtooth**: Strength +2, Dexterity +1
-  - **Swiftstride**: Dexterity +2, Charisma +1
-  - **Wildhunt**: Wisdom +2, Dexterity +1
+- **Changeling**: Charisma +2, +1 to any other attribute, two of Deception, Insight, Intimidation, and Persuasion, and two extra languages
+- **Shifter** (*Eberron: Rising from the Last War*): one extra language, plus a subrace:
+  - **Beasthide**: Constitution +2, Strength +1, and Athletics
+  - **Longtooth**: Strength +2, Dexterity +1, and Intimidation
+  - **Swiftstride**: Dexterity +2, Charisma +1, and Acrobatics
+  - **Wildhunt**: Wisdom +2, Dexterity +1, and Survival
 - **Genasi**:
   - **Air Genasi**: Constitution +2, Dexterity +1
   - **Earth Genasi**: Constitution +2, Strength +1
-  - **Fire Genasi**: Constitution +2, Intelligence +1
-  - **Water Genasi**: Constitution +2, Wisdom +1
-- **Goliath**: Strength +2, Constitution +1
+  - **Fire Genasi**: Constitution +2, Intelligence +1, and produce flame
+  - **Water Genasi**: Constitution +2, Wisdom +1, and shape water
+- **Goliath**: Strength +2, Constitution +1, and Athletics
 - **Aarakocra**: Dexterity +2, Wisdom +1
-- **Warforged** (*Eberron: Rising from the Last War*): Constitution +2, +1 to any other ability, and one skill proficiency
-- **Tabaxi**: Dexterity +2, Charisma +1
+- **Warforged** (*Eberron: Rising from the Last War*): Constitution +2, +1 to any other ability, one skill, one extra language, and one tool
+- **Tabaxi**: Dexterity +2, Charisma +1, Acrobatics, Stealth, and one extra language
 - **Firbolg**: Wisdom +2, Strength +1
 - **Kobold** (*Volo's Guide to Monsters*): Dexterity +2, Strength -2
 - **Lizardfolk**: Constitution +2, Wisdom +1
-- **Githyanki** (*Mordenkainen's Tome of Foes*): Strength +2, Intelligence +1
-- **Githzerai**: Wisdom +2, Intelligence +1
+- **Githyanki** (*Mordenkainen's Tome of Foes*): Strength +2, Intelligence +1, and mage hand
+- **Githzerai**: Wisdom +2, Intelligence +1, and mage hand
 
 ## Known Bugs
 

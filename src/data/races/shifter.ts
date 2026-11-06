@@ -10,6 +10,7 @@ export const shifter: Race = {
     "Shifters tend toward neutrality, being more interested in survival than in concepts of good and evil.",
   size: "Shifters are about the same size as humans. Your size is Medium.",
   speed: "Your base walking speed is 30 feet.",
+  languageChoice: { count: 1, exclude: ["Common"] },
   language:
     "You can speak, read, and write Common and one other language of your choice.",
   other: [
@@ -22,6 +23,7 @@ export const shifter: Race = {
     {
       name: "Beasthide",
       bonuses: bonuses({ constitution: 2, strength: 1 }),
+      grantedSkills: ["Athletics"],
       ability:
         "Your Constitution score increases by 2, and your Strength score increases by 1.",
       other: [
@@ -34,6 +36,7 @@ export const shifter: Race = {
     {
       name: "Longtooth",
       bonuses: bonuses({ strength: 2, dexterity: 1 }),
+      grantedSkills: ["Intimidation"],
       ability:
         "Your Strength score increases by 2, and your Dexterity score increases by 1.",
       other: [
@@ -46,6 +49,7 @@ export const shifter: Race = {
     {
       name: "Swiftstride",
       bonuses: bonuses({ dexterity: 2, charisma: 1 }),
+      grantedSkills: ["Acrobatics"],
       ability:
         "Your Dexterity score increases by 2, and your Charisma score increases by 1.",
       other: [
@@ -58,6 +62,7 @@ export const shifter: Race = {
     {
       name: "Wildhunt",
       bonuses: bonuses({ wisdom: 2, dexterity: 1 }),
+      grantedSkills: ["Survival"],
       ability:
         "Your Wisdom score increases by 2, and your Dexterity score increases by 1.",
       other: [

@@ -6,6 +6,8 @@ export const warforged: Race = {
   bonuses: bonuses({ constitution: 2 }),
   floatingBonus: { count: 1, exclude: ["constitution"] },
   skillChoice: { count: 1 },
+  languageChoice: { count: 1, exclude: ["Common"] },
+  toolChoice: {},
   ability:
     "Your Constitution score increases by 2, and one other ability score of your choice increases by 1.",
   age: "Warforged are built complete and have no childhood. They typically have lifespans of around 30 years but are functionally immortal.",

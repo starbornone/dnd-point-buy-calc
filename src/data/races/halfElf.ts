@@ -6,6 +6,7 @@ export const halfElf: Race = {
   bonuses: bonuses({ charisma: 2 }),
   floatingBonus: { count: 2, exclude: ["charisma"] },
   skillChoice: { count: 2 },
+  languageChoice: { count: 1, exclude: ["Common", "Elvish"] },
   ability:
     "Your Charisma score increases by 2, and two other ability scores of your choice increase by 1.",
   age: "Half-elves mature at the same rate humans do and reach adulthood around the age of 20. They live much longer than humans, often exceeding 180 years.",

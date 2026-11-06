@@ -4,6 +4,7 @@ import { Race } from "@/types/race";
 export const goliath: Race = {
   name: "Goliath",
   bonuses: bonuses({ strength: 2, constitution: 1 }),
+  grantedSkills: ["Athletics"],
   ability:
     "Your Strength score increases by 2, and your Constitution score increases by 1.",
   age: "Goliaths have lifespans comparable to humans. They enter adulthood in their late teens and usually live less than a century.",

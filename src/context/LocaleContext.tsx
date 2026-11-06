@@ -1,7 +1,7 @@
 "use client";
 
 import { messages } from "@/i18n/messages";
-import { DEFAULT_LOCALE, Locale } from "@/i18n/locale";
+import { DEFAULT_LOCALE, htmlLang, Locale } from "@/i18n/locale";
 import {
   createContext,
   useCallback,
@@ -43,7 +43,7 @@ export const LocaleDocument = () => {
 
   useEffect(() => {
     const apply = () => {
-      document.documentElement.lang = locale;
+      document.documentElement.lang = htmlLang(locale);
       const title = messages[locale].title;
       if (document.title !== title) document.title = title;
       const description = document.querySelector('meta[name="description"]');
@@ -54,10 +54,8 @@ export const LocaleDocument = () => {
     };
 
     apply();
-    const titleNode = document.querySelector("title");
-    if (!titleNode) return;
     const observer = new MutationObserver(apply);
-    observer.observe(titleNode, {
+    observer.observe(document.head, {
       childList: true,
       characterData: true,
       subtree: true,

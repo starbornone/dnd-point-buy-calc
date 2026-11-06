@@ -17,6 +17,7 @@ export const human: Race = {
     "Humans tend toward no particular alignment. The best and the worst are found among them.",
   size: "Humans vary widely in height and build, from barely 5 feet to well over 6 feet tall. Regardless of your position in that range, your size is Medium.",
   speed: "Your base walking speed is 30 feet.",
+  languageChoice: { count: 1, exclude: ["Common"] },
   language:
     "You can speak, read, and write Common and one extra language of your choice.",
   other: [],

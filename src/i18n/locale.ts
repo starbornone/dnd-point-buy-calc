@@ -1,4 +1,4 @@
-export const LOCALES = ["en", "es"] as const;
+export const LOCALES = ["en", "zh", "es"] as const;
 
 export type Locale = (typeof LOCALES)[number];
 
@@ -7,7 +7,9 @@ export const DEFAULT_LOCALE: Locale = "en";
 export const LOCALE_PARAM = "lang";
 
 export const isLocale = (value: string | null): value is Locale =>
-  value === "en" || value === "es";
+  LOCALES.some((locale) => locale === value);
+
+export const htmlLang = (locale: Locale): string => (locale === "zh" ? "zh-Hans" : locale);
 
 export const readLocale = (search: string): Locale => {
   const params = new URLSearchParams(

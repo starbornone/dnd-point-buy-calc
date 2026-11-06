@@ -4,6 +4,7 @@ import { Race } from "@/types/race";
 export const halfOrc: Race = {
   name: "Half-Orc",
   bonuses: bonuses({ strength: 2, constitution: 1 }),
+  grantedSkills: ["Intimidation"],
   ability:
     "Your Strength score increases by 2, and your Constitution score increases by 1.",
   age: "Half-orcs mature a little faster than humans, reaching adulthood around age 14. They age noticeably faster and rarely live longer than 75 years.",

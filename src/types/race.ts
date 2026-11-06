@@ -22,6 +22,19 @@ export interface SkillChoice {
   options?: readonly string[];
 }
 
+export interface LanguageChoice {
+  count: 1 | 2;
+  exclude?: readonly string[];
+}
+
+export interface ToolChoice {
+  options?: readonly string[];
+}
+
+export interface CantripChoice {
+  list: "wizard";
+}
+
 export interface Variant {
   name: string;
   bonuses: AttributeState;
@@ -31,6 +44,12 @@ export interface Variant {
   speed?: string;
   floatingBonus?: FloatingBonus;
   skillChoice?: SkillChoice;
+  grantedSkills?: readonly string[];
+  grantedTools?: readonly string[];
+  grantedCantrips?: readonly string[];
+  languageChoice?: LanguageChoice;
+  toolChoice?: ToolChoice;
+  cantripChoice?: CantripChoice;
 }
 
 export interface Race {
@@ -46,4 +65,11 @@ export interface Race {
   variants?: Variant[];
   floatingBonus?: FloatingBonus;
   skillChoice?: SkillChoice;
+  grantedSkills?: readonly string[];
+  grantedTools?: readonly string[];
+  grantedCantrips?: readonly string[];
+  languageChoice?: LanguageChoice;
+  toolChoice?: ToolChoice;
+  cantripChoice?: CantripChoice;
+  draconicAncestry?: boolean;
 }
