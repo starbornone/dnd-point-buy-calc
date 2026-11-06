@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { raceDropdown } from "@/data/raceDropdown";
 import { defaultAttributes, parseBuild, serializeBuild } from "@/utils/characterBuild";
-import { LOCALES, readLocale, withLocale } from "./locale";
+import { LOCALES, PLANNED_LOCALES, readLocale, withLocale } from "./locale";
 import { raceNames, skillLabel } from "./names";
 
 describe("locale query", () => {
@@ -36,6 +36,13 @@ describe("locale query", () => {
   it("ignores an unknown language", () => {
     expect(readLocale("?lang=fr&race=elf")).toBe("en");
     expect(parseBuild("?lang=es")).toBeNull();
+  });
+
+  it("leaves planned languages untranslated", () => {
+    for (const locale of PLANNED_LOCALES) {
+      expect(LOCALES).not.toContain(locale.code);
+      expect(readLocale(`?lang=${locale.code}`)).toBe("en");
+    }
   });
 });
 

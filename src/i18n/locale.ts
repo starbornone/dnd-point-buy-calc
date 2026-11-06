@@ -1,5 +1,11 @@
 export const LOCALES = ["en", "zh", "es"] as const;
 
+export const PLANNED_LOCALES = [
+  { code: "mk", name: "Македонски" },
+  { code: "ru", name: "Русский" },
+  { code: "ja", name: "日本語" },
+] as const;
+
 export type Locale = (typeof LOCALES)[number];
 
 export const DEFAULT_LOCALE: Locale = "en";

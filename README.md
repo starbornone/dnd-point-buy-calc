@@ -94,6 +94,12 @@ The app features the following races and variants with their respective racial m
 
 ## Known Bugs
 
+## Languages still to add
+
+- Macedonian
+- Russian
+- Japanese
+
 ## Installation
 
 ### Prerequisites
