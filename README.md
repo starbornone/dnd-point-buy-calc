@@ -100,7 +100,7 @@ The app features the following races and variants with their respective racial m
 
 Ensure you have the following installed:
 
-- **Node.js**: `>=18.17`
+- **Node.js**: `24.x`
 - **npm** or **yarn`
 
 ### Setup
