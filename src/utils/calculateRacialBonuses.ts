@@ -1,35 +1,44 @@
-import { AttributeState } from "@/types";
+import { addBonuses } from "@/data/bonuses";
+import { AttributeState, FloatingBonus, Race, Variant } from "@/types";
+
+export const resolveFloatingBonus = (
+  race: Race | undefined,
+  variant: Variant | undefined
+): FloatingBonus | undefined => {
+  if (!race) return undefined;
+  if (variant?.replacesParent) return variant.floatingBonus;
+  return variant?.floatingBonus ?? race.floatingBonus;
+};
 
 export const calculateRacialBonuses = ({
-  baseModifiers,
-  isVariant,
+  fixedBonuses,
+  floatingBonus,
   selectedBonuses,
-  selectedRace,
-  selectedVariant,
-  variantModifiers,
 }: {
-  baseModifiers: AttributeState;
-  isVariant?: boolean;
-  selectedBonuses?: [keyof AttributeState, keyof AttributeState];
-  selectedRace?: string;
-  selectedVariant?: string;
-  variantModifiers: AttributeState;
-}) => {
-  const bonuses = isVariant ? { ...variantModifiers } : { ...baseModifiers };
+  fixedBonuses: AttributeState;
+  floatingBonus?: FloatingBonus;
+  selectedBonuses: readonly (keyof AttributeState | undefined)[];
+}): AttributeState => {
+  const totals = { ...fixedBonuses };
+  if (!floatingBonus) return totals;
 
-  if (selectedRace === "changeling" && selectedBonuses) {
-    bonuses[selectedBonuses[0]] += 1;
+  const used = new Set<keyof AttributeState>();
+  for (const pick of selectedBonuses.slice(0, floatingBonus.count)) {
+    if (!pick || used.has(pick) || floatingBonus.exclude.includes(pick)) {
+      continue;
+    }
+    totals[pick] += 1;
+    used.add(pick);
   }
 
-  if (selectedRace === "halfElf" && selectedBonuses) {
-    bonuses[selectedBonuses[0]] += 1;
-    bonuses[selectedBonuses[1]] += 1;
-  }
+  return totals;
+};
 
-  if (selectedVariant === "Variant Human" && selectedBonuses) {
-    bonuses[selectedBonuses[0]] += 1;
-    bonuses[selectedBonuses[1]] += 1;
-  }
-
-  return bonuses;
+export const combineFixedBonuses = (
+  race: Race,
+  variant: Variant | undefined
+): AttributeState => {
+  if (!variant) return race.bonuses;
+  if (variant.replacesParent) return variant.bonuses;
+  return addBonuses(race.bonuses, variant.bonuses);
 };

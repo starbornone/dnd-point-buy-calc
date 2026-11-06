@@ -1,7 +1,9 @@
+import { bonuses } from "@/data/bonuses";
 import { Race } from "@/types/race";
 
 export const tabaxi: Race = {
   name: "Tabaxi",
+  bonuses: bonuses({ dexterity: 2, charisma: 1 }),
   ability:
     "Your Dexterity score increases by 2, and your Charisma score increases by 1.",
   age: "Tabaxi reach adulthood around age 15 and can live to be over 100 years old.",

@@ -1,7 +1,9 @@
+import { bonuses } from "@/data/bonuses";
 import { Race } from "@/types/race";
 
 export const halfling: Race = {
   name: "Halfling",
+  bonuses: bonuses({ dexterity: 2 }),
   ability: "Your Dexterity score increases by 2.",
   age: "A halfling reaches adulthood at the age of 20 and generally lives into the middle of his or her second century.",
   alignment:
@@ -20,6 +22,7 @@ export const halfling: Race = {
   variants: [
     {
       name: "Lightfoot Halfling",
+      bonuses: bonuses({ charisma: 1 }),
       ability: "Your Charisma score increases by 1.",
       other: [
         "Naturally Stealthy",
@@ -28,6 +31,7 @@ export const halfling: Race = {
     },
     {
       name: "Stout Halfling",
+      bonuses: bonuses({ constitution: 1 }),
       ability: "Your Constitution score increases by 1.",
       other: [
         "Stout Resilience",

@@ -1,22 +1,21 @@
 "use client";
 
+import { useLocale, useMessages } from "@/context/LocaleContext";
 import { useRace } from "@/context/RaceContext";
+import { raceData } from "@/data/raceData";
 import { raceDropdown } from "@/data/raceDropdown";
-import { racialModifiers } from "@/data/racialModifiers";
-import { useState } from "react";
+import { raceLabel, variantLabel } from "@/i18n/names";
 
 export const RaceSelector = () => {
+  const { locale } = useLocale();
+  const copy = useMessages();
   const { selectedRace, setSelectedRace, selectedVariant, setSelectedVariant } =
     useRace();
-  const [availableVariants, setAvailableVariants] = useState<string[]>([]);
+  const availableVariants =
+    raceData[selectedRace]?.variants?.map((variant) => variant.name) ?? [];
 
   const handleRaceChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const race = e.target.value;
-    setSelectedRace(race);
-    setSelectedVariant("");
-
-    const variants = racialModifiers[race]?.variants || [];
-    setAvailableVariants(variants);
+    setSelectedRace(e.target.value);
   };
 
   const handleVariantChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -27,7 +26,7 @@ export const RaceSelector = () => {
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div>
         <label htmlFor="race" className="block font-bold">
-          Select Race
+          {copy.selectRace}
         </label>
         <select
           id="race"
@@ -36,11 +35,11 @@ export const RaceSelector = () => {
           onChange={handleRaceChange}
         >
           <option value="" disabled>
-            Select a race
+            {copy.selectRacePlaceholder}
           </option>
           {raceDropdown.map((race) => (
             <option key={race.value} value={race.value}>
-              {race.name}
+              {raceLabel(locale, race.value)}
             </option>
           ))}
         </select>
@@ -49,7 +48,7 @@ export const RaceSelector = () => {
         {availableVariants.length > 0 && (
           <>
             <label htmlFor="variant" className="block font-bold">
-              Select Variant
+              {copy.selectVariant}
             </label>
             <select
               id="variant"
@@ -57,12 +56,14 @@ export const RaceSelector = () => {
               value={selectedVariant}
               onChange={handleVariantChange}
             >
-              <option value="" disabled>
-                Select a variant
-              </option>
+              {selectedRace === "human" ? null : (
+                <option value="" disabled>
+                  {copy.selectVariantPlaceholder}
+                </option>
+              )}
               {availableVariants.map((variant) => (
                 <option key={variant} value={variant}>
-                  {variant}
+                  {variantLabel(locale, variant)}
                 </option>
               ))}
             </select>

@@ -1,15 +1,20 @@
 "use client";
 
+import { BuildSync } from "@/components/BuildSync";
+import { LocaleDocument, LocaleProvider } from "@/context/LocaleContext";
 import { RaceProvider } from "@/context/RaceContext";
-import { SettingsProvider } from "@/context/SettingsContext";
 import { StatsProvider } from "@/context/StatsContext";
 
 export default function Providers({ children }: { children: React.ReactNode }) {
   return (
-    <SettingsProvider>
+    <LocaleProvider>
       <RaceProvider>
-        <StatsProvider>{children}</StatsProvider>
+        <StatsProvider>
+          <LocaleDocument />
+          <BuildSync />
+          {children}
+        </StatsProvider>
       </RaceProvider>
-    </SettingsProvider>
+    </LocaleProvider>
   );
 }

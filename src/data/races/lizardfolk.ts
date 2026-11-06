@@ -1,7 +1,9 @@
+import { bonuses } from "@/data/bonuses";
 import { Race } from "@/types/race";
 
 export const lizardfolk: Race = {
   name: "Lizardfolk",
+  bonuses: bonuses({ constitution: 2, wisdom: 1 }),
   ability:
     "Your Constitution score increases by 2, and your Wisdom score increases by 1.",
   age: "Lizardfolk reach adulthood around age 14 and can live up to 80 years.",

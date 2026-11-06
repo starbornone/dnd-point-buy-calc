@@ -1,12 +1,17 @@
 "use client";
 
+import { useLocale, useMessages } from "@/context/LocaleContext";
 import { useRace } from "@/context/RaceContext";
+import { emptyBonuses } from "@/data/bonuses";
 import { raceData } from "@/data";
 import { Race } from "@/types/race";
-import { mergeRaceAndVariant } from "@/utils";
+import { DEFAULT_LOCALE } from "@/i18n/locale";
+import { abilityLabel, skillLabel } from "@/i18n/names";
+import { grantedFeatAbility, mergeRaceAndVariant } from "@/utils";
 
 const defaultTraits: Race = {
   name: "",
+  bonuses: emptyBonuses(),
   ability: "",
   age: "",
   alignment: "",
@@ -17,7 +22,12 @@ const defaultTraits: Race = {
 };
 
 export const RacialTraits = () => {
-  const { selectedRace, selectedVariant } = useRace();
+  const { locale } = useLocale();
+  const copy = useMessages();
+  const { selectedRace, selectedVariant, selectedSkills, selectedFeat, selectedFeatAbility } =
+    useRace();
+  const chosenSkills = selectedSkills.filter(Boolean);
+  const featAbility = grantedFeatAbility(selectedFeat, selectedFeatAbility);
 
   const baseRaceTraits = raceData[selectedRace] || defaultTraits;
 
@@ -28,27 +38,28 @@ export const RacialTraits = () => {
 
   return (
     <div className="bg-lightGray p-4 mt-4 rounded">
-      <h2 className="font-bold">Racial Traits</h2>
+      <h2 className="font-bold">{copy.racialTraits}</h2>
+      {locale !== DEFAULT_LOCALE ? <p>{copy.rulesInEnglish}</p> : null}
       {selectedRace ? (
         <>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8">
             <div>
               <dl>
-                <dt>Ability Score Increase:</dt>
+                <dt>{copy.abilityScoreIncrease}</dt>
                 <dd>{selectedRaceTraits.ability}</dd>
-                <dt>Age:</dt>
+                <dt>{copy.age}</dt>
                 <dd>{selectedRaceTraits.age}</dd>
-                <dt>Alignment:</dt>
+                <dt>{copy.alignment}</dt>
                 <dd>{selectedRaceTraits.alignment}</dd>
-                <dt>Size:</dt>
+                <dt>{copy.size}</dt>
                 <dd>{selectedRaceTraits.size}</dd>
-                <dt>Speed:</dt>
+                <dt>{copy.speed}</dt>
                 <dd>{selectedRaceTraits.speed}</dd>
               </dl>
             </div>
             <div>
               <dl>
-                <dt>Languages:</dt>
+                <dt>{copy.languages}</dt>
                 <dd>{selectedRaceTraits.language}</dd>
                 {selectedRaceTraits.other.map((trait, index) => {
                   if (index % 2 === 0) {
@@ -56,12 +67,29 @@ export const RacialTraits = () => {
                   }
                   return <dd key={index}>{trait}</dd>;
                 })}
+                {chosenSkills.length > 0 && (
+                  <>
+                    <dt>{chosenSkills.length > 1 ? copy.chosenSkills : copy.chosenSkill}</dt>
+                    {chosenSkills.map((skill) => (
+                      <dd key={skill}>{skillLabel(locale, skill)}</dd>
+                    ))}
+                  </>
+                )}
+                {selectedFeat && (
+                  <>
+                    <dt>{copy.chosenFeat}</dt>
+                    <dd>
+                      {selectedFeat}
+                      {featAbility ? ` (+1 ${abilityLabel(locale, featAbility)})` : ""}
+                    </dd>
+                  </>
+                )}
               </dl>
             </div>
           </div>
         </>
       ) : (
-        <p>Please select a race to see the racial traits.</p>
+        <p>{copy.selectRacePrompt}</p>
       )}
     </div>
   );

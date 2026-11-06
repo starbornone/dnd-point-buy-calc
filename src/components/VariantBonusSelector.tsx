@@ -1,122 +1,81 @@
-import { AttributeState } from "@/types/race";
+"use client";
+
+import { useLocale, useMessages } from "@/context/LocaleContext";
+import { abilityLabel } from "@/i18n/names";
+import { AttributeState, FloatingBonus } from "@/types/race";
 import React from "react";
 
+type BonusPicks = [
+  keyof AttributeState | undefined,
+  keyof AttributeState | undefined,
+];
+
 interface VariantBonusSelectorProps {
-  selectedBonuses: [keyof AttributeState, keyof AttributeState | undefined];
-  setSelectedBonuses: React.Dispatch<
-    React.SetStateAction<
-      [keyof AttributeState, keyof AttributeState | undefined]
-    >
-  >;
+  selectedBonuses: BonusPicks;
+  setSelectedBonuses: React.Dispatch<React.SetStateAction<BonusPicks>>;
   attributeKeys: (keyof AttributeState)[];
-  selectedRace: string;
+  floatingBonus: FloatingBonus;
 }
 
 export const VariantBonusSelector: React.FC<VariantBonusSelectorProps> = ({
   selectedBonuses,
   setSelectedBonuses,
   attributeKeys,
-  selectedRace,
+  floatingBonus,
 }) => {
+  const { locale } = useLocale();
+  const copy = useMessages();
   const handleBonusChange = (
     e: React.ChangeEvent<HTMLSelectElement>,
     index: number
   ) => {
-    const newBonus = e.target.value as keyof AttributeState;
+    const raw = e.target.value;
+    const newBonus = raw === "" ? undefined : (raw as keyof AttributeState);
     setSelectedBonuses((prev) => {
-      const newBonuses = [...prev];
+      const newBonuses: BonusPicks = [prev[0], prev[1]];
       newBonuses[index] = newBonus;
-      return newBonuses as [
-        keyof AttributeState,
-        keyof AttributeState | undefined
-      ];
+      return newBonuses;
     });
   };
 
-  const renderSelect = (
-    value: keyof AttributeState | undefined,
-    index: number,
-    availableAttributes: (keyof AttributeState)[]
-  ) => (
-    <select
-      value={value || ""}
-      onChange={(e) => handleBonusChange(e, index)}
-      className="mt-2 block w-full p-2 border border-lightGray rounded"
-    >
-      <option value="" disabled>
-        Select an attribute
-      </option>
-      {availableAttributes.map((attr) => (
-        <option key={attr} value={attr}>
-          {attr.charAt(0).toUpperCase() + attr.slice(1)}
-        </option>
-      ))}
-    </select>
-  );
-
-  if (selectedRace === "changeling") {
-    const availableAttributesForBonus = attributeKeys.filter(
-      (attr) => attr !== "charisma"
+  const optionsFor = (index: number) => {
+    const other = selectedBonuses[index === 0 ? 1 : 0];
+    return attributeKeys.filter(
+      (attr) => !floatingBonus.exclude.includes(attr) && attr !== other
     );
+  };
 
+  const renderSelect = (index: number) => {
+    const selectId = `floating-bonus-${index}`;
+    const value = selectedBonuses[index];
     return (
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <label>Select one attribute for +1 bonus:</label>
-          <div className="grid grid-cols-1 gap-4">
-            {renderSelect(selectedBonuses[0], 0, availableAttributesForBonus)}
-          </div>
-        </div>
+      <div>
+        <label htmlFor={selectId} className="block">
+          {floatingBonus.count === 1
+            ? copy.oneBonus
+            : copy.bonusAttribute(index)}
+        </label>
+        <select
+          id={selectId}
+          value={value ?? ""}
+          onChange={(e) => handleBonusChange(e, index)}
+          className="mt-2 block w-full p-2 border border-lightGray rounded"
+        >
+          <option value="">{copy.selectAttribute}</option>
+          {optionsFor(index).map((attr) => (
+            <option key={attr} value={attr}>
+              {abilityLabel(locale, attr)}
+            </option>
+          ))}
+        </select>
       </div>
     );
-  }
-
-  const availableAttributesForFirstSelect = attributeKeys.filter(
-    (attr) => attr !== selectedBonuses[1]
-  );
-  const availableAttributesForSecondSelect = attributeKeys.filter(
-    (attr) => attr !== selectedBonuses[0]
-  );
-
-  if (selectedRace === "halfElf") {
-    return (
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <label>Select two attributes for +1 bonus:</label>
-          <div className="grid grid-cols-2 gap-4">
-            {renderSelect(
-              selectedBonuses[0],
-              0,
-              availableAttributesForFirstSelect
-            )}
-            {renderSelect(
-              selectedBonuses[1],
-              1,
-              availableAttributesForSecondSelect
-            )}
-          </div>
-        </div>
-      </div>
-    );
-  }
+  };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <div>
-        <label>Select two attributes for +1 bonus:</label>
-        <div className="grid grid-cols-2 gap-4">
-          {renderSelect(
-            selectedBonuses[0],
-            0,
-            availableAttributesForFirstSelect
-          )}
-          {renderSelect(
-            selectedBonuses[1],
-            1,
-            availableAttributesForSecondSelect
-          )}
-        </div>
-      </div>
+    <div className="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+      {renderSelect(0)}
+      {floatingBonus.count === 2 ? renderSelect(1) : null}
     </div>
   );
 };

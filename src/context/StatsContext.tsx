@@ -1,31 +1,51 @@
 "use client";
 
 import { AttributeState } from "@/types/race";
-import { createContext, ReactNode, useContext, useState } from "react";
+import { POINT_BUY_BUDGET } from "@/utils/calculatePointCost";
+import { defaultAttributes } from "@/utils/characterBuild";
+import {
+  createContext,
+  ReactNode,
+  useCallback,
+  useContext,
+  useMemo,
+  useState,
+} from "react";
 
 interface StatsContextType {
   attributes: AttributeState;
   setAttributes: (
     attributes: AttributeState | ((prev: AttributeState) => AttributeState)
   ) => void;
+  pointBudget: number;
+  setPointBudget: (budget: number) => void;
+  loadStats: (attributes: AttributeState, budget: number) => void;
 }
 
 const StatsContext = createContext<StatsContextType | undefined>(undefined);
 
 export const StatsProvider = ({ children }: { children: ReactNode }) => {
-  const [attributes, setAttributes] = useState<AttributeState>({
-    strength: 8,
-    dexterity: 8,
-    constitution: 8,
-    intelligence: 8,
-    wisdom: 8,
-    charisma: 8,
-  });
+  const [attributes, setAttributes] = useState<AttributeState>(defaultAttributes);
+  const [pointBudget, setPointBudget] = useState(POINT_BUY_BUDGET);
+
+  const loadStats = useCallback((next: AttributeState, budget: number) => {
+    setAttributes(next);
+    setPointBudget(budget);
+  }, []);
+
+  const value = useMemo(
+    () => ({
+      attributes,
+      setAttributes,
+      pointBudget,
+      setPointBudget,
+      loadStats,
+    }),
+    [attributes, pointBudget, loadStats]
+  );
 
   return (
-    <StatsContext.Provider value={{ attributes, setAttributes }}>
-      {children}
-    </StatsContext.Provider>
+    <StatsContext.Provider value={value}>{children}</StatsContext.Provider>
   );
 };
 

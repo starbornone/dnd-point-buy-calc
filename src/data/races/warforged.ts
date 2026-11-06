@@ -1,9 +1,13 @@
+import { bonuses } from "@/data/bonuses";
 import { Race } from "@/types/race";
 
 export const warforged: Race = {
   name: "Warforged",
+  bonuses: bonuses({ constitution: 2 }),
+  floatingBonus: { count: 1, exclude: ["constitution"] },
+  skillChoice: { count: 1 },
   ability:
-    "Your Constitution score increases by 1, and one other ability score of your choice increases by 1.",
+    "Your Constitution score increases by 2, and one other ability score of your choice increases by 1.",
   age: "Warforged are built complete and have no childhood. They typically have lifespans of around 30 years but are functionally immortal.",
   alignment:
     "Most warforged are neutral, leaning toward lawful. They obey their orders and value the concept of duty.",

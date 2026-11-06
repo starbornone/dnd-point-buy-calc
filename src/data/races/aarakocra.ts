@@ -1,7 +1,9 @@
+import { bonuses } from "@/data/bonuses";
 import { Race } from "@/types/race";
 
 export const aarakocra: Race = {
   name: "Aarakocra",
+  bonuses: bonuses({ dexterity: 2, wisdom: 1 }),
   ability:
     "Your Dexterity score increases by 2, and your Wisdom score increases by 1.",
   age: "Aarakocra reach maturity by age 3 and typically live to be around 30 years old.",

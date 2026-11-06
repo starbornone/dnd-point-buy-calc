@@ -1,7 +1,9 @@
+import { bonuses } from "@/data/bonuses";
 import { Race } from "@/types/race";
 
 export const firbolg: Race = {
   name: "Firbolg",
+  bonuses: bonuses({ wisdom: 2, strength: 1 }),
   ability:
     "Your Wisdom score increases by 2, and your Strength score increases by 1.",
   age: "Firbolgs reach adulthood in their late teens and can live up to 500 years.",

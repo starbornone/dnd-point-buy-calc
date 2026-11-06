@@ -1,0 +1,119 @@
+"use client";
+
+import { useLocale, useMessages } from "@/context/LocaleContext";
+import { useRace } from "@/context/RaceContext";
+import { useStats } from "@/context/StatsContext";
+import { attributeKeys } from "@/data";
+import { DEFAULT_LOCALE } from "@/i18n/locale";
+import { abilityLabel, raceLabel, skillLabel, variantLabel } from "@/i18n/names";
+import { raceData } from "@/data/raceData";
+import {
+  calculateFeatBonus,
+  calculateModifier,
+  calculatePointCost,
+  calculateRacialBonuses,
+  featGrantsIncrease,
+  formatPointCost,
+  getFixedBonuses,
+  mergeRaceAndVariant,
+  resolveFloatingBonus,
+} from "@/utils";
+
+export const PrintSheet = () => {
+  const { locale } = useLocale();
+  const copy = useMessages();
+  const { attributes, pointBudget } = useStats();
+  const {
+    selectedRace,
+    selectedVariant,
+    selectedBonuses,
+    selectedSkills,
+    selectedFeat,
+    selectedFeatAbility,
+  } = useRace();
+
+  const race = raceData[selectedRace];
+  const variant = race?.variants?.find((entry) => entry.name === selectedVariant);
+  const racialBonuses = calculateRacialBonuses({
+    fixedBonuses: getFixedBonuses(selectedRace, selectedVariant),
+    floatingBonus: resolveFloatingBonus(race, variant),
+    selectedBonuses,
+  });
+  const featBonuses = calculateFeatBonus(selectedFeat, selectedFeatAbility);
+  const showFeat = featGrantsIncrease(selectedFeat);
+  const traits = race ? mergeRaceAndVariant(race, selectedVariant) : null;
+  const costs = attributeKeys.map((key) => calculatePointCost(attributes[key]));
+  const pointCost = costs.every((cost) => !Number.isNaN(cost))
+    ? costs.reduce((sum, cost) => sum + cost, 0)
+    : null;
+
+  return (
+    <section className="hidden print:block">
+      <h1>{copy.title}</h1>
+      <p>
+        {race ? raceLabel(locale, selectedRace) : copy.noRace}
+        {selectedVariant ? ` — ${variantLabel(locale, selectedVariant)}` : ""}
+      </p>
+      <p>
+        {copy.pointSummary(
+          pointCost === null ? "—" : String(pointCost),
+          pointBudget,
+          pointCost === null ? "—" : String(pointBudget - pointCost)
+        )}
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>{copy.attribute}</th>
+            <th>{copy.score}</th>
+            <th>{copy.cost}</th>
+            <th>{copy.racial}</th>
+            {showFeat ? <th>{copy.feat}</th> : null}
+            <th>{copy.total}</th>
+            <th>{copy.modifier}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {attributeKeys.map((key) => {
+            const total = attributes[key] + racialBonuses[key] + featBonuses[key];
+            return (
+              <tr key={key}>
+                <td>{abilityLabel(locale, key)}</td>
+                <td>{attributes[key]}</td>
+                <td>{formatPointCost(attributes[key])}</td>
+                <td>{racialBonuses[key]}</td>
+                {showFeat ? <td>{featBonuses[key]}</td> : null}
+                <td>{total}</td>
+                <td>{calculateModifier(total)}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+      {selectedSkills.some(Boolean) ? (
+        <p>
+          {selectedSkills.filter(Boolean).length > 1 ? copy.chosenSkills : copy.skillLine}{" "}
+          {selectedSkills
+            .filter(Boolean)
+            .map((skill) => skillLabel(locale, skill))
+            .join(", ")}
+        </p>
+      ) : null}
+      {selectedFeat ? (
+        <p>
+          {copy.feat}: {selectedFeat}
+        </p>
+      ) : null}
+      {traits ? (
+        <>
+          <h2>{copy.racialTraits}</h2>
+          {locale !== DEFAULT_LOCALE ? <p>{copy.rulesInEnglish}</p> : null}
+          <p>{traits.ability}</p>
+          {traits.other.map((trait) => (
+            <p key={trait}>{trait}</p>
+          ))}
+        </>
+      ) : null}
+    </section>
+  );
+};

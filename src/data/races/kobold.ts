@@ -1,9 +1,11 @@
+import { bonuses } from "@/data/bonuses";
 import { Race } from "@/types/race";
 
 export const kobold: Race = {
   name: "Kobold",
+  bonuses: bonuses({ dexterity: 2, strength: -2 }),
   ability:
-    "Your Dexterity score increases by 2, and your Strength score decreases by 1.",
+    "Your Dexterity score increases by 2, and your Strength score decreases by 2.",
   age: "Kobolds reach maturity at age 6 and live up to 120 years.",
   alignment:
     "Kobolds tend to be chaotic, often driven by their instincts and curiosity.",

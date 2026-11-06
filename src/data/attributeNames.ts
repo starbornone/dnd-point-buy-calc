@@ -1,19 +1,14 @@
 import { AttributeState } from "@/types";
 
-export const attributeNames = [
-  "Strength",
-  "Dexterity",
-  "Constitution",
-  "Intelligence",
-  "Wisdom",
-  "Charisma",
-];
+export const attributeLabels: Record<keyof AttributeState, string> = {
+  strength: "Strength",
+  dexterity: "Dexterity",
+  constitution: "Constitution",
+  intelligence: "Intelligence",
+  wisdom: "Wisdom",
+  charisma: "Charisma",
+};
 
-export const attributeKeys: (keyof AttributeState)[] = [
-  "strength",
-  "dexterity",
-  "constitution",
-  "intelligence",
-  "wisdom",
-  "charisma",
-];
+export const attributeKeys = Object.keys(
+  attributeLabels
+) as (keyof AttributeState)[];

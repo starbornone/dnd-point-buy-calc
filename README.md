@@ -7,6 +7,7 @@ A point-buy calculator for **Dungeons & Dragons 5th Edition** (D&D 5e) that help
 ### Ability Score Calculator
 
 - Allows users to manually adjust their character’s **Strength**, **Dexterity**, **Constitution**, **Intelligence**, **Wisdom**, and **Charisma** scores.
+- Fills the Player's Handbook standard array: 15, 14, 13, 12, 10, 8.
 - Automatically calculates and displays the point costs for each ability score based on D&D 5e point buy rules.
 
 ### Racial Modifiers
@@ -19,7 +20,7 @@ A point-buy calculator for **Dungeons & Dragons 5th Edition** (D&D 5e) that help
 ### Custom Attribute Selection for Certain Races
 
 - Races like **Half-Elf**, **Variant Human**, and **Changeling** allow users to pick additional attribute bonuses.
-- For example, **Variant Human** lets you choose two ability scores to increase by +1, reflecting D&D 5e custom attributes rules.
+- For example, **Variant Human** lets you choose two ability scores to increase by +1, and applies the ability increase from the chosen Player's Handbook feat.
 
 ### Variant Race Support
 
@@ -53,25 +54,29 @@ The app features the following races and variants with their respective racial m
   - **High Elf**: Dexterity +2, Intelligence +1
   - **Wood Elf**: Dexterity +2, Wisdom +1
   - **Drow**: Dexterity +2, Charisma +1
+  - **Eladrin**: Dexterity +2, Intelligence +1
 - **Gnome**:
   - **Forest Gnome**: Intelligence +2, Dexterity +1
   - **Rock Gnome**: Intelligence +2, Constitution +1
-- **Half-Elf**: Charisma +2 and +1 to any two other attributes
+- **Half-Elf**: Charisma +2, +1 to any two other attributes, and two skill proficiencies
 - **Halfling**:
   - **Lightfoot Halfling**: Dexterity +2, Charisma +1
   - **Stout Halfling**: Dexterity +2, Constitution +1
 - **Half-Orc**: Strength +2, Constitution +1
 - **Human**:
   - **Human**: +1 to all ability scores
-  - **Variant Human**: +1 to any two attributes
+  - **Variant Human**: +1 to any two attributes, plus the ability increase from the chosen feat
 - **Tiefling**: Charisma +2, Intelligence +1
-- **Aasimar**: Charisma +2, Wisdom +1
-- **Changeling**: Charisma +2 and +1 to any other attribute
-- **Shifter**:
-  - **Beasthide**: Constitution +2
-  - **Longtooth**: Strength +1
-  - **Swiftstride**: Dexterity +1, Charisma +1
-  - **Wildhunt**: Wisdom +2
+- **Aasimar** (*Volo's Guide to Monsters*):
+  - **Protector**: Charisma +2, Wisdom +1
+  - **Scourge**: Charisma +2, Constitution +1
+  - **Fallen**: Charisma +2, Strength +1
+- **Changeling**: Charisma +2, +1 to any other attribute, and two of Deception, Insight, Intimidation, and Persuasion
+- **Shifter** (*Eberron: Rising from the Last War*):
+  - **Beasthide**: Constitution +2, Strength +1
+  - **Longtooth**: Strength +2, Dexterity +1
+  - **Swiftstride**: Dexterity +2, Charisma +1
+  - **Wildhunt**: Wisdom +2, Dexterity +1
 - **Genasi**:
   - **Air Genasi**: Constitution +2, Dexterity +1
   - **Earth Genasi**: Constitution +2, Strength +1
@@ -79,26 +84,15 @@ The app features the following races and variants with their respective racial m
   - **Water Genasi**: Constitution +2, Wisdom +1
 - **Goliath**: Strength +2, Constitution +1
 - **Aarakocra**: Dexterity +2, Wisdom +1
-- **Warforged**: Constitution +1, Strength +1
+- **Warforged** (*Eberron: Rising from the Last War*): Constitution +2, +1 to any other ability, and one skill proficiency
 - **Tabaxi**: Dexterity +2, Charisma +1
 - **Firbolg**: Wisdom +2, Strength +1
-- **Kobold**: Dexterity +2, Strength -1
+- **Kobold** (*Volo's Guide to Monsters*): Dexterity +2, Strength -2
 - **Lizardfolk**: Constitution +2, Wisdom +1
-- **Githyanki**: Strength +1, Intelligence +2
+- **Githyanki** (*Mordenkainen's Tome of Foes*): Strength +2, Intelligence +1
 - **Githzerai**: Wisdom +2, Intelligence +1
 
 ## Known Bugs
-
-## Roadmap
-
-### Short-Term Goals
-
-- **Mobile Optimization**: Ensure the app is fully optimized for mobile use with an improved user interface.
-
-### Long-Term Goals
-
-- **Save Character Builds**: Allow users to save character builds for future sessions or export them to PDF/JSON.
-- **Multi-Language Support**: Add support for additional languages to broaden accessibility.
 
 ## Installation
 
@@ -106,7 +100,7 @@ The app features the following races and variants with their respective racial m
 
 Ensure you have the following installed:
 
-- **Node.js**: `>=14.x`
+- **Node.js**: `>=18.17`
 - **npm** or **yarn`
 
 ### Setup

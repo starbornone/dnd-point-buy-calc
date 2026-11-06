@@ -1,7 +1,16 @@
+import { bonuses } from "@/data/bonuses";
 import { Race } from "@/types/race";
 
 export const human: Race = {
   name: "Human",
+  bonuses: bonuses({
+    strength: 1,
+    dexterity: 1,
+    constitution: 1,
+    intelligence: 1,
+    wisdom: 1,
+    charisma: 1,
+  }),
   ability: "Your ability scores each increase by 1.",
   age: "Humans reach adulthood in their late teens and live less than a century.",
   alignment:
@@ -13,7 +22,17 @@ export const human: Race = {
   other: [],
   variants: [
     {
+      name: "Standard Human",
+      bonuses: bonuses({}),
+      ability: "",
+      other: [],
+    },
+    {
       name: "Variant Human",
+      bonuses: bonuses({}),
+      replacesParent: true,
+      floatingBonus: { count: 2, exclude: [] },
+      skillChoice: { count: 1 },
       ability: "Two different ability scores of your choice increase by 1.",
       other: [
         "Skills",

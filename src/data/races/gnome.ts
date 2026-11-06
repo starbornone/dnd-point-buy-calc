@@ -1,7 +1,9 @@
+import { bonuses } from "@/data/bonuses";
 import { Race } from "@/types/race";
 
 export const gnome: Race = {
   name: "Gnome",
+  bonuses: bonuses({ intelligence: 2 }),
   ability: "Your Intelligence score increases by 2.",
   age: "Gnomes mature at the same rate humans do, and most are expected to settle down into an adult life by around age 40. They can live 350 to almost 500 years.",
   alignment:
@@ -18,6 +20,7 @@ export const gnome: Race = {
   variants: [
     {
       name: "Forest Gnome",
+      bonuses: bonuses({ dexterity: 1 }),
       ability: "Your Dexterity score increases by 1.",
       other: [
         "Natural Illusionist",
@@ -28,6 +31,7 @@ export const gnome: Race = {
     },
     {
       name: "Rock Gnome",
+      bonuses: bonuses({ constitution: 1 }),
       ability: "Your Constitution score increases by 1.",
       other: [
         "Artificer's Lore",

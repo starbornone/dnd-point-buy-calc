@@ -1,7 +1,9 @@
+import { bonuses } from "@/data/bonuses";
 import { Race } from "@/types/race";
 
 export const dwarf: Race = {
   name: "Dwarf",
+  bonuses: bonuses({ constitution: 2 }),
   ability: "Your Constitution score increases by 2.",
   age: "Dwarves mature at the same rate as humans, but they’re considered young until they reach the age of 50. On average, they live about 350 years.",
   alignment:
@@ -26,6 +28,7 @@ export const dwarf: Race = {
   variants: [
     {
       name: "Hill Dwarf",
+      bonuses: bonuses({ wisdom: 1 }),
       ability: "Your Wisdom score increases by 1.",
       other: [
         "Dwarven Toughness",
@@ -34,6 +37,7 @@ export const dwarf: Race = {
     },
     {
       name: "Mountain Dwarf",
+      bonuses: bonuses({ strength: 2 }),
       ability: "Your Strength score increases by 2.",
       other: [
         "Dwarven Armor Training",

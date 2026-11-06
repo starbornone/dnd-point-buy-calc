@@ -1,7 +1,9 @@
+import { bonuses } from "@/data/bonuses";
 import { Race } from "@/types/race";
 
 export const genasi: Race = {
   name: "Genasi",
+  bonuses: bonuses({ constitution: 2 }),
   ability: "Your Constitution score increases by 2.",
   age: "Genasi mature at about the same rate as humans and reach adulthood in their late teens. They live somewhat longer than humans do, up to 120 years.",
   alignment:
@@ -13,6 +15,7 @@ export const genasi: Race = {
   variants: [
     {
       name: "Air Genasi",
+      bonuses: bonuses({ dexterity: 1 }),
       ability: "Your Dexterity score increases by 1.",
       other: [
         "Unending Breath",
@@ -23,6 +26,7 @@ export const genasi: Race = {
     },
     {
       name: "Earth Genasi",
+      bonuses: bonuses({ strength: 1 }),
       ability: "Your Strength score increases by 1.",
       other: [
         "Earth Walk",
@@ -33,6 +37,7 @@ export const genasi: Race = {
     },
     {
       name: "Fire Genasi",
+      bonuses: bonuses({ intelligence: 1 }),
       ability: "Your Intelligence score increases by 1.",
       other: [
         "Darkvision",
@@ -45,6 +50,7 @@ export const genasi: Race = {
     },
     {
       name: "Water Genasi",
+      bonuses: bonuses({ wisdom: 1 }),
       ability: "Your Wisdom score increases by 1.",
       other: [
         "Acid Resistance",

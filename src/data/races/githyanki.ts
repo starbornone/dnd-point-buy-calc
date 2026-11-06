@@ -1,9 +1,11 @@
+import { bonuses } from "@/data/bonuses";
 import { Race } from "@/types/race";
 
 export const githyanki: Race = {
   name: "Githyanki",
+  bonuses: bonuses({ strength: 2, intelligence: 1 }),
   ability:
-    "Your Strength score increases by 1, and your Intelligence score increases by 2.",
+    "Your Strength score increases by 2, and your Intelligence score increases by 1.",
   age: "Githyanki reach adulthood in their late teens and typically live to be around 120 years old.",
   alignment:
     "Githyanki are typically lawful evil, driven by their desire for freedom from oppression.",

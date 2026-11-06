@@ -2,55 +2,60 @@
 
 import {
   AttributeTable,
+  BuildControls,
+  LanguageSelect,
   Modal,
+  PointCostTable,
+  PrintSheet,
   RaceSelector,
   RacialTraits,
 } from "@/components";
+import { useMessages } from "@/context/LocaleContext";
 import Link from "next/link";
 
 export default function HomePage() {
+  const copy = useMessages();
+
   return (
     <div className="container mx-auto mt-8">
-      <div className="flex flex-col md:flex-row gap-8 justify-between items-center">
+      <div className="flex flex-col md:flex-row gap-8 justify-between items-center print:hidden">
         <h1 className="text-3xl font-bold m-0 text-primary text-center md:text-left">
-          D&D 5e Point-Buy Calculator
+          {copy.title}
         </h1>
-        <div className="flex justify-end gap-x-4">
-          <Modal title="Basic Usage">
-            <p>Use 27 points, as recommended by the Player&apos;s Handbook.</p>
+        <div className="flex flex-wrap justify-end items-center gap-4">
+          <LanguageSelect />
+          <Modal title={copy.basicUsage}>
+            <p>{copy.basicUsageBody}</p>
+            <PointCostTable />
+            <p className="mt-4">{copy.standardArrayHelp}</p>
           </Modal>
-          <Modal title="About">
+          <Modal title={copy.about}>
             <p>
-              This point-buy calculator aims to cover several D&D 5e books. I
-              haven&apos;t played D&D 5e properly in a while, so feel free to
-              open an issue on{" "}
+              {copy.aboutLead}{" "}
               <Link
-                href="https://github.com/starbornone/seo-optimizer"
+                href="https://github.com/starbornone/DnD-Point-Buy-Calc"
                 rel="noopener noreferrer"
                 target="_blank"
               >
                 GitHub
               </Link>{" "}
-              if you find any errors.
+              {copy.aboutTrail}
             </p>
           </Modal>
         </div>
       </div>
 
-      <form className="mt-8" id="dnd5e-pbc">
-        {/* <AdvancedOptions /> */}
+      <form
+        className="mt-8 print:hidden"
+        id="dnd5e-pbc"
+        onSubmit={(event) => event.preventDefault()}
+      >
         <RaceSelector />
+        <BuildControls />
         <AttributeTable />
         <RacialTraits />
-
-        {/* <button
-              type="button"
-              className="bg-primary text-white mt-5 px-6 py-2 rounded"
-              id="reset"
-            >
-              Reset
-            </button> */}
       </form>
+      <PrintSheet />
     </div>
   );
 }

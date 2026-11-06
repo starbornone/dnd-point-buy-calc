@@ -1,7 +1,9 @@
+import { bonuses } from "@/data/bonuses";
 import { Race } from "@/types/race";
 
 export const dragonborn: Race = {
   name: "Dragonborn",
+  bonuses: bonuses({ strength: 2, charisma: 1 }),
   ability:
     "Your Strength score increases by 2, and your Charisma score increases by 1.",
   age: "Young dragonborn grow quickly. They walk hours after hatching, attain the size and development of a 10-year-old human child by the age of 3, and reach adulthood by 15. They live to be around 80.",

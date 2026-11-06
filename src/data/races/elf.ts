@@ -1,7 +1,9 @@
+import { bonuses } from "@/data/bonuses";
 import { Race } from "@/types/race";
 
 export const elf: Race = {
   name: "Elf",
+  bonuses: bonuses({ dexterity: 2 }),
   ability: "Your Dexterity score increases by 2.",
   age: "Although elves reach physical maturity at about the same age as humans, the elven understanding of adulthood goes beyond physical growth to encompass worldly experience. An elf typically claims adulthood and an adult name around the age of 100 and can live to be 750 years old.",
   alignment:
@@ -11,7 +13,7 @@ export const elf: Race = {
   language: "You can speak, read, and write Common and Elvish.",
   other: [
     "Darkvision",
-    "Accustomed to life underground, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of grey.",
+    "Accustomed to twilit forests and the night sky, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of grey.",
     "Keen Senses",
     "You have proficiency in the Perception skill.",
     "Fey Ancestry",
@@ -22,6 +24,7 @@ export const elf: Race = {
   variants: [
     {
       name: "Dark Elf (Drow)",
+      bonuses: bonuses({ charisma: 1 }),
       ability: "Your Charisma score increases by 1.",
       other: [
         "Superior Darkvision",
@@ -36,6 +39,7 @@ export const elf: Race = {
     },
     {
       name: "High Elf",
+      bonuses: bonuses({ intelligence: 1 }),
       ability: "Your Intelligence score increases by 1.",
       other: [
         "Elf Weapon Training",
@@ -48,6 +52,8 @@ export const elf: Race = {
     },
     {
       name: "Wood Elf",
+      bonuses: bonuses({ wisdom: 1 }),
+      speed: "Your base walking speed is 35 feet.",
       ability: "Your Wisdom score increases by 1.",
       other: [
         "Elf Weapon Training",
@@ -60,6 +66,7 @@ export const elf: Race = {
     },
     {
       name: "Eladrin",
+      bonuses: bonuses({ intelligence: 1 }),
       ability: "Your Intelligence score increases by 1.",
       other: [
         "Elf Weapon Training",

@@ -1,25 +1,18 @@
-import { racialModifiers } from "@/data/racialModifiers";
+import { emptyBonuses } from "@/data/bonuses";
+import { raceData } from "@/data/raceData";
 import { AttributeState } from "@/types/race";
-import { findRaceKeyByName } from "@/utils/findRaceKeyByName";
+import { combineFixedBonuses } from "./calculateRacialBonuses";
 
-export const getModifiers = (
-  raceOrVariant: string,
-  name: string
+export const getFixedBonuses = (
+  raceKey: string,
+  variantName: string
 ): AttributeState => {
-  let key = name;
+  const race = raceData[raceKey];
+  if (!race) return emptyBonuses();
 
-  if (raceOrVariant === "variant") {
-    key = findRaceKeyByName(name) || name;
-  }
+  const variant = variantName
+    ? race.variants?.find((entry) => entry.name === variantName)
+    : undefined;
 
-  return (
-    racialModifiers[key as keyof typeof racialModifiers] || {
-      strength: 0,
-      dexterity: 0,
-      constitution: 0,
-      intelligence: 0,
-      wisdom: 0,
-      charisma: 0,
-    }
-  );
+  return combineFixedBonuses(race, variant);
 };
