@@ -1,8 +1,14 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { useMessages } from "@/context/LocaleContext";
-import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from "@headlessui/react";
-import { useState } from "react";
 
 interface ModalProps {
   title: string;
@@ -11,43 +17,24 @@ interface ModalProps {
 
 export const Modal: React.FC<ModalProps> = ({ title, children }) => {
   const copy = useMessages();
-  const [isOpen, setIsOpen] = useState(false);
-  const titleId = `modal-${title.toLowerCase().replace(/\s+/g, "-")}`;
-
   return (
-    <>
-      <button
-        type="button"
-        className="bg-primary text-white px-4 py-2 rounded"
-        onClick={() => setIsOpen(true)}
-      >
-        {title}
-      </button>
-
-      <Dialog
-        open={isOpen}
-        onClose={() => setIsOpen(false)}
-        className="relative z-50"
-      >
-        <DialogBackdrop className="fixed inset-0 bg-gray-800/75" />
-        <div className="fixed inset-0 flex items-center justify-center p-4">
-          <DialogPanel className="bg-white p-6 rounded shadow-lg max-w-lg w-full">
-            <DialogTitle id={titleId} className="text-xl font-bold">
-              {title}
-            </DialogTitle>
-            <div className="mt-4">{children}</div>
-            <div className="mt-4 flex justify-end">
-              <button
-                type="button"
-                onClick={() => setIsOpen(false)}
-                className="bg-primary text-white px-4 py-2 rounded"
-              >
-                {copy.close}
-              </button>
-            </div>
-          </DialogPanel>
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button type="button" variant="secondary" className="min-h-11 px-2.5 text-sm sm:px-4 sm:text-base">
+          {title}
+        </Button>
+      </DialogTrigger>
+      <DialogContent aria-describedby={undefined}>
+        <DialogTitle>{title}</DialogTitle>
+        <div className="flex min-h-0 flex-col gap-3 overflow-y-auto text-sm leading-relaxed sm:gap-4 sm:text-base [&>*]:shrink-0">
+          {children}
         </div>
-      </Dialog>
-    </>
+        <div className="flex justify-end">
+          <DialogClose asChild>
+            <Button type="button" className="min-h-11">{copy.close}</Button>
+          </DialogClose>
+        </div>
+      </DialogContent>
+    </Dialog>
   );
 };
