@@ -2,11 +2,11 @@
 
 ## Is this the 2024 / “5.5e” rules?
 
-No. The shipped product is a **D&D 5e** point-buy calculator as described in the [README](../README.md). Support for the 2024 Player’s Handbook (often called 5.5e) is an open [roadmap](../roadmap/roadmap.json) item.
+Yes. A fresh calculator opens with **2024 rules (5.5e)**. Choose **2014 rules (5e)** in Character Setup to use racial bonuses. Existing build links with 2014 fields and version 1 JSON files restore in 2014 mode.
 
 ## Which races are included?
 
-See the Racial Modifiers and Variants section in the [README](../README.md). That list is the product source of truth for players; `src/data/races/` is the implementation source of truth for contributors.
+The 2024 mode includes the ten Player’s Handbook species. See the 2014 Racial Modifiers and Variants section in the [README](../README.md) for the legacy roster.
 
 ## Which UI languages work today?
 

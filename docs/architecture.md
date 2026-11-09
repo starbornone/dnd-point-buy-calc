@@ -26,8 +26,8 @@ flowchart TD
 | --- | --- | --- |
 | App shell | `src/app/` | Layout, providers, home page |
 | UI | `src/components/` | Form, attribute table, race/options selectors, print sheet, language select |
-| State | `src/context/` | Locale, race selection + choices, ability scores / budget |
-| Race rules | `src/data/races/`, `src/data/raceData.ts` | Bonuses, traits, language/skill/tool/cantrip grants |
+| State | `src/context/` | Locale, rules edition, origin and race choices, ability scores and budget |
+| Origin rules | `src/data/origins2024.ts`, `src/data/races/` | 2024 species and backgrounds, 2014 race bonuses and grants |
 | Lookups | `src/data/` | Skills, languages, tools, feats, dragons, cantrips |
 | Calculations | `src/utils/` | Point cost, modifiers, racial bonuses, build serialize/parse |
 | i18n | `src/i18n/` | Locales, UI strings, display names, Chinese racial trait text |
@@ -36,8 +36,8 @@ flowchart TD
 ## Control and data flow
 
 1. Middleware reads `?lang=` for the home page. The layout uses that locale for the initial HTML language, metadata, and locale provider. `BuildSync` restores build state from the URL and updates the query in browser history as the user edits.
-2. Selecting a race or variant updates `RaceContext`, which drives available choices (skills, languages, tools, cantrips, ancestry, feat).
-3. Score edits and flexible ASI picks update `StatsContext`; utils recalculate point cost, remaining budget, racial totals, and modifiers.
+2. `RaceContext` defaults to 2024 and stores each edition’s selections separately when switching rules. `StatsContext` holds the base scores and budget shared between editions.
+3. The 2024 build links use `rules=2024`, and 2024 JSON exports use version 2. Build links without an edition marker and version 1 JSON files restore the 2014 rules. Calculations apply the active edition’s bonuses to the shared base scores.
 4. Locale changes swap UI copy and labels via `LocaleContext` / `src/i18n`; race rules text falls back to English when a locale has no trait translation (Chinese has dedicated trait text).
 
 ## Where a typical change lands

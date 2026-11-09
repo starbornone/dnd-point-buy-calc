@@ -30,9 +30,9 @@ Lightweight records inferred from the README and the shipped codebase. Not a ful
 
 **Context:** Players need ability scores and racial grants, not a full digital character sheet.
 
-**Decision:** Ship point buy, standard array, racial ASIs/variants, and race-granted choices (skills, languages, tools, cantrips, feats, ancestry). Do not treat classes, leveling, or inventory as in-scope unless the roadmap says otherwise.
+**Decision:** Support point buy and standard array with 2024 background increases and origin choices, alongside the 2014 racial increases and grants. Classes, leveling, and inventory are outside this scope.
 
-**Consequences:** Feature requests for full builder tooling should become roadmap items or be declined; 5.5e support is tracked separately rather than silently mixed into 5e data.
+**Consequences:** Each edition uses its own origin data. A fresh calculator defaults to 2024, and existing 2014 builds retain their edition.
 
 ## ADR-005: name-roadmap/v1 JSON in `roadmap/`
 

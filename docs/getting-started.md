@@ -32,14 +32,14 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
-You should see the point-buy calculator title, race selector, ability score table, and language select (English and 简体中文).
+You should see the point-buy calculator, the rules edition selector, the ability score table, and the language selector (English and 简体中文).
 
 ## First useful action
 
-1. Select a race (for example **Dragonborn**).
-2. Confirm racial bonuses appear on Strength and Charisma and update totals.
-3. Raise or lower a score and watch point cost / points remaining change.
-4. Optionally click the standard-array control to fill 15, 14, 13, 12, 10, 8.
+1. In the default 2024 rules, choose a species and the **Farmer** background.
+2. Choose **+1 to all three** and confirm the totals for Strength, Constitution, and Wisdom each rise by one.
+3. Raise or lower a base score to see point costs and the remaining budget update.
+4. To use the original race picker, select **2014 rules (5e)** in Character Setup.
 
 ## Failure symptoms
 

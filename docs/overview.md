@@ -1,6 +1,6 @@
 # Overview
 
-**D&D 5e Point-Buy Calculator** (`dnd-point-buy-calc`) is a Next.js web app that builds starting ability scores for *Dungeons & Dragons* 5th Edition characters using the point-buy rules, with racial bonuses, variants, and related starting choices applied live.
+**D&D 5e Point-Buy Calculator** (`dnd-point-buy-calc`) is a Next.js app for building starting ability scores. It opens in 2024 mode (5.5e) and offers a 2014 mode (5e) in Character Setup.
 
 ## Who it is for
 
@@ -12,8 +12,8 @@
 
 - Adjust Strength, Dexterity, Constitution, Intelligence, Wisdom, and Charisma within point-buy limits
 - Fill the Player’s Handbook standard array (15, 14, 13, 12, 10, 8)
-- Apply racial ability increases and variant-specific bonuses from the races listed in the [README](../README.md)
-- Choose flexible ASI slots, skills, languages, tools, cantrips, feats, or draconic ancestry when a race grants them
+- In 2024 mode, choose a Player’s Handbook species and background, then apply the background’s ability increases. The origin summary shows the background’s feat and skills.
+- In 2014 mode, apply racial ability increases and variant-specific bonuses, and make the starting choices listed in the [README](../README.md).
 - See totals, point cost, remaining budget, and ability modifiers update immediately
 - Switch UI locale between English and Simplified Chinese (other languages are planned)
 - Share or restore a build via URL / import-export flows present in the app
@@ -24,12 +24,11 @@ Assumption: the README describes a **5e** calculator, not a full character sheet
 
 - Not a complete character builder (no classes, levels, equipment loadouts, or spell lists beyond race-granted cantrips)
 - Not a rules encyclopedia for every published 5e option
-- Not D&D **5.5e / 2024 Player’s Handbook** support yet — that is tracked on the [roadmap](../roadmap/roadmap.json)
 - No backend, accounts, or multiplayer sync
 
 ## Status
 
-The project is **active**. Shipped 5e point-buy and racial coverage are documented in the README; remaining work (5.5e update and additional locales) lives in `roadmap/`.
+The project is **active**. The README documents coverage for both editions. The remaining locale work is in the [roadmap](../roadmap/roadmap.json).
 
 ## Next reads
 

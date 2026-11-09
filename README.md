@@ -1,6 +1,6 @@
 # D&D 5e Point-Buy Calculator
 
-A point-buy calculator for **Dungeons & Dragons 5th Edition** (D&D 5e) that helps generate character ability scores with race-specific bonuses and variant handling. Built using **Next.js** and **TypeScript**, this web application dynamically calculates point costs for ability scores and applies racial modifiers based on the selected race or variant.
+A point-buy calculator for **Dungeons & Dragons** with the **2024 rules (5.5e)** as the default. Use **Rules edition** in Character Setup to switch to the **2014 rules (5e)**. Shared builds retain their edition, and older links and JSON files with build data open in 2014 mode.
 
 ## Documentation
 
@@ -16,12 +16,17 @@ A point-buy calculator for **Dungeons & Dragons 5th Edition** (D&D 5e) that help
 - Fills the Player's Handbook standard array: 15, 14, 13, 12, 10, 8.
 - Automatically calculates and displays the point costs for each ability score based on D&D 5e point buy rules.
 
-### Racial Modifiers
+### 2024 Origins
+
+- Choose from all ten 2024 Player’s Handbook species and all sixteen backgrounds. The calculator records available lineages, the background’s Origin feat and skills, and the extra Origin feat for Humans.
+- Apply **+2 to one eligible ability and +1 to another**, or **+1 to each** of the background’s three abilities. Point costs use the base scores and start from a 27-point budget. [2024 character creation rules](https://www.dndbeyond.com/sources/dnd/br-2024/creating-a-character)
+
+### 2014 Racial Modifiers
 
 - **Dynamic racial modifiers** are applied when a user selects a race from the dropdown.
 - The app includes all standard D&D 5e races such as **Dragonborn**, **Elf**, **Dwarf**, **Tiefling**, and **Human**.
 - Variant races are also supported, such as **High Elf**, **Hill Dwarf**, and **Variant Human**.
-- **Example**: Selecting **Dragonborn** automatically applies +2 to Strength and +1 to Charisma, updating the total character ability scores and point costs.
+- Selecting **Dragonborn** automatically applies +2 to Strength and +1 to Charisma, updating the total ability scores.
 
 ### Custom Attribute Selection for Certain Races
 
@@ -35,7 +40,7 @@ A point-buy calculator for **Dungeons & Dragons 5th Edition** (D&D 5e) that help
 
 ### Live Modifier and Total Score Calculation
 
-- The app dynamically updates the total ability scores and modifiers as users adjust their base ability scores or racial bonuses.
+- The app dynamically updates the total ability scores and modifiers as users adjust their base ability scores or bonuses.
 - Modifiers for each ability score are calculated in real time based on the D&D 5e rules (e.g., a score of 14 provides a +2 modifier).
   
 ### Responsive Design with Tailwind CSS
@@ -52,7 +57,7 @@ A point-buy calculator for **Dungeons & Dragons 5th Edition** (D&D 5e) that help
 
 - Supports English and Simplified Chinese, including localized feedback, racial traits, feat names, and page metadata. Shared links retain the selected language.
 
-## Racial Modifiers and Variants
+## 2014 Racial Modifiers and Variants
 
 The app features the following races and variants with their respective racial modifiers:
 
@@ -108,7 +113,6 @@ The app features the following races and variants with their respective racial m
 
 Tracked in [roadmap/roadmap.json](roadmap/roadmap.json) (highest priority first):
 
-- Update for D&D 5.5e (2024 Player's Handbook)
 - Languages still to add:
   - Japanese
   - Macedonian

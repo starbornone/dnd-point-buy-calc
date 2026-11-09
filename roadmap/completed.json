@@ -1,7 +1,7 @@
 {
   "schema": "name-roadmap/v1",
   "file": "completed",
-  "updatedAt": "2026-11-10T00:05:28+11:00",
+  "updatedAt": "2026-11-10T09:51:29+11:00",
   "project": {
     "key": "dnd-point-buy-calc",
     "title": "D&D 5e Point-Buy Calculator",
@@ -151,6 +151,13 @@
       "group": "ui",
       "notes": "Show only enabled locales in the dropdown; keep planned locales in PLANNED_LOCALES and the roadmap until they ship.",
       "completedAt": "2026-11-10T00:05:28+11:00"
+    },
+    {
+      "id": "support-dnd-5-5e",
+      "title": "Update the calculator for D&D 5.5e (2024 Player's Handbook)",
+      "group": "rules",
+      "notes": "Default to 2024 rules with ten species, sixteen backgrounds, and both background bonus distributions. Offer 2014 mode and preserve existing links and JSON builds.",
+      "completedAt": "2026-11-10T09:51:29+11:00"
     }
   ]
 }
