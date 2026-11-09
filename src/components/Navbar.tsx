@@ -17,7 +17,7 @@ export const Navbar = () => {
           className="min-h-11 px-2.5 py-1.5 text-sm"
         >
           <Link
-            href="https://sha.codes"
+            href="https://starmist.studio/"
             target="_blank"
             rel="noopener noreferrer"
           >
