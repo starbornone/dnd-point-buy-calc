@@ -3,9 +3,20 @@
 import { NativeSelect } from "@/components/ui/native-select";
 import { useLocale, useMessages } from "@/context/LocaleContext";
 import { useRace } from "@/context/RaceContext";
-import { featOptions, feats } from "@/data/feats";
+import { featOptions } from "@/data/feats";
 import { raceData } from "@/data/raceData";
-import { abilityLabel, ancestryLabel, cantripLabel, featLabel, languageLabel, skillLabel, toolGroupLabel, toolLabel } from "@/i18n/names";
+import {
+  abilityLabel,
+  ancestryLabel,
+  cantripLabel,
+  featLabel,
+  featsForLocale,
+  languageGroupLabel,
+  languageLabel,
+  skillLabel,
+  toolGroupLabel,
+  toolLabel,
+} from "@/i18n/names";
 import { skills } from "@/data/skills";
 import {
   featNeedsChoice,
@@ -14,7 +25,7 @@ import {
   dragonOptions,
   getFixedBonuses,
   getSelectedFloatingBonuses,
-  languageOptions,
+  languageGroupsFor,
   resolveCantripChoice,
   resolveLanguageChoice,
   resolveSkillChoice,
@@ -172,7 +183,7 @@ export const CharacterOptions = () => {
             onChange={(event) => setSelectedFeat(event.target.value)}
           >
             <option value="">{copy.selectFeat}</option>
-            {feats.map((feat) => (
+            {featsForLocale(locale).map((feat) => (
               <option key={feat} value={feat}>
                 {featLabel(locale, feat)}
               </option>
@@ -222,13 +233,30 @@ export const CharacterOptions = () => {
                 onChange={(event) => setSelectedLanguage(slot, event.target.value)}
               >
                 <option value="">{copy.selectLanguage}</option>
-                {languageOptions(languageChoice)
-                  .filter((language) => language !== other)
-                  .map((language) => (
-                    <option key={language} value={language}>
-                      {languageLabel(locale, language)}
-                    </option>
-                  ))}
+                {languageGroupsFor(languageChoice).map((group) => {
+                  const options = group.languages
+                    .filter((language) => language !== other)
+                    .slice()
+                    .sort((a, b) =>
+                      languageLabel(locale, a).localeCompare(
+                        languageLabel(locale, b),
+                        locale
+                      )
+                    );
+                  if (options.length === 0) return null;
+                  return (
+                    <optgroup
+                      key={group.name}
+                      label={languageGroupLabel(locale, group.name)}
+                    >
+                      {options.map((language) => (
+                        <option key={language} value={language}>
+                          {languageLabel(locale, language)}
+                        </option>
+                      ))}
+                    </optgroup>
+                  );
+                })}
               </NativeSelect>
             </div>
           );

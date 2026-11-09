@@ -1,6 +1,10 @@
 import { raceData } from "@/data/raceData";
 import { describe, expect, it } from "vitest";
-import { resolveLanguageChoice, selectLanguages } from "./languageChoice";
+import {
+  languageGroupsFor,
+  resolveLanguageChoice,
+  selectLanguages,
+} from "./languageChoice";
 
 const variant = (raceKey: string, name: string) =>
   raceData[raceKey].variants?.find((entry) => entry.name === name);
@@ -26,5 +30,19 @@ describe("language choices", () => {
       "Orc",
       "Goblin",
     ]);
+  });
+
+  it("groups remaining languages as standard then exotic after exclusions", () => {
+    const halfElf = resolveLanguageChoice(raceData.halfElf, undefined);
+    expect(halfElf).toBeDefined();
+    const groups = languageGroupsFor(halfElf!);
+    expect(groups.map((group) => group.name)).toEqual([
+      "Standard languages",
+      "Exotic languages",
+    ]);
+    expect(groups[0].languages).not.toContain("Common");
+    expect(groups[0].languages).not.toContain("Elvish");
+    expect(groups[0].languages).toContain("Dwarvish");
+    expect(groups[1].languages).toContain("Draconic");
   });
 });

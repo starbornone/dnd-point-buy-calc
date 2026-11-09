@@ -1,7 +1,12 @@
 import { CantripName, wizardCantrips } from "@/data/cantrips";
 import { DragonBreath, DragonDamage, DragonName, dragonByName, dragons } from "@/data/dragons";
-import type { FeatName } from "@/data/feats";
-import { languages, LanguageName } from "@/data/languages";
+import { FeatName, feats } from "@/data/feats";
+import {
+  LanguageGroupName,
+  LanguageName,
+  languageGroups,
+  languages,
+} from "@/data/languages";
 import { raceDropdown } from "@/data/raceDropdown";
 import { skills } from "@/data/skills";
 import { ToolGroupName, ToolName, toolGroups, tools } from "@/data/tools";
@@ -219,6 +224,14 @@ const toolGroupNames: Record<Locale, Record<ToolGroupName, string>> = {
   },
 };
 
+const languageGroupNames: Record<Locale, Record<LanguageGroupName, string>> = {
+  en: identity(languageGroups.map((group) => group.name)),
+  zh: {
+    "Standard languages": "标准语言",
+    "Exotic languages": "异种语言",
+  },
+};
+
 export const cantripNames: Record<Locale, Record<CantripName, string>> = {
   en: identity(wizardCantrips),
   zh: {
@@ -318,11 +331,19 @@ const featNamesZh: Record<FeatName, string> = {
 export const featLabel = (locale: Locale, feat: string): string =>
   locale === "zh" ? (featNamesZh[feat as FeatName] ?? feat) : feat;
 
+export const featsForLocale = (locale: Locale): FeatName[] =>
+  [...feats].sort((a, b) =>
+    featLabel(locale, a).localeCompare(featLabel(locale, b), locale)
+  );
+
 export const skillLabel = (locale: Locale, skill: string): string =>
   skillNames[locale][skill as SkillName] ?? skill;
 
 export const languageLabel = (locale: Locale, language: string): string =>
   languageNames[locale][language as LanguageName] ?? language;
+
+export const languageGroupLabel = (locale: Locale, group: string): string =>
+  languageGroupNames[locale][group as LanguageGroupName] ?? group;
 
 export const toolLabel = (locale: Locale, tool: string): string =>
   toolNames[locale][tool as ToolName] ?? tool;

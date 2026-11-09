@@ -1,4 +1,4 @@
-import { languages } from "@/data/languages";
+import { languageGroups, languages } from "@/data/languages";
 import { LanguageChoice, Race, Variant } from "@/types";
 
 export type LanguagePicks = [string, string];
@@ -18,6 +18,18 @@ export const resolveLanguageChoice = (
 export const languageOptions = (choice: LanguageChoice): readonly string[] => {
   const excluded = new Set(choice.exclude ?? []);
   return languageNames.filter((name) => !excluded.has(name));
+};
+
+export const languageGroupsFor = (
+  choice: LanguageChoice
+): { name: string; languages: readonly string[] }[] => {
+  const excluded = new Set(choice.exclude ?? []);
+  return languageGroups
+    .map((group) => ({
+      name: group.name,
+      languages: group.languages.filter((name) => !excluded.has(name)),
+    }))
+    .filter((group) => group.languages.length > 0);
 };
 
 export const selectLanguages = (
