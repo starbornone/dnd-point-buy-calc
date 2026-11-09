@@ -44,11 +44,24 @@ export const RacialTraits = () => {
       {copy.rulesInEnglish ? <p className="text-sm text-muted-foreground">{copy.rulesInEnglish}</p> : null}
       {selectedRaceTraits ? (
         <>
+          {selectedRaceTraits.description ? (
+            <div className="space-y-1 text-sm leading-relaxed">
+              <p>{selectedRaceTraits.description}</p>
+              <dl className="text-muted-foreground">
+                <dt className="inline font-semibold">{copy.abilityScoreIncrease}</dt>
+                <dd className="inline">{selectedRaceTraits.ability}</dd>
+              </dl>
+            </div>
+          ) : null}
           <div className="grid gap-x-7 gap-y-4 border-t border-border pt-3 text-sm md:grid-cols-2 [&_dd]:leading-relaxed [&_dt]:mt-3 [&_dt]:font-semibold [&_dt]:text-primary [&_dt:first-child]:mt-0">
             <div>
               <dl>
-                <dt>{copy.abilityScoreIncrease}</dt>
-                <dd>{selectedRaceTraits.ability}</dd>
+                {selectedRaceTraits.description ? null : (
+                  <>
+                    <dt>{copy.abilityScoreIncrease}</dt>
+                    <dd>{selectedRaceTraits.ability}</dd>
+                  </>
+                )}
                 <dt>{copy.age}</dt>
                 <dd>{selectedRaceTraits.age}</dd>
                 <dt>{copy.alignment}</dt>

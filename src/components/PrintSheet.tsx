@@ -169,6 +169,7 @@ export const PrintSheet = () => {
         <>
           <h2>{copy.racialTraits}</h2>
           {copy.rulesInEnglish ? <p>{copy.rulesInEnglish}</p> : null}
+          {traits.description ? <p>{traits.description}</p> : null}
           <p>{traits.ability}</p>
           {traits.other.map((trait) => (
             <p key={trait}>{trait}</p>
