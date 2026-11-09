@@ -1,7 +1,7 @@
 {
   "schema": "name-roadmap/v1",
   "file": "completed",
-  "updatedAt": "2026-11-09T20:40:00+11:00",
+  "updatedAt": "2026-11-09T20:59:23+11:00",
   "project": {
     "key": "dnd-point-buy-calc",
     "title": "D&D 5e Point-Buy Calculator",
@@ -81,6 +81,13 @@
       "group": "seo",
       "notes": "Canonical URLs per locale, Open Graph/Twitter cards, WebApplication schema, crawlable about copy, and NEXT_PUBLIC_SITE_URL.",
       "completedAt": "2026-11-09T20:40:00+11:00"
+    },
+    {
+      "id": "score-steppers-and-sticky-mobile-budget",
+      "title": "Add score steppers and keep the budget visible on mobile",
+      "group": "ui",
+      "notes": "Show the point cost of the next score increase and keep the budget summary visible while scrolling through ability scores on mobile.",
+      "completedAt": "2026-11-09T20:59:23+11:00"
     }
   ]
 }

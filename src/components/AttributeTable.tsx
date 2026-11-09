@@ -15,6 +15,8 @@ import {
   featGrantsIncrease,
   getFixedBonuses,
   handleAttributeChange,
+  MAX_ABILITY_SCORE,
+  MIN_ABILITY_SCORE,
   resolveFloatingBonus,
 } from "@/utils";
 import { AttributeTableBody } from "./AttributeTableBody";
@@ -45,23 +47,25 @@ export const AttributeTable = () => {
   return (
     <section aria-labelledby="scores-heading" className="min-w-0">
       <Card className="ledger-feature flex flex-col gap-4 sm:gap-5 sm:p-5 xl:p-6">
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div className="contents md:flex md:items-center md:justify-between md:gap-3">
           <h2 id="scores-heading" className="font-display text-2xl leading-tight text-primary sm:text-3xl">
             {copy.abilityScores}
           </h2>
-          <dl className="grid grid-cols-2 divide-x divide-border overflow-hidden rounded-md border border-border text-[0.65rem] font-medium uppercase leading-snug tracking-wider sm:min-w-56" aria-hidden="true">
-            <div className="flex flex-col justify-between gap-1 bg-background px-2.5 py-2 text-muted-foreground sm:px-4">
+          <dl className="sticky top-2 z-10 grid grid-cols-2 divide-x divide-border overflow-hidden rounded-md border border-border bg-card text-[0.65rem] font-medium uppercase leading-snug tracking-wider md:static md:min-w-56" aria-hidden="true">
+            <div className="flex items-center justify-between gap-1 bg-background px-2.5 py-2 text-muted-foreground md:flex-col md:items-start md:px-4">
               <dt>{copy.totalCost}</dt>
-              <dd className="font-display text-3xl leading-none tracking-normal text-foreground tabular-nums">{pointCost ?? "—"}</dd>
+              <dd className="font-display text-2xl leading-none tracking-normal text-foreground tabular-nums md:text-3xl">{pointCost ?? "—"}</dd>
             </div>
             <div
               className={cn(
-                "flex flex-col justify-between gap-1 px-2.5 py-2 sm:px-4",
+                "flex items-center justify-between gap-1 px-2.5 py-2 md:flex-col md:items-start md:px-4",
                 overBudget ? "bg-danger text-danger-foreground" : "bg-muted text-primary"
               )}
             >
-              <dt>{copy.pointsRemaining}</dt>
-              <dd className="font-display text-3xl leading-none tracking-normal tabular-nums">{remaining ?? "—"}</dd>
+              <dt>{overBudget ? copy.pointsOverBudget : copy.pointsRemaining}</dt>
+              <dd className="font-display text-2xl leading-none tracking-normal tabular-nums md:text-3xl">
+                {remaining === null ? "—" : Math.abs(remaining)}
+              </dd>
             </div>
           </dl>
           <p className="sr-only" role="status" aria-atomic="true">
@@ -99,6 +103,12 @@ export const AttributeTable = () => {
             handleChange={(event, attr) =>
               handleAttributeChange(event, attr, setAttributes)
             }
+            stepScore={(attr, delta) => {
+              setAttributes((current) => {
+                const next = Math.min(MAX_ABILITY_SCORE, Math.max(MIN_ABILITY_SCORE, current[attr] + delta));
+                return next === current[attr] ? current : { ...current, [attr]: next };
+              });
+            }}
           />
         </Table>
       </Card>

@@ -46,6 +46,7 @@ const en = {
   modifier: "Modifier",
   totalCost: "Total cost",
   pointsRemaining: "Points remaining",
+  pointsOverBudget: "Points over budget",
   pointLimit: (budget: number) => `Point cost cannot exceed ${budget}.`,
   scoreTooLow: (min: number) => `Base score cannot be lower than ${min}.`,
   scoreTooHigh: (max: number) => `Base score cannot be higher than ${max}.`,
@@ -98,6 +99,11 @@ const en = {
   pointSummary: (cost: string, budget: number, remaining: string) =>
     `Point cost ${cost} of ${budget}. Points remaining ${remaining}.`,
   scoreAria: (name: string) => `${name} score`,
+  decreaseScore: (name: string) => `Decrease ${name} base score`,
+  increaseScore: (name: string) => `Increase ${name} base score`,
+  nextScoreCost: (score: number, cost: number) =>
+    `${score} costs ${cost} more ${cost === 1 ? "point" : "points"}`,
+  maximumBaseScore: "Maximum base score",
 };
 
 export type Messages = typeof en;
@@ -148,6 +154,7 @@ const zh: Messages = {
   modifier: "调整值",
   totalCost: "已用点数",
   pointsRemaining: "剩余点数",
+  pointsOverBudget: "超出预算",
   pointLimit: (budget: number) => `购点总数不能超过 ${budget}`,
   scoreTooLow: (min: number) => `属性基础值不能低于 ${min}`,
   scoreTooHigh: (max: number) => `属性基础值不能高于 ${max}`,
@@ -200,6 +207,10 @@ const zh: Messages = {
   pointSummary: (cost: string, budget: number, remaining: string) =>
     `已用点数 ${cost} / ${budget}。剩余点数 ${remaining}。`,
   scoreAria: (name: string) => `${name}基础值`,
+  decreaseScore: (name: string) => `降低${name}基础值`,
+  increaseScore: (name: string) => `提高${name}基础值`,
+  nextScoreCost: (score: number, cost: number) => `升至 ${score} 需再花 ${cost} 点`,
+  maximumBaseScore: "已达基础值上限",
 };
 
 export const messages: Record<Locale, Messages> = { en, zh };
