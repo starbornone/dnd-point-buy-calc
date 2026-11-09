@@ -22,16 +22,15 @@ describe("locale query", () => {
       featAbility: "",
       budget: 27,
     });
-    const localized = withLocale(query, "es");
+    const localized = withLocale(query, "zh");
 
-    expect(readLocale(localized)).toBe("es");
+    expect(readLocale(localized)).toBe("zh");
     expect(parseBuild(localized)).toMatchObject({
       race: "dwarf",
       variant: "Hill Dwarf",
       attributes: expect.objectContaining({ strength: 15 }),
     });
     expect(withLocale(query, "zh")).toContain("lang=zh");
-    expect(readLocale(withLocale(query, "zh"))).toBe("zh");
     expect(withLocale(query, "en")).toBe(query);
   });
 
@@ -60,8 +59,6 @@ describe("display names", () => {
   it("uses the handbook skill names", () => {
     expect(skillLabel("zh", "Perception")).toBe("察觉");
     expect(skillLabel("zh", "Animal Handling")).toBe("驯兽");
-    expect(skillLabel("es", "Perception")).toBe("Percepción");
-    expect(skillLabel("es", "Animal Handling")).toBe("Trato con animales");
     expect(skillLabel("en", "Perception")).toBe("Perception");
   });
 });
@@ -97,9 +94,4 @@ describe("Chinese racial trait text", () => {
     expect(human?.other).toContain("你获得一项自选专长。");
   });
 
-  it("preserves English rules text for Spanish", () => {
-    expect(getRaceTraits("es", "dwarf", "Hill Dwarf")).toEqual(
-      getRaceTraits("en", "dwarf", "Hill Dwarf")
-    );
-  });
 });

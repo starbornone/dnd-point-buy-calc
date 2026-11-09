@@ -41,7 +41,6 @@ export const RacialTraits = () => {
       className="flex flex-col gap-3 sm:gap-4 sm:p-5 lg:col-span-2 xl:p-6"
     >
       <h2 id="racial-traits-heading" className="font-display text-2xl leading-tight text-primary">{copy.racialTraits}</h2>
-      {copy.rulesInEnglish ? <p className="text-sm text-muted-foreground">{copy.rulesInEnglish}</p> : null}
       {selectedRaceTraits ? (
         <>
           {selectedRaceTraits.description ? (

@@ -90,99 +90,7 @@ const en = {
   scoreAria: (name: string) => `${name} score`,
 };
 
-export type Messages = typeof en & { rulesInEnglish?: string };
-
-const es: Messages = {
-  title: "Calculadora de compra de puntos de D&D 5e",
-  titleAccent: "D&D 5e",
-  ledgerLabel: "Registro del personaje",
-  description:
-    "Calcula las características de tu personaje de Dungeons & Dragons 5e con compra de puntos. Incluye costes, bonificadores raciales, totales, modificadores y un resumen de rasgos.",
-  aboutAndUsage: "Información y uso",
-  aboutBody:
-    "Crea las puntuaciones de característica iniciales de un personaje de Dungeons & Dragons 5e. La calculadora aplica los bonificadores de razas y variantes de varios manuales de 5e y muestra las puntuaciones finales, los modificadores y los rasgos raciales.",
-  pointBuyHelp:
-    "Gasta puntos para subir las seis puntuaciones de característica básicas de 8 a un máximo de 15. El presupuesto inicial es de 27 puntos y puedes ajustarlo para tu campaña.",
-  costTable: "Costes",
-  standardArray: "Puntuaciones estándar",
-  standardArrayHelp:
-    "Selecciona Puntuaciones estándar para asignar 15, 14, 13, 12, 10 y 8 de Fuerza a Carisma. Estas puntuaciones cuestan 27 puntos en total.",
-  projectLink: "Consulta el proyecto o informa de un error en GitHub",
-  close: "Cerrar",
-  characterSetup: "Configuración del personaje",
-  abilityScores: "Puntuaciones de característica",
-  buildTools: "Herramientas del personaje",
-  selectRace: "Elegir raza",
-  selectRacePlaceholder: "Elige una raza",
-  selectVariant: "Elegir variante",
-  selectVariantPlaceholder: "Elige una variante",
-  pointBudget: "Presupuesto de puntos",
-  copyLink: "Copiar enlace",
-  linkCopied: "Enlace copiado",
-  exportJson: "Exportar JSON",
-  importJson: "Importar JSON",
-  importJsonBuild: "Importar una hoja JSON",
-  importError: "Ese archivo no es una hoja de compra de puntos.",
-  print: "Imprimir",
-  reset: "Restablecer",
-  attribute: "Característica",
-  score: "Puntuación",
-  cost: "Coste",
-  racial: "Racial",
-  total: "Total",
-  modifier: "Modificador",
-  totalCost: "Coste total",
-  pointsRemaining: "Puntos restantes",
-  skillProficiency: "Competencia en habilidad",
-  selectSkill: "Elige una habilidad",
-  feat: "Dote",
-  selectFeat: "Elige una dote",
-  featAbility: "Característica de la dote",
-  racialTraits: "Rasgos raciales",
-  abilityScoreIncrease: "Incremento de puntuación de característica:",
-  age: "Edad:",
-  alignment: "Alineamiento:",
-  size: "Tamaño:",
-  speed: "Velocidad:",
-  languages: "Idiomas:",
-  chosenSkill: "Habilidad elegida:",
-  chosenSkills: "Habilidades elegidas:",
-  grantedSkill: "Habilidad concedida:",
-  grantedSkills: "Habilidades concedidas:",
-  grantedTool: "Herramienta concedida:",
-  grantedCantrip: "Truco concedido:",
-  grantedCantrips: "Trucos concedidos:",
-  skillSlot: (index: number) => `Habilidad ${index + 1}`,
-  extraLanguage: "Idioma adicional",
-  selectLanguage: "Elige un idioma",
-  languageSlot: (index: number) => `Idioma ${index + 1}`,
-  chosenLanguage: "Idioma elegido:",
-  chosenLanguages: "Idiomas elegidos:",
-  toolProficiency: "Competencia con herramientas",
-  selectTool: "Elige una herramienta",
-  chosenTool: "Herramienta elegida:",
-  cantrip: "Truco",
-  selectCantrip: "Elige un truco",
-  chosenCantrip: "Truco elegido:",
-  draconicAncestry: "Ascendencia dracónica",
-  selectDragon: "Elige un dragón",
-  chosenAncestry: "Ascendencia elegida:",
-  chosenFeat: "Dote elegida:",
-  selectRacePrompt: "Elige una raza para ver los rasgos raciales.",
-  noRace: "Ninguna raza seleccionada",
-  skillLine: "Habilidad:",
-  rulesInEnglish: "El texto de las reglas se muestra en inglés.",
-  language: "Idioma",
-  returnHome: "Volver a Starmist Studio",
-  supportOnKoFi: "Apoyar en Ko-fi",
-  oneBonus: "Elige una característica para el bonificador de +1",
-  selectAttribute: "Elige una característica",
-  bonusAttribute: (index: number) =>
-    `Característica ${index + 1} para el bonificador de +1`,
-  pointSummary: (cost: string, budget: number, remaining: string) =>
-    `Coste de puntos ${cost} de ${budget}. Puntos restantes ${remaining}.`,
-  scoreAria: (name: string) => `Puntuación de ${name}`,
-};
+export type Messages = typeof en;
 
 const zh: Messages = {
   title: "D&D 5e 购点计算器",
@@ -274,4 +182,4 @@ const zh: Messages = {
   scoreAria: (name: string) => `${name}基础值`,
 };
 
-export const messages: Record<Locale, Messages> = { en, zh, es };
+export const messages: Record<Locale, Messages> = { en, zh };

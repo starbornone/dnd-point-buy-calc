@@ -1,4 +1,4 @@
-export const LOCALES = ["en", "zh", "es"] as const;
+export const LOCALES = ["en", "zh"] as const;
 
 export const PLANNED_LOCALES = [
   { code: "mk", name: "Македонски" },

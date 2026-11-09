@@ -30,14 +30,6 @@ export const abilityNames: Record<Locale, Record<keyof AttributeState, string>> 
     wisdom: "感知",
     charisma: "魅力",
   },
-  es: {
-    strength: "Fuerza",
-    dexterity: "Destreza",
-    constitution: "Constitución",
-    intelligence: "Inteligencia",
-    wisdom: "Sabiduría",
-    charisma: "Carisma",
-  },
 };
 
 export const skillNames: Record<Locale, Record<SkillName, string>> = {
@@ -61,26 +53,6 @@ export const skillNames: Record<Locale, Record<SkillName, string>> = {
     "Sleight of Hand": "巧手",
     Stealth: "隐匿",
     Survival: "生存",
-  },
-  es: {
-    Acrobatics: "Acrobacias",
-    "Animal Handling": "Trato con animales",
-    Arcana: "Arcano",
-    Athletics: "Atletismo",
-    Deception: "Engaño",
-    History: "Historia",
-    Insight: "Perspicacia",
-    Intimidation: "Intimidación",
-    Investigation: "Investigación",
-    Medicine: "Medicina",
-    Nature: "Naturaleza",
-    Perception: "Percepción",
-    Performance: "Interpretación",
-    Persuasion: "Persuasión",
-    Religion: "Religión",
-    "Sleight of Hand": "Juego de manos",
-    Stealth: "Sigilo",
-    Survival: "Supervivencia",
   },
 };
 
@@ -133,30 +105,6 @@ export const raceNames: Record<Locale, Record<RaceKey, string>> = {
     tiefling: "提夫林",
     warforged: "战俑",
   },
-  es: {
-    aarakocra: "Aarakocra",
-    aasimar: "Aasimar",
-    changeling: "Cambiante",
-    dragonborn: "Dracónido",
-    dwarf: "Enano",
-    elf: "Elfo",
-    firbolg: "Firbolg",
-    genasi: "Genasi",
-    githyanki: "Githyanki",
-    githzerai: "Githzerai",
-    gnome: "Gnomo",
-    goliath: "Goliat",
-    halfElf: "Semielfo",
-    halfOrc: "Semiorco",
-    halfling: "Mediano",
-    human: "Humano",
-    kobold: "Kóbold",
-    lizardfolk: "Hombre lagarto",
-    shifter: "Shifter",
-    tabaxi: "Tabaxi",
-    tiefling: "Tiefling",
-    warforged: "Warforged",
-  },
 };
 
 const variantNames: Record<Locale, Record<string, string>> = {
@@ -186,24 +134,6 @@ const variantNames: Record<Locale, Record<string, string>> = {
     Swiftstride: "迅步",
     Wildhunt: "野猎",
   },
-  es: {
-    "Hill Dwarf": "Enano de las colinas",
-    "Mountain Dwarf": "Enano de las montañas",
-    "Dark Elf (Drow)": "Elfo oscuro (drow)",
-    "High Elf": "Alto elfo",
-    "Wood Elf": "Elfo de los bosques",
-    "Forest Gnome": "Gnomo de los bosques",
-    "Rock Gnome": "Gnomo de las rocas",
-    "Lightfoot Halfling": "Mediano piesligeros",
-    "Stout Halfling": "Mediano fornido",
-    "Standard Human": "Humano estándar",
-    "Variant Human": "Humano variante",
-    "Air Genasi": "Genasi del aire",
-    "Earth Genasi": "Genasi de la tierra",
-    "Fire Genasi": "Genasi del fuego",
-    "Water Genasi": "Genasi del agua",
-    Fallen: "Caído",
-  },
 };
 
 const englishLanguages = Object.fromEntries(
@@ -229,24 +159,6 @@ export const languageNames: Record<Locale, Record<LanguageName, string>> = {
     Primordial: "原初语",
     Sylvan: "木族语",
     Undercommon: "地底通用语",
-  },
-  es: {
-    Common: "Común",
-    Dwarvish: "Enano",
-    Elvish: "Élfico",
-    Giant: "Gigante",
-    Gnomish: "Gnómico",
-    Goblin: "Goblin",
-    Halfling: "Mediano",
-    Orc: "Orco",
-    Abyssal: "Abisal",
-    Celestial: "Celestial",
-    Draconic: "Dracónico",
-    "Deep Speech": "Habla profunda",
-    Infernal: "Infernal",
-    Primordial: "Primordial",
-    Sylvan: "Silvano",
-    Undercommon: "Infracomún",
   },
 };
 
@@ -293,47 +205,6 @@ export const toolNames: Record<Locale, Record<ToolName, string>> = {
     "Vehicles (land)": "陆上载具",
     "Vehicles (water)": "水上载具",
   },
-  es: {
-    "Alchemist's supplies": "Suministros de alquimista",
-    "Brewer's supplies": "Suministros de cervecero",
-    "Calligrapher's supplies": "Suministros de calígrafo",
-    "Carpenter's tools": "Herramientas de carpintero",
-    "Cartographer's tools": "Herramientas de cartógrafo",
-    "Cobbler's tools": "Herramientas de zapatero",
-    "Cook's utensils": "Utensilios de cocinero",
-    "Glassblower's tools": "Herramientas de soplador de vidrio",
-    "Jeweler's tools": "Herramientas de joyero",
-    "Leatherworker's tools": "Herramientas de peletero",
-    "Mason's tools": "Herramientas de albañil",
-    "Painter's supplies": "Suministros de pintor",
-    "Potter's tools": "Herramientas de alfarero",
-    "Smith's tools": "Herramientas de herrero",
-    "Tinker's tools": "Herramientas de hojalatero",
-    "Weaver's tools": "Herramientas de tejedor",
-    "Woodcarver's tools": "Herramientas de tallista",
-    "Disguise kit": "Kit de disfraz",
-    "Forgery kit": "Kit de falsificación",
-    "Herbalism kit": "Kit de herboristería",
-    "Navigator's tools": "Herramientas de navegante",
-    "Poisoner's kit": "Kit de envenenador",
-    "Thieves' tools": "Herramientas de ladrón",
-    "Dice set": "Juego de dados",
-    "Dragonchess set": "Ajedrez de dragones",
-    "Playing card set": "Baraja",
-    "Three-Dragon Ante set": "Ante de tres dragones",
-    Bagpipes: "Gaita",
-    Drum: "Tambor",
-    Dulcimer: "Dulcémele",
-    Flute: "Flauta",
-    Lute: "Laúd",
-    Lyre: "Lira",
-    Horn: "Cuerno",
-    "Pan flute": "Flauta de pan",
-    Shawm: "Chirimía",
-    Viol: "Viola",
-    "Vehicles (land)": "Vehículos terrestres",
-    "Vehicles (water)": "Vehículos acuáticos",
-  },
 };
 
 const toolGroupNames: Record<Locale, Record<ToolGroupName, string>> = {
@@ -344,13 +215,6 @@ const toolGroupNames: Record<Locale, Record<ToolGroupName, string>> = {
     "Gaming sets": "赌具",
     "Musical instruments": "乐器",
     Vehicles: "载具",
-  },
-  es: {
-    "Artisan's tools": "Herramientas de artesano",
-    Kits: "Equipos",
-    "Gaming sets": "Juegos",
-    "Musical instruments": "Instrumentos musicales",
-    Vehicles: "Vehículos",
   },
 };
 
@@ -374,24 +238,6 @@ export const cantripNames: Record<Locale, Record<CantripName, string>> = {
     "Shocking Grasp": "电爪",
     "True Strike": "克敌先机",
   },
-  es: {
-    "Acid Splash": "Salpicadura de ácido",
-    "Blade Ward": "Protección contra armas",
-    "Chill Touch": "Toque gélido",
-    "Dancing Lights": "Luces danzantes",
-    "Fire Bolt": "Rayo de fuego",
-    Friends: "Amigos",
-    Light: "Luz",
-    "Mage Hand": "Mano de mago",
-    Mending: "Remendar",
-    Message: "Mensaje",
-    "Minor Illusion": "Ilusión menor",
-    "Poison Spray": "Rocío de veneno",
-    Prestidigitation: "Prestidigitación",
-    "Ray of Frost": "Rayo de escarcha",
-    "Shocking Grasp": "Toque electrizante",
-    "True Strike": "Golpe certero",
-  },
 };
 
 export const dragonNames: Record<Locale, Record<DragonName, string>> = {
@@ -408,30 +254,16 @@ export const dragonNames: Record<Locale, Record<DragonName, string>> = {
     Silver: "银龙",
     White: "白龙",
   },
-  es: {
-    Black: "Negro",
-    Blue: "Azul",
-    Brass: "Latón",
-    Bronze: "Bronce",
-    Copper: "Cobre",
-    Gold: "Oro",
-    Green: "Verde",
-    Red: "Rojo",
-    Silver: "Plata",
-    White: "Blanco",
-  },
 };
 
 const damageNames: Record<Locale, Record<DragonDamage, string>> = {
   en: { acid: "Acid", lightning: "Lightning", fire: "Fire", poison: "Poison", cold: "Cold" },
   zh: { acid: "强酸", lightning: "闪电", fire: "火焰", poison: "毒素", cold: "寒冷" },
-  es: { acid: "Ácido", lightning: "Relámpago", fire: "Fuego", poison: "Veneno", cold: "Frío" },
 };
 
 const breathNames: Record<Locale, Record<DragonBreath, string>> = {
   en: { line: "5 by 30 ft. line", cone: "15 ft. cone" },
   zh: { line: "5 尺宽、30 尺长的直线", cone: "15 尺锥形" },
-  es: { line: "línea de 5 × 30 pies", cone: "cono de 15 pies" },
 };
 
 export const abilityLabel = (locale: Locale, key: keyof AttributeState): string =>
@@ -459,11 +291,6 @@ const extraCantripNames: Record<Locale, Record<string, string>> = {
     "Produce Flame": "燃火术",
     "Shape Water": "塑水术",
     Thaumaturgy: "奇术",
-  },
-  es: {
-    "Produce Flame": "Producir llama",
-    "Shape Water": "Moldear agua",
-    Thaumaturgy: "Taumaturgia",
   },
 };
 
