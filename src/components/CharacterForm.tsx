@@ -249,6 +249,7 @@ export const CharacterForm = () => {
 
       <div className="grid min-w-0 gap-4 sm:gap-5 lg:gap-6">
         <AttributeTable />
+        <RacialTraits />
         <Card
           role="region"
           aria-labelledby="build-tools-heading"
@@ -294,8 +295,6 @@ export const CharacterForm = () => {
           </p>
         </Card>
       </div>
-
-      <RacialTraits />
     </form>
   );
 };

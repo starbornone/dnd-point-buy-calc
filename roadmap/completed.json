@@ -1,7 +1,7 @@
 {
   "schema": "name-roadmap/v1",
   "file": "completed",
-  "updatedAt": "2026-11-09T23:50:32+11:00",
+  "updatedAt": "2026-11-09T23:52:17+11:00",
   "project": {
     "key": "dnd-point-buy-calc",
     "title": "D&D 5e Point-Buy Calculator",
@@ -137,6 +137,13 @@
       "group": "ui",
       "notes": "Sort feat options by localized label. Show Standard and Exotic language optgroups with locale-aware ordering inside each group.",
       "completedAt": "2026-11-09T23:50:32+11:00"
+    },
+    {
+      "id": "raise-racial-traits-section",
+      "title": "Place Racial Traits between Ability scores and Build tools",
+      "group": "ui",
+      "notes": "Keep traits beside the scores column so race details sit higher on the page than share/import actions.",
+      "completedAt": "2026-11-09T23:52:17+11:00"
     }
   ]
 }
