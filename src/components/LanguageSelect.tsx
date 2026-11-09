@@ -19,7 +19,7 @@ export const LanguageSelect = () => {
       }}
     >
       <option value="en">English</option>
-      <option value="zh">中文</option>
+      <option value="zh">简体中文</option>
       <option value="es">Español</option>
     </NativeSelect>
   );

@@ -4,24 +4,10 @@ import { Card } from "@/components/ui/card";
 import { Fragment } from "react";
 import { useLocale, useMessages } from "@/context/LocaleContext";
 import { useRace } from "@/context/RaceContext";
-import { emptyBonuses } from "@/data/bonuses";
-import { raceData } from "@/data";
-import { Race } from "@/types/race";
-import { DEFAULT_LOCALE } from "@/i18n/locale";
+import { raceData } from "@/data/raceData";
 import { abilityLabel, ancestryLabel, cantripLabel, languageLabel, skillLabel, toolLabel } from "@/i18n/names";
-import { grantedFeatAbility, mergeRaceAndVariant, resolveGrantedCantrips, resolveGrantedSkills, resolveGrantedTools } from "@/utils";
-
-const defaultTraits: Race = {
-  name: "",
-  bonuses: emptyBonuses(),
-  ability: "",
-  age: "",
-  alignment: "",
-  size: "",
-  speed: "",
-  language: "",
-  other: [],
-};
+import { getRaceTraits } from "@/i18n/raceTraits";
+import { grantedFeatAbility, resolveGrantedCantrips, resolveGrantedSkills, resolveGrantedTools } from "@/utils";
 
 export const RacialTraits = () => {
   const { locale } = useLocale();
@@ -38,27 +24,15 @@ export const RacialTraits = () => {
     selectedFeatAbility,
   } = useRace();
   const chosenSkills = selectedSkills.filter(Boolean);
-  const grantedSkills = resolveGrantedSkills(
-    raceData[selectedRace],
-    raceData[selectedRace]?.variants?.find((entry) => entry.name === selectedVariant)
-  );
-  const grantedTools = resolveGrantedTools(
-    raceData[selectedRace],
-    raceData[selectedRace]?.variants?.find((entry) => entry.name === selectedVariant)
-  );
-  const grantedCantrips = resolveGrantedCantrips(
-    raceData[selectedRace],
-    raceData[selectedRace]?.variants?.find((entry) => entry.name === selectedVariant)
-  );
+  const race = raceData[selectedRace];
+  const variant = race?.variants?.find((entry) => entry.name === selectedVariant);
+  const grantedSkills = resolveGrantedSkills(race, variant);
+  const grantedTools = resolveGrantedTools(race, variant);
+  const grantedCantrips = resolveGrantedCantrips(race, variant);
   const chosenLanguages = selectedLanguages.filter(Boolean);
   const featAbility = grantedFeatAbility(selectedFeat, selectedFeatAbility);
 
-  const baseRaceTraits = raceData[selectedRace] || defaultTraits;
-
-  const selectedRaceTraits = mergeRaceAndVariant(
-    baseRaceTraits,
-    selectedVariant
-  );
+  const selectedRaceTraits = getRaceTraits(locale, selectedRace, selectedVariant);
 
   return (
     <Card
@@ -67,8 +41,8 @@ export const RacialTraits = () => {
       className="flex flex-col gap-3 sm:gap-4 sm:p-5 lg:col-span-2 xl:p-6"
     >
       <h2 id="racial-traits-heading" className="font-display text-2xl leading-tight text-primary">{copy.racialTraits}</h2>
-      {locale !== DEFAULT_LOCALE ? <p className="text-sm text-muted-foreground">{copy.rulesInEnglish}</p> : null}
-      {selectedRace ? (
+      {copy.rulesInEnglish ? <p className="text-sm text-muted-foreground">{copy.rulesInEnglish}</p> : null}
+      {selectedRaceTraits ? (
         <>
           <div className="grid gap-x-7 gap-y-4 border-t border-border pt-3 text-sm md:grid-cols-2 [&_dd]:leading-relaxed [&_dt]:mt-3 [&_dt]:font-semibold [&_dt]:text-primary [&_dt:first-child]:mt-0">
             <div>
@@ -101,7 +75,7 @@ export const RacialTraits = () => {
                 )}
                 {selectedRaceTraits.other.map((trait, index) => {
                   if (index % 2 === 0) {
-                    return <dt key={index}>{trait}:</dt>;
+                    return <dt key={index}>{trait}{locale === "zh" ? "：" : ":"}</dt>;
                   }
                   return <dd key={index}>{trait}</dd>;
                 })}

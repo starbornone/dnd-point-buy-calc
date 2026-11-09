@@ -79,7 +79,6 @@ const en = {
   selectRacePrompt: "Please select a race to see the racial traits.",
   noRace: "No race selected",
   skillLine: "Skill:",
-  rulesInEnglish: "Rules text is shown in English.",
   language: "Language",
   returnHome: "Return to Starmist Studio",
   supportOnKoFi: "Support on Ko-fi",
@@ -91,7 +90,7 @@ const en = {
   scoreAria: (name: string) => `${name} score`,
 };
 
-export type Messages = typeof en;
+export type Messages = typeof en & { rulesInEnglish?: string };
 
 const es: Messages = {
   title: "Calculadora de compra de puntos de D&D 5e",
@@ -190,26 +189,26 @@ const zh: Messages = {
   titleAccent: "购点计算器",
   ledgerLabel: "角色记录",
   description:
-    "用购点法计算《龙与地下城》第五版角色属性。包含点数花费、种族加值、总值、调整值和特质摘要。",
+    "用购点法计算《龙与地下城》第五版角色属性。包含点数花费、种族加成、属性总值、调整值和种族特性摘要。",
   basicUsage: "基本用法",
   basicUsageBody: "使用 27 点，与《玩家手册》的建议一致。",
   costTable: "点数花费",
-  standardArray: "标准数组",
+  standardArray: "标准属性",
   standardArrayHelp:
-    "标准数组为 15、14、13、12、10、8，从力量依次分配到魅力，共花费 27 点。",
+    "标准属性值为 15、14、13、12、10、8，从力量依次分配到魅力，共花费 27 点。",
   about: "关于",
   aboutLead:
     "这个购点计算器覆盖多本《龙与地下城》第五版规则书。我已经有一段时间没有认真玩过第五版，如果发现错误，请在",
   aboutTrail: "提交问题。",
   close: "关闭",
   characterSetup: "角色设置",
-  abilityScores: "属性数值",
-  buildTools: "角色工具",
+  abilityScores: "属性值",
+  buildTools: "构建工具",
   selectRace: "选择种族",
-  selectRacePlaceholder: "选择一个种族",
+  selectRacePlaceholder: "选择种族",
   selectVariant: "选择亚种",
   selectVariantPlaceholder: "选择一个亚种",
-  pointBudget: "点数上限",
+  pointBudget: "购点预算",
   copyLink: "复制链接",
   linkCopied: "链接已复制",
   exportJson: "导出 JSON",
@@ -219,10 +218,10 @@ const zh: Messages = {
   print: "打印",
   reset: "重置",
   attribute: "属性",
-  score: "数值",
+  score: "基础值",
   cost: "花费",
-  racial: "种族",
-  total: "合计",
+  racial: "种族加成",
+  total: "总计",
   modifier: "调整值",
   totalCost: "总花费",
   pointsRemaining: "剩余点数",
@@ -231,7 +230,7 @@ const zh: Messages = {
   feat: "专长",
   selectFeat: "选择一项专长",
   featAbility: "专长属性",
-  racialTraits: "种族特质",
+  racialTraits: "种族特性",
   abilityScoreIncrease: "属性值加成：",
   age: "年龄：",
   alignment: "阵营：",
@@ -261,10 +260,9 @@ const zh: Messages = {
   selectDragon: "选择一种龙",
   chosenAncestry: "所选血统：",
   chosenFeat: "所选专长：",
-  selectRacePrompt: "请选择一个种族以查看种族特质。",
+  selectRacePrompt: "请选择一个种族以查看其种族特性。",
   noRace: "未选择种族",
   skillLine: "技能：",
-  rulesInEnglish: "规则原文以英文显示。",
   language: "语言",
   returnHome: "返回 Starmist Studio",
   supportOnKoFi: "在 Ko-fi 上支持",
@@ -272,8 +270,8 @@ const zh: Messages = {
   selectAttribute: "选择一项属性",
   bonusAttribute: (index: number) => `第 ${index + 1} 项 +1 加值属性`,
   pointSummary: (cost: string, budget: number, remaining: string) =>
-    `点数花费 ${cost} / ${budget}。剩余 ${remaining}。`,
-  scoreAria: (name: string) => `${name}数值`,
+    `已用点数 ${cost} / ${budget}。剩余点数 ${remaining}。`,
+  scoreAria: (name: string) => `${name}基础值`,
 };
 
 export const messages: Record<Locale, Messages> = { en, zh, es };

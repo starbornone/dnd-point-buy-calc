@@ -4,7 +4,6 @@ import { useLocale, useMessages } from "@/context/LocaleContext";
 import { useRace } from "@/context/RaceContext";
 import { useStats } from "@/context/StatsContext";
 import { attributeKeys } from "@/data";
-import { DEFAULT_LOCALE } from "@/i18n/locale";
 import {
   abilityLabel,
   ancestryLabel,
@@ -15,6 +14,7 @@ import {
   toolLabel,
   variantLabel,
 } from "@/i18n/names";
+import { getRaceTraits } from "@/i18n/raceTraits";
 import { raceData } from "@/data/raceData";
 import {
   calculateFeatBonus,
@@ -24,7 +24,6 @@ import {
   featGrantsIncrease,
   formatPointCost,
   getFixedBonuses,
-  mergeRaceAndVariant,
   resolveFloatingBonus,
   resolveGrantedCantrips,
   resolveGrantedSkills,
@@ -57,7 +56,7 @@ export const PrintSheet = () => {
   });
   const featBonuses = calculateFeatBonus(selectedFeat, selectedFeatAbility);
   const showFeat = featGrantsIncrease(selectedFeat);
-  const traits = race ? mergeRaceAndVariant(race, selectedVariant) : null;
+  const traits = getRaceTraits(locale, selectedRace, selectedVariant);
   const grantedSkills = resolveGrantedSkills(race, variant);
   const grantedTools = resolveGrantedTools(race, variant);
   const grantedCantrips = resolveGrantedCantrips(race, variant);
@@ -169,7 +168,7 @@ export const PrintSheet = () => {
       {traits ? (
         <>
           <h2>{copy.racialTraits}</h2>
-          {locale !== DEFAULT_LOCALE ? <p>{copy.rulesInEnglish}</p> : null}
+          {copy.rulesInEnglish ? <p>{copy.rulesInEnglish}</p> : null}
           <p>{traits.ability}</p>
           {traits.other.map((trait) => (
             <p key={trait}>{trait}</p>
