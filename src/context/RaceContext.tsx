@@ -2,8 +2,9 @@
 
 import { raceData } from "@/data/raceData";
 import { AttributeState, BonusPicks } from "@/types";
-import { emptyBonusPicks } from "@/utils/characterBuild";
+import { emptyBonusPicks, type CharacterBuild } from "@/utils/characterBuild";
 import { emptyLanguagePicks, LanguagePicks } from "@/utils/languageChoice";
+import { emptyOrigin2024, type Origin2024, type RulesEdition } from "@/utils/origin2024";
 import { emptySkillPicks, SkillPicks } from "@/utils/skillChoice";
 import {
   createContext,
@@ -12,9 +13,15 @@ import {
   useContext,
   useMemo,
   useState,
+  type Dispatch,
+  type SetStateAction,
 } from "react";
 
 interface RaceContextType {
+  edition: RulesEdition;
+  setEdition: (edition: RulesEdition) => void;
+  origin2024: Origin2024;
+  setOrigin2024: Dispatch<SetStateAction<Origin2024>>;
   selectedRace: string;
   selectedVariant: string;
   selectedBonuses: BonusPicks;
@@ -37,18 +44,7 @@ interface RaceContextType {
   setSelectedDragon: (dragon: string) => void;
   setSelectedFeat: (feat: string) => void;
   setSelectedFeatAbility: (ability: keyof AttributeState | "") => void;
-  loadRace: (
-    race: string,
-    variant: string,
-    bonuses: BonusPicks,
-    skills: SkillPicks,
-    languages: LanguagePicks,
-    tool: string,
-    cantrip: string,
-    dragon: string,
-    feat: string,
-    featAbility: keyof AttributeState | ""
-  ) => void;
+  loadRace: (build: CharacterBuild) => void;
 }
 
 const RaceContext = createContext<RaceContextType | undefined>(undefined);
@@ -59,6 +55,8 @@ const variantForRace = (race: string) =>
     : "";
 
 export const RaceProvider = ({ children }: { children: ReactNode }) => {
+  const [edition, setEdition] = useState<RulesEdition>("2024");
+  const [origin2024, setOrigin2024] = useState(emptyOrigin2024);
   const [selectedRace, setRace] = useState("");
   const [selectedVariant, setVariant] = useState("");
   const [selectedBonuses, setSelectedBonuses] = useState<BonusPicks>(
@@ -141,34 +139,29 @@ export const RaceProvider = ({ children }: { children: ReactNode }) => {
   );
 
   const loadRace = useCallback(
-    (
-      race: string,
-      variant: string,
-      bonuses: BonusPicks,
-      skills: SkillPicks,
-      languages: LanguagePicks,
-      tool: string,
-      cantrip: string,
-      dragon: string,
-      feat: string,
-      featAbility: keyof AttributeState | ""
-    ) => {
-      setRace(race);
-      setVariant(variant);
-      setSelectedBonuses(bonuses);
-      setSelectedSkills(skills);
-      setSelectedLanguages(languages);
-      setTool(tool);
-      setCantrip(cantrip);
-      setDragon(dragon);
-      setFeat(feat);
-      setSelectedFeatAbility(featAbility);
+    (build: CharacterBuild) => {
+      setEdition(build.origin2024 ? "2024" : "2014");
+      setOrigin2024(build.origin2024 ?? emptyOrigin2024());
+      setRace(build.race);
+      setVariant(build.variant);
+      setSelectedBonuses(build.bonuses);
+      setSelectedSkills(build.skills);
+      setSelectedLanguages(build.languages);
+      setTool(build.tool);
+      setCantrip(build.cantrip);
+      setDragon(build.dragon);
+      setFeat(build.feat);
+      setSelectedFeatAbility(build.featAbility);
     },
     []
   );
 
   const value = useMemo(
     () => ({
+      edition,
+      setEdition,
+      origin2024,
+      setOrigin2024,
       selectedRace,
       selectedVariant,
       selectedBonuses,
@@ -192,6 +185,8 @@ export const RaceProvider = ({ children }: { children: ReactNode }) => {
       loadRace,
     }),
     [
+      edition,
+      origin2024,
       selectedRace,
       selectedVariant,
       selectedBonuses,

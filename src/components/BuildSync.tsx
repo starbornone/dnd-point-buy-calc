@@ -10,6 +10,8 @@ import { useEffect, useState } from "react";
 export const BuildSync = () => {
   const { locale } = useLocale();
   const {
+    edition,
+    origin2024,
     selectedRace,
     selectedVariant,
     selectedBonuses,
@@ -28,18 +30,7 @@ export const BuildSync = () => {
   useEffect(() => {
     const parsed = parseBuild(window.location.search);
     if (parsed) {
-      loadRace(
-        parsed.race,
-        parsed.variant,
-        parsed.bonuses,
-        parsed.skills,
-        parsed.languages,
-        parsed.tool,
-        parsed.cantrip,
-        parsed.dragon,
-        parsed.feat,
-        parsed.featAbility
-      );
+      loadRace(parsed);
       loadStats(parsed.attributes, parsed.budget);
     }
     setReady(true);
@@ -61,6 +52,7 @@ export const BuildSync = () => {
         feat: selectedFeat,
         featAbility: selectedFeatAbility,
         budget: pointBudget,
+        origin2024: edition === "2024" ? origin2024 : undefined,
       }),
       locale
     );
@@ -70,6 +62,8 @@ export const BuildSync = () => {
     window.history.replaceState(null, "", `${pathname}${query ? `?${query}` : ""}${hash}`);
   }, [
     ready,
+    edition,
+    origin2024,
     selectedRace,
     selectedVariant,
     selectedBonuses,

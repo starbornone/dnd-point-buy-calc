@@ -17,6 +17,8 @@ import {
 } from "@/i18n/names";
 import { getRaceTraits } from "@/i18n/raceTraits";
 import { raceData } from "@/data/raceData";
+import { calculateBackgroundBonuses } from "@/utils/origin2024";
+import { Origin2024Details } from "./Origin2024";
 import {
   calculateFeatBonus,
   calculateModifier,
@@ -36,6 +38,8 @@ export const PrintSheet = () => {
   const copy = useMessages();
   const { attributes, pointBudget } = useStats();
   const {
+    edition,
+    origin2024,
     selectedRace,
     selectedVariant,
     selectedBonuses,
@@ -50,13 +54,13 @@ export const PrintSheet = () => {
 
   const race = raceData[selectedRace];
   const variant = race?.variants?.find((entry) => entry.name === selectedVariant);
-  const racialBonuses = calculateRacialBonuses({
+  const legacy = edition === "2014";
+  const sourceBonuses = legacy ? calculateRacialBonuses({
     fixedBonuses: getFixedBonuses(selectedRace, selectedVariant),
     floatingBonus: resolveFloatingBonus(race, variant),
     selectedBonuses,
-  });
-  const featBonuses = calculateFeatBonus(selectedFeat, selectedFeatAbility);
-  const showFeat = featGrantsIncrease(selectedFeat);
+  }) : calculateBackgroundBonuses(origin2024);
+  const featBonuses = legacy && featGrantsIncrease(selectedFeat) ? calculateFeatBonus(selectedFeat, selectedFeatAbility) : undefined;
   const traits = getRaceTraits(locale, selectedRace, selectedVariant);
   const grantedSkills = resolveGrantedSkills(race, variant);
   const grantedTools = resolveGrantedTools(race, variant);
@@ -69,10 +73,11 @@ export const PrintSheet = () => {
   return (
     <section className="hidden print:block">
       <h1>{copy.title}</h1>
-      <p>
+      <p>{legacy ? copy.rules2014 : copy.rules2024}</p>
+      {legacy ? <p>
         {race ? raceLabel(locale, selectedRace) : copy.noRace}
         {selectedVariant ? ` — ${variantLabel(locale, selectedVariant)}` : ""}
-      </p>
+      </p> : <Origin2024Details origin={origin2024} />}
       <p>
         {copy.pointSummary(
           pointCost === null ? "—" : String(pointCost),
@@ -86,22 +91,22 @@ export const PrintSheet = () => {
             <th>{copy.attribute}</th>
             <th>{copy.score}</th>
             <th>{copy.cost}</th>
-            <th>{copy.racial}</th>
-            {showFeat ? <th>{copy.feat}</th> : null}
+            <th>{legacy ? copy.racial : copy.background}</th>
+            {featBonuses ? <th>{copy.feat}</th> : null}
             <th>{copy.total}</th>
             <th>{copy.modifier}</th>
           </tr>
         </thead>
         <tbody>
           {attributeKeys.map((key) => {
-            const total = attributes[key] + racialBonuses[key] + featBonuses[key];
+            const total = attributes[key] + sourceBonuses[key] + (featBonuses?.[key] ?? 0);
             return (
               <tr key={key}>
                 <td>{abilityLabel(locale, key)}</td>
                 <td>{attributes[key]}</td>
                 <td>{formatPointCost(attributes[key])}</td>
-                <td>{racialBonuses[key]}</td>
-                {showFeat ? <td>{featBonuses[key]}</td> : null}
+                <td>{sourceBonuses[key]}</td>
+                {featBonuses ? <td>{featBonuses[key]}</td> : null}
                 <td>{total}</td>
                 <td>{calculateModifier(total)}</td>
               </tr>
@@ -109,6 +114,7 @@ export const PrintSheet = () => {
           })}
         </tbody>
       </table>
+      {legacy && <>
       {grantedSkills.length > 0 ? (
         <p>
           {grantedSkills.length > 1 ? copy.grantedSkills : copy.grantedSkill}{" "}
@@ -176,6 +182,7 @@ export const PrintSheet = () => {
           ))}
         </>
       ) : null}
+      </>}
     </section>
   );
 };

@@ -8,6 +8,7 @@ import { useStats } from "@/context/StatsContext";
 import { attributeKeys } from "@/data";
 import { raceData } from "@/data/raceData";
 import { cn } from "@/lib/utils";
+import { calculateBackgroundBonuses } from "@/utils/origin2024";
 import {
   calculateFeatBonus,
   calculatePointCost,
@@ -24,18 +25,19 @@ import { AttributeTableBody } from "./AttributeTableBody";
 export const AttributeTable = () => {
   const copy = useMessages();
   const { attributes, setAttributes, pointBudget } = useStats();
-  const { selectedRace, selectedVariant, selectedBonuses, selectedFeat, selectedFeatAbility } =
+  const { edition, origin2024, selectedRace, selectedVariant, selectedBonuses, selectedFeat, selectedFeatAbility } =
     useRace();
 
   const race = raceData[selectedRace];
   const variant = race?.variants?.find((entry) => entry.name === selectedVariant);
-  const racialBonuses = calculateRacialBonuses({
+  const bonusLabel = edition === "2024" ? copy.background : copy.racial;
+  const sourceBonuses = edition === "2024" ? calculateBackgroundBonuses(origin2024) : calculateRacialBonuses({
     fixedBonuses: getFixedBonuses(selectedRace, selectedVariant),
     floatingBonus: resolveFloatingBonus(race, variant),
     selectedBonuses,
   });
   const featBonuses = calculateFeatBonus(selectedFeat, selectedFeatAbility);
-  const showFeat = featGrantsIncrease(selectedFeat);
+  const showFeat = edition === "2014" && featGrantsIncrease(selectedFeat);
 
   const costs = attributeKeys.map((key) => calculatePointCost(attributes[key]));
   const pointCost = costs.every((cost) => !Number.isNaN(cost))
@@ -87,7 +89,7 @@ export const AttributeTable = () => {
               </th>
               <th scope="col" role="columnheader">{copy.score}</th>
               <th scope="col" role="columnheader">{copy.cost}</th>
-              <th scope="col" role="columnheader">{copy.racial}</th>
+              <th scope="col" role="columnheader">{bonusLabel}</th>
               {showFeat && <th scope="col" role="columnheader">{copy.feat}</th>}
               <th scope="col" role="columnheader">{copy.total}</th>
               <th scope="col" role="columnheader">{copy.modifier}</th>
@@ -95,9 +97,10 @@ export const AttributeTable = () => {
           </thead>
 
           <AttributeTableBody
-            key={`${selectedRace}:${selectedVariant}`}
+            key={`${edition}:${selectedRace}:${selectedVariant}`}
             attributes={attributes}
-            racialBonuses={racialBonuses}
+            sourceBonuses={sourceBonuses}
+            bonusLabel={bonusLabel}
             featBonuses={showFeat ? featBonuses : undefined}
             attributeKeys={attributeKeys}
             handleChange={(event, attr) =>

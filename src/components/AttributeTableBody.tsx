@@ -12,7 +12,8 @@ import { useState } from "react";
 
 interface AttributeTableBodyProps {
   attributes: AttributeState;
-  racialBonuses: AttributeState;
+  sourceBonuses: AttributeState;
+  bonusLabel: string;
   featBonuses?: AttributeState;
   attributeKeys: (keyof AttributeState)[];
   handleChange: (
@@ -28,7 +29,8 @@ const stepButtonClass = "size-11 shrink-0 p-0 text-xl leading-none max-md:scroll
 
 export const AttributeTableBody: React.FC<AttributeTableBodyProps> = ({
   attributes,
-  racialBonuses,
+  sourceBonuses,
+  bonusLabel,
   featBonuses,
   attributeKeys,
   handleChange,
@@ -56,9 +58,9 @@ export const AttributeTableBody: React.FC<AttributeTableBodyProps> = ({
     <tbody role="rowgroup" className="grid gap-2 min-[580px]:grid-cols-2 md:table-row-group md:[&>tr:not(:last-child)>*]:border-b md:[&>tr>*]:border-border">
       {attributeKeys.map((attrKey) => {
         const attrValue = attributes[attrKey];
-        const racialBonus = racialBonuses[attrKey];
+        const sourceBonus = sourceBonuses[attrKey];
         const featBonus = featBonuses?.[attrKey] ?? 0;
-        const total = attrValue + racialBonus + featBonus;
+        const total = attrValue + sourceBonus + featBonus;
         const label = abilityLabel(locale, attrKey);
         const scoreId = `score-${attrKey}`;
         const draft = drafts[attrKey];
@@ -145,8 +147,8 @@ export const AttributeTableBody: React.FC<AttributeTableBodyProps> = ({
               {formatPointCost(attrValue)}
             </td>
             <td role="cell" className={bonusCell}>
-              <span className={metricLabelClass} aria-hidden="true">{copy.racial}</span>
-              {racialBonus}
+              <span className={metricLabelClass} aria-hidden="true">{bonusLabel}</span>
+              {sourceBonus}
             </td>
             {featBonuses ? (
               <td role="cell" className={bonusCell}>

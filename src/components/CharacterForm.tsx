@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { NativeSelect } from "@/components/ui/native-select";
 import { useLocale, useMessages } from "@/context/LocaleContext";
 import { useRace } from "@/context/RaceContext";
 import { useStats } from "@/context/StatsContext";
@@ -20,6 +21,7 @@ import {
 import { useEffect, useRef, useState } from "react";
 import { AttributeTable } from "./AttributeTable";
 import { CharacterOptions } from "./CharacterOptions";
+import { Origin2024Options, Origin2024Details } from "./Origin2024";
 import { RacialTraits } from "./RacialTraits";
 
 const actionClass = "min-h-11 break-words px-2 text-sm leading-snug [overflow-wrap:anywhere]";
@@ -33,6 +35,9 @@ export const CharacterForm = () => {
   const { locale } = useLocale();
   const copy = useMessages();
   const {
+    edition,
+    setEdition,
+    origin2024,
     loadRace,
     selectedRace,
     selectedVariant,
@@ -45,7 +50,7 @@ export const CharacterForm = () => {
     selectedFeat,
     selectedFeatAbility,
   } = useRace();
-  const { attributes, pointBudget, setPointBudget, loadStats } = useStats();
+  const { attributes, pointBudget, setAttributes, setPointBudget, loadStats } = useStats();
   const [feedback, setFeedback] = useState<Feedback | null>(null);
   const [setupChange, setSetupChange] = useState<SetupChange | null>(null);
   const feedbackIsSuccess = feedback === "linkCopied" || feedback === "importSuccess";
@@ -67,6 +72,7 @@ export const CharacterForm = () => {
     feat: selectedFeat,
     featAbility: selectedFeatAbility,
     budget: pointBudget,
+    origin2024: edition === "2024" ? origin2024 : undefined,
   };
   const buildQuery = serializeBuild(build);
   const currentSetupChange = setupChange?.resultQuery === buildQuery ? setupChange : null;
@@ -80,18 +86,7 @@ export const CharacterForm = () => {
   }, [setupChange]);
 
   const loadBuild = (next: CharacterBuild) => {
-    loadRace(
-      next.race,
-      next.variant,
-      next.bonuses,
-      next.skills,
-      next.languages,
-      next.tool,
-      next.cantrip,
-      next.dragon,
-      next.feat,
-      next.featAbility
-    );
+    loadRace(next);
     loadStats(next.attributes, next.budget);
   };
 
@@ -102,7 +97,8 @@ export const CharacterForm = () => {
     if (resultQuery === buildQuery) return;
 
     setSetupChange({ action, previous: build, resultQuery });
-    loadBuild(next);
+    if (action === "standardArray") setAttributes(next.attributes);
+    else loadBuild(next);
   };
 
   const restorePreviousBuild = () => {
@@ -110,7 +106,8 @@ export const CharacterForm = () => {
 
     importRequest.current += 1;
     setFeedback(null);
-    loadBuild(undo.previous);
+    if (undo.action === "standardArray") setAttributes(undo.previous.attributes);
+    else loadBuild(undo.previous);
     setSetupChange({ action: "restored", resultQuery: serializeBuild(undo.previous) });
     const actionButton = undo.action === "reset" ? resetButton : standardArrayButton;
     actionButton.current?.focus({ preventScroll: true });
@@ -187,8 +184,24 @@ export const CharacterForm = () => {
           <h2 id="setup-heading" className="font-display text-2xl leading-tight text-primary">
             {copy.characterSetup}
           </h2>
+          <div>
+            <label htmlFor="rules-edition" className="mb-2 block text-sm font-semibold">{copy.rulesEdition}</label>
+            <NativeSelect
+              id="rules-edition"
+              value={edition}
+              onChange={(event) => {
+                importRequest.current += 1;
+                setSetupChange(null);
+                setFeedback(null);
+                setEdition(event.target.value === "2014" ? "2014" : "2024");
+              }}
+            >
+              <option value="2024">{copy.rules2024}</option>
+              <option value="2014">{copy.rules2014}</option>
+            </NativeSelect>
+          </div>
           <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,13rem),1fr))] items-end gap-3 sm:gap-4 [&_label]:text-sm">
-            <CharacterOptions />
+            {edition === "2024" ? <Origin2024Options /> : <CharacterOptions />}
           </div>
           <div ref={setupActions} className="grid gap-3 border-t border-border pt-3 sm:grid-cols-2 lg:grid-cols-1">
             <div className="flex items-center justify-between gap-3">
@@ -230,7 +243,7 @@ export const CharacterForm = () => {
                 variant="secondary"
                 className={actionClass}
                 aria-label={copy.resetScores}
-                onClick={() => applySetupAction("reset", defaultBuild())}
+                onClick={() => applySetupAction("reset", defaultBuild(edition))}
               >
                 {copy.reset}
               </Button>
@@ -249,7 +262,12 @@ export const CharacterForm = () => {
 
       <div className="grid min-w-0 gap-4 sm:gap-5 lg:gap-6">
         <AttributeTable />
-        <RacialTraits />
+        {edition === "2024" ? (
+          <Card role="region" aria-labelledby="origin-details-heading" className="space-y-3 sm:p-5 xl:p-6">
+            <h2 id="origin-details-heading" className="font-display text-2xl leading-tight text-primary">{copy.originDetails}</h2>
+            <Origin2024Details origin={origin2024} />
+          </Card>
+        ) : <RacialTraits />}
         <Card
           role="region"
           aria-labelledby="build-tools-heading"
