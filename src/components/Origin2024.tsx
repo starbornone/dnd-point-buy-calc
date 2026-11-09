@@ -4,9 +4,11 @@ import { NativeSelect } from "@/components/ui/native-select";
 import { useLocale, useMessages } from "@/context/LocaleContext";
 import { useRace } from "@/context/RaceContext";
 import { backgrounds2024, species2024 } from "@/data/origins2024";
-import { abilityLabel, ancestryLabel, featLabel, raceLabel, skillLabel, variantLabel } from "@/i18n/names";
+import { abilityLabel, ancestryLabel, originFeatLabel, raceLabel, skillLabel, variantLabel } from "@/i18n/names";
 import type { Locale } from "@/i18n/locale";
+import { cn } from "@/lib/utils";
 import { getBackground2024, getSpecies2024, humanFeatOptions, selectOrigin2024, type Origin2024 } from "@/utils/origin2024";
+import { FeatSummary } from "./FeatSummary";
 import { SetupChecklist } from "./SetupChecklist";
 
 const backgroundsZh: Record<string, string> = {
@@ -20,17 +22,34 @@ const lineagesZh: Record<string, string> = {
   Stone: "石巨人", Storm: "风暴巨人", Abyssal: "深渊", Chthonic: "冥界", Infernal: "炼狱",
 };
 
-const originFeatsZh: Record<string, string> = {
-  Crafter: "工匠", Musician: "音乐家", "Magic Initiate (Cleric)": "魔法学徒（牧师）",
-  "Magic Initiate (Druid)": "魔法学徒（德鲁伊）", "Magic Initiate (Wizard)": "魔法学徒（法师）",
-};
-
 const backgroundLabel = (locale: Locale, name: string) => locale === "zh" ? backgroundsZh[name] ?? name : name;
 const speciesLabel = (locale: Locale, name: string) => name === "orc" ? (locale === "zh" ? "兽人" : "Orc") : raceLabel(locale, name);
-const originFeatLabel = (locale: Locale, name: string) => locale === "zh" ? originFeatsZh[name] ?? featLabel(locale, name) : name;
 const lineageLabel = (locale: Locale, species: string, name: string) => {
   if (species === "dragonborn") return ancestryLabel(locale, name);
   return locale === "zh" ? lineagesZh[name] ?? variantLabel(locale, name) : name;
+};
+
+const Origin2024Feats = ({ origin, className }: { origin: Origin2024; className?: string }) => {
+  const { locale } = useLocale();
+  const copy = useMessages();
+  const background = getBackground2024(origin.background);
+  const humanFeat = origin.species === "human" ? origin.humanFeat : "";
+  if (!background && !humanFeat) return null;
+
+  return (
+    <div className={cn("grid gap-2", className)}>
+      {background && (
+        <FeatSummary
+          edition="2024"
+          feat={background.feat}
+          source={copy.featGrantedByBackground(backgroundLabel(locale, origin.background))}
+        />
+      )}
+      {humanFeat && (
+        <FeatSummary edition="2024" feat={humanFeat} source={copy.featChosenAs(speciesLabel(locale, "human"))} />
+      )}
+    </div>
+  );
 };
 
 const OriginSelect = ({ id, label, value, onChange, options, placeholder }: {
@@ -110,6 +129,7 @@ export const Origin2024Options = () => {
           options={humanFeatOptions(origin.background).map((value) => ({ value, label: originFeatLabel(locale, value) }))}
           onChange={(humanFeat) => update({ humanFeat })} />
       )}
+      <Origin2024Feats origin={origin} className="col-span-full" />
     </>
   );
 };
@@ -122,28 +142,28 @@ export const Origin2024Details = ({ origin }: { origin: Origin2024 }) => {
   if (!species && !background) return <p className="text-sm text-muted-foreground">{copy.selectOriginPrompt}</p>;
 
   return (
-    <div className="grid gap-3 text-sm sm:grid-cols-2 [&_dt]:font-semibold">
-      {species && (
-        <dl>
-          <dt>{copy.species}</dt>
-          <dd>{speciesLabel(locale, origin.species)}{origin.lineage && ` · ${lineageLabel(locale, origin.species, origin.lineage)}`}</dd>
-          <dt className="mt-2">{copy.size}</dt>
-          <dd>{copy[species.size]}</dd>
-          <dt className="mt-2">{copy.speed}</dt>
-          <dd>{copy.walkingSpeed(origin.species === "elf" && origin.lineage === "Wood Elf" ? 35 : species.speed)}</dd>
-          {origin.humanFeat && <><dt className="mt-2">{copy.humanOriginFeat}</dt><dd>{originFeatLabel(locale, origin.humanFeat)}</dd></>}
-        </dl>
-      )}
-      {background && (
-        <dl>
-          <dt>{copy.background}</dt>
-          <dd>{backgroundLabel(locale, origin.background)}</dd>
-          <dt className="mt-2">{copy.originFeat}</dt>
-          <dd>{originFeatLabel(locale, background.feat)}</dd>
-          <dt className="mt-2">{copy.grantedSkills}</dt>
-          <dd>{background.skills.map((skill) => skillLabel(locale, skill)).join(locale === "zh" ? "、" : ", ")}</dd>
-        </dl>
-      )}
+    <div className="space-y-3">
+      <div className="grid gap-3 text-sm sm:grid-cols-2 [&_dt]:font-semibold">
+        {species && (
+          <dl>
+            <dt>{copy.species}</dt>
+            <dd>{speciesLabel(locale, origin.species)}{origin.lineage && ` · ${lineageLabel(locale, origin.species, origin.lineage)}`}</dd>
+            <dt className="mt-2">{copy.size}</dt>
+            <dd>{copy[species.size]}</dd>
+            <dt className="mt-2">{copy.speed}</dt>
+            <dd>{copy.walkingSpeed(origin.species === "elf" && origin.lineage === "Wood Elf" ? 35 : species.speed)}</dd>
+          </dl>
+        )}
+        {background && (
+          <dl>
+            <dt>{copy.background}</dt>
+            <dd>{backgroundLabel(locale, origin.background)}</dd>
+            <dt className="mt-2">{copy.grantedSkills}</dt>
+            <dd>{background.skills.map((skill) => skillLabel(locale, skill)).join(locale === "zh" ? "、" : ", ")}</dd>
+          </dl>
+        )}
+      </div>
+      <Origin2024Feats origin={origin} />
     </div>
   );
 };

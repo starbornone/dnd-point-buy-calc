@@ -5,9 +5,10 @@ import { Fragment } from "react";
 import { useLocale, useMessages } from "@/context/LocaleContext";
 import { useRace } from "@/context/RaceContext";
 import { raceData } from "@/data/raceData";
-import { abilityLabel, ancestryLabel, cantripLabel, featLabel, languageLabel, skillLabel, toolLabel } from "@/i18n/names";
+import { ancestryLabel, cantripLabel, languageLabel, skillLabel, toolLabel, variantLabel } from "@/i18n/names";
 import { getRaceTraits } from "@/i18n/raceTraits";
-import { grantedFeatAbility, resolveGrantedCantrips, resolveGrantedSkills, resolveGrantedTools } from "@/utils";
+import { resolveGrantedCantrips, resolveGrantedSkills, resolveGrantedTools } from "@/utils";
+import { FeatSummary } from "./FeatSummary";
 
 export const RacialTraits = () => {
   const { locale } = useLocale();
@@ -30,7 +31,6 @@ export const RacialTraits = () => {
   const grantedTools = resolveGrantedTools(race, variant);
   const grantedCantrips = resolveGrantedCantrips(race, variant);
   const chosenLanguages = selectedLanguages.filter(Boolean);
-  const featAbility = grantedFeatAbility(selectedFeat, selectedFeatAbility);
 
   const selectedRaceTraits = getRaceTraits(locale, selectedRace, selectedVariant);
 
@@ -145,8 +145,12 @@ export const RacialTraits = () => {
                   <>
                     <dt>{copy.chosenFeat}</dt>
                     <dd>
-                      {featLabel(locale, selectedFeat)}
-                      {featAbility ? ` (+1 ${abilityLabel(locale, featAbility)})` : ""}
+                      <FeatSummary
+                        edition="2014"
+                        feat={selectedFeat}
+                        source={copy.featChosenAs(variantLabel(locale, selectedVariant))}
+                        abilityChoice={selectedFeatAbility}
+                      />
                     </dd>
                   </>
                 )}

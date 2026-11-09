@@ -8,7 +8,6 @@ import {
   abilityLabel,
   ancestryLabel,
   cantripLabel,
-  featLabel,
   languageLabel,
   raceLabel,
   skillLabel,
@@ -19,6 +18,7 @@ import { getRaceTraits } from "@/i18n/raceTraits";
 import { raceData } from "@/data/raceData";
 import { calculateBackgroundBonuses } from "@/utils/origin2024";
 import { Origin2024Details } from "./Origin2024";
+import { FeatSummary } from "./FeatSummary";
 import {
   calculateFeatBonus,
   calculateModifier,
@@ -168,9 +168,12 @@ export const PrintSheet = () => {
         </p>
       ) : null}
       {selectedFeat ? (
-        <p>
-          {copy.feat}: {featLabel(locale, selectedFeat)}
-        </p>
+        <FeatSummary
+          edition="2014"
+          feat={selectedFeat}
+          source={copy.featChosenAs(variantLabel(locale, selectedVariant))}
+          abilityChoice={selectedFeatAbility}
+        />
       ) : null}
       {traits ? (
         <>

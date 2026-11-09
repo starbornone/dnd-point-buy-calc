@@ -1,7 +1,7 @@
 {
   "schema": "name-roadmap/v1",
   "file": "completed",
-  "updatedAt": "2026-11-10T09:51:29+11:00",
+  "updatedAt": "2026-11-10T10:34:08+11:00",
   "project": {
     "key": "dnd-point-buy-calc",
     "title": "D&D 5e Point-Buy Calculator",
@@ -158,6 +158,13 @@
       "group": "rules",
       "notes": "Default to 2024 rules with ten species, sixteen backgrounds, and both background bonus distributions. Offer 2014 mode and preserve existing links and JSON builds.",
       "completedAt": "2026-11-10T09:51:29+11:00"
+    },
+    {
+      "id": "show-feat-summaries",
+      "title": "Show feat effects and sources in setup, details, and print",
+      "group": "ui",
+      "notes": "Add English and Simplified Chinese summaries for the 2014 Variant Human and 2024 Origin feats, with grant sources and any applicable ability increase.",
+      "completedAt": "2026-11-10T10:34:08+11:00"
     }
   ]
 }

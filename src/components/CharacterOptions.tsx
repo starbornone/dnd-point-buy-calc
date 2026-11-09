@@ -16,6 +16,7 @@ import {
   skillLabel,
   toolGroupLabel,
   toolLabel,
+  variantLabel,
 } from "@/i18n/names";
 import { skills } from "@/data/skills";
 import {
@@ -32,6 +33,7 @@ import {
   resolveToolChoice,
   toolGroupsFor,
 } from "@/utils";
+import { FeatSummary } from "./FeatSummary";
 import { RaceSelector } from "./RaceSelector";
 import { SetupChecklist } from "./SetupChecklist";
 import { VariantBonusSelector } from "./VariantBonusSelector";
@@ -187,6 +189,15 @@ export const CharacterOptions = () => {
             ))}
           </NativeSelect>
         </div>
+      )}
+      {variantHuman && selectedFeat && (
+        <FeatSummary
+          edition="2014"
+          feat={selectedFeat}
+          source={copy.featChosenAs(variantLabel(locale, selectedVariant))}
+          abilityChoice={selectedFeatAbility}
+          className="col-span-full"
+        />
       )}
 
       {languageChoice &&

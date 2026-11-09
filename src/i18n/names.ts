@@ -331,6 +331,17 @@ const featNamesZh: Record<FeatName, string> = {
 export const featLabel = (locale: Locale, feat: string): string =>
   locale === "zh" ? (featNamesZh[feat as FeatName] ?? feat) : feat;
 
+const originFeatNamesZh: Record<string, string> = {
+  Crafter: "工匠",
+  Musician: "音乐家",
+  "Magic Initiate (Cleric)": "魔法学徒（牧师）",
+  "Magic Initiate (Druid)": "魔法学徒（德鲁伊）",
+  "Magic Initiate (Wizard)": "魔法学徒（法师）",
+};
+
+export const originFeatLabel = (locale: Locale, feat: string): string =>
+  locale === "zh" ? (originFeatNamesZh[feat] ?? featLabel(locale, feat)) : feat;
+
 export const featsForLocale = (locale: Locale): FeatName[] =>
   [...feats].sort((a, b) =>
     featLabel(locale, a).localeCompare(featLabel(locale, b), locale)

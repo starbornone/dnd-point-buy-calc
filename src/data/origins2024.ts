@@ -5,7 +5,7 @@ type Ability = keyof AttributeState;
 
 interface Background2024 {
   abilities: readonly [Ability, Ability, Ability];
-  feat: string;
+  feat: (typeof originFeats2024)[number];
   skills: readonly [string, string];
 }
 
@@ -51,4 +51,4 @@ export const species2024: Record<string, Species2024> = {
 export const originFeats2024 = [
   "Alert", "Crafter", "Healer", "Lucky", "Magic Initiate (Cleric)", "Magic Initiate (Druid)",
   "Magic Initiate (Wizard)", "Musician", "Savage Attacker", "Skilled", "Tavern Brawler", "Tough",
-];
+] as const;
