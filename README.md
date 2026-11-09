@@ -96,9 +96,9 @@ The app features the following races and variants with their respective racial m
 
 ## Languages still to add
 
+- Japanese
 - Macedonian
 - Russian
-- Japanese
 
 ## Installation
 

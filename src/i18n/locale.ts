@@ -1,9 +1,9 @@
 export const LOCALES = ["en", "zh"] as const;
 
 export const PLANNED_LOCALES = [
+  { code: "ja", name: "日本語" },
   { code: "mk", name: "Македонски" },
   { code: "ru", name: "Русский" },
-  { code: "ja", name: "日本語" },
 ] as const;
 
 export type Locale = (typeof LOCALES)[number];
