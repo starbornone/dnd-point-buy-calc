@@ -2,11 +2,54 @@ import { describe, expect, it } from "vitest";
 import {
   buildFileName,
   defaultAttributes,
+  defaultBuild,
   fromBuildFile,
   parseBuild,
   serializeBuild,
   toBuildFile,
 } from "./characterBuild";
+import { calculateBackgroundBonuses } from "./origin2024";
+
+describe("2024 character origins", () => {
+  it("identifies empty builds of either edition and leaves old score-only links in 2014", () => {
+    expect(parseBuild(serializeBuild(defaultBuild("2024")))).toEqual(defaultBuild("2024"));
+    expect(parseBuild(serializeBuild(defaultBuild("2014")))).toEqual(defaultBuild("2014"));
+    expect(parseBuild("?dex=15")?.origin2024).toBeUndefined();
+    expect(fromBuildFile({ version: 1, attributes: { dexterity: 15 } })?.origin2024).toBeUndefined();
+  });
+
+  it("round-trips a 2024 build through links and JSON using only background increases", () => {
+    const build = parseBuild("?rules=2024&species=human&background=Farmer&plusTwo=strength&plusOne=wisdom&humanFeat=Alert&str=15&budget=30")!;
+    const withLegacyChoices = { ...build, race: "human", variant: "Variant Human", feat: "Resilient", featAbility: "strength" as const };
+    const query = new URLSearchParams(serializeBuild(withLegacyChoices));
+    const file = toBuildFile(withLegacyChoices);
+
+    expect(query.has("race")).toBe(false);
+    expect(parseBuild(query.toString())).toEqual(build);
+    expect(file.version).toBe(2);
+    expect(file.pointsRemaining).toBe(21);
+    expect(file.abilities.find(({ key }) => key === "strength")).toMatchObject({ score: 15, racial: 0, feat: 0, background: 2, total: 17 });
+    expect(fromBuildFile(file)).toEqual(build);
+  });
+
+  it("applies +1 to each of the three allowed scores and discards stale split picks", () => {
+    const { origin2024 } = parseBuild("?rules=2024&species=elf&lineage=Wood+Elf&background=Sailor&spread=1&plusTwo=strength")!;
+    expect(origin2024).toMatchObject({ lineage: "Wood Elf", spread: true, plusTwo: "", plusOne: "" });
+    expect(calculateBackgroundBonuses(origin2024!)).toEqual({
+      strength: 1, dexterity: 1, wisdom: 1, constitution: 0, intelligence: 0, charisma: 0,
+    });
+  });
+
+  it("rejects incompatible species, feats and ability selections in edited links", () => {
+    expect(parseBuild("?rules=2024&species=halfElf&lineage=Wood+Elf&background=Farmer&plusTwo=wisdom&plusOne=wisdom&humanFeat=Alert")?.origin2024)
+      .toMatchObject({ species: "", lineage: "", plusTwo: "wisdom", plusOne: "", humanFeat: "" });
+    expect(parseBuild("?rules=2024&species=human&background=Farmer&plusTwo=dexterity&humanFeat=Tough")?.origin2024)
+      .toMatchObject({ plusTwo: "", humanFeat: "" });
+    expect(parseBuild("?rules=2024&species=human&background=Scribe&humanFeat=Skilled")?.origin2024?.humanFeat).toBe("Skilled");
+    expect(parseBuild("?rules=2024&species=human&background=Sage&humanFeat=Magic+Initiate+%28Cleric%29")?.origin2024?.humanFeat)
+      .toBe("Magic Initiate (Cleric)");
+  });
+});
 
 describe("character build links", () => {
   it("ignores inherited race keys in links and JSON builds", () => {
