@@ -1,0 +1,86 @@
+{
+  "schema": "name-roadmap/v1",
+  "file": "completed",
+  "updatedAt": "2026-11-09T20:40:00+11:00",
+  "project": {
+    "key": "dnd-point-buy-calc",
+    "title": "D&D 5e Point-Buy Calculator",
+    "status": "active"
+  },
+  "items": [
+    {
+      "id": "point-buy-ability-scores",
+      "title": "Ship manual point-buy editing for the six ability scores",
+      "group": "calculator",
+      "notes": "Strength through Charisma with live point costs under 5e point-buy rules.",
+      "completedAt": "2026-11-09T20:26:45+11:00"
+    },
+    {
+      "id": "standard-array-fill",
+      "title": "Fill the Player's Handbook standard array",
+      "group": "calculator",
+      "notes": "15, 14, 13, 12, 10, 8 from Strength through Charisma.",
+      "completedAt": "2026-11-09T20:26:45+11:00"
+    },
+    {
+      "id": "racial-modifiers-and-variants",
+      "title": "Apply racial modifiers and variant bonuses from the documented race list",
+      "group": "races",
+      "notes": "Includes PHB races plus listed options from Volo's, Eberron, and Mordenkainen's as described in the README.",
+      "completedAt": "2026-11-09T20:26:45+11:00"
+    },
+    {
+      "id": "flexible-asi-and-grants",
+      "title": "Support flexible ASI picks and race-granted choices",
+      "group": "races",
+      "notes": "Half-Elf, Variant Human, Changeling and similar flows for skills, languages, tools, cantrips, feats, and draconic ancestry.",
+      "completedAt": "2026-11-09T20:26:45+11:00"
+    },
+    {
+      "id": "live-totals-and-modifiers",
+      "title": "Show live totals, remaining points, and ability modifiers",
+      "group": "calculator",
+      "completedAt": "2026-11-09T20:26:45+11:00"
+    },
+    {
+      "id": "responsive-tailwind-ui",
+      "title": "Ship a responsive Tailwind UI with a D&D-oriented palette",
+      "group": "ui",
+      "completedAt": "2026-11-09T20:26:45+11:00"
+    },
+    {
+      "id": "react-context-state",
+      "title": "Manage calculator state with React Context",
+      "group": "architecture",
+      "completedAt": "2026-11-09T20:26:45+11:00"
+    },
+    {
+      "id": "locale-english-chinese",
+      "title": "Ship English and Simplified Chinese UI locales",
+      "group": "i18n",
+      "notes": "Japanese, Macedonian, and Russian remain planned.",
+      "completedAt": "2026-11-09T20:26:45+11:00"
+    },
+    {
+      "id": "agent-ready-docs",
+      "title": "Add agent-ready docs, AGENTS.md, and name-roadmap files",
+      "group": "docs",
+      "notes": "docs/, AGENTS.md, and roadmap/*.json derived from the README.",
+      "completedAt": "2026-11-09T20:26:45+11:00"
+    },
+    {
+      "id": "simplified-chinese-localization-checklist",
+      "title": "Complete the Simplified Chinese localization checklist",
+      "group": "i18n",
+      "notes": "Localize action feedback, validation, reset accessibility, footer text, feat names, and initial page metadata. Keep the locale in copied build links.",
+      "completedAt": "2026-11-09T20:35:18+11:00"
+    },
+    {
+      "id": "seo-fundamentals",
+      "title": "Add production SEO metadata, sitemap, robots, and JSON-LD",
+      "group": "seo",
+      "notes": "Canonical URLs per locale, Open Graph/Twitter cards, WebApplication schema, crawlable about copy, and NEXT_PUBLIC_SITE_URL.",
+      "completedAt": "2026-11-09T20:40:00+11:00"
+    }
+  ]
+}

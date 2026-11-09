@@ -1,0 +1,37 @@
+{
+  "schema": "name-roadmap/v1",
+  "file": "roadmap",
+  "updatedAt": "2026-11-09T20:26:45+11:00",
+  "project": {
+    "key": "dnd-point-buy-calc",
+    "title": "D&D 5e Point-Buy Calculator",
+    "status": "active",
+    "summary": "Point-buy calculator for D&D 5e ability scores with racial bonuses, variants, locales, and shareable builds."
+  },
+  "items": [
+    {
+      "id": "support-dnd-5-5e",
+      "title": "Update the calculator for D&D 5.5e (2024 Player's Handbook)",
+      "group": "rules",
+      "notes": "Add or switch to 2024 PHB species, origin/background ability increases, and related point-buy assumptions without breaking the existing 5e calculator unless a clear migration path is chosen."
+    },
+    {
+      "id": "locale-japanese",
+      "title": "Add Japanese UI locale",
+      "group": "i18n",
+      "notes": "Enable ja in LOCALES with messages, display names, and language selector; decide whether racial trait text stays English or is translated."
+    },
+    {
+      "id": "locale-macedonian",
+      "title": "Add Macedonian UI locale",
+      "group": "i18n",
+      "notes": "Enable mk in LOCALES with messages, display names, and language selector; decide whether racial trait text stays English or is translated."
+    },
+    {
+      "id": "locale-russian",
+      "title": "Add Russian UI locale",
+      "group": "i18n",
+      "notes": "Enable ru in LOCALES with messages, display names, and language selector; decide whether racial trait text stays English or is translated."
+    }
+  ]
+}

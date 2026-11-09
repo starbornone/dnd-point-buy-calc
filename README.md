@@ -2,6 +2,12 @@
 
 A point-buy calculator for **Dungeons & Dragons 5th Edition** (D&D 5e) that helps generate character ability scores with race-specific bonuses and variant handling. Built using **Next.js** and **TypeScript**, this web application dynamically calculates point costs for ability scores and applies racial modifiers based on the selected race or variant.
 
+## Documentation
+
+- [docs/overview.md](docs/overview.md) — product overview and scope
+- [AGENTS.md](AGENTS.md) — guidance for coding agents
+- [roadmap/roadmap.json](roadmap/roadmap.json) — open roadmap items
+
 ## Features
 
 ### Ability Score Calculator
@@ -98,11 +104,17 @@ The app features the following races and variants with their respective racial m
 
 ## Known Bugs
 
-## Languages still to add
+## Roadmap
 
-- Japanese
-- Macedonian
-- Russian
+Tracked in [roadmap/roadmap.json](roadmap/roadmap.json) (highest priority first):
+
+- Update for D&D 5.5e (2024 Player's Handbook)
+- Languages still to add:
+  - Japanese
+  - Macedonian
+  - Russian
+
+See also [roadmap/completed.json](roadmap/completed.json) and [docs/roadmap-format.md](docs/roadmap-format.md).
 
 ## Installation
 

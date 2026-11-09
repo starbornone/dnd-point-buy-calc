@@ -5,7 +5,7 @@ const en = {
   titleAccent: "Calculator",
   ledgerLabel: "Character ledger",
   description:
-    "Easily calculate your Dungeons & Dragons 5e character stats with our point buy calculator. Includes point costs, racial bonuses, total scores, modifiers, and a summary of traits.",
+    "Free D&D 5e point buy calculator for ability scores. Apply racial bonuses and variants, track point costs, totals, and modifiers, or fill the standard array.",
   aboutAndUsage: "About & usage",
   aboutBody:
     "Build starting ability scores for a Dungeons & Dragons 5e character. The calculator applies bonuses for races and variants from several 5e sourcebooks and shows your final scores, modifiers, and racial traits.",
@@ -107,7 +107,7 @@ const zh: Messages = {
   titleAccent: "购点计算器",
   ledgerLabel: "角色记录",
   description:
-    "免费、易用的 D&D 5e 角色购点计算器，支持种族属性加成与标准属性。",
+    "免费的 D&D 5e 购点计算器：分配属性值、应用种族与亚种加成、查看点数花费与调整值，也可一键填入标准属性。",
   aboutAndUsage: "简介与用法",
   aboutBody:
     "为《龙与地下城》第五版角色分配初始属性值。计算器会应用多本第五版规则书中种族及其变体的属性加成，并显示最终属性值、调整值和种族特性。",

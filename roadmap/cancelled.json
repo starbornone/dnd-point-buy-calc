@@ -1,0 +1,11 @@
+{
+  "schema": "name-roadmap/v1",
+  "file": "cancelled",
+  "updatedAt": "2026-11-09T20:26:45+11:00",
+  "project": {
+    "key": "dnd-point-buy-calc",
+    "title": "D&D 5e Point-Buy Calculator",
+    "status": "active"
+  },
+  "items": []
+}
