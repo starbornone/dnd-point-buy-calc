@@ -213,7 +213,7 @@ const toolGroupNames: Record<Locale, Record<ToolGroupName, string>> = {
   zh: {
     "Artisan's tools": "工匠工具",
     Kits: "工具套组",
-    "Gaming sets": "赌具",
+    "Gaming sets": "游戏道具",
     "Musical instruments": "乐器",
     Vehicles: "载具",
   },
@@ -264,7 +264,7 @@ const damageNames: Record<Locale, Record<DragonDamage, string>> = {
 
 const breathNames: Record<Locale, Record<DragonBreath, string>> = {
   en: { line: "5 by 30 ft. line", cone: "15 ft. cone" },
-  zh: { line: "5 尺宽、30 尺长的直线", cone: "15 尺锥形" },
+  zh: { line: "5尺宽、30尺长的直线", cone: "15尺锥形" },
 };
 
 export const abilityLabel = (locale: Locale, key: keyof AttributeState): string =>
@@ -291,7 +291,7 @@ const featNamesZh: Record<FeatName, string> = {
   "Lightly Armored": "轻甲运用",
   Linguist: "语言学家",
   Lucky: "幸运",
-  "Mage Slayer": "巫师杀手",
+  "Mage Slayer": "法师杀手",
   "Magic Initiate": "魔法学徒",
   "Martial Adept": "战技专家",
   "Medium Armor Master": "中甲大师",
