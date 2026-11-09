@@ -1,9 +1,11 @@
 "use client";
 
+import { Input } from "@/components/ui/input";
 import { useLocale, useMessages } from "@/context/LocaleContext";
 import { abilityLabel } from "@/i18n/names";
+import { cn } from "@/lib/utils";
 import { AttributeState } from "@/types/race";
-import { calculateModifier, calculatePointCost, formatPointCost } from "@/utils";
+import { calculateModifier, formatPointCost } from "@/utils";
 import { useState } from "react";
 
 interface AttributeTableBodyProps {
@@ -11,22 +13,20 @@ interface AttributeTableBodyProps {
   racialBonuses: AttributeState;
   featBonuses?: AttributeState;
   attributeKeys: (keyof AttributeState)[];
-  pointBudget: number;
   handleChange: (
     e: React.ChangeEvent<HTMLInputElement>,
     attr: keyof AttributeState
   ) => void;
 }
 
-const cellClass =
-  "flex items-center justify-between gap-3 py-1 md:table-cell md:py-0 md:text-center";
+const metricClass = "min-w-0 text-center md:table-cell md:px-2 md:py-1.5";
+const metricLabelClass = "block break-words text-xs leading-tight md:hidden";
 
 export const AttributeTableBody: React.FC<AttributeTableBodyProps> = ({
   attributes,
   racialBonuses,
   featBonuses,
   attributeKeys,
-  pointBudget,
   handleChange,
 }) => {
   const { locale } = useLocale();
@@ -35,18 +35,9 @@ export const AttributeTableBody: React.FC<AttributeTableBodyProps> = ({
     Partial<Record<keyof AttributeState, string>>
   >({});
 
-  const costs = attributeKeys.map((attrKey) =>
-    calculatePointCost(attributes[attrKey])
-  );
-  const totalCost = costs.every((cost) => !Number.isNaN(cost))
-    ? costs.reduce((sum, cost) => sum + cost, 0)
-    : null;
-  const pointsRemaining =
-    totalCost === null ? null : pointBudget - totalCost;
-  const overBudget = pointsRemaining !== null && pointsRemaining < 0;
-  const totalClass = `block py-1 md:table-cell md:py-0 md:text-center ${
-    overBudget ? "font-bold text-primary" : ""
-  }`;
+  const topCellSpan = featBonuses ? "col-span-3" : "col-span-2";
+  const bonusCell = cn(metricClass, featBonuses && "col-span-2");
+  const resultCell = cn(metricClass, featBonuses && "col-span-3");
 
   const clearDraft = (attrKey: keyof AttributeState) => {
     setDrafts((current) => {
@@ -58,7 +49,7 @@ export const AttributeTableBody: React.FC<AttributeTableBodyProps> = ({
   };
 
   return (
-    <tbody>
+    <tbody role="rowgroup" className="grid gap-2 min-[580px]:grid-cols-2 md:table-row-group md:[&>tr:not(:last-child)>*]:border-b md:[&>tr>*]:border-secondary">
       {attributeKeys.map((attrKey) => {
         const attrValue = attributes[attrKey];
         const racialBonus = racialBonuses[attrKey];
@@ -70,20 +61,24 @@ export const AttributeTableBody: React.FC<AttributeTableBodyProps> = ({
         return (
           <tr
             key={attrKey}
-            className="mb-3 block rounded border border-lightGray p-3 md:mb-0 md:table-row md:border-0 md:p-0"
+            role="row"
+            className={cn(
+              "grid items-center gap-x-1 gap-y-2 rounded-md border border-secondary p-2.5 md:table-row md:border-0 md:p-0 md:hover:bg-background",
+              featBonuses ? "grid-cols-6" : "grid-cols-[repeat(3,minmax(0,1fr))_minmax(0,1.25fr)]"
+            )}
           >
             <th
               scope="row"
-              className="block text-left font-bold md:table-cell md:font-normal"
+              role="rowheader"
+              className={cn("min-w-0 break-words text-left font-bold md:table-cell md:py-2 md:pl-4 md:pr-2", topCellSpan)}
             >
               {label}
             </th>
-            <td className={cellClass}>
-              <span className="md:hidden">{copy.score}</span>
-              <input
+            <td role="cell" className={cn("flex min-w-0 items-center justify-end gap-1.5 md:table-cell md:px-2 md:py-1.5 md:text-center", topCellSpan)}>
+              <Input
                 id={scoreId}
                 aria-label={copy.scoreAria(label)}
-                className="border p-1 rounded text-center w-16 min-h-11 md:w-12 md:min-h-0"
+                className="min-h-11 w-14 shrink-0 p-1 text-center tabular-nums md:w-16"
                 inputMode="numeric"
                 max={15}
                 min={8}
@@ -101,55 +96,31 @@ export const AttributeTableBody: React.FC<AttributeTableBodyProps> = ({
                 value={drafts[attrKey] ?? attrValue}
               />
             </td>
-            <td className={cellClass}>
-              <span className="md:hidden">{copy.cost}</span>
-              <span>{formatPointCost(attrValue)}</span>
+            <td role="cell" className={bonusCell}>
+              <span className={metricLabelClass} aria-hidden="true">{copy.cost}</span>
+              {formatPointCost(attrValue)}
             </td>
-            <td className={cellClass}>
-              <span className="md:hidden">{copy.racial}</span>
-              <span>{racialBonus}</span>
+            <td role="cell" className={bonusCell}>
+              <span className={metricLabelClass} aria-hidden="true">{copy.racial}</span>
+              {racialBonus}
             </td>
             {featBonuses ? (
-              <td className={cellClass}>
-                <span className="md:hidden">{copy.feat}</span>
-                <span>{featBonus}</span>
+              <td role="cell" className={bonusCell}>
+                <span className={metricLabelClass} aria-hidden="true">{copy.feat}</span>
+                {featBonus}
               </td>
             ) : null}
-            <td className={cellClass}>
-              <span className="md:hidden">{copy.total}</span>
-              <span>{total}</span>
+            <td role="cell" className={resultCell}>
+              <span className={metricLabelClass} aria-hidden="true">{copy.total}</span>
+              <span className="font-bold text-primary">{total}</span>
             </td>
-            <td className={cellClass}>
-              <span className="md:hidden">{copy.modifier}</span>
+            <td role="cell" className={resultCell}>
+              <span className={metricLabelClass} aria-hidden="true">{copy.modifier}</span>
               <span>{calculateModifier(total)}</span>
             </td>
           </tr>
         );
       })}
-      <tr className="mb-3 block rounded border border-lightGray p-3 md:mb-0 md:table-row md:border-0 md:p-0">
-        <th scope="row" className="block text-left md:table-cell">
-          {copy.totalCost}
-        </th>
-        <td className="hidden md:table-cell"></td>
-        <td className={totalClass}>{totalCost === null ? "\u2014" : totalCost}</td>
-        <td className="hidden md:table-cell"></td>
-        {featBonuses ? <td className="hidden md:table-cell"></td> : null}
-        <td className="hidden md:table-cell"></td>
-        <td className="hidden md:table-cell"></td>
-      </tr>
-      <tr className="block rounded border border-lightGray p-3 md:table-row md:border-0 md:p-0">
-        <th scope="row" className="block text-left md:table-cell">
-          {copy.pointsRemaining}
-        </th>
-        <td className="hidden md:table-cell"></td>
-        <td className={totalClass}>
-          {pointsRemaining === null ? "\u2014" : pointsRemaining}
-        </td>
-        <td className="hidden md:table-cell"></td>
-        {featBonuses ? <td className="hidden md:table-cell"></td> : null}
-        <td className="hidden md:table-cell"></td>
-        <td className="hidden md:table-cell"></td>
-      </tr>
     </tbody>
   );
 };

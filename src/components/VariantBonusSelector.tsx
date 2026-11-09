@@ -1,5 +1,6 @@
 "use client";
 
+import { NativeSelect } from "@/components/ui/native-select";
 import { useLocale, useMessages } from "@/context/LocaleContext";
 import { abilityLabel } from "@/i18n/names";
 import { AttributeState, FloatingBonus } from "@/types/race";
@@ -49,17 +50,16 @@ export const VariantBonusSelector: React.FC<VariantBonusSelectorProps> = ({
     const selectId = `floating-bonus-${index}`;
     const value = selectedBonuses[index];
     return (
-      <div>
-        <label htmlFor={selectId} className="block">
+      <div className="min-w-0">
+        <label htmlFor={selectId} className="mb-2 block">
           {floatingBonus.count === 1
             ? copy.oneBonus
             : copy.bonusAttribute(index)}
         </label>
-        <select
+        <NativeSelect
           id={selectId}
           value={value ?? ""}
           onChange={(e) => handleBonusChange(e, index)}
-          className="mt-2 block w-full p-2 border border-lightGray rounded"
         >
           <option value="">{copy.selectAttribute}</option>
           {optionsFor(index).map((attr) => (
@@ -67,15 +67,15 @@ export const VariantBonusSelector: React.FC<VariantBonusSelectorProps> = ({
               {abilityLabel(locale, attr)}
             </option>
           ))}
-        </select>
+        </NativeSelect>
       </div>
     );
   };
 
   return (
-    <div className="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+    <>
       {renderSelect(0)}
       {floatingBonus.count === 2 ? renderSelect(1) : null}
-    </div>
+    </>
   );
 };

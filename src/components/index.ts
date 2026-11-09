@@ -1,6 +1,6 @@
 export * from "./AttributeTable";
 export * from "./LanguageSelect";
-export * from "./BuildControls";
+export * from "./CharacterForm";
 export * from "./AttributeTableBody";
 export * from "./Modal";
 export * from "./Navbar";

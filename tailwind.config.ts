@@ -14,8 +14,6 @@ const config: Config = {
       colors: {
         bgInverse: "var(--color-bg-inverse)",
         lightGray: "var(--color-bg-info)",
-        navButton: "var(--color-nav-button)",
-        white: "var(--color-bg-light)",
         background: "var(--color-bg-light)",
         foreground: "var(--color-text-primary)",
         card: {

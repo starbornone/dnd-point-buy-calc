@@ -1,5 +1,6 @@
 "use client";
 
+import { Card } from "@/components/ui/card";
 import { Fragment } from "react";
 import { useLocale, useMessages } from "@/context/LocaleContext";
 import { useRace } from "@/context/RaceContext";
@@ -60,12 +61,16 @@ export const RacialTraits = () => {
   );
 
   return (
-    <div className="bg-lightGray p-4 mt-4 rounded">
-      <h2 className="font-bold">{copy.racialTraits}</h2>
-      {locale !== DEFAULT_LOCALE ? <p>{copy.rulesInEnglish}</p> : null}
+    <Card
+      role="region"
+      aria-labelledby="racial-traits-heading"
+      className="flex flex-col gap-3 rounded-lg p-4 sm:gap-4 sm:p-5 lg:col-span-2 xl:p-6"
+    >
+      <h2 id="racial-traits-heading" className="text-xl font-bold">{copy.racialTraits}</h2>
+      {locale !== DEFAULT_LOCALE ? <p className="text-sm">{copy.rulesInEnglish}</p> : null}
       {selectedRace ? (
         <>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8">
+          <div className="grid gap-x-7 gap-y-4 md:grid-cols-2 [&_dd]:leading-relaxed [&_dt]:mt-3 [&_dt]:font-bold [&_dt:first-child]:mt-0">
             <div>
               <dl>
                 <dt>{copy.abilityScoreIncrease}</dt>
@@ -166,6 +171,6 @@ export const RacialTraits = () => {
       ) : (
         <p>{copy.selectRacePrompt}</p>
       )}
-    </div>
+    </Card>
   );
 };

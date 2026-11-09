@@ -1,5 +1,6 @@
 "use client";
 
+import { NativeSelect } from "@/components/ui/native-select";
 import { useLocale, useMessages } from "@/context/LocaleContext";
 import { useRace } from "@/context/RaceContext";
 import { raceData } from "@/data/raceData";
@@ -23,14 +24,13 @@ export const RaceSelector = () => {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <div>
-        <label htmlFor="race" className="block font-bold">
+    <>
+      <div className="min-w-0">
+        <label htmlFor="race" className="mb-2 block font-bold">
           {copy.selectRace}
         </label>
-        <select
+        <NativeSelect
           id="race"
-          className="mt-2 block w-full p-2 border border-lightGray rounded"
           value={selectedRace}
           onChange={handleRaceChange}
         >
@@ -42,34 +42,31 @@ export const RaceSelector = () => {
               {raceLabel(locale, race.value)}
             </option>
           ))}
-        </select>
+        </NativeSelect>
       </div>
-      <div>
-        {availableVariants.length > 0 && (
-          <>
-            <label htmlFor="variant" className="block font-bold">
-              {copy.selectVariant}
-            </label>
-            <select
-              id="variant"
-              className="mt-2 block w-full p-2 border border-lightGray rounded"
-              value={selectedVariant}
-              onChange={handleVariantChange}
-            >
-              {selectedRace === "human" ? null : (
-                <option value="" disabled>
-                  {copy.selectVariantPlaceholder}
-                </option>
-              )}
-              {availableVariants.map((variant) => (
-                <option key={variant} value={variant}>
-                  {variantLabel(locale, variant)}
-                </option>
-              ))}
-            </select>
-          </>
-        )}
-      </div>
-    </div>
+      {availableVariants.length > 0 && (
+        <div className="min-w-0">
+          <label htmlFor="variant" className="mb-2 block font-bold">
+            {copy.selectVariant}
+          </label>
+          <NativeSelect
+            id="variant"
+            value={selectedVariant}
+            onChange={handleVariantChange}
+          >
+            {selectedRace === "human" ? null : (
+              <option value="" disabled>
+                {copy.selectVariantPlaceholder}
+              </option>
+            )}
+            {availableVariants.map((variant) => (
+              <option key={variant} value={variant}>
+                {variantLabel(locale, variant)}
+              </option>
+            ))}
+          </NativeSelect>
+        </div>
+      )}
+    </>
   );
 };

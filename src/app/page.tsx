@@ -1,14 +1,11 @@
 "use client";
 
 import {
-  AttributeTable,
-  BuildControls,
+  CharacterForm,
   LanguageSelect,
   Modal,
   PointCostTable,
   PrintSheet,
-  RaceSelector,
-  RacialTraits,
 } from "@/components";
 import { useMessages } from "@/context/LocaleContext";
 import Link from "next/link";
@@ -45,16 +42,7 @@ export default function HomePage() {
         </div>
       </header>
 
-      <form
-        className="prose mt-8 max-w-none print:hidden"
-        id="dnd5e-pbc"
-        onSubmit={(event) => event.preventDefault()}
-      >
-        <RaceSelector />
-        <BuildControls />
-        <AttributeTable />
-        <RacialTraits />
-      </form>
+      <CharacterForm />
       <div className="prose mx-auto hidden max-w-5xl print:block">
         <PrintSheet />
       </div>
