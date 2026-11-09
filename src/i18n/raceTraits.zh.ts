@@ -8,11 +8,11 @@ type RaceText = Pick<Race, "ability" | "age" | "alignment" | "size" | "speed" | 
 
 const walk30 = "你的基础步行速度为 30 尺。";
 const walk25 = "你的基础步行速度为 25 尺。";
-const commonAndChoice = "你会说、读、写通用语和另一种自选语言。";
+const commonAndChoice = "你会说、读、写通用语和一门自选语言。";
 const darkvision =
   "在 60 尺范围内，你能像在明亮光照下那样看清微光中的事物，也能像在微光下那样看清黑暗中的事物。你在黑暗中只能分辨灰度，无法分辨颜色。";
 const undergroundVision = "你习惯了地下生活，在黑暗和微光中视力格外敏锐。" + darkvision;
-const feyAncestry = "你为避免陷入魅惑状态而进行的豁免具有优势，且魔法无法使你入睡。";
+const feyAncestry = "你对抗魅惑状态的豁免具有优势，且魔法无法使你入睡。";
 const elfWeapons = "你具有长剑、短剑、短弓和长弓的熟练项。";
 const poisonResilience = "你对抗毒素的豁免具有优势，并对毒素伤害具有抗性。";
 const powerfulBuild = "计算负重以及可推动、拖曳或举起的重量时，你视为比实际体型大一级。";
@@ -23,11 +23,11 @@ export const raceTraitsZh: Record<string, RaceText> = {
   aarakocra: {
     description: "鸟形类人生物，以卓越的飞行能力和对天空的热爱而闻名。",
     ability: "你的敏捷值增加 2，感知值增加 1。",
-    age: "鹰身人 3 岁成熟，通常能活到 30 岁左右。",
-    alignment: "大多数鹰身人倾向善良，其中以中立善良为主。",
-    size: "鹰身人身高约 5 尺，身形纤瘦轻盈，体重在 80 至 100 磅之间。你的体型为中型。",
+    age: "阿拉寇拉 3 岁成熟，通常能活到 30 岁左右。",
+    alignment: "大多数阿拉寇拉倾向善良，其中以中立善良为主。",
+    size: "阿拉寇拉身高约 5 尺，身形纤瘦轻盈，体重在 80 至 100 磅之间。你的体型为中型。",
     speed: "你的基础步行速度为 25 尺，飞行速度为 50 尺。",
-    language: "你会说、读、写通用语、鹰身人语和气族语。",
+    language: "你会说、读、写通用语、阿拉寇拉语和气族语。",
     other: [
       "飞行",
       "你的飞行速度为 50 尺。穿着中甲或重甲时，你无法使用这一飞行速度。",
@@ -212,9 +212,9 @@ export const raceTraitsZh: Record<string, RaceText> = {
   firbolg: {
     description: "身负巨人血统的温和守护者，隐居在森林深处，天生能与自然沟通并施展幻术。",
     ability: "你的感知值增加 2，力量值增加 1。",
-    age: "菲尔博特人在接近 20 岁时成年，寿命可达 500 年。",
-    alignment: "菲尔博特人倾向善良，守护自然，阵营往往偏向中立。",
-    size: "菲尔博特人比人类高大，身高 7 至 8 尺。你的体型为中型。",
+    age: "菲尔博格人在接近 20 岁时成年，寿命可达 500 年。",
+    alignment: "菲尔博格人倾向善良，守护自然，阵营往往偏向中立。",
+    size: "菲尔博格人比人类高大，身高 7 至 8 尺。你的体型为中型。",
     speed: walk30,
     language: "你会说、读、写通用语、精灵语和木族语。",
     other: [
@@ -222,7 +222,7 @@ export const raceTraitsZh: Record<string, RaceText> = {
       "你可以用一个附赠动作以魔法使自己隐形，直至你的下个回合开始，或直至你发动攻击或施展法术。",
       "强健体格",
       powerfulBuild,
-      "菲尔博特人魔法",
+      "菲尔博格人魔法",
       "你可以施展侦测魔法和易容术。这些法术的施法属性为感知。",
     ],
   },
@@ -369,7 +369,7 @@ export const raceTraitsZh: Record<string, RaceText> = {
     alignment: "半精灵继承了精灵血统中偏向混乱的一面，重视个人自由和创意表达。",
     size: "半精灵身形与人类相仿，身高 5 至 6 尺。你的体型为中型。",
     speed: walk30,
-    language: "你会说、读、写通用语、精灵语和另一种自选语言。",
+    language: "你会说、读、写通用语、精灵语和一门自选语言。",
     other: [
       "黑暗视觉",
       "精灵血统使你在黑暗和微光中视力格外敏锐。" + darkvision,
@@ -389,7 +389,7 @@ export const raceTraitsZh: Record<string, RaceText> = {
     language: "你会说、读、写通用语和半身人语。",
     other: [
       "幸运",
-      "当你在攻击检定、属性检定或豁免中掷出 1 时，可以重掷该骰子，但必须采用新的结果。",
+      "当你在攻击检定、属性检定或豁免检定中掷出 1 时，可以重掷该骰子，但必须采用新的结果。",
       "勇敢",
       "你为避免陷入恐慌状态而进行的豁免具有优势。",
       "半身人灵巧",
@@ -425,7 +425,7 @@ export const raceTraitsZh: Record<string, RaceText> = {
       "坚韧不屈",
       "当你的生命值降至 0 且没有当场死亡时，你可以让生命值改为降至 1。完成一次长休后，你才能再次使用此特性。",
       "凶蛮攻击",
-      "当你的近战武器攻击造成重击时，你可以额外掷一次该武器的一枚伤害骰，并将结果计入重击的额外伤害。",
+      "当你的近战武器攻击造成重击时，你可以额外掷一次该武器的伤害骰，并将结果计入重击的额外伤害。",
     ],
   },
   human: {
@@ -465,7 +465,7 @@ export const raceTraitsZh: Record<string, RaceText> = {
       "黑暗视觉",
       "在 60 尺范围内，你能像在明亮光照下那样看清微光中的事物。",
       "集群战术",
-      "当你攻击一个生物时，只要你至少有一名盟友在该生物 5 尺内且未陷入失能状态，你的攻击检定就具有优势。",
+      "当你攻击一个生物时，只要你至少有一个盟友在该生物 5 尺内且未陷入失能状态，你的攻击检定就具有优势。",
       "日照敏感",
       sunlightSensitivity,
     ],
@@ -490,9 +490,9 @@ export const raceTraitsZh: Record<string, RaceText> = {
   shifter: {
     description: "拥有兽化人血统，能够短暂化形，获得野兽般的感官、速度或力量。",
     ability: "你的属性值加成由亚种决定。",
-    age: "化兽者的身体和心智都成熟得很快，10 岁便踏入成年，寿命很少超过 70 年。",
-    alignment: "化兽者更关心生存，对善恶之分兴趣不大，因此往往偏向中立。",
-    size: "化兽者身形与人类相近。你的体型为中型。",
+    age: "化兽人的身体和心智都成熟得很快，10 岁便踏入成年，寿命很少超过 70 年。",
+    alignment: "化兽人更关心生存，对善恶之分兴趣不大，因此往往偏向中立。",
+    size: "化兽人身形与人类相近。你的体型为中型。",
     speed: walk30,
     language: commonAndChoice,
     other: [
@@ -543,9 +543,9 @@ export const raceTraitsZh: Record<string, RaceText> = {
   tabaxi: {
     description: "好奇而敏捷的猫形类人生物，总在追寻新知识、精彩的故事和闪亮的物品。",
     ability: "你的敏捷值增加 2，魅力值增加 1。",
-    age: "塔巴西约在 15 岁成年，寿命可超过 100 年。",
-    alignment: "塔巴西重视独立，也充满好奇心，往往偏向混乱阵营。",
-    size: "塔巴西身形与人类相仿，但更为纤瘦。你的体型为中型。",
+    age: "塔巴希约在 15 岁成年，寿命可超过 100 年。",
+    alignment: "塔巴希重视独立，也充满好奇心，往往偏向混乱阵营。",
+    size: "塔巴希身形与人类相仿，但更为纤瘦。你的体型为中型。",
     speed: "你的基础步行速度为 30 尺，攀爬速度为 20 尺。",
     language: commonAndChoice,
     other: [

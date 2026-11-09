@@ -1,7 +1,7 @@
 {
   "schema": "name-roadmap/v1",
   "file": "completed",
-  "updatedAt": "2026-11-09T22:45:16+11:00",
+  "updatedAt": "2026-11-09T23:40:00+11:00",
   "project": {
     "key": "dnd-point-buy-calc",
     "title": "D&D 5e Point-Buy Calculator",
@@ -109,6 +109,13 @@
       "group": "ui",
       "notes": "Show automatic bonuses, eligible abilities, and the selection limit in one picker. Include the feat name and +1 in the feat ability label.",
       "completedAt": "2026-11-09T22:45:16+11:00"
+    },
+    {
+      "id": "zh-official-terminology-polish",
+      "title": "Align Simplified Chinese race names and trait wording with official 5e usage",
+      "group": "i18n",
+      "notes": "Correct Aarakocra (阿拉寇拉), Firbolg, Shifter, and Tabaxi names; polish common language, fey ancestry, lucky, savage attacks, and pack tactics phrasing.",
+      "completedAt": "2026-11-09T23:40:00+11:00"
     }
   ]
 }
