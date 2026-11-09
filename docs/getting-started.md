@@ -32,7 +32,7 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
-You should see the point-buy calculator title, race selector, ability score table, and language select (English and 简体中文 available; planned locales appear disabled).
+You should see the point-buy calculator title, race selector, ability score table, and language select (English and 简体中文).
 
 ## First useful action
 

@@ -10,7 +10,7 @@ See the Racial Modifiers and Variants section in the [README](../README.md). Tha
 
 ## Which UI languages work today?
 
-English and Simplified Chinese. Japanese, Macedonian, and Russian appear as disabled options and are tracked on the roadmap.
+English and Simplified Chinese. Japanese, Macedonian, and Russian are tracked on the roadmap and stay out of the language selector until ready.
 
 ## Does the app save characters to a server?
 

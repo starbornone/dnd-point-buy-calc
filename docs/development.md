@@ -41,7 +41,7 @@ README.md        # Human product entrypoint
 ## i18n notes
 
 - Active locales: `en`, `zh` (`src/i18n/locale.ts`).
-- Planned (disabled in the selector): Japanese, Macedonian, Russian.
+- Planned (listed in `PLANNED_LOCALES`, hidden from the selector until enabled): Japanese, Macedonian, Russian.
 - UI strings: `src/i18n/messages.ts`. Display names: `src/i18n/names.ts`. Chinese racial traits: `src/i18n/raceTraits.zh.ts`.
 
 ## Safety for agents

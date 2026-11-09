@@ -2,19 +2,11 @@
 
 import { NativeSelect } from "@/components/ui/native-select";
 import { useLocale, useMessages } from "@/context/LocaleContext";
-import { isLocale, PLANNED_LOCALES } from "@/i18n/locale";
-
-const PLANNED_SORT = { ja: "Japanese", mk: "Macedonian", ru: "Russian" } as const;
+import { isLocale } from "@/i18n/locale";
 
 const LOCALE_OPTIONS = [
-  { code: "zh", name: "简体中文", sort: "Chinese", disabled: false },
-  { code: "en", name: "English", sort: "English", disabled: false },
-  ...PLANNED_LOCALES.map(({ code, name }) => ({
-    code,
-    name,
-    sort: PLANNED_SORT[code],
-    disabled: true,
-  })),
+  { code: "zh", name: "简体中文", sort: "Chinese" },
+  { code: "en", name: "English", sort: "English" },
 ].sort((a, b) => a.sort.localeCompare(b.sort, "en"));
 
 export const LanguageSelect = () => {
@@ -31,8 +23,8 @@ export const LanguageSelect = () => {
         if (isLocale(next)) setLocale(next);
       }}
     >
-      {LOCALE_OPTIONS.map(({ code, name, disabled }) => (
-        <option key={code} value={code} disabled={disabled}>
+      {LOCALE_OPTIONS.map(({ code, name }) => (
+        <option key={code} value={code}>
           {name}
         </option>
       ))}

@@ -1,7 +1,7 @@
 {
   "schema": "name-roadmap/v1",
   "file": "completed",
-  "updatedAt": "2026-11-09T23:52:17+11:00",
+  "updatedAt": "2026-11-10T00:05:28+11:00",
   "project": {
     "key": "dnd-point-buy-calc",
     "title": "D&D 5e Point-Buy Calculator",
@@ -144,6 +144,13 @@
       "group": "ui",
       "notes": "Keep traits beside the scores column so race details sit higher on the page than share/import actions.",
       "completedAt": "2026-11-09T23:52:17+11:00"
+    },
+    {
+      "id": "hide-unready-locale-options",
+      "title": "Hide unready locales from the language selector",
+      "group": "ui",
+      "notes": "Show only enabled locales in the dropdown; keep planned locales in PLANNED_LOCALES and the roadmap until they ship.",
+      "completedAt": "2026-11-10T00:05:28+11:00"
     }
   ]
 }
