@@ -3,7 +3,6 @@
 import { NativeSelect } from "@/components/ui/native-select";
 import { useLocale, useMessages } from "@/context/LocaleContext";
 import { useRace } from "@/context/RaceContext";
-import { attributeKeys } from "@/data";
 import { featOptions, feats } from "@/data/feats";
 import { raceData } from "@/data/raceData";
 import { abilityLabel, ancestryLabel, cantripLabel, featLabel, languageLabel, skillLabel, toolGroupLabel, toolLabel } from "@/i18n/names";
@@ -13,6 +12,8 @@ import {
   resolveFloatingBonus,
   cantripOptions,
   dragonOptions,
+  getFixedBonuses,
+  getSelectedFloatingBonuses,
   languageOptions,
   resolveCantripChoice,
   resolveLanguageChoice,
@@ -21,7 +22,7 @@ import {
   toolGroupsFor,
 } from "@/utils";
 import { RaceSelector } from "./RaceSelector";
-import { floatingBonusOptionsForSlot, VariantBonusSelector } from "./VariantBonusSelector";
+import { VariantBonusSelector } from "./VariantBonusSelector";
 
 const choiceSlots = [0, 1] as const;
 
@@ -54,6 +55,7 @@ export const CharacterOptions = () => {
   const floatingBonus = resolveFloatingBonus(race, variant);
   const variantHuman = selectedVariant === "Variant Human";
   const chooseFeatAbility = variantHuman && featNeedsChoice(selectedFeat);
+  const featAbilityLabel = copy.featAbility(featLabel(locale, selectedFeat));
   const skillChoice = resolveSkillChoice(race, variant);
   const skillOptions = skillChoice?.options ?? skills;
   const languageChoice = resolveLanguageChoice(race, variant);
@@ -69,17 +71,9 @@ export const CharacterOptions = () => {
     id: `language-choice-${slot}`,
     label: languageChoice?.count === 1 ? copy.extraLanguage : copy.languageSlot(slot),
   }));
-  const bonusSlots = floatingBonus
-    ? choiceSlots.slice(0, floatingBonus.count).map((slot) => {
-        const pick = selectedBonuses[slot];
-        const allowed = floatingBonusOptionsForSlot(attributeKeys, floatingBonus, selectedBonuses, slot);
-        return {
-          id: `floating-bonus-${slot}`,
-          label: floatingBonus.count === 1 ? copy.abilityBonus : copy.abilityBonusSlot(slot),
-          missing: !pick || !allowed.includes(pick),
-        };
-      })
-    : [];
+  const missingBonuses = floatingBonus
+    ? floatingBonus.count - getSelectedFloatingBonuses(floatingBonus, selectedBonuses).size
+    : 0;
   const missingChoices = [
     { id: "race", label: copy.selectRacePlaceholder, missing: !race },
     {
@@ -88,22 +82,23 @@ export const CharacterOptions = () => {
       // The Human selector already defaults to Standard Human.
       missing: race?.variants?.length && selectedRace !== "human" && !variant,
     },
-    ...bonusSlots,
+    { id: "ability-bonuses", label: copy.missingAbilityBonuses(missingBonuses), missing: missingBonuses > 0 },
     ...skillSlots.map(({ slot, id, label }) => ({ id, label, missing: !selectedSkills[slot] })),
     { id: "variant-feat", label: copy.feat, missing: variantHuman && !selectedFeat },
-    { id: "feat-ability", label: copy.featAbility, missing: chooseFeatAbility && !selectedFeatAbility },
+    { id: "feat-ability", label: featAbilityLabel, missing: chooseFeatAbility && !selectedFeatAbility },
     ...languageSlots.map(({ slot, id, label }) => ({ id, label, missing: !selectedLanguages[slot] })),
     { id: "tool-choice", label: copy.toolProficiency, missing: toolChoice && !selectedTool },
     { id: "cantrip-choice", label: copy.cantrip, missing: cantripChoice && !selectedCantrip },
     { id: "dragon-ancestry", label: copy.draconicAncestry, missing: race?.draconicAncestry && !selectedDragon },
   ].filter(({ missing }) => missing);
+  const missingChoiceCount = missingChoices.length + Math.max(0, missingBonuses - 1);
 
   return (
     <>
       <div className="col-span-full rounded-md border border-border bg-muted p-2.5 text-sm">
         <p role="status" className="font-semibold">
-          {missingChoices.length
-            ? copy.setupChoicesRemaining(missingChoices.length)
+          {missingChoiceCount
+            ? copy.setupChoicesRemaining(missingChoiceCount)
             : copy.setupChoicesComplete}
         </p>
         {missingChoices.length > 0 && (
@@ -115,7 +110,10 @@ export const CharacterOptions = () => {
                   className="inline-flex min-h-8 items-center rounded-sm text-primary underline underline-offset-4 hover:decoration-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
                   onClick={(event) => {
                     if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
-                    const control = document.getElementById(id);
+                    const target = document.getElementById(id);
+                    const control = target instanceof HTMLFieldSetElement
+                      ? target.querySelector<HTMLInputElement>("input:not(:checked):not(:disabled)")
+                      : target;
                     if (control) {
                       event.preventDefault();
                       control.focus();
@@ -134,7 +132,7 @@ export const CharacterOptions = () => {
         <VariantBonusSelector
           selectedBonuses={selectedBonuses}
           setSelectedBonuses={setSelectedBonuses}
-          attributeKeys={attributeKeys}
+          fixedBonuses={getFixedBonuses(selectedRace, selectedVariant)}
           floatingBonus={floatingBonus}
         />
       )}
@@ -185,7 +183,7 @@ export const CharacterOptions = () => {
       {chooseFeatAbility && (
         <div className="min-w-0">
           <label htmlFor="feat-ability" className="mb-2 block">
-            {copy.featAbility}
+            {featAbilityLabel}
           </label>
           <NativeSelect
             id="feat-ability"

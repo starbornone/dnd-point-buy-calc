@@ -1,7 +1,7 @@
 {
   "schema": "name-roadmap/v1",
   "file": "completed",
-  "updatedAt": "2026-11-09T21:14:31+11:00",
+  "updatedAt": "2026-11-09T22:45:16+11:00",
   "project": {
     "key": "dnd-point-buy-calc",
     "title": "D&D 5e Point-Buy Calculator",
@@ -102,6 +102,13 @@
       "group": "ui",
       "notes": "Restore the previous build while the result of the latest setup action is current.",
       "completedAt": "2026-11-09T21:14:31+11:00"
+    },
+    {
+      "id": "grouped-ability-bonus-picker",
+      "title": "Group ability bonus picks and name feat bonuses",
+      "group": "ui",
+      "notes": "Show automatic bonuses, eligible abilities, and the selection limit in one picker. Include the feat name and +1 in the feat ability label.",
+      "completedAt": "2026-11-09T22:45:16+11:00"
     }
   ]
 }

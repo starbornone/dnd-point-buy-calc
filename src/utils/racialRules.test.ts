@@ -3,6 +3,7 @@ import { raceData } from "@/data/raceData";
 import { raceDropdown } from "@/data/raceDropdown";
 import { describe, expect, it } from "vitest";
 import { calculateRacialBonuses } from "./calculateRacialBonuses";
+import { parseBuild } from "./characterBuild";
 import { getFixedBonuses } from "./getModifiers";
 import { mergeRaceAndVariant } from "./mergeRaceAndVariant";
 
@@ -150,6 +151,18 @@ describe("calculateRacialBonuses", () => {
         selectedBonuses: ["strength", "strength"],
       })
     ).toEqual(bonuses({ charisma: 2, strength: 1 }));
+  });
+
+  it("ignores an invalid shared bonus pick and still applies the other pick", () => {
+    const build = parseBuild("race=halfElf&bonus=constructor,dexterity")!;
+
+    expect(
+      calculateRacialBonuses({
+        fixedBonuses: getFixedBonuses(build.race, build.variant),
+        floatingBonus: halfElf,
+        selectedBonuses: build.bonuses,
+      })
+    ).toEqual(bonuses({ charisma: 2, dexterity: 1 }));
   });
 
   it("adds the warforged floating bonus to an ability other than Constitution", () => {

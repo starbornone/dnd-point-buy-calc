@@ -1,3 +1,4 @@
+import { attributeKeys } from "@/data/attributeNames";
 import { addBonuses } from "@/data/bonuses";
 import { AttributeState, FloatingBonus, Race, Variant } from "@/types";
 
@@ -8,6 +9,19 @@ export const resolveFloatingBonus = (
   if (!race) return undefined;
   if (variant?.replacesParent) return variant.floatingBonus;
   return variant?.floatingBonus ?? race.floatingBonus;
+};
+
+export const getSelectedFloatingBonuses = (
+  floatingBonus: FloatingBonus,
+  selectedBonuses: readonly (keyof AttributeState | undefined)[]
+) => {
+  const picks = new Set<keyof AttributeState>();
+  for (const pick of selectedBonuses.slice(0, floatingBonus.count)) {
+    if (pick && attributeKeys.includes(pick) && !floatingBonus.exclude.includes(pick)) {
+      picks.add(pick);
+    }
+  }
+  return picks;
 };
 
 export const calculateRacialBonuses = ({
@@ -22,14 +36,9 @@ export const calculateRacialBonuses = ({
   const totals = { ...fixedBonuses };
   if (!floatingBonus) return totals;
 
-  const used = new Set<keyof AttributeState>();
-  for (const pick of selectedBonuses.slice(0, floatingBonus.count)) {
-    if (!pick || used.has(pick) || floatingBonus.exclude.includes(pick)) {
-      continue;
-    }
+  getSelectedFloatingBonuses(floatingBonus, selectedBonuses).forEach((pick) => {
     totals[pick] += 1;
-    used.add(pick);
-  }
+  });
 
   return totals;
 };
