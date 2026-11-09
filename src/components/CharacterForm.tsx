@@ -26,7 +26,6 @@ import {
 import { useRef, useState } from "react";
 import { AttributeTable } from "./AttributeTable";
 import { CharacterOptions } from "./CharacterOptions";
-import { RaceSelector } from "./RaceSelector";
 import { RacialTraits } from "./RacialTraits";
 
 const actionClass = "min-h-11 break-words px-2 text-sm leading-snug [overflow-wrap:anywhere]";
@@ -164,7 +163,6 @@ export const CharacterForm = () => {
             {copy.characterSetup}
           </h2>
           <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,13rem),1fr))] items-end gap-3 sm:gap-4 [&_label]:text-sm">
-            <RaceSelector />
             <CharacterOptions />
           </div>
           <div className="grid gap-3 border-t border-border pt-3 sm:grid-cols-2 lg:grid-cols-1">

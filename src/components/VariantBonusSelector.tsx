@@ -3,13 +3,8 @@
 import { NativeSelect } from "@/components/ui/native-select";
 import { useLocale, useMessages } from "@/context/LocaleContext";
 import { abilityLabel } from "@/i18n/names";
-import { AttributeState, FloatingBonus } from "@/types/race";
+import { AttributeState, BonusPicks, FloatingBonus } from "@/types/race";
 import React from "react";
-
-type BonusPicks = [
-  keyof AttributeState | undefined,
-  keyof AttributeState | undefined,
-];
 
 interface VariantBonusSelectorProps {
   selectedBonuses: BonusPicks;
@@ -17,6 +12,18 @@ interface VariantBonusSelectorProps {
   attributeKeys: (keyof AttributeState)[];
   floatingBonus: FloatingBonus;
 }
+
+export const floatingBonusOptionsForSlot = (
+  attributeKeys: (keyof AttributeState)[],
+  floatingBonus: FloatingBonus,
+  selectedBonuses: BonusPicks,
+  slot: 0 | 1
+) => {
+  const other = selectedBonuses[slot === 0 ? 1 : 0];
+  return attributeKeys.filter(
+    (attr) => !floatingBonus.exclude.includes(attr) && attr !== other
+  );
+};
 
 export const VariantBonusSelector: React.FC<VariantBonusSelectorProps> = ({
   selectedBonuses,
@@ -28,7 +35,7 @@ export const VariantBonusSelector: React.FC<VariantBonusSelectorProps> = ({
   const copy = useMessages();
   const handleBonusChange = (
     e: React.ChangeEvent<HTMLSelectElement>,
-    index: number
+    index: 0 | 1
   ) => {
     const raw = e.target.value;
     const newBonus = raw === "" ? undefined : (raw as keyof AttributeState);
@@ -39,16 +46,10 @@ export const VariantBonusSelector: React.FC<VariantBonusSelectorProps> = ({
     });
   };
 
-  const optionsFor = (index: number) => {
-    const other = selectedBonuses[index === 0 ? 1 : 0];
-    return attributeKeys.filter(
-      (attr) => !floatingBonus.exclude.includes(attr) && attr !== other
-    );
-  };
-
-  const renderSelect = (index: number) => {
+  const renderSelect = (index: 0 | 1) => {
     const selectId = `floating-bonus-${index}`;
     const value = selectedBonuses[index];
+    const options = floatingBonusOptionsForSlot(attributeKeys, floatingBonus, selectedBonuses, index);
     return (
       <div className="min-w-0">
         <label htmlFor={selectId} className="mb-2 block">
@@ -62,7 +63,7 @@ export const VariantBonusSelector: React.FC<VariantBonusSelectorProps> = ({
           onChange={(e) => handleBonusChange(e, index)}
         >
           <option value="">{copy.selectAttribute}</option>
-          {optionsFor(index).map((attr) => (
+          {options.map((attr) => (
             <option key={attr} value={attr}>
               {abilityLabel(locale, attr)}
             </option>

@@ -20,7 +20,10 @@ import {
   resolveToolChoice,
   toolGroupsFor,
 } from "@/utils";
-import { VariantBonusSelector } from "./VariantBonusSelector";
+import { RaceSelector } from "./RaceSelector";
+import { floatingBonusOptionsForSlot, VariantBonusSelector } from "./VariantBonusSelector";
+
+const choiceSlots = [0, 1] as const;
 
 export const CharacterOptions = () => {
   const { locale } = useLocale();
@@ -50,14 +53,83 @@ export const CharacterOptions = () => {
   const variant = race?.variants?.find((entry) => entry.name === selectedVariant);
   const floatingBonus = resolveFloatingBonus(race, variant);
   const variantHuman = selectedVariant === "Variant Human";
+  const chooseFeatAbility = variantHuman && featNeedsChoice(selectedFeat);
   const skillChoice = resolveSkillChoice(race, variant);
   const skillOptions = skillChoice?.options ?? skills;
   const languageChoice = resolveLanguageChoice(race, variant);
   const toolChoice = resolveToolChoice(race, variant);
   const cantripChoice = resolveCantripChoice(race, variant);
+  const skillSlots = choiceSlots.slice(0, skillChoice?.count ?? 0).map((slot) => ({
+    slot,
+    id: `skill-choice-${slot}`,
+    label: skillChoice?.count === 1 ? copy.skillProficiency : copy.skillSlot(slot),
+  }));
+  const languageSlots = choiceSlots.slice(0, languageChoice?.count ?? 0).map((slot) => ({
+    slot,
+    id: `language-choice-${slot}`,
+    label: languageChoice?.count === 1 ? copy.extraLanguage : copy.languageSlot(slot),
+  }));
+  const bonusSlots = floatingBonus
+    ? choiceSlots.slice(0, floatingBonus.count).map((slot) => {
+        const pick = selectedBonuses[slot];
+        const allowed = floatingBonusOptionsForSlot(attributeKeys, floatingBonus, selectedBonuses, slot);
+        return {
+          id: `floating-bonus-${slot}`,
+          label: floatingBonus.count === 1 ? copy.abilityBonus : copy.abilityBonusSlot(slot),
+          missing: !pick || !allowed.includes(pick),
+        };
+      })
+    : [];
+  const missingChoices = [
+    { id: "race", label: copy.selectRacePlaceholder, missing: !race },
+    {
+      id: "variant",
+      label: copy.selectVariantPlaceholder,
+      // The Human selector already defaults to Standard Human.
+      missing: race?.variants?.length && selectedRace !== "human" && !variant,
+    },
+    ...bonusSlots,
+    ...skillSlots.map(({ slot, id, label }) => ({ id, label, missing: !selectedSkills[slot] })),
+    { id: "variant-feat", label: copy.feat, missing: variantHuman && !selectedFeat },
+    { id: "feat-ability", label: copy.featAbility, missing: chooseFeatAbility && !selectedFeatAbility },
+    ...languageSlots.map(({ slot, id, label }) => ({ id, label, missing: !selectedLanguages[slot] })),
+    { id: "tool-choice", label: copy.toolProficiency, missing: toolChoice && !selectedTool },
+    { id: "cantrip-choice", label: copy.cantrip, missing: cantripChoice && !selectedCantrip },
+    { id: "dragon-ancestry", label: copy.draconicAncestry, missing: race?.draconicAncestry && !selectedDragon },
+  ].filter(({ missing }) => missing);
 
   return (
     <>
+      <div className="col-span-full rounded-md border border-border bg-muted p-2.5 text-sm">
+        <p role="status" className="font-semibold">
+          {missingChoices.length
+            ? copy.setupChoicesRemaining(missingChoices.length)
+            : copy.setupChoicesComplete}
+        </p>
+        {missingChoices.length > 0 && (
+          <ul className="mt-1 flex flex-wrap gap-x-3 gap-y-1">
+            {missingChoices.map(({ id, label }) => (
+              <li key={id}>
+                <a
+                  href={`#${id}`}
+                  className="inline-flex min-h-8 items-center rounded-sm text-primary underline underline-offset-4 hover:decoration-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+                  onClick={(event) => {
+                    if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
+                    const control = document.getElementById(id);
+                    if (control) {
+                      event.preventDefault();
+                      control.focus();
+                    }
+                  }}
+                >
+                  {label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+      <RaceSelector />
       {floatingBonus && (
         <VariantBonusSelector
           selectedBonuses={selectedBonuses}
@@ -67,34 +139,30 @@ export const CharacterOptions = () => {
         />
       )}
 
-      {skillChoice &&
-        Array.from({ length: skillChoice.count }, (_, index) => {
-          const slot = index as 0 | 1;
-          const other = selectedSkills[slot === 0 ? 1 : 0];
-          return (
-            <div key={slot} className="min-w-0">
-              <label htmlFor={`skill-choice-${slot}`} className="mb-2 block">
-                {skillChoice.count === 1
-                  ? copy.skillProficiency
-                  : copy.skillSlot(slot)}
-              </label>
-              <NativeSelect
-                id={`skill-choice-${slot}`}
-                value={selectedSkills[slot]}
-                onChange={(event) => setSelectedSkill(slot, event.target.value)}
-              >
-                <option value="">{copy.selectSkill}</option>
-                {skillOptions
-                  .filter((skill) => skill !== other)
-                  .map((skill) => (
-                    <option key={skill} value={skill}>
-                      {skillLabel(locale, skill)}
-                    </option>
-                  ))}
-              </NativeSelect>
-            </div>
-          );
-        })}
+      {skillSlots.map(({ slot, id, label }) => {
+        const other = selectedSkills[slot === 0 ? 1 : 0];
+        return (
+          <div key={id} className="min-w-0">
+            <label htmlFor={id} className="mb-2 block">
+              {label}
+            </label>
+            <NativeSelect
+              id={id}
+              value={selectedSkills[slot]}
+              onChange={(event) => setSelectedSkill(slot, event.target.value)}
+            >
+              <option value="">{copy.selectSkill}</option>
+              {skillOptions
+                .filter((skill) => skill !== other)
+                .map((skill) => (
+                  <option key={skill} value={skill}>
+                    {skillLabel(locale, skill)}
+                  </option>
+                ))}
+            </NativeSelect>
+          </div>
+        );
+      })}
       {variantHuman && (
         <div className="min-w-0">
           <label htmlFor="variant-feat" className="mb-2 block">
@@ -114,7 +182,7 @@ export const CharacterOptions = () => {
           </NativeSelect>
         </div>
       )}
-      {variantHuman && featNeedsChoice(selectedFeat) && (
+      {chooseFeatAbility && (
         <div className="min-w-0">
           <label htmlFor="feat-ability" className="mb-2 block">
             {copy.featAbility}
@@ -143,18 +211,15 @@ export const CharacterOptions = () => {
       )}
 
       {languageChoice &&
-        Array.from({ length: languageChoice.count }, (_, index) => {
-          const slot = index as 0 | 1;
+        languageSlots.map(({ slot, id, label }) => {
           const other = selectedLanguages[slot === 0 ? 1 : 0];
           return (
-            <div key={slot} className="min-w-0">
-              <label htmlFor={`language-choice-${slot}`} className="mb-2 block">
-                {languageChoice.count === 1
-                  ? copy.extraLanguage
-                  : copy.languageSlot(slot)}
+            <div key={id} className="min-w-0">
+              <label htmlFor={id} className="mb-2 block">
+                {label}
               </label>
               <NativeSelect
-                id={`language-choice-${slot}`}
+                id={id}
                 value={selectedLanguages[slot]}
                 onChange={(event) => setSelectedLanguage(slot, event.target.value)}
               >
