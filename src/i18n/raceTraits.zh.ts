@@ -2,6 +2,7 @@ import type { Race, Variant } from "@/types/race";
 
 type VariantText = Pick<Variant, "ability" | "other" | "speed">;
 type RaceText = Pick<Race, "ability" | "age" | "alignment" | "size" | "speed" | "language" | "other"> & {
+  description: string;
   variants?: Record<string, VariantText>;
 };
 
@@ -20,6 +21,7 @@ const sunlightSensitivity =
 
 export const raceTraitsZh: Record<string, RaceText> = {
   aarakocra: {
+    description: "鸟形类人生物，以卓越的飞行能力和对天空的热爱而闻名。",
     ability: "你的敏捷值增加 2，感知值增加 1。",
     age: "鹰身人 3 岁成熟，通常能活到 30 岁左右。",
     alignment: "大多数鹰身人倾向善良，其中以中立善良为主。",
@@ -34,6 +36,7 @@ export const raceTraitsZh: Record<string, RaceText> = {
     ],
   },
   aasimar: {
+    description: "拥有天界血统的凡人，体内流淌着神圣的光芒，常被赋予保护他人的使命。",
     ability: "你的魅力值增加 2。",
     age: "阿斯莫与人类成熟的速度相同，但寿命可长达 160 年。",
     alignment: "大多数阿斯莫受到天界力量的影响而倾向善良。堕入邪恶的阿斯莫会背弃自己的天界传承。",
@@ -75,20 +78,22 @@ export const raceTraitsZh: Record<string, RaceText> = {
     },
   },
   changeling: {
+    description: "能够改变外貌和声音，擅长伪装，也能灵活适应不同的社交环境。",
     ability: "你的魅力值增加 2，另一项自选属性值增加 1。",
-    age: "变形怪比人类稍早成熟，接近 20 岁时成年，寿命与人类相近，最长可达 100 年。",
-    alignment: "变形怪在多重身份之间维持平衡，往往倾向中立。善于转换身份也让他们处世灵活而务实。",
-    size: "变形怪的身形与人类相仿，但略为纤瘦。你的体型为中型。",
+    age: "幻身灵比人类稍早成熟，接近 20 岁时成年，寿命与人类相近，最长可达 100 年。",
+    alignment: "幻身灵在多重身份之间维持平衡，往往倾向中立。善于转换身份也让他们处世灵活而务实。",
+    size: "幻身灵的身形与人类相仿，但略为纤瘦。你的体型为中型。",
     speed: walk30,
     language: "你会说、读、写通用语和另外两种自选语言。",
     other: [
       "改变外貌",
       "你可以用一个动作改变外貌或恢复原形。你可以自行决定肤色、发长、性别等细节。你的体型、身体结构和肢体数量无法改变。",
-      "变形怪本能",
+      "幻身灵本能",
       "从欺瞒、洞悉、威吓和说服中选择两项技能，获得其熟练项。",
     ],
   },
   dragonborn: {
+    description: "拥有龙族血统的类人生物，珍视氏族传统，以强大的元素吐息著称。",
     ability: "你的力量值增加 2，魅力值增加 1。",
     age: "龙裔成长很快，孵化后几小时便能行走。3 岁时的身形和发育程度相当于 10 岁的人类儿童，15 岁成年，寿命约为 80 年。",
     alignment: "龙裔的立场往往走向极端。他们会在巴哈姆特与提亚马特所代表的善恶之争中主动选择一方。大多数龙裔倾向善良，投向提亚马特的龙裔却可能成为可怕的恶徒。",
@@ -105,6 +110,7 @@ export const raceTraitsZh: Record<string, RaceText> = {
     ],
   },
   dwarf: {
+    description: "坚韧顽强的山地或丘陵居民，以精湛的锻造工艺、对黄金的热爱和强健的体魄闻名。",
     ability: "你的体质值增加 2。",
     age: "矮人与人类成熟的速度相同，但 50 岁以前仍被视为年轻。矮人平均能活约 350 年。",
     alignment: "大多数矮人倾向守序，深信井然有序的社会能造福众人。他们通常也倾向善良，重视公平，并相信人人都应从公正的秩序中受益。",
@@ -138,6 +144,7 @@ export const raceTraitsZh: Record<string, RaceText> = {
     },
   },
   elf: {
+    description: "优雅长寿，感官敏锐，与自然或奥术魔法有着深厚的联系。",
     ability: "你的敏捷值增加 2。",
     age: "精灵身体成熟的年龄与人类相近，但精灵眼中的成年还需要足够的阅历。精灵通常在 100 岁左右宣告成年并取一个成年名字，寿命可达 750 年。",
     alignment: "精灵热爱自由、多样性与自我表达，因此偏向混乱阵营中较温和的一面。他们珍视并捍卫自己和他人的自由，多数倾向善良。卓尔则是例外，流放到幽暗地域后，他们变得凶狠而危险，多数倾向邪恶。",
@@ -203,10 +210,11 @@ export const raceTraitsZh: Record<string, RaceText> = {
     },
   },
   firbolg: {
+    description: "身负巨人血统的温和守护者，隐居在森林深处，天生能与自然沟通并施展幻术。",
     ability: "你的感知值增加 2，力量值增加 1。",
-    age: "菲尔博特在接近 20 岁时成年，寿命可达 500 年。",
-    alignment: "菲尔博特倾向善良，守护自然，阵营往往偏向中立。",
-    size: "菲尔博特比人类高大，身高 7 至 8 尺。你的体型为中型。",
+    age: "菲尔博特人在接近 20 岁时成年，寿命可达 500 年。",
+    alignment: "菲尔博特人倾向善良，守护自然，阵营往往偏向中立。",
+    size: "菲尔博特人比人类高大，身高 7 至 8 尺。你的体型为中型。",
     speed: walk30,
     language: "你会说、读、写通用语、精灵语和木族语。",
     other: [
@@ -214,11 +222,12 @@ export const raceTraitsZh: Record<string, RaceText> = {
       "你可以用一个附赠动作以魔法使自己隐形，直至你的下个回合开始，或直至你发动攻击或施展法术。",
       "强健体格",
       powerfulBuild,
-      "菲尔博特魔法",
+      "菲尔博特人魔法",
       "你可以施展侦测魔法和易容术。这些法术的施法属性为感知。",
     ],
   },
   genasi: {
+    description: "拥有火、水、气或土元素血统的凡人，外貌和力量都反映出先祖的元素本质。",
     ability: "你的体质值增加 2。",
     age: "元素裔与人类成熟的速度相近，接近 20 岁时成年。他们比人类略为长寿，最长可活到 120 岁。",
     alignment: "元素裔会顺应孕育他们的元素之力的性情，阵营往往偏向中立。",
@@ -270,6 +279,7 @@ export const raceTraitsZh: Record<string, RaceText> = {
     },
   },
   githyanki: {
+    description: "骄傲好战的星界掠夺者，擅长将灵能融入武艺，有时骑乘红龙作战。",
     ability: "你的力量值增加 2，智力值增加 1。",
     age: "吉斯洋基人在接近 20 岁时成年，寿命约为 120 年。",
     alignment: "吉斯洋基人通常属于守序邪恶阵营，渴望摆脱压迫、获得自由。",
@@ -284,6 +294,7 @@ export const raceTraitsZh: Record<string, RaceText> = {
     ],
   },
   githzerai: {
+    description: "居于混沌海的灵能种族，崇尚纪律与内心平静，以坚强的意志和心灵防御著称。",
     ability: "你的感知值增加 2，智力值增加 1。",
     age: "吉斯瑟雷人在接近 20 岁时成年，寿命可达 120 年左右。",
     alignment: "吉斯瑟雷人通常属于守序善良阵营，致力于维护秩序与个人自由。",
@@ -298,6 +309,7 @@ export const raceTraitsZh: Record<string, RaceText> = {
     ],
   },
   gnome: {
+    description: "好奇而精力充沛的小型种族。森林侏儒擅长幻术，岩侏儒精通机械。",
     ability: "你的智力值增加 2。",
     age: "侏儒与人类成熟的速度相同，但多数侏儒要到 40 岁左右才会安定下来，过上成年人的生活。他们能活 350 年，有些甚至接近 500 年。",
     alignment: "侏儒大多倾向善良。偏向守序的侏儒常成为贤者、工程师、研究员、学者、调查员或发明家。偏向混乱的侏儒则常成为吟游诗人、恶作剧者、流浪者或富有奇思妙想的珠宝匠。",
@@ -332,6 +344,7 @@ export const raceTraitsZh: Record<string, RaceText> = {
     },
   },
   goliath: {
+    description: "高大强壮的山地民族，崇尚公平竞争和个人成就，天生拥有磐石般的耐力。",
     ability: "你的力量值增加 2，体质值增加 1。",
     age: "歌利亚的寿命与人类相近。他们在接近 20 岁时成年，寿命一般不到 100 年。",
     alignment: "歌利亚恪守社会秩序，往往偏向守序阵营。",
@@ -350,6 +363,7 @@ export const raceTraitsZh: Record<string, RaceText> = {
     ],
   },
   halfElf: {
+    description: "人类与精灵的后代，兼具人类的适应力与精灵的优雅，在两个世界之间往来。",
     ability: "你的魅力值增加 2，另外两项自选属性值各增加 1。",
     age: "半精灵与人类成熟的速度相同，约在 20 岁成年。他们比人类长寿得多，常能活过 180 岁。",
     alignment: "半精灵继承了精灵血统中偏向混乱的一面，重视个人自由和创意表达。",
@@ -366,6 +380,7 @@ export const raceTraitsZh: Record<string, RaceText> = {
     ],
   },
   halfling: {
+    description: "乐观、幸运且热爱舒适生活的小型种族，以敏捷和善于避人耳目闻名。",
     ability: "你的敏捷值增加 2。",
     age: "半身人 20 岁成年，通常能活到 150 岁左右。",
     alignment: "多数半身人属于守序善良阵营。他们通常心地善良、待人友好，见不得他人受苦，也无法容忍压迫。",
@@ -395,6 +410,7 @@ export const raceTraitsZh: Record<string, RaceText> = {
     },
   },
   halfOrc: {
+    description: "兼具人类与兽人血统，拥有惊人的力量和坚韧的体魄，在逆境中也不轻易屈服。",
     ability: "你的力量值增加 2，体质值增加 1。",
     age: "半兽人比人类稍早成熟，约在 14 岁成年。他们衰老明显更快，寿命很少超过 75 年。",
     alignment: "半兽人从兽人亲代那里继承了偏向混乱的倾向，通常也不怎么倾向善良。",
@@ -413,6 +429,7 @@ export const raceTraitsZh: Record<string, RaceText> = {
     ],
   },
   human: {
+    description: "多样而富有适应力的种族，常受短暂寿命所激励，在各种职业和环境中追求成就。",
     ability: "你的每项属性值都增加 1。",
     age: "人类在接近 20 岁时成年，寿命不到 100 年。",
     alignment: "人类没有固定的阵营倾向，其中既有至善之人，也有至恶之徒。",
@@ -437,6 +454,7 @@ export const raceTraitsZh: Record<string, RaceText> = {
     },
   },
   kobold: {
+    description: "娇小而狡黠的爬行类生物，擅长设置陷阱和协同作战，并以崇拜龙族为荣。",
     ability: "你的敏捷值增加 2，力量值减少 2。",
     age: "狗头人 6 岁成熟，寿命最长可达 120 年。",
     alignment: "狗头人往往受本能和好奇心驱使，偏向混乱阵营。",
@@ -453,6 +471,7 @@ export const raceTraitsZh: Record<string, RaceText> = {
     ],
   },
   lizardfolk: {
+    description: "常在沼泽或丛林中群居的爬行类猎手，重视生存，处事务实。",
     ability: "你的体质值增加 2，感知值增加 1。",
     age: "蜥蜴人约在 14 岁成年，寿命最长可达 80 年。",
     alignment: "蜥蜴人往往偏向中立，相比道德观念，他们更看重生存和实用。",
@@ -469,17 +488,18 @@ export const raceTraitsZh: Record<string, RaceText> = {
     ],
   },
   shifter: {
+    description: "拥有兽化人血统，能够短暂化形，获得野兽般的感官、速度或力量。",
     ability: "你的属性值加成由亚种决定。",
-    age: "兽化裔的身体和心智都成熟得很快，10 岁便踏入成年，寿命很少超过 70 年。",
-    alignment: "兽化裔更关心生存，对善恶之分兴趣不大，因此往往偏向中立。",
-    size: "兽化裔身形与人类相近。你的体型为中型。",
+    age: "化兽者的身体和心智都成熟得很快，10 岁便踏入成年，寿命很少超过 70 年。",
+    alignment: "化兽者更关心生存，对善恶之分兴趣不大，因此往往偏向中立。",
+    size: "化兽者身形与人类相近。你的体型为中型。",
     speed: walk30,
     language: commonAndChoice,
     other: [
       "黑暗视觉",
       darkvision,
-      "兽化",
-      "你可以用一个附赠动作让外貌变得更像野兽。变身持续 1 分钟，若你死亡或用一个附赠动作恢复原形，则提前结束。兽化期间，你获得等同于你的等级 + 体质调整值的临时生命值（至少 1 点），并获得亚种提供的增益。完成一次短休或长休后，你才能再次兽化。",
+      "化形",
+      "你可以用一个附赠动作让外貌变得更像野兽。化形持续 1 分钟，若你死亡或用一个附赠动作恢复原形，则提前结束。化形期间，你获得等同于你的等级 + 体质调整值的临时生命值（至少 1 点），并获得亚种提供的增益。完成一次短休或长休后，你才能再次化形。",
     ],
     variants: {
       Beasthide: {
@@ -487,8 +507,8 @@ export const raceTraitsZh: Record<string, RaceText> = {
         other: [
           "天生健将",
           "你具有运动技能的熟练项。",
-          "兽化特性",
-          "每次兽化时，你额外获得 1d6 点临时生命值。兽化期间，你的护甲等级获得 +1 加值。",
+          "化形特性",
+          "每次化形时，你额外获得 1d6 点临时生命值。化形期间，你的护甲等级获得 +1 加值。",
         ],
       },
       Longtooth: {
@@ -496,8 +516,8 @@ export const raceTraitsZh: Record<string, RaceText> = {
         other: [
           "凶猛",
           "你具有威吓技能的熟练项。",
-          "兽化特性",
-          "兽化期间，你可以用一个附赠动作以伸长的獠牙进行一次徒手打击。獠牙命中时造成 1d6 + 你的力量调整值的穿刺伤害，取代徒手打击通常造成的钝击伤害。",
+          "化形特性",
+          "化形期间，你可以用一个附赠动作以伸长的獠牙进行一次徒手打击。獠牙命中时造成 1d6 + 你的力量调整值的穿刺伤害，取代徒手打击通常造成的钝击伤害。",
         ],
       },
       Swiftstride: {
@@ -505,8 +525,8 @@ export const raceTraitsZh: Record<string, RaceText> = {
         other: [
           "身姿轻盈",
           "你具有特技技能的熟练项。",
-          "兽化特性",
-          "兽化期间，你的步行速度增加 10 尺。此外，当敌人在距你 5 尺内结束其回合时，你可以用一个反应移动至多 10 尺。这段移动不会引发借机攻击。",
+          "化形特性",
+          "化形期间，你的步行速度增加 10 尺。此外，当敌人在距你 5 尺内结束其回合时，你可以用一个反应移动至多 10 尺。这段移动不会引发借机攻击。",
         ],
       },
       Wildhunt: {
@@ -514,13 +534,14 @@ export const raceTraitsZh: Record<string, RaceText> = {
         other: [
           "天生追踪者",
           "你具有生存技能的熟练项。",
-          "兽化特性",
-          "兽化期间，你的感知检定具有优势。除非你陷入失能状态，否则距你 30 尺内的生物对你进行攻击检定时无法获得优势。",
+          "化形特性",
+          "化形期间，你的感知检定具有优势。除非你陷入失能状态，否则距你 30 尺内的生物对你进行攻击检定时无法获得优势。",
         ],
       },
     },
   },
   tabaxi: {
+    description: "好奇而敏捷的猫形类人生物，总在追寻新知识、精彩的故事和闪亮的物品。",
     ability: "你的敏捷值增加 2，魅力值增加 1。",
     age: "塔巴西约在 15 岁成年，寿命可超过 100 年。",
     alignment: "塔巴西重视独立，也充满好奇心，往往偏向混乱阵营。",
@@ -537,6 +558,7 @@ export const raceTraitsZh: Record<string, RaceText> = {
     ],
   },
   tiefling: {
+    description: "拥有地狱或邪魔血统的凡人，常因外貌遭受偏见，却往往坚韧而独立。",
     ability: "你的智力值增加 1，魅力值增加 2。",
     age: "提夫林与人类成熟的速度相同，但比人类多活几年。",
     alignment: "提夫林未必天生倾向邪恶，但许多人最终走上了这条路。无论善恶，独立的性情往往让提夫林偏向混乱阵营。",
@@ -553,6 +575,7 @@ export const raceTraitsZh: Record<string, RaceText> = {
     ],
   },
   warforged: {
+    description: "为战争打造的构装体，拥有自我意识和情感，正在战后的世界寻找自身的意义与归属。",
     ability: "你的体质值增加 2，另一项自选属性值增加 1。",
     age: "战俑造好时便已成形，没有童年。他们的寿命通常在 30 年左右，但实际上可以长生不老。",
     alignment: "多数战俑属于中立阵营，偏向守序。他们服从命令，重视职责。",

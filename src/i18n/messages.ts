@@ -260,7 +260,7 @@ const zh: Messages = {
   selectDragon: "选择一种龙",
   chosenAncestry: "所选血统：",
   chosenFeat: "所选专长：",
-  selectRacePrompt: "请选择一个种族以查看其种族特性。",
+  selectRacePrompt: "请选择一个种族以查看其种族特性与属性加成。",
   noRace: "未选择种族",
   skillLine: "技能：",
   language: "语言",

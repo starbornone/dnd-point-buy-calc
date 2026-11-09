@@ -67,6 +67,8 @@ describe("display names", () => {
 });
 
 describe("Chinese racial trait text", () => {
+  const hanCharacter = /[\u3400-\u4dbf\u4e00-\u9fff]/;
+
   it.each(raceDropdown)("covers $name and its variants", ({ value }) => {
     const race = raceData[value];
     const variants = ["", ...(race.variants ?? []).map(({ name }) => name)];
@@ -76,9 +78,10 @@ describe("Chinese racial trait text", () => {
       const zh = getRaceTraits("zh", value, variant)!;
       const fields = ["ability", "age", "alignment", "size", "speed", "language"] as const;
 
+      expect(zh.description).toMatch(hanCharacter);
       expect(zh.other).toHaveLength(en.other.length);
       for (const text of [...fields.map((field) => zh[field]), ...zh.other]) {
-        expect(text).toMatch(/\p{Script=Han}/u);
+        expect(text).toMatch(hanCharacter);
       }
     }
   });
