@@ -19,7 +19,7 @@ const keywordsByLocale: Record<Locale, string[]> = {
     "购点计算器",
     "属性值",
     "种族加成",
-    "标准属性",
+    "标准数组",
     "角色创建",
   ],
 };

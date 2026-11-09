@@ -1,7 +1,7 @@
 {
   "schema": "name-roadmap/v1",
   "file": "completed",
-  "updatedAt": "2026-11-09T23:42:00+11:00",
+  "updatedAt": "2026-11-09T23:45:00+11:00",
   "project": {
     "key": "dnd-point-buy-calc",
     "title": "D&D 5e Point-Buy Calculator",
@@ -123,6 +123,13 @@
       "group": "i18n",
       "notes": "Gaming sets to 游戏道具, Mage Slayer to 法师杀手, and remove number/character spaces in breath shape labels.",
       "completedAt": "2026-11-09T23:42:00+11:00"
+    },
+    {
+      "id": "zh-ui-messages-official-polish",
+      "title": "Align Chinese UI messages with official 5e phrasing",
+      "group": "i18n",
+      "notes": "Standard array, ASI, point budget, granted traits, automatic bonus, and score control aria spacing.",
+      "completedAt": "2026-11-09T23:45:00+11:00"
     }
   ]
 }
