@@ -1,5 +1,6 @@
 "use client";
 
+import { NativeSelect } from "@/components/ui/native-select";
 import { useLocale, useMessages } from "@/context/LocaleContext";
 import { isLocale } from "@/i18n/locale";
 
@@ -8,10 +9,10 @@ export const LanguageSelect = () => {
   const copy = useMessages();
 
   return (
-    <select
+    <NativeSelect
       id="language"
       aria-label={copy.language}
-      className="border p-2 rounded min-h-11"
+      className="border-gray-500"
       value={locale}
       onChange={(event) => {
         const next = event.target.value;
@@ -21,6 +22,6 @@ export const LanguageSelect = () => {
       <option value="en">English</option>
       <option value="zh">中文</option>
       <option value="es">Español</option>
-    </select>
+    </NativeSelect>
   );
 };

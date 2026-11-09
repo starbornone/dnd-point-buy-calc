@@ -17,23 +17,23 @@ export default function HomePage() {
   const copy = useMessages();
 
   return (
-    <div className="container mx-auto mt-8">
-      <div className="flex flex-col md:flex-row gap-8 justify-between items-center print:hidden">
-        <h1 className="text-3xl font-bold m-0 text-primary text-center md:text-left">
+    <>
+      <header className="flex flex-col gap-4 border-b border-accent pb-5 sm:gap-5 sm:pb-6 lg:flex-row lg:items-end lg:justify-between print:hidden">
+        <h1 className="text-3xl font-bold leading-tight sm:text-balance sm:text-4xl xl:text-[2.625rem]">
           {copy.title}
         </h1>
-        <div className="flex flex-wrap justify-end items-center gap-4">
+        <div className="flex shrink-0 flex-wrap items-center gap-2 sm:gap-3 lg:justify-end">
           <LanguageSelect />
           <Modal title={copy.basicUsage}>
             <p>{copy.basicUsageBody}</p>
             <PointCostTable />
-            <p className="mt-4">{copy.standardArrayHelp}</p>
+            <p>{copy.standardArrayHelp}</p>
           </Modal>
           <Modal title={copy.about}>
             <p>
               {copy.aboutLead}{" "}
               <Link
-                href="https://github.com/starbornone/DnD-Point-Buy-Calc"
+                href="https://github.com/starbornone/dnd-point-buy-calc"
                 rel="noopener noreferrer"
                 target="_blank"
               >
@@ -43,10 +43,10 @@ export default function HomePage() {
             </p>
           </Modal>
         </div>
-      </div>
+      </header>
 
       <form
-        className="mt-8 print:hidden"
+        className="prose mt-8 max-w-none print:hidden"
         id="dnd5e-pbc"
         onSubmit={(event) => event.preventDefault()}
       >
@@ -55,7 +55,9 @@ export default function HomePage() {
         <AttributeTable />
         <RacialTraits />
       </form>
-      <PrintSheet />
-    </div>
+      <div className="prose mx-auto hidden max-w-5xl print:block">
+        <PrintSheet />
+      </div>
+    </>
   );
 }

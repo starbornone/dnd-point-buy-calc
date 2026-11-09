@@ -1,5 +1,6 @@
 "use client";
 
+import { Table } from "@/components/ui/table";
 import { useMessages } from "@/context/LocaleContext";
 import { ABILITY_POINT_COSTS } from "@/utils/calculatePointCost";
 
@@ -7,22 +8,22 @@ export const PointCostTable = () => {
   const copy = useMessages();
 
   return (
-    <table className="mt-4 w-full text-center">
-      <caption className="text-left font-bold">{copy.costTable}</caption>
-      <thead>
+    <Table className="text-center text-sm tabular-nums">
+      <caption className="pb-2 text-left font-bold">{copy.costTable}</caption>
+      <thead className="bg-secondary">
         <tr>
-          <th scope="col">{copy.score}</th>
-          <th scope="col">{copy.cost}</th>
+          <th scope="col" className="py-1.5">{copy.score}</th>
+          <th scope="col" className="py-1.5">{copy.cost}</th>
         </tr>
       </thead>
       <tbody>
         {ABILITY_POINT_COSTS.map(({ score, cost }) => (
-          <tr key={score}>
+          <tr key={score} className="border-b border-secondary">
             <th scope="row">{score}</th>
             <td>{cost}</td>
           </tr>
         ))}
       </tbody>
-    </table>
+    </Table>
   );
 };

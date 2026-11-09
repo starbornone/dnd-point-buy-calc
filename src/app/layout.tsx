@@ -16,15 +16,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased p-4">
+      <body className="text-foreground antialiased">
         <Providers>
-          <div className="hidden md:block print:hidden">
-            <Navbar />
-          </div>
-          <main className="prose mx-auto max-w-5xl mb-12">{children}</main>
-          <div className="md:hidden block print:hidden">
-            <Navbar />
-          </div>
+          <main className="mx-auto w-full max-w-7xl px-4 py-6 sm:px-6 sm:py-9 lg:px-8 lg:py-12 print:max-w-none print:p-4">
+            {children}
+          </main>
+          <Navbar />
         </Providers>
       </body>
     </html>
