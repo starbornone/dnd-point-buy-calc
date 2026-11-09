@@ -7,29 +7,27 @@ import { useLocale, useMessages } from "@/context/LocaleContext";
 import { useRace } from "@/context/RaceContext";
 import { useStats } from "@/context/StatsContext";
 import { withLocale } from "@/i18n/locale";
-import {
-  MAX_POINT_BUDGET,
-  MIN_POINT_BUDGET,
-  POINT_BUY_BUDGET,
-} from "@/utils/calculatePointCost";
-import { emptyLanguagePicks } from "@/utils/languageChoice";
-import { emptySkillPicks } from "@/utils/skillChoice";
+import { MAX_POINT_BUDGET, MIN_POINT_BUDGET } from "@/utils/calculatePointCost";
 import { standardArrayAttributes } from "@/utils/standardArray";
 import {
   buildFileName,
-  defaultAttributes,
-  emptyBonusPicks,
+  defaultBuild,
   fromBuildFile,
   serializeBuild,
   toBuildFile,
+  type CharacterBuild,
 } from "@/utils/characterBuild";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AttributeTable } from "./AttributeTable";
 import { CharacterOptions } from "./CharacterOptions";
 import { RacialTraits } from "./RacialTraits";
 
 const actionClass = "min-h-11 break-words px-2 text-sm leading-snug [overflow-wrap:anywhere]";
 type Feedback = "linkCopied" | "copyError" | "invalidJson" | "importReadError" | "importError" | "importSuccess";
+type SetupAction = "reset" | "standardArray";
+type SetupChange =
+  | { action: SetupAction; previous: CharacterBuild; resultQuery: string }
+  | { action: "restored"; resultQuery: string };
 
 export const CharacterForm = () => {
   const { locale } = useLocale();
@@ -47,12 +45,16 @@ export const CharacterForm = () => {
     selectedFeat,
     selectedFeatAbility,
   } = useRace();
-  const { attributes, pointBudget, setPointBudget, setAttributes, loadStats } = useStats();
+  const { attributes, pointBudget, setPointBudget, loadStats } = useStats();
   const [feedback, setFeedback] = useState<Feedback | null>(null);
+  const [setupChange, setSetupChange] = useState<SetupChange | null>(null);
   const feedbackIsSuccess = feedback === "linkCopied" || feedback === "importSuccess";
   const fileInput = useRef<HTMLInputElement>(null);
+  const setupActions = useRef<HTMLDivElement>(null);
+  const standardArrayButton = useRef<HTMLButtonElement>(null);
+  const resetButton = useRef<HTMLButtonElement>(null);
   const importRequest = useRef(0);
-  const build = {
+  const build: CharacterBuild = {
     race: selectedRace,
     variant: selectedVariant,
     attributes,
@@ -66,22 +68,56 @@ export const CharacterForm = () => {
     featAbility: selectedFeatAbility,
     budget: pointBudget,
   };
+  const buildQuery = serializeBuild(build);
+  const currentSetupChange = setupChange?.resultQuery === buildQuery ? setupChange : null;
+  const undo = currentSetupChange?.action === "restored" ? null : currentSetupChange;
+  const setupMessage = currentSetupChange?.action === "restored"
+    ? copy.previousBuildRestored
+    : undo && (undo.action === "reset" ? copy.buildReset : copy.standardArrayApplied);
 
-  const applyStandardArray = () => {
-    setAttributes(standardArrayAttributes());
-    importRequest.current += 1;
-    setFeedback(null);
+  useEffect(() => {
+    if (setupChange) setupActions.current?.scrollIntoView({ block: "nearest" });
+  }, [setupChange]);
+
+  const loadBuild = (next: CharacterBuild) => {
+    loadRace(
+      next.race,
+      next.variant,
+      next.bonuses,
+      next.skills,
+      next.languages,
+      next.tool,
+      next.cantrip,
+      next.dragon,
+      next.feat,
+      next.featAbility
+    );
+    loadStats(next.attributes, next.budget);
   };
 
-  const reset = () => {
-    loadRace("", "", emptyBonusPicks(), emptySkillPicks(), emptyLanguagePicks(), "", "", "", "", "");
-    loadStats(defaultAttributes(), POINT_BUY_BUDGET);
+  const applySetupAction = (action: SetupAction, next: CharacterBuild) => {
     importRequest.current += 1;
     setFeedback(null);
+    const resultQuery = serializeBuild(next);
+    if (resultQuery === buildQuery) return;
+
+    setSetupChange({ action, previous: build, resultQuery });
+    loadBuild(next);
+  };
+
+  const restorePreviousBuild = () => {
+    if (!undo) return;
+
+    importRequest.current += 1;
+    setFeedback(null);
+    loadBuild(undo.previous);
+    setSetupChange({ action: "restored", resultQuery: serializeBuild(undo.previous) });
+    const actionButton = undo.action === "reset" ? resetButton : standardArrayButton;
+    actionButton.current?.focus({ preventScroll: true });
   };
 
   const copyLink = async () => {
-    const query = withLocale(serializeBuild(build), locale);
+    const query = withLocale(buildQuery, locale);
     const url = `${window.location.origin}${window.location.pathname}${
       query ? `?${query}` : ""
     }`;
@@ -135,19 +171,8 @@ export const CharacterForm = () => {
       return;
     }
 
-    loadRace(
-      parsed.race,
-      parsed.variant,
-      parsed.bonuses,
-      parsed.skills,
-      parsed.languages,
-      parsed.tool,
-      parsed.cantrip,
-      parsed.dragon,
-      parsed.feat,
-      parsed.featAbility
-    );
-    loadStats(parsed.attributes, parsed.budget);
+    loadBuild(parsed);
+    setSetupChange(null);
     setFeedback("importSuccess");
   };
 
@@ -165,7 +190,7 @@ export const CharacterForm = () => {
           <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,13rem),1fr))] items-end gap-3 sm:gap-4 [&_label]:text-sm">
             <CharacterOptions />
           </div>
-          <div className="grid gap-3 border-t border-border pt-3 sm:grid-cols-2 lg:grid-cols-1">
+          <div ref={setupActions} className="grid gap-3 border-t border-border pt-3 sm:grid-cols-2 lg:grid-cols-1">
             <div className="flex items-center justify-between gap-3">
               <label htmlFor="point-budget" className="text-sm font-semibold">
                 {copy.pointBudget}
@@ -191,12 +216,32 @@ export const CharacterForm = () => {
               />
             </div>
             <div className="grid grid-cols-2 gap-2">
-              <Button type="button" className={actionClass} onClick={applyStandardArray}>
+              <Button
+                ref={standardArrayButton}
+                type="button"
+                className={actionClass}
+                onClick={() => applySetupAction("standardArray", { ...build, attributes: standardArrayAttributes() })}
+              >
                 {copy.standardArray}
               </Button>
-              <Button type="button" variant="secondary" className={actionClass} aria-label={copy.resetScores} onClick={reset}>
+              <Button
+                ref={resetButton}
+                type="button"
+                variant="secondary"
+                className={actionClass}
+                aria-label={copy.resetScores}
+                onClick={() => applySetupAction("reset", defaultBuild())}
+              >
                 {copy.reset}
               </Button>
+            </div>
+            <div className={setupMessage ? "flex items-center justify-between gap-2 rounded-md border border-border bg-muted p-2 sm:col-span-2 lg:col-span-1" : "sr-only"}>
+              <p role="status" className="text-sm">{setupMessage}</p>
+              {undo && (
+                <Button type="button" variant="secondary" className={actionClass} onClick={restorePreviousBuild}>
+                  {copy.undo}
+                </Button>
+              )}
             </div>
           </div>
         </Card>

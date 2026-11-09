@@ -1,7 +1,7 @@
 {
   "schema": "name-roadmap/v1",
   "file": "completed",
-  "updatedAt": "2026-11-09T21:05:45+11:00",
+  "updatedAt": "2026-11-09T21:14:31+11:00",
   "project": {
     "key": "dnd-point-buy-calc",
     "title": "D&D 5e Point-Buy Calculator",
@@ -95,6 +95,13 @@
       "group": "ui",
       "notes": "Update the checklist as applicable choices change and allow players to copy links to in-progress builds.",
       "completedAt": "2026-11-09T21:05:45+11:00"
+    },
+    {
+      "id": "undo-reset-and-standard-array",
+      "title": "Add one-click Undo for Reset and Standard Array",
+      "group": "ui",
+      "notes": "Restore the previous build while the result of the latest setup action is current.",
+      "completedAt": "2026-11-09T21:14:31+11:00"
     }
   ]
 }
