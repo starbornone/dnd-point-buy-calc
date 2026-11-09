@@ -11,25 +11,31 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        display: ["Bookmania", "Georgia", "serif"],
+      },
       colors: {
-        bgInverse: "var(--color-bg-inverse)",
-        lightGray: "var(--color-bg-info)",
-        background: "var(--color-bg-light)",
-        foreground: "var(--color-text-primary)",
+        background: "var(--color-background)",
+        foreground: "var(--color-foreground)",
         card: {
-          DEFAULT: "var(--color-bg-info)",
-          foreground: "var(--color-text-primary)",
+          DEFAULT: "var(--color-card)",
+          foreground: "var(--color-foreground)",
         },
         primary: {
           DEFAULT: "var(--color-primary)",
-          foreground: "var(--color-bg-light)",
+          foreground: "var(--color-primary-foreground)",
         },
-        secondary: {
-          DEFAULT: "var(--color-nav-button)",
-          foreground: "var(--color-text-primary)",
+        muted: {
+          DEFAULT: "var(--color-muted)",
+          foreground: "var(--color-muted-foreground)",
         },
-        accent: "var(--color-secondary)",
-        input: "var(--color-bg-info)",
+        danger: {
+          DEFAULT: "var(--color-danger)",
+          foreground: "var(--color-danger-foreground)",
+        },
+        accent: "var(--color-border)",
+        border: "var(--color-border)",
+        input: "var(--color-input)",
         ring: "var(--color-primary)",
       },
     },

@@ -20,7 +20,7 @@ interface AttributeTableBodyProps {
 }
 
 const metricClass = "min-w-0 text-center md:table-cell md:px-2 md:py-1.5";
-const metricLabelClass = "block break-words text-xs leading-tight md:hidden";
+const metricLabelClass = "block break-words text-xs leading-tight text-muted-foreground md:hidden";
 
 export const AttributeTableBody: React.FC<AttributeTableBodyProps> = ({
   attributes,
@@ -49,7 +49,7 @@ export const AttributeTableBody: React.FC<AttributeTableBodyProps> = ({
   };
 
   return (
-    <tbody role="rowgroup" className="grid gap-2 min-[580px]:grid-cols-2 md:table-row-group md:[&>tr:not(:last-child)>*]:border-b md:[&>tr>*]:border-secondary">
+    <tbody role="rowgroup" className="grid gap-2 min-[580px]:grid-cols-2 md:table-row-group md:[&>tr:not(:last-child)>*]:border-b md:[&>tr>*]:border-border">
       {attributeKeys.map((attrKey) => {
         const attrValue = attributes[attrKey];
         const racialBonus = racialBonuses[attrKey];
@@ -63,14 +63,14 @@ export const AttributeTableBody: React.FC<AttributeTableBodyProps> = ({
             key={attrKey}
             role="row"
             className={cn(
-              "grid items-center gap-x-1 gap-y-2 rounded-md border border-secondary p-2.5 md:table-row md:border-0 md:p-0 md:hover:bg-background",
+              "grid items-center gap-x-1 gap-y-2 rounded-md border border-border bg-card p-2.5 md:table-row md:border-0 md:p-0 md:hover:bg-muted",
               featBonuses ? "grid-cols-6" : "grid-cols-[repeat(3,minmax(0,1fr))_minmax(0,1.25fr)]"
             )}
           >
             <th
               scope="row"
               role="rowheader"
-              className={cn("min-w-0 break-words text-left font-bold md:table-cell md:py-2 md:pl-4 md:pr-2", topCellSpan)}
+              className={cn("min-w-0 break-words text-left font-semibold md:table-cell md:py-2 md:pl-4 md:pr-2", topCellSpan)}
             >
               {label}
             </th>

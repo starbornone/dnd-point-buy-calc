@@ -64,13 +64,13 @@ export const RacialTraits = () => {
     <Card
       role="region"
       aria-labelledby="racial-traits-heading"
-      className="flex flex-col gap-3 rounded-lg p-4 sm:gap-4 sm:p-5 lg:col-span-2 xl:p-6"
+      className="flex flex-col gap-3 sm:gap-4 sm:p-5 lg:col-span-2 xl:p-6"
     >
-      <h2 id="racial-traits-heading" className="text-xl font-bold">{copy.racialTraits}</h2>
-      {locale !== DEFAULT_LOCALE ? <p className="text-sm">{copy.rulesInEnglish}</p> : null}
+      <h2 id="racial-traits-heading" className="font-display text-2xl leading-tight text-primary">{copy.racialTraits}</h2>
+      {locale !== DEFAULT_LOCALE ? <p className="text-sm text-muted-foreground">{copy.rulesInEnglish}</p> : null}
       {selectedRace ? (
         <>
-          <div className="grid gap-x-7 gap-y-4 md:grid-cols-2 [&_dd]:leading-relaxed [&_dt]:mt-3 [&_dt]:font-bold [&_dt:first-child]:mt-0">
+          <div className="grid gap-x-7 gap-y-4 border-t border-border pt-3 text-sm md:grid-cols-2 [&_dd]:leading-relaxed [&_dt]:mt-3 [&_dt]:font-semibold [&_dt]:text-primary [&_dt:first-child]:mt-0">
             <div>
               <dl>
                 <dt>{copy.abilityScoreIncrease}</dt>
@@ -169,7 +169,7 @@ export const RacialTraits = () => {
           </div>
         </>
       ) : (
-        <p>{copy.selectRacePrompt}</p>
+        <p className="text-sm text-muted-foreground">{copy.selectRacePrompt}</p>
       )}
     </Card>
   );

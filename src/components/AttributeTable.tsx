@@ -44,24 +44,24 @@ export const AttributeTable = () => {
 
   return (
     <section aria-labelledby="scores-heading" className="min-w-0">
-      <Card className="flex flex-col gap-4 rounded-lg border border-secondary bg-white p-3 sm:gap-5 sm:p-5 xl:p-6">
+      <Card className="ledger-feature flex flex-col gap-4 sm:gap-5 sm:p-5 xl:p-6">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <h2 id="scores-heading" className="text-xl font-bold">
+          <h2 id="scores-heading" className="font-display text-2xl leading-tight text-primary sm:text-3xl">
             {copy.abilityScores}
           </h2>
-          <dl className="grid grid-cols-2 gap-2 text-xs leading-snug sm:text-sm" aria-hidden="true">
-            <div className="rounded-md bg-background px-2.5 py-2 sm:px-4">
+          <dl className="grid grid-cols-2 divide-x divide-border overflow-hidden rounded-md border border-border text-[0.65rem] font-medium uppercase leading-snug tracking-wider sm:min-w-56" aria-hidden="true">
+            <div className="flex flex-col justify-between gap-1 bg-background px-2.5 py-2 text-muted-foreground sm:px-4">
               <dt>{copy.totalCost}</dt>
-              <dd className="text-lg font-bold tabular-nums">{pointCost ?? "—"}</dd>
+              <dd className="font-display text-3xl leading-none tracking-normal text-foreground tabular-nums">{pointCost ?? "—"}</dd>
             </div>
             <div
               className={cn(
-                "rounded-md px-2.5 py-2 sm:px-4",
-                overBudget ? "bg-primary text-primary-foreground" : "bg-secondary text-primary"
+                "flex flex-col justify-between gap-1 px-2.5 py-2 sm:px-4",
+                overBudget ? "bg-danger text-danger-foreground" : "bg-muted text-primary"
               )}
             >
               <dt>{copy.pointsRemaining}</dt>
-              <dd className="text-lg font-bold tabular-nums">{remaining ?? "—"}</dd>
+              <dd className="font-display text-3xl leading-none tracking-normal tabular-nums">{remaining ?? "—"}</dd>
             </div>
           </dl>
           <p className="sr-only" role="status" aria-atomic="true">
@@ -72,9 +72,9 @@ export const AttributeTable = () => {
         <Table
           aria-labelledby="scores-heading"
           role="table"
-          className="block text-sm tabular-nums md:table md:border-separate md:border-spacing-0 md:overflow-hidden md:rounded-md md:border md:border-secondary"
+          className="block text-sm tabular-nums md:table md:border-separate md:border-spacing-0 md:overflow-hidden md:rounded-md md:border md:border-border md:bg-card"
         >
-          <thead role="rowgroup" className="sr-only md:not-sr-only md:table-header-group md:bg-secondary">
+          <thead role="rowgroup" className="sr-only md:not-sr-only md:table-header-group md:bg-muted md:text-primary">
             <tr role="row" className="text-center [&>th]:px-2 [&>th]:py-3">
               <th scope="col" role="columnheader" className="text-left first:pl-4">
                 {copy.attribute}

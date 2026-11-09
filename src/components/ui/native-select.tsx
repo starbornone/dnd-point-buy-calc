@@ -12,14 +12,14 @@ const NativeSelect = React.forwardRef<
       ref={ref}
       data-slot="native-select"
       className={cn(
-        "block min-h-11 w-full appearance-none rounded border border-input bg-white bg-none py-2 pl-2 pr-8 text-base text-foreground focus-visible:border-ring focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50",
+        "block min-h-11 w-full appearance-none rounded-md border border-input bg-background bg-none py-2 pl-2 pr-8 text-base text-foreground focus:border-ring focus:ring-ring focus-visible:outline-none focus-visible:ring-2 disabled:cursor-not-allowed disabled:opacity-50",
         className
       )}
       {...props}
     />
     <ChevronDown
       aria-hidden="true"
-      className="pointer-events-none absolute right-2 top-1/2 size-4 -translate-y-1/2 text-foreground"
+      className="pointer-events-none absolute right-2 top-1/2 size-4 -translate-y-1/2 text-muted-foreground"
     />
   </div>
 ));

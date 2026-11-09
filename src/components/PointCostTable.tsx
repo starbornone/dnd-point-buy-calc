@@ -10,7 +10,7 @@ export const PointCostTable = () => {
   return (
     <Table className="text-center text-sm tabular-nums">
       <caption className="pb-2 text-left font-bold">{copy.costTable}</caption>
-      <thead className="bg-secondary">
+      <thead className="bg-muted text-primary">
         <tr>
           <th scope="col" className="py-1.5">{copy.score}</th>
           <th scope="col" className="py-1.5">{copy.cost}</th>
@@ -18,7 +18,7 @@ export const PointCostTable = () => {
       </thead>
       <tbody>
         {ABILITY_POINT_COSTS.map(({ score, cost }) => (
-          <tr key={score} className="border-b border-secondary">
+          <tr key={score} className="border-b border-border">
             <th scope="row">{score}</th>
             <td>{cost}</td>
           </tr>

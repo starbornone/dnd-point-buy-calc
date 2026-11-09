@@ -132,22 +132,22 @@ export const CharacterForm = () => {
 
   return (
     <form
-      className="mt-5 grid items-start gap-4 sm:mt-6 sm:gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:gap-6 print:hidden"
+      className="mt-5 grid items-start gap-4 sm:mt-8 sm:gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:gap-6 print:hidden"
       id="dnd5e-pbc"
       onSubmit={(event) => event.preventDefault()}
     >
       <section aria-labelledby="setup-heading" className="min-w-0">
-        <Card className="flex flex-col gap-4 rounded-lg border border-secondary bg-white p-3 sm:gap-5 sm:p-5 xl:p-6">
-          <h2 id="setup-heading" className="text-xl font-bold">
+        <Card className="flex flex-col gap-4 sm:gap-5 sm:p-5 xl:p-6">
+          <h2 id="setup-heading" className="font-display text-2xl leading-tight text-primary">
             {copy.characterSetup}
           </h2>
-          <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,13rem),1fr))] items-end gap-3 sm:gap-4">
+          <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,13rem),1fr))] items-end gap-3 sm:gap-4 [&_label]:text-sm">
             <RaceSelector />
             <CharacterOptions />
           </div>
-          <div className="grid gap-3 border-t border-secondary pt-3 sm:grid-cols-2 lg:grid-cols-1">
+          <div className="grid gap-3 border-t border-border pt-3 sm:grid-cols-2 lg:grid-cols-1">
             <div className="flex items-center justify-between gap-3">
-              <label htmlFor="point-budget" className="font-bold">
+              <label htmlFor="point-budget" className="text-sm font-semibold">
                 {copy.pointBudget}
               </label>
               <Input
@@ -187,9 +187,9 @@ export const CharacterForm = () => {
         <Card
           role="region"
           aria-labelledby="build-tools-heading"
-          className="flex flex-col gap-3 rounded-lg border border-secondary bg-white p-3 sm:p-5 xl:p-6"
+          className="flex flex-col gap-3 sm:p-5 xl:p-6"
         >
-          <h2 id="build-tools-heading" className="text-xl font-bold">{copy.buildTools}</h2>
+          <h2 id="build-tools-heading" className="font-display text-2xl leading-tight text-primary">{copy.buildTools}</h2>
           <div className="grid grid-cols-2 gap-2 min-[480px]:grid-cols-4">
             <Button type="button" variant="secondary" className={actionClass} onClick={copyLink}>
               {copied ? copy.linkCopied : copy.copyLink}
@@ -222,7 +222,7 @@ export const CharacterForm = () => {
             </Button>
           </div>
           {importError ? (
-            <p className="text-sm text-primary" role="alert">
+            <p className="text-sm text-danger-foreground" role="alert">
               {importError}
             </p>
           ) : null}
