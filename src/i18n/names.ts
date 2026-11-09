@@ -1,5 +1,6 @@
 import { CantripName, wizardCantrips } from "@/data/cantrips";
 import { DragonBreath, DragonDamage, DragonName, dragonByName, dragons } from "@/data/dragons";
+import type { FeatName } from "@/data/feats";
 import { languages, LanguageName } from "@/data/languages";
 import { raceDropdown } from "@/data/raceDropdown";
 import { skills } from "@/data/skills";
@@ -268,6 +269,54 @@ const breathNames: Record<Locale, Record<DragonBreath, string>> = {
 
 export const abilityLabel = (locale: Locale, key: keyof AttributeState): string =>
   abilityNames[locale][key];
+
+const featNamesZh: Record<FeatName, string> = {
+  Actor: "演员",
+  Alert: "警觉",
+  Athlete: "运动员",
+  Charger: "冲锋手",
+  "Crossbow Expert": "强弩专家",
+  "Defensive Duelist": "防御式决斗",
+  "Dual Wielder": "双持客",
+  "Dungeon Delver": "地城探索者",
+  Durable: "耐性",
+  "Elemental Adept": "元素导师",
+  Grappler: "擒抱者",
+  "Great Weapon Master": "巨武器大师",
+  Healer: "医疗师",
+  "Heavily Armored": "重甲运用",
+  "Heavy Armor Master": "重甲大师",
+  "Inspiring Leader": "领袖之证",
+  "Keen Mind": "敏锐心灵",
+  "Lightly Armored": "轻甲运用",
+  Linguist: "语言学家",
+  Lucky: "幸运",
+  "Mage Slayer": "巫师杀手",
+  "Magic Initiate": "魔法学徒",
+  "Martial Adept": "战技专家",
+  "Medium Armor Master": "中甲大师",
+  Mobile: "灵活移动",
+  "Moderately Armored": "中甲运用",
+  "Mounted Combatant": "骑乘战斗",
+  Observant: "观察力",
+  "Polearm Master": "长柄武器大师",
+  Resilient: "强健身心",
+  "Ritual Caster": "仪式施法者",
+  "Savage Attacker": "凶蛮打手",
+  Sentinel: "哨兵",
+  Sharpshooter: "神射手",
+  "Shield Master": "盾牌大师",
+  Skilled: "熟习",
+  Skulker: "隐伏者",
+  "Spell Sniper": "法术射手",
+  "Tavern Brawler": "斗殴高手",
+  Tough: "健壮",
+  "War Caster": "战地施法者",
+  "Weapon Master": "武器大师",
+};
+
+export const featLabel = (locale: Locale, feat: string): string =>
+  locale === "zh" ? (featNamesZh[feat as FeatName] ?? feat) : feat;
 
 export const skillLabel = (locale: Locale, skill: string): string =>
   skillNames[locale][skill as SkillName] ?? skill;

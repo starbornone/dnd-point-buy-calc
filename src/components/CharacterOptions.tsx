@@ -6,7 +6,7 @@ import { useRace } from "@/context/RaceContext";
 import { attributeKeys } from "@/data";
 import { featOptions, feats } from "@/data/feats";
 import { raceData } from "@/data/raceData";
-import { abilityLabel, ancestryLabel, cantripLabel, languageLabel, skillLabel, toolGroupLabel, toolLabel } from "@/i18n/names";
+import { abilityLabel, ancestryLabel, cantripLabel, featLabel, languageLabel, skillLabel, toolGroupLabel, toolLabel } from "@/i18n/names";
 import { skills } from "@/data/skills";
 import {
   featNeedsChoice,
@@ -108,7 +108,7 @@ export const CharacterOptions = () => {
             <option value="">{copy.selectFeat}</option>
             {feats.map((feat) => (
               <option key={feat} value={feat}>
-                {feat}
+                {featLabel(locale, feat)}
               </option>
             ))}
           </NativeSelect>

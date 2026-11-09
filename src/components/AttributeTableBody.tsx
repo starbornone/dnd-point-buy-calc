@@ -5,7 +5,8 @@ import { useLocale, useMessages } from "@/context/LocaleContext";
 import { abilityLabel } from "@/i18n/names";
 import { cn } from "@/lib/utils";
 import { AttributeState } from "@/types/race";
-import { calculateModifier, formatPointCost } from "@/utils";
+import { calculateModifier } from "@/utils/calculateModifier";
+import { formatPointCost, MAX_ABILITY_SCORE, MIN_ABILITY_SCORE } from "@/utils/calculatePointCost";
 import { useState } from "react";
 
 interface AttributeTableBodyProps {
@@ -16,7 +17,7 @@ interface AttributeTableBodyProps {
   handleChange: (
     e: React.ChangeEvent<HTMLInputElement>,
     attr: keyof AttributeState
-  ) => void;
+  ) => boolean;
 }
 
 const metricClass = "min-w-0 text-center md:table-cell md:px-2 md:py-1.5";
@@ -57,6 +58,12 @@ export const AttributeTableBody: React.FC<AttributeTableBodyProps> = ({
         const total = attrValue + racialBonus + featBonus;
         const label = abilityLabel(locale, attrKey);
         const scoreId = `score-${attrKey}`;
+        const draft = drafts[attrKey];
+        const draftScore = Number.parseInt(draft ?? "", 10);
+        const error =
+          draftScore < MIN_ABILITY_SCORE ? copy.scoreTooLow(MIN_ABILITY_SCORE) :
+          draftScore > MAX_ABILITY_SCORE ? copy.scoreTooHigh(MAX_ABILITY_SCORE) : undefined;
+        const errorId = `${scoreId}-error`;
 
         return (
           <tr
@@ -74,27 +81,31 @@ export const AttributeTableBody: React.FC<AttributeTableBodyProps> = ({
             >
               {label}
             </th>
-            <td role="cell" className={cn("flex min-w-0 items-center justify-end gap-1.5 md:table-cell md:px-2 md:py-1.5 md:text-center", topCellSpan)}>
+            <td role="cell" className={cn("flex min-w-0 flex-col items-end gap-1 md:table-cell md:px-2 md:py-1.5 md:text-center", topCellSpan)}>
               <Input
                 id={scoreId}
                 aria-label={copy.scoreAria(label)}
+                aria-invalid={error ? true : undefined}
+                aria-describedby={error ? errorId : undefined}
                 className="min-h-11 w-14 shrink-0 p-1 text-center tabular-nums md:w-16"
                 inputMode="numeric"
-                max={15}
-                min={8}
+                max={MAX_ABILITY_SCORE}
+                min={MIN_ABILITY_SCORE}
                 onBlur={() => clearDraft(attrKey)}
                 onChange={(e) => {
-                  const raw = e.target.value;
-                  if (raw === "" || raw === "1") {
+                  if (!handleChange(e, attrKey)) {
+                    const raw = e.target.value;
                     setDrafts((current) => ({ ...current, [attrKey]: raw }));
                     return;
                   }
-                  handleChange(e, attrKey);
                   clearDraft(attrKey);
                 }}
                 type="number"
-                value={drafts[attrKey] ?? attrValue}
+                value={draft ?? attrValue}
               />
+              <p id={errorId} role="status" className={error ? "mx-auto max-w-28 text-xs text-danger-foreground" : "sr-only"}>
+                {error}
+              </p>
             </td>
             <td role="cell" className={bonusCell}>
               <span className={metricLabelClass} aria-hidden="true">{copy.cost}</span>

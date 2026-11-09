@@ -5,7 +5,7 @@ import { Fragment } from "react";
 import { useLocale, useMessages } from "@/context/LocaleContext";
 import { useRace } from "@/context/RaceContext";
 import { raceData } from "@/data/raceData";
-import { abilityLabel, ancestryLabel, cantripLabel, languageLabel, skillLabel, toolLabel } from "@/i18n/names";
+import { abilityLabel, ancestryLabel, cantripLabel, featLabel, languageLabel, skillLabel, toolLabel } from "@/i18n/names";
 import { getRaceTraits } from "@/i18n/raceTraits";
 import { grantedFeatAbility, resolveGrantedCantrips, resolveGrantedSkills, resolveGrantedTools } from "@/utils";
 
@@ -145,7 +145,7 @@ export const RacialTraits = () => {
                   <>
                     <dt>{copy.chosenFeat}</dt>
                     <dd>
-                      {selectedFeat}
+                      {featLabel(locale, selectedFeat)}
                       {featAbility ? ` (+1 ${abilityLabel(locale, featAbility)})` : ""}
                     </dd>
                   </>

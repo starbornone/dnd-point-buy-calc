@@ -8,6 +8,7 @@ import {
   abilityLabel,
   ancestryLabel,
   cantripLabel,
+  featLabel,
   languageLabel,
   raceLabel,
   skillLabel,
@@ -162,7 +163,7 @@ export const PrintSheet = () => {
       ) : null}
       {selectedFeat ? (
         <p>
-          {copy.feat}: {selectedFeat}
+          {copy.feat}: {featLabel(locale, selectedFeat)}
         </p>
       ) : null}
       {traits ? (

@@ -36,11 +36,11 @@ export default function HomePage() {
             <p>
               <Link
                 className="text-primary underline underline-offset-4"
-                href="https://github.com/starbornone/dnd-point-buy-calc"
+                href="https://github.com/starbornone/dnd-point-buy-calc/issues"
                 rel="noopener noreferrer"
                 target="_blank"
               >
-                {copy.projectLink}
+                {copy.reportIssue}
               </Link>
             </p>
           </Modal>

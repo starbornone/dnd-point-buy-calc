@@ -3,15 +3,12 @@
 import { useLocale } from "@/context/LocaleContext";
 import { useRace } from "@/context/RaceContext";
 import { useStats } from "@/context/StatsContext";
-import { readLocale, withLocale } from "@/i18n/locale";
+import { withLocale } from "@/i18n/locale";
 import { parseBuild, serializeBuild } from "@/utils/characterBuild";
-import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export const BuildSync = () => {
-  const router = useRouter();
-  const pathname = usePathname();
-  const { locale, setLocale } = useLocale();
+  const { locale } = useLocale();
   const {
     selectedRace,
     selectedVariant,
@@ -29,7 +26,6 @@ export const BuildSync = () => {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    setLocale(readLocale(window.location.search));
     const parsed = parseBuild(window.location.search);
     if (parsed) {
       loadRace(
@@ -47,7 +43,7 @@ export const BuildSync = () => {
       loadStats(parsed.attributes, parsed.budget);
     }
     setReady(true);
-  }, [loadRace, loadStats, setLocale]);
+  }, [loadRace, loadStats]);
 
   useEffect(() => {
     if (!ready) return;
@@ -70,11 +66,10 @@ export const BuildSync = () => {
     );
     const current = window.location.search.replace(/^\?/, "");
     if (query === current) return;
-    router.replace(query ? `${pathname}?${query}` : pathname, { scroll: false });
+    const { pathname, hash } = window.location;
+    window.history.replaceState(null, "", `${pathname}${query ? `?${query}` : ""}${hash}`);
   }, [
     ready,
-    router,
-    pathname,
     selectedRace,
     selectedVariant,
     selectedBonuses,

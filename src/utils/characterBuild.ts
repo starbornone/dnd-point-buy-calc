@@ -136,7 +136,7 @@ export const parseBuild = (search: string): CharacterBuild | null => {
   if (!tracked.some((key) => params.has(key))) return null;
 
   const requestedRace = params.get("race") ?? "";
-  const race = raceData[requestedRace] ? requestedRace : "";
+  const race = Object.hasOwn(raceData, requestedRace) ? requestedRace : "";
   const requestedVariant = params.get("variant") ?? "";
   const variant =
     race &&

@@ -1,7 +1,7 @@
 "use client";
 
 import { messages } from "@/i18n/messages";
-import { DEFAULT_LOCALE, htmlLang, Locale } from "@/i18n/locale";
+import { htmlLang, Locale } from "@/i18n/locale";
 import {
   createContext,
   useCallback,
@@ -18,8 +18,14 @@ interface LocaleValue {
 
 const LocaleContext = createContext<LocaleValue | null>(null);
 
-export const LocaleProvider = ({ children }: { children: React.ReactNode }) => {
-  const [locale, setLocaleState] = useState<Locale>(DEFAULT_LOCALE);
+export const LocaleProvider = ({
+  children,
+  initialLocale,
+}: {
+  children: React.ReactNode;
+  initialLocale: Locale;
+}) => {
+  const [locale, setLocaleState] = useState(initialLocale);
   const setLocale = useCallback((next: Locale) => {
     setLocaleState((current) => (current === next ? current : next));
   }, []);

@@ -13,11 +13,12 @@ export const handleAttributeChange = (
     value < MIN_ABILITY_SCORE ||
     value > MAX_ABILITY_SCORE
   ) {
-    return;
+    return false;
   }
 
   setAttributes((prev) => ({
     ...prev,
     [attr]: value,
   }));
+  return true;
 };

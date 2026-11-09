@@ -42,6 +42,10 @@ A point-buy calculator for **Dungeons & Dragons 5th Edition** (D&D 5e) that help
 - Uses **React Context API** for managing global state, such as the currently selected race, attribute scores, and racial bonuses.
 - Ensures smooth updates across components without needing page reloads.
 
+### Language Support
+
+- Supports English and Simplified Chinese, including localized feedback, racial traits, feat names, and page metadata. Shared links retain the selected language.
+
 ## Racial Modifiers and Variants
 
 The app features the following races and variants with their respective racial modifiers:

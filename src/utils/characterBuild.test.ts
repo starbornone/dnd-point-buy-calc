@@ -9,6 +9,11 @@ import {
 } from "./characterBuild";
 
 describe("character build links", () => {
+  it("ignores inherited race keys in links and JSON builds", () => {
+    expect(parseBuild("?race=constructor")?.race).toBe("");
+    expect(fromBuildFile({ version: 1, attributes: {}, race: "__proto__" })?.race).toBe("");
+  });
+
   it("round-trips a shared build", () => {
     const attributes = defaultAttributes();
     attributes.strength = 15;

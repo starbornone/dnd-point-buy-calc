@@ -69,6 +69,8 @@ export const AttributeTable = () => {
           </p>
         </div>
 
+        {overBudget ? <p className="text-sm text-danger-foreground">{copy.pointLimit(pointBudget)}</p> : null}
+
         <Table
           aria-labelledby="scores-heading"
           role="table"

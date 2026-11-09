@@ -3,9 +3,10 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { useMessages } from "@/context/LocaleContext";
+import { useLocale, useMessages } from "@/context/LocaleContext";
 import { useRace } from "@/context/RaceContext";
 import { useStats } from "@/context/StatsContext";
+import { withLocale } from "@/i18n/locale";
 import {
   MAX_POINT_BUDGET,
   MIN_POINT_BUDGET,
@@ -29,8 +30,10 @@ import { RaceSelector } from "./RaceSelector";
 import { RacialTraits } from "./RacialTraits";
 
 const actionClass = "min-h-11 break-words px-2 text-sm leading-snug [overflow-wrap:anywhere]";
+type Feedback = "linkCopied" | "copyError" | "invalidJson" | "importReadError" | "importError" | "importSuccess";
 
 export const CharacterForm = () => {
+  const { locale } = useLocale();
   const copy = useMessages();
   const {
     loadRace,
@@ -46,9 +49,10 @@ export const CharacterForm = () => {
     selectedFeatAbility,
   } = useRace();
   const { attributes, pointBudget, setPointBudget, setAttributes, loadStats } = useStats();
-  const [copied, setCopied] = useState(false);
-  const [importError, setImportError] = useState("");
+  const [feedback, setFeedback] = useState<Feedback | null>(null);
+  const feedbackIsSuccess = feedback === "linkCopied" || feedback === "importSuccess";
   const fileInput = useRef<HTMLInputElement>(null);
+  const importRequest = useRef(0);
   const build = {
     race: selectedRace,
     variant: selectedVariant,
@@ -66,25 +70,27 @@ export const CharacterForm = () => {
 
   const applyStandardArray = () => {
     setAttributes(standardArrayAttributes());
-    setCopied(false);
+    importRequest.current += 1;
+    setFeedback(null);
   };
 
   const reset = () => {
     loadRace("", "", emptyBonusPicks(), emptySkillPicks(), emptyLanguagePicks(), "", "", "", "", "");
     loadStats(defaultAttributes(), POINT_BUY_BUDGET);
-    setCopied(false);
+    importRequest.current += 1;
+    setFeedback(null);
   };
 
   const copyLink = async () => {
-    const query = serializeBuild(build);
+    const query = withLocale(serializeBuild(build), locale);
     const url = `${window.location.origin}${window.location.pathname}${
       query ? `?${query}` : ""
     }`;
     try {
       await navigator.clipboard.writeText(url);
-      setCopied(true);
+      setFeedback("linkCopied");
     } catch {
-      setCopied(false);
+      setFeedback("copyError");
     }
   };
 
@@ -99,35 +105,51 @@ export const CharacterForm = () => {
     link.download = buildFileName(build);
     link.click();
     URL.revokeObjectURL(url);
-    setImportError("");
+    setFeedback(null);
   };
 
   const importJson = async (file: File | undefined) => {
     if (!file) return;
+    const request = ++importRequest.current;
+    setFeedback(null);
+
+    let text: string;
     try {
-      const parsed = fromBuildFile(JSON.parse(await file.text()));
-      if (!parsed) {
-        setImportError(copy.importError);
-        return;
-      }
-      loadRace(
-        parsed.race,
-        parsed.variant,
-        parsed.bonuses,
-        parsed.skills,
-        parsed.languages,
-        parsed.tool,
-        parsed.cantrip,
-        parsed.dragon,
-        parsed.feat,
-        parsed.featAbility
-      );
-      loadStats(parsed.attributes, parsed.budget);
-      setCopied(false);
-      setImportError("");
+      text = await file.text();
     } catch {
-      setImportError(copy.importError);
+      if (request === importRequest.current) setFeedback("importReadError");
+      return;
     }
+    if (request !== importRequest.current) return;
+
+    let value: unknown;
+    try {
+      value = JSON.parse(text);
+    } catch {
+      setFeedback("invalidJson");
+      return;
+    }
+
+    const parsed = fromBuildFile(value);
+    if (!parsed) {
+      setFeedback("importError");
+      return;
+    }
+
+    loadRace(
+      parsed.race,
+      parsed.variant,
+      parsed.bonuses,
+      parsed.skills,
+      parsed.languages,
+      parsed.tool,
+      parsed.cantrip,
+      parsed.dragon,
+      parsed.feat,
+      parsed.featAbility
+    );
+    loadStats(parsed.attributes, parsed.budget);
+    setFeedback("importSuccess");
   };
 
   return (
@@ -174,7 +196,7 @@ export const CharacterForm = () => {
               <Button type="button" className={actionClass} onClick={applyStandardArray}>
                 {copy.standardArray}
               </Button>
-              <Button type="button" variant="secondary" className={actionClass} onClick={reset}>
+              <Button type="button" variant="secondary" className={actionClass} aria-label={copy.resetScores} onClick={reset}>
                 {copy.reset}
               </Button>
             </div>
@@ -192,7 +214,7 @@ export const CharacterForm = () => {
           <h2 id="build-tools-heading" className="font-display text-2xl leading-tight text-primary">{copy.buildTools}</h2>
           <div className="grid grid-cols-2 gap-2 min-[480px]:grid-cols-4">
             <Button type="button" variant="secondary" className={actionClass} onClick={copyLink}>
-              {copied ? copy.linkCopied : copy.copyLink}
+              {copy.copyLink}
             </Button>
             <Button type="button" variant="secondary" className={actionClass} onClick={exportJson}>
               {copy.exportJson}
@@ -221,11 +243,12 @@ export const CharacterForm = () => {
               {copy.print}
             </Button>
           </div>
-          {importError ? (
-            <p className="text-sm text-danger-foreground" role="alert">
-              {importError}
-            </p>
-          ) : null}
+          <p
+            className={feedback ? (feedbackIsSuccess ? "text-sm text-muted-foreground" : "text-sm text-danger-foreground") : "sr-only"}
+            role="status"
+          >
+            {feedback ? copy[feedback] : null}
+          </p>
         </Card>
       </div>
 
