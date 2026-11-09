@@ -12,14 +12,21 @@ import Link from "next/link";
 
 export default function HomePage() {
   const copy = useMessages();
+  const titleLead = copy.title.slice(0, -copy.titleAccent.length);
 
   return (
     <>
-      <header className="flex flex-col gap-4 border-b border-accent pb-5 sm:gap-5 sm:pb-6 lg:flex-row lg:items-end lg:justify-between print:hidden">
-        <h1 className="text-3xl font-bold leading-tight sm:text-balance sm:text-4xl xl:text-[2.625rem]">
-          {copy.title}
+      <header className="grid items-center gap-x-5 gap-y-3 sm:gap-y-4 lg:grid-cols-[minmax(0,1fr)_auto] print:hidden">
+        <p className="flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.16em] text-primary">
+          <span aria-hidden="true" className="grid size-7 place-items-center rounded-full border border-border text-base tracking-normal">
+            ✧
+          </span>
+          {copy.ledgerLabel}
+        </p>
+        <h1 className="font-display text-[clamp(2.05rem,5.3vw,4.6rem)] leading-[1.08] tracking-tight sm:text-balance lg:col-span-2 lg:row-start-2">
+          {titleLead}<span className="text-primary">{copy.titleAccent}</span>
         </h1>
-        <div className="flex shrink-0 flex-wrap items-center gap-2 sm:gap-3 lg:justify-end">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3 lg:col-start-2 lg:row-start-1 lg:justify-end">
           <LanguageSelect />
           <Modal title={copy.basicUsage}>
             <p>{copy.basicUsageBody}</p>
@@ -30,6 +37,7 @@ export default function HomePage() {
             <p>
               {copy.aboutLead}{" "}
               <Link
+                className="text-primary underline underline-offset-4"
                 href="https://github.com/starbornone/dnd-point-buy-calc"
                 rel="noopener noreferrer"
                 target="_blank"

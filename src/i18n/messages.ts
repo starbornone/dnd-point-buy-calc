@@ -2,6 +2,8 @@ import { Locale } from "./locale";
 
 const en = {
   title: "D&D 5e Point-Buy Calculator",
+  titleAccent: "Calculator",
+  ledgerLabel: "Character ledger",
   description:
     "Easily calculate your Dungeons & Dragons 5e character stats with our point buy calculator. Includes point costs, racial bonuses, total scores, modifiers, and a summary of traits.",
   basicUsage: "Basic Usage",
@@ -92,6 +94,8 @@ export type Messages = typeof en;
 
 const es: Messages = {
   title: "Calculadora de compra de puntos de D&D 5e",
+  titleAccent: "D&D 5e",
+  ledgerLabel: "Registro del personaje",
   description:
     "Calcula las características de tu personaje de Dungeons & Dragons 5e con compra de puntos. Incluye costes, bonificadores raciales, totales, modificadores y un resumen de rasgos.",
   basicUsage: "Uso básico",
@@ -181,6 +185,8 @@ const es: Messages = {
 
 const zh: Messages = {
   title: "D&D 5e 购点计算器",
+  titleAccent: "购点计算器",
+  ledgerLabel: "角色记录",
   description:
     "用购点法计算《龙与地下城》第五版角色属性。包含点数花费、种族加值、总值、调整值和特质摘要。",
   basicUsage: "基本用法",

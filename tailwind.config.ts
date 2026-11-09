@@ -33,7 +33,6 @@ const config: Config = {
           DEFAULT: "var(--color-danger)",
           foreground: "var(--color-danger-foreground)",
         },
-        accent: "var(--color-border)",
         border: "var(--color-border)",
         input: "var(--color-input)",
         ring: "var(--color-primary)",

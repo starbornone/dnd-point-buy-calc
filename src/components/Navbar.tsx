@@ -9,12 +9,12 @@ export const Navbar = () => {
   const copy = useMessages();
 
   return (
-    <nav className="mx-auto w-full max-w-7xl px-4 pb-6 sm:px-6 lg:px-8 print:hidden">
-      <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 border-t border-accent pt-4 sm:justify-between">
+    <nav className="mx-auto w-full max-w-6xl px-4 pb-6 sm:px-6 lg:px-8 print:hidden">
+      <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 border-t border-border pt-4 sm:justify-between">
         <Button
           asChild
           variant="secondary"
-          className="min-h-11 rounded-[12px] px-2 py-1.5 text-sm"
+          className="min-h-11 px-2.5 py-1.5 text-sm"
         >
           <Link
             href="https://sha.codes"
@@ -50,7 +50,7 @@ export const Navbar = () => {
           <Button
             asChild
             variant="secondary"
-            className="min-h-11 rounded-[12px] px-2 py-1.5 text-sm"
+            className="min-h-11 px-2.5 py-1.5 text-sm"
           >
             <Link
               href="https://github.com/starbornone/dnd-point-buy-calc"

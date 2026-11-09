@@ -12,7 +12,6 @@ export const LanguageSelect = () => {
     <NativeSelect
       id="language"
       aria-label={copy.language}
-      className="border-gray-500"
       value={locale}
       onChange={(event) => {
         const next = event.target.value;
