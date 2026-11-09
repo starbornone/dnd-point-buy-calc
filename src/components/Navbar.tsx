@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { useMessages } from "@/context/LocaleContext";
-import Image from "next/image";
+import { Coffee } from "lucide-react";
 import Link from "next/link";
 
 export const Navbar = () => {
@@ -34,19 +34,20 @@ export const Navbar = () => {
           </Link>
         </Button>
         <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
-          <Link
-            className="flex min-h-11 items-center"
-            href="https://ko-fi.com/starbornone"
-            rel="noopener noreferrer"
-            target="_blank"
+          <Button
+            asChild
+            variant="secondary"
+            className="min-h-11 px-2.5 py-1.5 text-sm"
           >
-            <Image
-              alt="Buy Me a Coffee at ko-fi.com"
-              height={36}
-              src="https://storage.ko-fi.com/cdn/kofi1.png?v=6"
-              width={143}
-            />
-          </Link>
+            <Link
+              href="https://ko-fi.com/starbornone"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <Coffee aria-hidden="true" className="size-5 shrink-0 text-primary" />
+              {copy.supportOnKoFi}
+            </Link>
+          </Button>
           <Button
             asChild
             variant="secondary"

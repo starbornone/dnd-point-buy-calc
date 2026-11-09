@@ -82,6 +82,7 @@ const en = {
   rulesInEnglish: "Rules text is shown in English.",
   language: "Language",
   returnHome: "Return to sha.codes",
+  supportOnKoFi: "Support on Ko-fi",
   oneBonus: "Select one attribute for +1 bonus",
   selectAttribute: "Select an attribute",
   bonusAttribute: (index: number) => `Attribute ${index + 1} for +1 bonus`,
@@ -174,6 +175,7 @@ const es: Messages = {
   rulesInEnglish: "El texto de las reglas se muestra en inglés.",
   language: "Idioma",
   returnHome: "Volver a sha.codes",
+  supportOnKoFi: "Apoyar en Ko-fi",
   oneBonus: "Elige una característica para el bonificador de +1",
   selectAttribute: "Elige una característica",
   bonusAttribute: (index: number) =>
@@ -265,6 +267,7 @@ const zh: Messages = {
   rulesInEnglish: "规则原文以英文显示。",
   language: "语言",
   returnHome: "返回 sha.codes",
+  supportOnKoFi: "在 Ko-fi 上支持",
   oneBonus: "选择一项属性获得 +1 加值",
   selectAttribute: "选择一项属性",
   bonusAttribute: (index: number) => `第 ${index + 1} 项 +1 加值属性`,
