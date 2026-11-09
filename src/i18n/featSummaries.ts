@@ -212,3 +212,27 @@ export const getFeatSummary = (edition: RulesEdition, feat: string, locale: Loca
   const summaries: Readonly<Record<string, Summary>> = edition === "2014" ? legacySummaries : originSummaries;
   return Object.hasOwn(summaries, feat) ? summaries[feat][locale] : undefined;
 };
+
+const spellcasting = { en: "the ability to cast at least one spell", zh: "能够施展至少一个法术" };
+const mediumArmor = { en: "medium armor proficiency", zh: "具有中甲熟练" };
+const dexterity = { en: "Dexterity 13 or higher", zh: "敏捷至少为 13" };
+
+const legacyPrerequisites: Partial<Record<FeatName, Summary>> = {
+  "Defensive Duelist": dexterity,
+  "Elemental Adept": spellcasting,
+  Grappler: { en: "Strength 13 or higher", zh: "力量至少为 13" },
+  "Heavily Armored": mediumArmor,
+  "Heavy Armor Master": { en: "heavy armor proficiency", zh: "具有重甲熟练" },
+  "Inspiring Leader": { en: "Charisma 13 or higher", zh: "魅力至少为 13" },
+  "Medium Armor Master": mediumArmor,
+  "Moderately Armored": { en: "light armor proficiency", zh: "具有轻甲熟练" },
+  "Ritual Caster": { en: "Intelligence or Wisdom 13 or higher", zh: "智力或感知至少为 13" },
+  Skulker: dexterity,
+  "Spell Sniper": spellcasting,
+  "War Caster": spellcasting,
+};
+
+export const getFeatPrerequisite = (edition: RulesEdition, feat: string, locale: Locale): string | undefined =>
+  edition === "2014" && Object.hasOwn(legacyPrerequisites, feat)
+    ? legacyPrerequisites[feat as FeatName]?.[locale]
+    : undefined;

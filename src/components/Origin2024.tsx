@@ -4,10 +4,11 @@ import { NativeSelect } from "@/components/ui/native-select";
 import { useLocale, useMessages } from "@/context/LocaleContext";
 import { useRace } from "@/context/RaceContext";
 import { backgrounds2024, species2024 } from "@/data/origins2024";
-import { abilityLabel, ancestryLabel, originFeatLabel, raceLabel, skillLabel, variantLabel } from "@/i18n/names";
+import { abilityLabel, ancestryLabel, raceLabel, skillLabel, variantLabel } from "@/i18n/names";
 import type { Locale } from "@/i18n/locale";
 import { cn } from "@/lib/utils";
 import { getBackground2024, getSpecies2024, humanFeatOptions, selectOrigin2024, type Origin2024 } from "@/utils/origin2024";
+import { FeatPicker } from "./FeatPicker";
 import { FeatSummary } from "./FeatSummary";
 import { SetupChecklist } from "./SetupChecklist";
 
@@ -125,9 +126,14 @@ export const Origin2024Options = () => {
         </fieldset>
       )}
       {human && (
-        <OriginSelect id="human-origin-feat" label={copy.humanOriginFeat} placeholder={copy.selectFeat} value={origin.humanFeat}
-          options={humanFeatOptions(origin.background).map((value) => ({ value, label: originFeatLabel(locale, value) }))}
-          onChange={(humanFeat) => update({ humanFeat })} />
+        <FeatPicker
+          id="human-origin-feat"
+          label={copy.humanOriginFeat}
+          edition="2024"
+          options={humanFeatOptions(origin.background)}
+          value={origin.humanFeat}
+          onSelect={(humanFeat) => update({ humanFeat })}
+        />
       )}
       <Origin2024Feats origin={origin} className="col-span-full" />
     </>

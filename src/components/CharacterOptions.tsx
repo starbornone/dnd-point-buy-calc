@@ -3,14 +3,14 @@
 import { NativeSelect } from "@/components/ui/native-select";
 import { useLocale, useMessages } from "@/context/LocaleContext";
 import { useRace } from "@/context/RaceContext";
-import { featOptions } from "@/data/feats";
+import { useStats } from "@/context/StatsContext";
+import { addBonuses } from "@/data/bonuses";
+import { feats } from "@/data/feats";
 import { raceData } from "@/data/raceData";
 import {
-  abilityLabel,
   ancestryLabel,
   cantripLabel,
   featLabel,
-  featsForLocale,
   languageGroupLabel,
   languageLabel,
   skillLabel,
@@ -23,6 +23,7 @@ import {
   featNeedsChoice,
   resolveFloatingBonus,
   cantripOptions,
+  calculateRacialBonuses,
   dragonOptions,
   getFixedBonuses,
   getSelectedFloatingBonuses,
@@ -33,6 +34,7 @@ import {
   resolveToolChoice,
   toolGroupsFor,
 } from "@/utils";
+import { FeatPicker } from "./FeatPicker";
 import { FeatSummary } from "./FeatSummary";
 import { RaceSelector } from "./RaceSelector";
 import { SetupChecklist } from "./SetupChecklist";
@@ -43,6 +45,7 @@ const choiceSlots = [0, 1] as const;
 export const CharacterOptions = () => {
   const { locale } = useLocale();
   const copy = useMessages();
+  const { attributes } = useStats();
   const {
     selectedRace,
     selectedVariant,
@@ -68,8 +71,12 @@ export const CharacterOptions = () => {
   const variant = race?.variants?.find((entry) => entry.name === selectedVariant);
   const floatingBonus = resolveFloatingBonus(race, variant);
   const variantHuman = selectedVariant === "Variant Human";
-  const chooseFeatAbility = variantHuman && featNeedsChoice(selectedFeat);
-  const featAbilityLabel = copy.featAbility(featLabel(locale, selectedFeat));
+  const missingFeatAbility = featNeedsChoice(selectedFeat) && !selectedFeatAbility;
+  const scoresBeforeFeat = variantHuman ? addBonuses(attributes, calculateRacialBonuses({
+    fixedBonuses: getFixedBonuses(selectedRace, selectedVariant),
+    floatingBonus,
+    selectedBonuses,
+  })) : undefined;
   const skillChoice = resolveSkillChoice(race, variant);
   const skillOptions = skillChoice?.options ?? skills;
   const languageChoice = resolveLanguageChoice(race, variant);
@@ -98,8 +105,11 @@ export const CharacterOptions = () => {
     },
     { id: "ability-bonuses", label: copy.missingAbilityBonuses(missingBonuses), missing: missingBonuses > 0 },
     ...skillSlots.map(({ slot, id, label }) => ({ id, label, missing: !selectedSkills[slot] })),
-    { id: "variant-feat", label: copy.feat, missing: variantHuman && !selectedFeat },
-    { id: "feat-ability", label: featAbilityLabel, missing: chooseFeatAbility && !selectedFeatAbility },
+    {
+      id: "variant-feat",
+      label: missingFeatAbility ? copy.featAbility(featLabel(locale, selectedFeat)) : copy.feat,
+      missing: variantHuman && (!selectedFeat || missingFeatAbility),
+    },
     ...languageSlots.map(({ slot, id, label }) => ({ id, label, missing: !selectedLanguages[slot] })),
     { id: "tool-choice", label: copy.toolProficiency, missing: toolChoice && !selectedTool },
     { id: "cantrip-choice", label: copy.cantrip, missing: cantripChoice && !selectedCantrip },
@@ -145,50 +155,19 @@ export const CharacterOptions = () => {
         );
       })}
       {variantHuman && (
-        <div className="min-w-0">
-          <label htmlFor="variant-feat" className="mb-2 block">
-            {copy.feat}
-          </label>
-          <NativeSelect
-            id="variant-feat"
-            value={selectedFeat}
-            onChange={(event) => setSelectedFeat(event.target.value)}
-          >
-            <option value="">{copy.selectFeat}</option>
-            {featsForLocale(locale).map((feat) => (
-              <option key={feat} value={feat}>
-                {featLabel(locale, feat)}
-              </option>
-            ))}
-          </NativeSelect>
-        </div>
-      )}
-      {chooseFeatAbility && (
-        <div className="min-w-0">
-          <label htmlFor="feat-ability" className="mb-2 block">
-            {featAbilityLabel}
-          </label>
-          <NativeSelect
-            id="feat-ability"
-            value={selectedFeatAbility}
-            onChange={(event) => {
-              const value = event.target.value;
-              const allowed = featOptions(selectedFeat);
-              setSelectedFeatAbility(
-                allowed.includes(value as (typeof allowed)[number])
-                  ? (value as (typeof allowed)[number])
-                  : ""
-              );
-            }}
-          >
-            <option value="">{copy.selectAttribute}</option>
-            {featOptions(selectedFeat).map((ability) => (
-              <option key={ability} value={ability}>
-                {abilityLabel(locale, ability)}
-              </option>
-            ))}
-          </NativeSelect>
-        </div>
+        <FeatPicker
+          id="variant-feat"
+          label={copy.feat}
+          edition="2014"
+          options={feats}
+          value={selectedFeat}
+          abilityChoice={selectedFeatAbility}
+          scoresBeforeFeat={scoresBeforeFeat}
+          onSelect={(feat, ability) => {
+            setSelectedFeat(feat);
+            setSelectedFeatAbility(ability);
+          }}
+        />
       )}
       {variantHuman && selectedFeat && (
         <FeatSummary

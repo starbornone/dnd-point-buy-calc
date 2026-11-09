@@ -1,7 +1,7 @@
 {
   "schema": "name-roadmap/v1",
   "file": "completed",
-  "updatedAt": "2026-11-10T10:34:08+11:00",
+  "updatedAt": "2026-11-10T10:58:14+11:00",
   "project": {
     "key": "dnd-point-buy-calc",
     "title": "D&D 5e Point-Buy Calculator",
@@ -165,6 +165,13 @@
       "group": "ui",
       "notes": "Add English and Simplified Chinese summaries for the 2014 Variant Human and 2024 Origin feats, with grant sources and any applicable ability increase.",
       "completedAt": "2026-11-10T10:34:08+11:00"
+    },
+    {
+      "id": "searchable-feat-picker",
+      "title": "Search and preview feats before selection",
+      "group": "ui",
+      "notes": "Offer a localized feat picker for 2024 Humans and 2014 Variant Humans. Show prerequisites and preview 2014 ability increases before applying a choice.",
+      "completedAt": "2026-11-10T10:58:14+11:00"
     }
   ]
 }
