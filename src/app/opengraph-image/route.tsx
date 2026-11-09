@@ -2,11 +2,8 @@ import { ImageResponse } from "next/og";
 import { messages } from "@/i18n/messages";
 
 export const runtime = "edge";
-export const alt = messages.en.title;
-export const size = { width: 1200, height: 630 };
-export const contentType = "image/png";
 
-export default function OpenGraphImage() {
+export function GET() {
   const copy = messages.en;
 
   return new ImageResponse(
@@ -46,7 +43,7 @@ export default function OpenGraphImage() {
               justifyContent: "center",
             }}
           >
-            ✧
+            <div style={{ width: 10, height: 10, border: "1px solid #c4a574", transform: "rotate(45deg)" }} />
           </div>
           Starmist Studio
         </div>
@@ -58,6 +55,6 @@ export default function OpenGraphImage() {
         </div>
       </div>
     ),
-    { ...size }
+    { width: 1200, height: 630 }
   );
 }

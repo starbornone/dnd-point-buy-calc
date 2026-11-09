@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { messages } from "@/i18n/messages";
 import { DEFAULT_LOCALE, htmlLang, Locale, LOCALES } from "@/i18n/locale";
-import { absoluteUrl, getSiteUrl, localeCanonicalPath, localeCanonicalUrl } from "@/lib/site";
+import { absoluteUrl, localeCanonicalPath, localeCanonicalUrl } from "@/lib/site";
 
 const keywordsByLocale: Record<Locale, string[]> = {
   en: [
@@ -26,13 +26,14 @@ const keywordsByLocale: Record<Locale, string[]> = {
 
 export function buildMetadata(locale: Locale): Metadata {
   const copy = messages[locale];
+  // Absolute metadata URLs preserve the locale query on the home page in Next.js 14.
   const canonical = localeCanonicalUrl(locale);
+  const socialImage = absoluteUrl("/opengraph-image");
   const languageAlternates = Object.fromEntries(
     LOCALES.map((code) => [htmlLang(code), absoluteUrl(localeCanonicalPath(code))])
   );
 
   return {
-    metadataBase: new URL(getSiteUrl()),
     title: {
       default: copy.title,
       template: `%s · ${copy.title}`,
@@ -57,6 +58,7 @@ export function buildMetadata(locale: Locale): Metadata {
       siteName: copy.title,
       title: copy.title,
       description: copy.description,
+      images: [{ url: socialImage, width: 1200, height: 630, alt: messages.en.title }],
       locale: htmlLang(locale),
       alternateLocale: LOCALES.filter((code) => code !== locale).map(htmlLang),
     },
@@ -64,6 +66,7 @@ export function buildMetadata(locale: Locale): Metadata {
       card: "summary_large_image",
       title: copy.title,
       description: copy.description,
+      images: [socialImage],
     },
     robots: {
       index: true,
