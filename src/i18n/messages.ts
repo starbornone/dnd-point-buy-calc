@@ -6,16 +6,16 @@ const en = {
   ledgerLabel: "Character ledger",
   description:
     "Easily calculate your Dungeons & Dragons 5e character stats with our point buy calculator. Includes point costs, racial bonuses, total scores, modifiers, and a summary of traits.",
-  basicUsage: "Basic Usage",
-  basicUsageBody: "Use 27 points, as recommended by the Player's Handbook.",
+  aboutAndUsage: "About & usage",
+  aboutBody:
+    "Build starting ability scores for a Dungeons & Dragons 5e character. The calculator applies bonuses for races and variants from several 5e sourcebooks and shows your final scores, modifiers, and racial traits.",
+  pointBuyHelp:
+    "Spend points to raise your six base ability scores from 8 up to 15. The budget starts at 27 points and can be adjusted for your campaign.",
   costTable: "Point costs",
   standardArray: "Standard array",
   standardArrayHelp:
-    "The standard array is 15, 14, 13, 12, 10, and 8, assigned from Strength through Charisma. It costs 27 points.",
-  about: "About",
-  aboutLead:
-    "This point-buy calculator aims to cover several D&D 5e books. I haven't played D&D 5e properly in a while, so feel free to open an issue on",
-  aboutTrail: "if you find any errors.",
+    "Select Standard array to fill in 15, 14, 13, 12, 10, and 8 from Strength through Charisma. These scores cost 27 points in total.",
+  projectLink: "View the project or report an issue on GitHub",
   close: "Close",
   characterSetup: "Character setup",
   abilityScores: "Ability scores",
@@ -98,16 +98,16 @@ const es: Messages = {
   ledgerLabel: "Registro del personaje",
   description:
     "Calcula las características de tu personaje de Dungeons & Dragons 5e con compra de puntos. Incluye costes, bonificadores raciales, totales, modificadores y un resumen de rasgos.",
-  basicUsage: "Uso básico",
-  basicUsageBody: "Usa 27 puntos, como recomienda el Manual del Jugador.",
+  aboutAndUsage: "Información y uso",
+  aboutBody:
+    "Crea las puntuaciones de característica iniciales de un personaje de Dungeons & Dragons 5e. La calculadora aplica los bonificadores de razas y variantes de varios manuales de 5e y muestra las puntuaciones finales, los modificadores y los rasgos raciales.",
+  pointBuyHelp:
+    "Gasta puntos para subir las seis puntuaciones de característica básicas de 8 a un máximo de 15. El presupuesto inicial es de 27 puntos y puedes ajustarlo para tu campaña.",
   costTable: "Costes",
   standardArray: "Puntuaciones estándar",
   standardArrayHelp:
-    "Las puntuaciones estándar son 15, 14, 13, 12, 10 y 8, asignadas de Fuerza a Carisma. Cuestan 27 puntos.",
-  about: "Acerca de",
-  aboutLead:
-    "Esta calculadora de compra de puntos cubre varios libros de D&D 5e. Hace tiempo que no juego a D&D 5e con regularidad, así que abre una incidencia en",
-  aboutTrail: "si encuentras algún error.",
+    "Selecciona Puntuaciones estándar para asignar 15, 14, 13, 12, 10 y 8 de Fuerza a Carisma. Estas puntuaciones cuestan 27 puntos en total.",
+  projectLink: "Consulta el proyecto o informa de un error en GitHub",
   close: "Cerrar",
   characterSetup: "Configuración del personaje",
   abilityScores: "Puntuaciones de característica",
@@ -190,16 +190,16 @@ const zh: Messages = {
   ledgerLabel: "角色记录",
   description:
     "用购点法计算《龙与地下城》第五版角色属性。包含点数花费、种族加成、属性总值、调整值和种族特性摘要。",
-  basicUsage: "基本用法",
-  basicUsageBody: "使用 27 点，与《玩家手册》的建议一致。",
+  aboutAndUsage: "简介与用法",
+  aboutBody:
+    "为《龙与地下城》第五版角色分配初始属性值。计算器会应用多本第五版规则书中种族及其变体的属性加成，并显示最终属性值、调整值和种族特性。",
+  pointBuyHelp:
+    "花费点数可将六项基础属性值从 8 提高到最多 15。默认预算为 27 点，可根据战役规则调整。",
   costTable: "点数花费",
   standardArray: "标准属性",
   standardArrayHelp:
-    "标准属性值为 15、14、13、12、10、8，从力量依次分配到魅力，共花费 27 点。",
-  about: "关于",
-  aboutLead:
-    "这个购点计算器覆盖多本《龙与地下城》第五版规则书。我已经有一段时间没有认真玩过第五版，如果发现错误，请在",
-  aboutTrail: "提交问题。",
+    "点击「标准属性」，即可按从力量到魅力的顺序填入 15、14、13、12、10、8，共花费 27 点。",
+  projectLink: "在 GitHub 上查看项目或反馈问题",
   close: "关闭",
   characterSetup: "角色设置",
   abilityScores: "属性值",

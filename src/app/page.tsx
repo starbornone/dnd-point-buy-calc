@@ -28,23 +28,20 @@ export default function HomePage() {
         </h1>
         <div className="flex flex-wrap items-center gap-2 sm:gap-3 lg:col-start-2 lg:row-start-1 lg:justify-end">
           <LanguageSelect />
-          <Modal title={copy.basicUsage}>
-            <p>{copy.basicUsageBody}</p>
+          <Modal title={copy.aboutAndUsage}>
+            <p>{copy.aboutBody}</p>
+            <p>{copy.pointBuyHelp}</p>
             <PointCostTable />
             <p>{copy.standardArrayHelp}</p>
-          </Modal>
-          <Modal title={copy.about}>
             <p>
-              {copy.aboutLead}{" "}
               <Link
                 className="text-primary underline underline-offset-4"
                 href="https://github.com/starbornone/dnd-point-buy-calc"
                 rel="noopener noreferrer"
                 target="_blank"
               >
-                GitHub
-              </Link>{" "}
-              {copy.aboutTrail}
+                {copy.projectLink}
+              </Link>
             </p>
           </Modal>
         </div>
