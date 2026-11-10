@@ -4,10 +4,10 @@
 
 | Command | Purpose |
 | --- | --- |
-| `npm run dev` | Next.js development server |
-| `npm run build` | Production build |
-| `npm start` | Serve the production build |
-| `npm run lint` | ESLint via `next lint` |
+| `npm run dev` | Vite development server |
+| `npm run build` | Typecheck and production build |
+| `npm start` | Preview the production build |
+| `npm run lint` | ESLint |
 | `npm run typecheck` | `tsc --noEmit` |
 | `npm test` | Vitest once (`vitest run`) |
 
@@ -17,13 +17,16 @@ Use Node **24.x**. Prefer small, focused changes with matching tests under `src/
 
 ```
 src/
-  app/           # Next.js routes, layout, Providers
+  main.tsx       # Vite entry
+  App.tsx        # Page shell
+  Providers.tsx  # Locale / race / stats providers
   components/    # UI (calculator form, tables, selectors)
   context/       # Locale, race, stats providers
   data/          # Races, skills, languages, tools, feats, …
   i18n/          # Locales, messages, names, trait translations
   utils/         # Pure calculation and build encode/decode
   types/         # Shared TypeScript types
+public/          # Static SEO assets (robots, sitemap, manifest, OG image)
 docs/            # Agent-ready documentation (this tree)
 roadmap/         # roadmap.json, completed.json, cancelled.json
 AGENTS.md        # Coding-agent entrypoint

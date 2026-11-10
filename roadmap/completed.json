@@ -1,7 +1,7 @@
 {
   "schema": "name-roadmap/v1",
   "file": "completed",
-  "updatedAt": "2026-11-10T10:58:14+11:00",
+  "updatedAt": "2026-11-10T13:06:08+11:00",
   "project": {
     "key": "dnd-point-buy-calc",
     "title": "D&D 5e Point-Buy Calculator",
@@ -172,6 +172,13 @@
       "group": "ui",
       "notes": "Offer a localized feat picker for 2024 Humans and 2014 Variant Humans. Show prerequisites and preview 2014 ability increases before applying a choice.",
       "completedAt": "2026-11-10T10:58:14+11:00"
+    },
+    {
+      "id": "migrate-to-vite",
+      "title": "Convert the Next.js app to a Vite SPA",
+      "group": "tooling",
+      "notes": "Replace App Router, middleware, and dynamic SEO routes with Vite entry, client locale bootstrap, and static public SEO assets.",
+      "completedAt": "2026-11-10T13:06:08+11:00"
     }
   ]
 }

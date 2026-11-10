@@ -150,4 +150,4 @@ Ensure you have the following installed:
    npm run dev
    ```
 
-4. Open [http://localhost:3000](http://localhost:3000) in your browser to see the app.
+4. Open [http://localhost:5173](http://localhost:5173) in your browser to see the app.

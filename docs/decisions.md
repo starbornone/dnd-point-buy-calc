@@ -2,13 +2,13 @@
 
 Lightweight records inferred from the README and the shipped codebase. Not a full ADR archive.
 
-## ADR-001: Next.js + TypeScript + Tailwind
+## ADR-001: Vite + TypeScript + Tailwind
 
-**Context:** The calculator needs a responsive browser UI with typed race rules and live recalculation.
+**Context:** The calculator needs a responsive browser UI with typed race rules and live recalculation. The app is client-side only (contexts, URL build sync), so a full App Router server was unused weight.
 
-**Decision:** Build with Next.js, TypeScript, React, and Tailwind CSS (as stated in the README).
+**Decision:** Build with Vite, TypeScript, React, and Tailwind CSS as a single-page app. Ship static SEO assets under `public/` and default meta tags in `index.html`.
 
-**Consequences:** Contributors need a Node 24 toolchain. UI and rules live in one frontend package; there is no separate API service to deploy.
+**Consequences:** Contributors need a Node 24 toolchain. UI and rules live in one frontend package; there is no separate API service to deploy. Crawler-facing sitemap/robots/manifest are static files rather than generated routes.
 
 ## ADR-002: React Context for calculator state
 

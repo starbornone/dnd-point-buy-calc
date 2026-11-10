@@ -2,12 +2,12 @@ import { DEFAULT_LOCALE, Locale, LOCALE_PARAM } from "@/i18n/locale";
 
 /** Canonical site origin for metadata, sitemap, and JSON-LD. */
 export function getSiteUrl(): string {
-  const explicit = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+  const explicit = import.meta.env.VITE_SITE_URL?.trim();
   if (explicit) return explicit.replace(/\/$/, "");
 
   const vercel =
-    process.env.VERCEL_PROJECT_PRODUCTION_URL?.trim() ||
-    process.env.VERCEL_URL?.trim();
+    import.meta.env.VITE_VERCEL_PROJECT_PRODUCTION_URL?.trim() ||
+    import.meta.env.VITE_VERCEL_URL?.trim();
   if (vercel) {
     return `https://${vercel.replace(/^https?:\/\//, "").replace(/\/$/, "")}`;
   }

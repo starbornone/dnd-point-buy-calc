@@ -1,5 +1,3 @@
-"use client";
-
 import { BuildSync } from "@/components/BuildSync";
 import { LocaleDocument, LocaleProvider } from "@/context/LocaleContext";
 import { RaceProvider } from "@/context/RaceContext";

@@ -8,9 +8,9 @@ Run the calculator locally with Node.js 24 and npm (or yarn).
 - **npm** or **yarn**
 - Git, for cloning
 
-For production SEO (canonical URLs, Open Graph, sitemap), set `NEXT_PUBLIC_SITE_URL` to the public origin (see `.env.example`).
+For production SEO (canonical URLs, Open Graph, sitemap), set `VITE_SITE_URL` to the public origin (see `.env.example`). Static crawler files under `public/` use the default origin until you regenerate them for another host.
 
-If Node is missing or is a different major version, `npm install` / `next` may fail or warn. Use an nvm/fnm-managed 24.x runtime.
+If Node is missing or is a different major version, `npm install` / `vite` may fail or warn. Use an nvm/fnm-managed 24.x runtime.
 
 Unsupported / untested: non-Node runtimes, and Node majors outside 24.x. The README does not claim Windows/macOS/Linux differences beyond a normal Node toolchain — all three should work if Node 24 is installed.
 
@@ -30,7 +30,7 @@ Yarn is also acceptable for install if you prefer it; scripts below use npm as d
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+Open [http://localhost:5173](http://localhost:5173).
 
 You should see the point-buy calculator, the rules edition selector, the ability score table, and the language selector (English and 简体中文).
 
@@ -46,7 +46,7 @@ You should see the point-buy calculator, the rules edition selector, the ability
 | Symptom | Likely cause |
 | --- | --- |
 | `engine` / Node version errors on install | Node is not 24.x |
-| Port 3000 already in use | Another process holds the port; stop it or start Next on another port |
+| Port 5173 already in use | Another process holds the port; stop it or start Vite on another port |
 | Blank page / module errors after pull | Stale `node_modules` — re-run `npm install` |
 | Clone fails over SSH | GitHub SSH key missing; use HTTPS clone instead |
 

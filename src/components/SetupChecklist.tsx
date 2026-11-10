@@ -1,4 +1,3 @@
-"use client";
 
 import { useMessages } from "@/context/LocaleContext";
 

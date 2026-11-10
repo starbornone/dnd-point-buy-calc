@@ -1,4 +1,3 @@
-"use client";
 
 import { NativeSelect } from "@/components/ui/native-select";
 import { useLocale, useMessages } from "@/context/LocaleContext";

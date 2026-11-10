@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="D&amp;D 5e Point-Buy Calculator">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a1612"/>
+      <stop offset="55%" stop-color="#2c241c"/>
+      <stop offset="100%" stop-color="#3d2f22"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <g fill="none" stroke="#c4a574" stroke-width="2">
+    <circle cx="100" cy="92" r="18"/>
+    <rect x="94" y="86" width="12" height="12" transform="rotate(45 100 92)"/>
+  </g>
+  <text x="136" y="102" fill="#c4a574" font-family="Georgia, 'Times New Roman', serif" font-size="28" letter-spacing="0.18em">STARMIST STUDIO</text>
+  <text x="64" y="320" fill="#f4efe6" font-family="Georgia, 'Times New Roman', serif" font-size="64">
+    <tspan x="64" dy="0">D&amp;D 5e Point-Buy</tspan>
+    <tspan x="64" dy="78">Calculator</tspan>
+  </text>
+  <text x="64" y="480" fill="#d9d0c3" font-family="Georgia, 'Times New Roman', serif" font-size="28">
+    <tspan x="64" dy="0">Free D&amp;D point-buy calculator for the 2024 (5.5e)</tspan>
+    <tspan x="64" dy="40">and 2014 (5e) rules. Apply background or racial</tspan>
+    <tspan x="64" dy="40">bonuses and see point costs, totals, and modifiers.</tspan>
+  </text>
+</svg>

@@ -1,4 +1,3 @@
-"use client";
 
 import { useLocale } from "@/context/LocaleContext";
 import { useRace } from "@/context/RaceContext";

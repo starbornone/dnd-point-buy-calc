@@ -11,7 +11,6 @@ export type Locale = (typeof LOCALES)[number];
 export const DEFAULT_LOCALE: Locale = "en";
 
 export const LOCALE_PARAM = "lang";
-export const LOCALE_HEADER = "x-calculator-locale";
 
 export const isLocale = (value: string | null): value is Locale =>
   LOCALES.some((locale) => locale === value);

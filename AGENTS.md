@@ -13,7 +13,7 @@
 | [README.md](README.md) | Human product entrypoint: features, race list, install |
 | [docs/](docs/overview.md) | Overview, architecture, setup, contributing, roadmap contract |
 | [roadmap/](roadmap/roadmap.json) | Todo / completed / cancelled backlog |
-| `src/app/` | Next.js App Router shell and providers |
+| `src/App.tsx`, `src/main.tsx` | Vite SPA entry and app shell |
 | `src/components/` | Calculator UI |
 | `src/context/` | Locale, race, and stats state |
 | `src/data/` | Race and lookup tables |

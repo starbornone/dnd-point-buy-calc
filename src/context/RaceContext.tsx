@@ -1,4 +1,3 @@
-"use client";
 
 import { raceData } from "@/data/raceData";
 import { AttributeState, BonusPicks } from "@/types";

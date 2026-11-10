@@ -1,4 +1,3 @@
-"use client";
 
 import { useLocale, useMessages } from "@/context/LocaleContext";
 import { featOptions } from "@/data/feats";

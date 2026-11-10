@@ -1,4 +1,3 @@
-"use client";
 
 import {
   CharacterForm,
@@ -8,7 +7,6 @@ import {
   PrintSheet,
 } from "@/components";
 import { useMessages } from "@/context/LocaleContext";
-import Link from "next/link";
 
 export function HomeCalculator() {
   const copy = useMessages();
@@ -38,14 +36,14 @@ export function HomeCalculator() {
             <PointCostTable />
             <p>{copy.standardArrayHelp}</p>
             <p>
-              <Link
+              <a
                 className="text-primary underline underline-offset-4"
                 href="https://github.com/starbornone/dnd-point-buy-calc/issues"
                 rel="noopener noreferrer"
                 target="_blank"
               >
                 {copy.reportIssue}
-              </Link>
+              </a>
             </p>
           </Modal>
         </div>

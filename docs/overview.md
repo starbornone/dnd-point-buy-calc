@@ -1,6 +1,6 @@
 # Overview
 
-**D&D 5e Point-Buy Calculator** (`dnd-point-buy-calc`) is a Next.js app for building starting ability scores. It opens in 2024 mode (5.5e) and offers a 2014 mode (5e) in Character Setup.
+**D&D 5e Point-Buy Calculator** (`dnd-point-buy-calc`) is a Vite + React SPA for building starting ability scores. It opens in 2024 mode (5.5e) and offers a 2014 mode (5e) in Character Setup.
 
 ## Who it is for
 

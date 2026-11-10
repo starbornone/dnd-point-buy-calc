@@ -1,4 +1,3 @@
-"use client";
 
 import { messages } from "@/i18n/messages";
 import { htmlLang, Locale } from "@/i18n/locale";

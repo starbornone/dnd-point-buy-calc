@@ -1,4 +1,3 @@
-"use client";
 
 import { AttributeState } from "@/types/race";
 import { POINT_BUY_BUDGET } from "@/utils/calculatePointCost";

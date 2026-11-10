@@ -1,0 +1,22 @@
+{
+  "name": "D&D 5e Point-Buy Calculator",
+  "short_name": "Point Buy",
+  "description": "Free D&D point-buy calculator for the 2024 (5.5e) and 2014 (5e) rules. Apply background or racial bonuses and see point costs, totals, and modifiers.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1a1612",
+  "theme_color": "#c4a574",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    }
+  ]
+}

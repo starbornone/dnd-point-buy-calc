@@ -1,4 +1,3 @@
-"use client";
 
 import { Table } from "@/components/ui/table";
 import { useMessages } from "@/context/LocaleContext";
