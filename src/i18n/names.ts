@@ -391,3 +391,54 @@ export const raceLabel = (locale: Locale, key: string): string =>
 
 export const variantLabel = (locale: Locale, name: string): string =>
   variantNames[locale][name] ?? name;
+
+const backgroundNames: Record<Locale, Record<string, string>> = {
+  en: {},
+  zh: {
+    Acolyte: "侍僧",
+    Artisan: "工匠",
+    Charlatan: "骗子",
+    Criminal: "罪犯",
+    Entertainer: "艺人",
+    Farmer: "农夫",
+    Guard: "守卫",
+    Guide: "向导",
+    Hermit: "隐士",
+    Merchant: "商人",
+    Noble: "贵族",
+    Sage: "智者",
+    Sailor: "水手",
+    Scribe: "抄写员",
+    Soldier: "士兵",
+    Wayfarer: "旅人",
+  },
+};
+
+const lineageNames: Record<Locale, Record<string, string>> = {
+  en: {},
+  zh: {
+    Drow: "卓尔精灵",
+    Cloud: "云巨人",
+    Fire: "火巨人",
+    Frost: "霜巨人",
+    Hill: "丘陵巨人",
+    Stone: "石巨人",
+    Storm: "风暴巨人",
+    Abyssal: "深渊",
+    Chthonic: "冥界",
+    Infernal: "炼狱",
+  },
+};
+
+const orcNames: Record<Locale, string> = { en: "Orc", zh: "兽人" };
+
+export const backgroundLabel = (locale: Locale, name: string): string =>
+  backgroundNames[locale][name] ?? name;
+
+export const speciesLabel = (locale: Locale, key: string): string =>
+  key === "orc" ? orcNames[locale] : raceLabel(locale, key);
+
+export const lineageLabel = (locale: Locale, species: string, name: string): string =>
+  species === "dragonborn"
+    ? ancestryLabel(locale, name)
+    : lineageNames[locale][name] ?? variantLabel(locale, name);

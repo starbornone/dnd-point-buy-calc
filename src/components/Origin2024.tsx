@@ -3,31 +3,12 @@ import { NativeSelect } from "@/components/ui/native-select";
 import { useLocale, useMessages } from "@/context/LocaleContext";
 import { useRace } from "@/context/RaceContext";
 import { backgrounds2024, species2024 } from "@/data/origins2024";
-import { abilityLabel, ancestryLabel, raceLabel, skillLabel, variantLabel } from "@/i18n/names";
-import type { Locale } from "@/i18n/locale";
+import { abilityLabel, backgroundLabel, lineageLabel, skillLabel, speciesLabel } from "@/i18n/names";
 import { cn } from "@/lib/utils";
 import { getBackground2024, getSpecies2024, humanFeatOptions, selectOrigin2024, type Origin2024 } from "@/utils/origin2024";
 import { FeatPicker } from "./FeatPicker";
 import { FeatSummary } from "./FeatSummary";
 import { SetupChecklist } from "./SetupChecklist";
-
-const backgroundsZh: Record<string, string> = {
-  Acolyte: "侍僧", Artisan: "工匠", Charlatan: "骗子", Criminal: "罪犯", Entertainer: "艺人",
-  Farmer: "农夫", Guard: "守卫", Guide: "向导", Hermit: "隐士", Merchant: "商人", Noble: "贵族",
-  Sage: "智者", Sailor: "水手", Scribe: "抄写员", Soldier: "士兵", Wayfarer: "旅人",
-};
-
-const lineagesZh: Record<string, string> = {
-  Drow: "卓尔精灵", Cloud: "云巨人", Fire: "火巨人", Frost: "霜巨人", Hill: "丘陵巨人",
-  Stone: "石巨人", Storm: "风暴巨人", Abyssal: "深渊", Chthonic: "冥界", Infernal: "炼狱",
-};
-
-const backgroundLabel = (locale: Locale, name: string) => locale === "zh" ? backgroundsZh[name] ?? name : name;
-const speciesLabel = (locale: Locale, name: string) => name === "orc" ? (locale === "zh" ? "兽人" : "Orc") : raceLabel(locale, name);
-const lineageLabel = (locale: Locale, species: string, name: string) => {
-  if (species === "dragonborn") return ancestryLabel(locale, name);
-  return locale === "zh" ? lineagesZh[name] ?? variantLabel(locale, name) : name;
-};
 
 const Origin2024Feats = ({ origin, className }: { origin: Origin2024; className?: string }) => {
   const { locale } = useLocale();
