@@ -47,6 +47,17 @@
     "vite": "^7.2.2",
     "vitest": "^5.1.0"
   },
+  "overrides": {
+    "@tailwindcss/typography": {
+      "postcss-selector-parser": "^6.1.6"
+    },
+    "@typescript-eslint/typescript-estree": {
+      "minimatch": "^11.0.8"
+    },
+    "minimatch@3": {
+      "brace-expansion": "^1.1.22"
+    }
+  },
   "allowScripts": {
     "esbuild@0.28.2": true
   }
