@@ -38,7 +38,7 @@ flowchart TD
 
 1. `main.tsx` reads `?lang=` from the URL for the initial locale, document language, and JSON-LD. `BuildSync` restores build state from the URL and updates the query in browser history as the user edits.
 2. `RaceContext` defaults to 2024 and stores each edition’s selections separately when switching rules. `StatsContext` holds the base scores and budget shared between editions.
-3. The 2024 build links use `rules=2024`, and 2024 JSON exports use version 2. Build links without an edition marker and version 1 JSON files restore the 2014 rules. Calculations apply the active edition’s bonuses to the shared base scores.
+3. The 2024 build links use `rules=2024`, and 2024 JSON exports use version 2. Build links without an edition marker and version 1 JSON files restore the 2014 rules. Failed imports leave the current build intact. A partial 2024 split selection is saved in links and exports, and both increases apply to the shared base scores once both abilities are selected.
 4. Locale changes swap UI copy and labels via `LocaleContext` / `src/i18n`; race rules text falls back to English when a locale has no trait translation (Chinese has dedicated trait text).
 
 ## Where a typical change lands

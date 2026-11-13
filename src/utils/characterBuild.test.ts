@@ -40,6 +40,15 @@ describe("2024 character origins", () => {
     });
   });
 
+  it.each(["plusTwo=strength", "plusOne=wisdom"])("preserves an unfinished split pick (%s) without applying it", (pick) => {
+    const build = parseBuild(`?rules=2024&background=Farmer&str=15&wis=14&${pick}`)!;
+    expect(new URLSearchParams(serializeBuild(build)).toString()).toContain(pick);
+
+    const file = toBuildFile(build);
+    expect(file.abilities.every(({ background, score, total }) => background === 0 && total === score)).toBe(true);
+    expect(fromBuildFile(file)).toEqual(build);
+  });
+
   it("rejects incompatible species, feats and ability selections in edited links", () => {
     expect(parseBuild("?rules=2024&species=halfElf&lineage=Wood+Elf&background=Farmer&plusTwo=wisdom&plusOne=wisdom&humanFeat=Alert")?.origin2024)
       .toMatchObject({ species: "", lineage: "", plusTwo: "wisdom", plusOne: "", humanFeat: "" });
@@ -246,5 +255,10 @@ describe("build files", () => {
   it("rejects a file from another version", () => {
     expect(fromBuildFile({ version: 2, attributes: defaultAttributes() })).toBeNull();
     expect(fromBuildFile(null)).toBeNull();
+  });
+
+  it("rejects a version 1 file without parseable build fields", () => {
+    expect(fromBuildFile({ version: 1, attributes: {} })).toBeNull();
+    expect(fromBuildFile({ version: 1, attributes: { dexterity: "15" } })).toBeNull();
   });
 });

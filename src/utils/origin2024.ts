@@ -54,6 +54,7 @@ export const calculateBackgroundBonuses = (origin: Origin2024): AttributeState =
   const bonuses = emptyBonuses();
   const background = getBackground2024(origin.background);
   if (!background) return bonuses;
+  if (!origin.spread && (!origin.plusTwo || !origin.plusOne)) return bonuses;
 
   for (const ability of background.abilities) {
     if (origin.spread) bonuses[ability] = 1;

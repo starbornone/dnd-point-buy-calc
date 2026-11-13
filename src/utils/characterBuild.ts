@@ -394,5 +394,5 @@ export const fromBuildFile = (value: unknown): CharacterBuild | null => {
   }
   if (typeof value.budget === "number") params.set("budget", String(value.budget));
 
-  return parseBuild(params.toString()) ?? defaultBuild();
+  return parseBuild(params.toString());
 };

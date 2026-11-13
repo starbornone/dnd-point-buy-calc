@@ -19,7 +19,7 @@ A point-buy calculator for **Dungeons & Dragons** with the **2024 rules (5.5e)**
 ### 2024 Origins
 
 - Choose from all ten 2024 Player’s Handbook species and all sixteen backgrounds. The calculator records available lineages, the background’s Origin feat and skills, and the extra Origin feat for Humans.
-- Apply **+2 to one eligible ability and +1 to another**, or **+1 to each** of the background’s three abilities. Point costs use the base scores and start from a 27-point budget. [2024 character creation rules](https://www.dndbeyond.com/sources/dnd/br-2024/creating-a-character)
+- Apply **+2 to one eligible ability and +1 to another**, or **+1 to each** of the background’s three abilities. Split increases apply once both abilities are selected. Point costs use the base scores and start from a 27-point budget. [2024 character creation rules](https://www.dndbeyond.com/sources/dnd/br-2024/creating-a-character)
 
 ### 2014 Racial Modifiers
 
@@ -56,6 +56,10 @@ A point-buy calculator for **Dungeons & Dragons** with the **2024 rules (5.5e)**
 ### Language Support
 
 - Supports English and Simplified Chinese, including localized feedback, racial traits, feat names, and page metadata. Shared links retain the selected language.
+
+### Build Tools
+
+- Copy a share link or export a JSON file to save a build. If a JSON import fails, the current build stays in place.
 
 ## 2014 Racial Modifiers and Variants
 
@@ -117,6 +121,7 @@ Tracked in [roadmap/roadmap.json](roadmap/roadmap.json) (highest priority first)
   - Japanese
   - Macedonian
   - Russian
+- Revisit splitting `RaceContext` if more origin systems make the provider hard to extend.
 
 See also [roadmap/completed.json](roadmap/completed.json) and [docs/roadmap-format.md](docs/roadmap-format.md).
 
