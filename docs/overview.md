@@ -28,7 +28,7 @@ Assumption: the README describes a **5e** calculator, not a full character sheet
 
 ## Status
 
-The project is **active**. The README documents coverage for both editions. The remaining locale work is in the [roadmap](../roadmap/roadmap.json).
+The project is **active**. The README documents coverage for both editions. Open items and their conditions are in the [roadmap](../roadmap/roadmap.json).
 
 ## Next reads
 

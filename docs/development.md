@@ -11,7 +11,7 @@
 | `npm run typecheck` | `tsc --noEmit` |
 | `npm test` | Vitest once (`vitest run`) |
 
-Use Node **24.x**. Prefer small, focused changes with matching tests under `src/**/*.test.ts` when touching calculation or build-serialization logic.
+Use Node **24.x**. Prefer small, focused changes with matching tests under `src/**/*.test.ts` when touching calculation or build-serialization logic. Component tests use React Testing Library and opt into jsdom with `// @vitest-environment jsdom` in the test file. CI runs typecheck, lint, tests, and the production build.
 
 ## Repo layout
 

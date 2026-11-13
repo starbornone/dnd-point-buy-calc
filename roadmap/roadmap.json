@@ -1,7 +1,7 @@
 {
   "schema": "name-roadmap/v1",
   "file": "roadmap",
-  "updatedAt": "2026-11-11T20:22:48+11:00",
+  "updatedAt": "2026-11-13T18:41:16+11:00",
   "project": {
     "key": "dnd-point-buy-calc",
     "title": "D&D 5e Point-Buy Calculator",
@@ -9,36 +9,6 @@
     "summary": "Point-buy calculator for the 2024 and 2014 D&D rules with origin and racial bonuses, locales, and shareable builds."
   },
   "items": [
-    {
-      "id": "fix-from-build-file-null",
-      "title": "Return null from fromBuildFile when parseBuild fails",
-      "group": "correctness",
-      "notes": "fromBuildFile currently falls back to defaultBuild() when parseBuild returns null, so empty or non-numeric versioned JSON imports wipe the current build and show success. Return null instead and cover { version: 1, attributes: {} } in characterBuild tests."
-    },
-    {
-      "id": "ci-run-production-build",
-      "title": "Run npm run build in CI",
-      "group": "ci",
-      "notes": "CI runs typecheck, lint, and test only. Add the production Vite build so asset and bundling failures cannot merge."
-    },
-    {
-      "id": "gate-incomplete-2024-asi",
-      "title": "Apply 2024 split ASI only when both picks are set",
-      "group": "correctness",
-      "notes": "calculateBackgroundBonuses applies a lone +2 while plusOne is still empty. Only apply split bonuses when plusTwo and plusOne are both set, or when spread is true, so shared links and prints do not present incomplete PHB increases as final."
-    },
-    {
-      "id": "consolidate-origin-2024-zh-labels",
-      "title": "Move 2024 Chinese origin labels into i18n names",
-      "group": "i18n",
-      "notes": "Origin2024.tsx keeps local backgroundsZh and lineagesZh maps. Relocate them into src/i18n/names.ts before adding more locales so display-name conventions stay in one place."
-    },
-    {
-      "id": "test-share-import-edition-ui",
-      "title": "Add component tests for share, import, and edition switch",
-      "group": "testing",
-      "notes": "Codecs and racial rules are well covered by Vitest. Add a few RTL tests for import success/failure, undo/reset, and edition toggle vs URL sync around CharacterForm and BuildSync."
-    },
     {
       "id": "locale-japanese",
       "title": "Add Japanese UI locale",
