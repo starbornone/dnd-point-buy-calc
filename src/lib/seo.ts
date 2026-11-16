@@ -77,8 +77,8 @@ export function buildJsonLd(locale: Locale) {
     },
     creator: {
       "@type": "Organization",
-      name: "Starmist Studio",
-      url: "https://starmist.studio/",
+      name: "Astral Archives",
+      url: "https://astralarchives.games/",
     },
   };
 }

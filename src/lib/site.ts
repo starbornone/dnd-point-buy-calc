@@ -12,7 +12,7 @@ export function getSiteUrl(): string {
     return `https://${vercel.replace(/^https?:\/\//, "").replace(/\/$/, "")}`;
   }
 
-  return "https://dnd.starmist.studio";
+  return "https://dnd.astralarchives.games";
 }
 
 export function absoluteUrl(path = "/"): string {

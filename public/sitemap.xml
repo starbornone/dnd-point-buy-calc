@@ -2,17 +2,17 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://dnd.starmist.studio/</loc>
+    <loc>https://dnd.astralarchives.games/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://dnd.starmist.studio/" />
-    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://dnd.starmist.studio/?lang=zh" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://dnd.astralarchives.games/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://dnd.astralarchives.games/?lang=zh" />
   </url>
   <url>
-    <loc>https://dnd.starmist.studio/?lang=zh</loc>
+    <loc>https://dnd.astralarchives.games/?lang=zh</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://dnd.starmist.studio/" />
-    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://dnd.starmist.studio/?lang=zh" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://dnd.astralarchives.games/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://dnd.astralarchives.games/?lang=zh" />
   </url>
 </urlset>

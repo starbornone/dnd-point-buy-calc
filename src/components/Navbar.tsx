@@ -15,7 +15,7 @@ export const Navbar = () => {
           className="min-h-11 px-2.5 py-1.5 text-sm"
         >
           <a
-            href="https://starmist.studio/"
+            href="https://astralarchives.games/"
             target="_blank"
             rel="noopener noreferrer"
           >
